@@ -1,4 +1,11 @@
-#### 功能介绍
+## 目录
+
+* [功能介绍](#功能介绍)
+* [DownloadManager](#DownloadManager：配置文档)
+* [UpdateConfiguration](#UpdateConfiguration：配置文档)
+* [使用步骤](#使用步骤)
+
+### 功能介绍
 * [x] 支持断点下载
 * [x] 支持后台下载
 * [x] 支持自定义下载过程
@@ -8,7 +15,7 @@
 * [x] 支持Android O
 
 
-#### DownloadManager：配置文档
+### DownloadManager：配置文档
 > 初始化使用`DownloadManager.getInstance(this)`
 
 属性      | 描述		| 默认值  | 是否必须设置
@@ -21,7 +28,7 @@ smallIcon | 通知栏的图标(资源id)  | -1 |  true
 configuration | 这个库的额外配置 | null |  false
 apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会进行版本判断)  | 1 | false
 
-#### UpdateConfiguration：配置文档
+### UpdateConfiguration：配置文档
 属性      | 描述		| 默认值
 :-------- | :-------- | :--------
 notifyId | 通知栏消息id  | 1011
@@ -33,7 +40,7 @@ onDownloadListener | 下载过程的回调  | null
 jumpInstallPage | 下载完成是否自动弹出安装页面  | true
 showNotification | 是否显示通知栏进度（后台下载提示）  | true
 
-#### 使用步骤
+### 使用步骤
 * 简单用法：创建`DownloadManager`
 
 ```
