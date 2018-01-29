@@ -1,9 +1,10 @@
 ## 目录
 
 * [功能介绍](#功能介绍)
-* [DownloadManager](#DownloadManager：配置文档)
-* [UpdateConfiguration](#UpdateConfiguration：配置文档)
+* [DownloadManager](#downloadManager配置文档)
+* [UpdateConfiguration](#updateconfiguration配置文档)
 * [使用步骤](#使用步骤)
+* [结语](#结语)
 
 ### 功能介绍
 * [x] 支持断点下载
@@ -79,3 +80,7 @@ manager.setApkName("QQ.apk")
 </paths>
 ```
 * 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
+
+### 结语
+* 如果大家在使用的过程中有什么问题，欢迎提Issuse告知。
+* 如果大家有什么好的建议或者需求，也可以提Issuse或者发送邮件至：958460248@qq.com
