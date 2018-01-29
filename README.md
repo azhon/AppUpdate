@@ -1,7 +1,7 @@
 ## 目录
 
 * [功能介绍](#功能介绍)
-* [DownloadManager](#downloadManager配置文档)
+* [DownloadManager](#downloadmanager配置文档)
 * [UpdateConfiguration](#updateconfiguration配置文档)
 * [使用步骤](#使用步骤)
 * [结语](#结语)
