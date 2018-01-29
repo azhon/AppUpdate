@@ -13,8 +13,6 @@ package com.azhon.appupdate.utils;
 
 public final class Constant {
 
-    public static final String NOTIFICATION = "notification";
-
     public static final int PERMISSION_REQUEST_CODE = 1997;
 
     public static final String DEFAULT_CHANNEL_ID = "appUpdate";

@@ -135,8 +135,7 @@ public final class NotificationUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             afterO(manager);
         }
-        Intent intent = new Intent(context, DownloadService.class)
-                .putExtra(Constant.NOTIFICATION, true);
+        Intent intent = new Intent(context, DownloadService.class);
         PendingIntent pi = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = builderNotification(context, icon, title, content)
                 .setAutoCancel(true)

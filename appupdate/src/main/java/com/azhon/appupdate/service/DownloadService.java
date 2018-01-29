@@ -14,7 +14,6 @@ import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.azhon.appupdate.manager.HttpDownloadManager;
 import com.azhon.appupdate.utils.ApkUtil;
-import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.FileUtil;
 import com.azhon.appupdate.utils.LogUtil;
 import com.azhon.appupdate.utils.NotificationUtil;
@@ -48,20 +47,16 @@ public final class DownloadService extends Service implements OnDownloadListener
         if (null == intent) {
             return START_STICKY;
         }
-        init(intent);
+        init();
         return super.onStartCommand(intent, flags, startId);
     }
 
 
-    private void init(Intent intent) {
-        //标识是否是从通知栏点击进入
-        boolean notification = intent.getBooleanExtra(Constant.NOTIFICATION, false);
-        if (!notification) {
-            apkUrl = DownloadManager.getInstance().getApkUrl();
-            apkName = DownloadManager.getInstance().getApkName();
-            downloadPath = DownloadManager.getInstance().getDownloadPath();
-            smallIcon = DownloadManager.getInstance().getSmallIcon();
-        }
+    private void init() {
+        apkUrl = DownloadManager.getInstance().getApkUrl();
+        apkName = DownloadManager.getInstance().getApkName();
+        downloadPath = DownloadManager.getInstance().getDownloadPath();
+        smallIcon = DownloadManager.getInstance().getSmallIcon();
         //创建apk文件存储文件夹
         FileUtil.createDirDirectory(downloadPath);
 

@@ -34,7 +34,7 @@ jumpInstallPage | 下载完成是否自动弹出安装页面  | true
 showNotification | 是否显示通知栏进度（后台下载提示）  | true
 
 #### 使用步骤
-* 创建`DownloadManager`
+* 简单用法：创建`DownloadManager`
 
 ```
 DownloadManager manager = DownloadManager.getInstance(this);
