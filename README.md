@@ -31,3 +31,44 @@ breakpointDownload | 是否需要支持断点下载  | true
 enableLog | 是否需要日志输出  | true
 onDownloadListener | 下载过程的回调  | null
 jumpInstallPage | 下载完成是否自动弹出安装页面  | true
+showNotification | 是否显示通知栏进度（后台下载提示）  | true
+
+#### 使用步骤
+* 创建`DownloadManager`
+
+```
+DownloadManager manager = DownloadManager.getInstance(this);
+manager.setApkName("QQ.apk")
+        .setApkUrl("http://gdown.baidu.com/data/wisegame/74dadae1bde205b0/QQ_776.apk")
+        .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
+        .setSmallIcon(R.mipmap.ic_launcher)
+        //可设置，可不设置
+        .setConfiguration(configuration)
+        .download();
+```
+* 兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
+
+```
+<provider
+    android:name="android.support.v4.content.FileProvider"
+    <!--这个不用改-->
+    android:authorities="${applicationId}"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths_public" />
+</provider>
+```
+* 资源文件`res/xml/file_paths_public.xml`内容
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="app_update"
+        <!--这里的 AppUpdate 要与你设置的下载目录一致-->
+        path="AppUpdate" />
+</paths>
+```
+* 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)

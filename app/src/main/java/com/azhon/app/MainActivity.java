@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     }
 
     private void startUpdate() {
-        DownloadManager manager = DownloadManager.getInstance(this);
-        /**
+        /*
          * 整个库允许配置的内容
          * 非必选
          */
@@ -65,8 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //设置下载过程的监听
                 .setOnDownloadListener(this);
 
+        DownloadManager manager = DownloadManager.getInstance(this);
         manager.setApkName("QQ.apk")
-                .setApkUrl("http://122.228.255.161/appdl.hicloud.com/dl/appdl/application/apk/90/9012af6dab704164a7792bc185015cf4/com.lovebizhi.wallpaper.1801111518.apk?mkey=5a6ca5f233a0cd8f&f=2664&c=0&sign=portal@portal1517060867705&source=portalsite&p=.apk")
+                .setApkUrl("http://gdown.baidu.com/data/wisegame/74dadae1bde205b0/QQ_776.apk")
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setConfiguration(configuration)
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     @Override
     public void downloading(int max, int progress) {
+
     }
 
     @Override

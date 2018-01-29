@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <external-path
-        name="appupdate"
+        name="app_update"
         path="AppUpdate" />
 </paths>
