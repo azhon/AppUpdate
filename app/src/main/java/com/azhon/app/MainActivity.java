@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
         DownloadManager manager = DownloadManager.getInstance(this);
         manager.setApkName("QQ.apk")
-                .setApkUrl("http://gdown.baidu.com/data/wisegame/74dadae1bde205b0/QQ_776.apk")
+                .setApkUrl("http://gdown.baidu.com/data/wisegame/9d24e3f43ca2de66/mojitianqi_7030202.apk")
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setConfiguration(configuration)
