@@ -1,10 +1,12 @@
 ## 目录
 
 * [编译问题](#编译问题)
+* [效果图](#效果图)
 * [功能介绍](#功能介绍)
 * [DownloadManager](#downloadmanager配置文档)
 * [UpdateConfiguration](#updateconfiguration配置文档)
 * [使用步骤](#使用步骤)
+* [Demo下载体验](#Demo下载体验)
 * [结语](#结语)
 
 ### 编译问题
@@ -12,6 +14,9 @@
 * 因为适配了Android O的通知栏，所以依赖的v7包版本比较高`appcompat-v7:26.1.0`
 * 使用的gradle版本为`gradle-4.1-all`，所以建议使用`Android Studio 3.0`及以上的版本打开此项目
 
+### 效果图
+<img src="http://img.blog.csdn.net/20180130212521314" width="300">　<img src="http://img.blog.csdn.net/20180130212630909" width="300">
+<img src="http://img.blog.csdn.net/20180130212731751" width="300">　<img src="http://img.blog.csdn.net/20180130212801442" width="300">
 
 ### 功能介绍
 * [x] 支持断点下载
@@ -34,7 +39,10 @@ apkName | apk下载好的名字 | null | true
 downloadPath | apk下载的位置 | null | true
 smallIcon | 通知栏的图标(资源id)  | -1 |  true
 configuration | 这个库的额外配置 | null |  false
-apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会进行版本判断)  | 1 | false
+apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会进行版本判断<br>下面的属性也就需要设置了)  | 1 | false
+apkVersionName | 更新apk的versionName  | null | false
+apkDescription | 更新描述  | null | false
+apkSize | 新版本的安装包大小（单位M）  | null | false
 
 ### UpdateConfiguration：配置文档
 属性      | 描述		| 默认值
@@ -88,6 +96,8 @@ manager.setApkName("QQ.apk")
 ```
 * 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
 
+### Demo下载体验
+ [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issuse告知。
 * 如果大家有什么好的建议或者需求，也可以提Issuse或者发送邮件至：958460248@qq.com

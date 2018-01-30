@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("一个简单好用的版本更新库");
         progressBar = findViewById(R.id.number_progress_bar);
     }
 
@@ -39,11 +40,11 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //输出错误日志
                 .setEnableLog(true)
                 //设置自定义的下载
-//                .setHttpManager()
+                //.setHttpManager()
                 //下载完成自动跳动安装页面
                 .setJumpInstallPage(true)
                 //支持断点下载
-                .setBreakpointDownload(false)
+                .setBreakpointDownload(true)
                 //设置是否显示通知栏进度
                 .setShowNotification(true)
                 //设置下载过程的监听
@@ -51,8 +52,9 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
         DownloadManager manager = DownloadManager.getInstance(this);
         manager.setApkName("QQ.apk")
-                .setApkUrl("http://gdown.baidu.com/data/wisegame/9d24e3f43ca2de66/mojitianqi_7030202.apk")
+                .setApkUrl("https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk")
                 .setSmallIcon(R.mipmap.ic_launcher)
+                .setConfiguration(configuration)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setApkVersionCode(2)
                 .setApkVersionName("2.1.8")
@@ -89,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            progressBar.setMax(msg.arg1);
-            progressBar.setProgress(msg.arg2);
+            progressBar.setMax(msg.arg1 / 1000);
+            progressBar.setProgress(msg.arg2 / 1000);
         }
     };
 }
