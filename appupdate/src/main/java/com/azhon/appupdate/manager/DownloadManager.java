@@ -6,7 +6,9 @@ import android.text.TextUtils;
 
 import com.azhon.appupdate.activity.PermissionActivity;
 import com.azhon.appupdate.config.UpdateConfiguration;
+import com.azhon.appupdate.dialog.UpdateDialog;
 import com.azhon.appupdate.service.DownloadService;
+import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.PermissionUtil;
 
 /**
@@ -134,27 +136,32 @@ public class DownloadManager {
      * 开始下载
      */
     public void download() {
-        checkParams();
-        //检查权限
-        if (!PermissionUtil.checkStoragePermission(context)) {
-            //没有权限,去申请权限
-            context.startActivity(new Intent(context, PermissionActivity.class));
-            return;
+        if (checkParams()) {
+            //检查权限
+            if (!PermissionUtil.checkStoragePermission(context)) {
+                //没有权限,去申请权限
+                context.startActivity(new Intent(context, PermissionActivity.class));
+                return;
+            }
+            context.startService(new Intent(context, DownloadService.class));
+        } else {
+            //显示升级对话框
+            UpdateDialog dialog = new UpdateDialog(context);
+            dialog.show();
         }
-        context.startService(new Intent(context, DownloadService.class));
     }
 
     /**
      * 检查参数
      */
-    private void checkParams() {
+    private boolean checkParams() {
         if (TextUtils.isEmpty(apkUrl)) {
             throw new RuntimeException("apkUrl can not be empty!");
         }
         if (TextUtils.isEmpty(apkName)) {
             throw new RuntimeException("apkName can not be empty!");
         }
-        if (!apkName.endsWith(".apk")) {
+        if (!apkName.endsWith(Constant.APK_SUFFIX)) {
             throw new RuntimeException("apkName must endsWith .apk!");
         }
         if (TextUtils.isEmpty(downloadPath)) {
@@ -167,10 +174,11 @@ public class DownloadManager {
         if (configuration == null) {
             configuration = new UpdateConfiguration();
         }
-        //设置了 VersionCode 则库中进行逻辑处理
+        //设置了 VersionCode 则库中进行对话框逻辑处理
         if (apkVersionCode > 1) {
-
+            return false;
         }
+        return true;
     }
 
     /**

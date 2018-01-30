@@ -25,4 +25,6 @@ public final class Constant {
 
     public static final String PROGRESS = "progress";
 
+    public static final String APK_SUFFIX = ".apk";
+
 }
