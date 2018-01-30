@@ -1,10 +1,17 @@
 ## 目录
 
+* [依赖库版本问题](#依赖库版本问题)
 * [功能介绍](#功能介绍)
 * [DownloadManager](#downloadmanager配置文档)
 * [UpdateConfiguration](#updateconfiguration配置文档)
 * [使用步骤](#使用步骤)
 * [结语](#结语)
+
+### 依赖库版本问题
+
+> 因为适配了Android O的通知栏，所以依赖的v7包版本比较高`appcompat-v7:26.1.0`
+> 使用的gradle版本为`gradle-4.1-all`，所以建议使用`Android Studio 3.0`以上的版本打开此项目
+
 
 ### 功能介绍
 * [x] 支持断点下载
