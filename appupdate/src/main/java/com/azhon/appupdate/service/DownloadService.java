@@ -41,6 +41,10 @@ public final class DownloadService extends Service implements OnDownloadListener
     private OnDownloadListener listener;
     private boolean showNotification;
     private boolean jumpInstallPage;
+    /**
+     * 是否正在下载，防止重复点击
+     */
+    private boolean downloading;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -69,7 +73,11 @@ public final class DownloadService extends Service implements OnDownloadListener
     /**
      * 获取下载管理者
      */
-    private void download() {
+    private synchronized void download() {
+        if (downloading) {
+            LogUtil.e(TAG, "download: 当前正在下载，请务重复下载！");
+            return;
+        }
         BaseHttpDownloadManager manager = DownloadManager.getInstance().getConfiguration().getHttpManager();
         //如果用户自己定义了下载过程
         if (manager != null) {
@@ -78,6 +86,7 @@ public final class DownloadService extends Service implements OnDownloadListener
             //使用自己的下载
             new HttpDownloadManager(this, downloadPath).download(apkUrl, apkName, this);
         }
+        downloading = true;
     }
 
 
@@ -104,6 +113,7 @@ public final class DownloadService extends Service implements OnDownloadListener
 
     @Override
     public void done(File apk) {
+        downloading = false;
         if (showNotification) {
             NotificationUtil.showDoneNotification(this, smallIcon, "下载完成", "点击进行安装", apk);
         }
@@ -120,6 +130,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     @Override
     public void error(Exception e) {
         LogUtil.e(TAG, "error: " + e);
+        downloading = false;
         if (showNotification) {
             NotificationUtil.showErrorNotification(this, smallIcon, "下载出错", "点击继续下载");
         }
