@@ -3,11 +3,13 @@ package com.azhon.appupdate.manager;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.azhon.appupdate.activity.PermissionActivity;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.dialog.UpdateDialog;
 import com.azhon.appupdate.service.DownloadService;
+import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.PermissionUtil;
 
@@ -32,10 +34,6 @@ public class DownloadManager {
      */
     private String apkUrl = "";
     /**
-     * 要更新apk的versionCode
-     */
-    private int apkVersionCode = 1;
-    /**
      * apk下载好的名字 .apk 结尾
      */
     private String apkName = "";
@@ -51,6 +49,23 @@ public class DownloadManager {
      * 整个库的一些配置属性，可以从这里配置
      */
     private UpdateConfiguration configuration;
+    /**
+     * 要更新apk的versionCode
+     */
+    private int apkVersionCode = 1;
+    /**
+     * 显示给用户的版本号
+     */
+    private String apkVersionName = "";
+    /**
+     * 更新描述
+     */
+    private String apkDescription = "";
+    /**
+     * 安装包大小 单位 M
+     */
+    private String apkSize = "";
+
 
     private static DownloadManager manager;
 
@@ -132,6 +147,33 @@ public class DownloadManager {
         return configuration;
     }
 
+    public String getApkVersionName() {
+        return apkVersionName;
+    }
+
+    public DownloadManager setApkVersionName(String apkVersionName) {
+        this.apkVersionName = apkVersionName;
+        return this;
+    }
+
+    public String getApkDescription() {
+        return apkDescription;
+    }
+
+    public DownloadManager setApkDescription(String apkDescription) {
+        this.apkDescription = apkDescription;
+        return this;
+    }
+
+    public String getApkSize() {
+        return apkSize;
+    }
+
+    public DownloadManager setApkSize(String apkSize) {
+        this.apkSize = apkSize;
+        return this;
+    }
+
     /**
      * 开始下载
      */
@@ -145,9 +187,13 @@ public class DownloadManager {
             }
             context.startService(new Intent(context, DownloadService.class));
         } else {
-            //显示升级对话框
-            UpdateDialog dialog = new UpdateDialog(context);
-            dialog.show();
+            //对版本进行判断，是否显示升级对话框
+            if (apkVersionCode > ApkUtil.getVersionCode(context)) {
+                UpdateDialog dialog = new UpdateDialog(context);
+                dialog.show();
+            } else {
+                Toast.makeText(context, "当前已是最新版本!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -176,6 +222,9 @@ public class DownloadManager {
         }
         //设置了 VersionCode 则库中进行对话框逻辑处理
         if (apkVersionCode > 1) {
+            if (TextUtils.isEmpty(apkDescription)) {
+                throw new RuntimeException("apkDescription can not be empty!");
+            }
             return false;
         }
         return true;
