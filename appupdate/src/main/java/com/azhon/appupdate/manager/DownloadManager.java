@@ -167,6 +167,10 @@ public class DownloadManager {
         if (configuration == null) {
             configuration = new UpdateConfiguration();
         }
+        //设置了 VersionCode 则库中进行逻辑处理
+        if (apkVersionCode > 1) {
+
+        }
     }
 
     /**

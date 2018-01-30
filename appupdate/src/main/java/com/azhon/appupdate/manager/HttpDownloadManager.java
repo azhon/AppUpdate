@@ -89,8 +89,8 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             URL url = new URL(apkUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            con.setReadTimeout(3000);
-            con.setConnectTimeout(3000);
+            con.setReadTimeout(Constant.HTTP_TIME_OUT);
+            con.setConnectTimeout(Constant.HTTP_TIME_OUT);
             //判断上一次下载一半的文件是否存在
             if (!FileUtil.fileExists(downloadPath, apkName)) {
                 //不存在 则从头开始下载
@@ -149,8 +149,8 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             URL url = new URL(apkUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            con.setReadTimeout(3000);
-            con.setConnectTimeout(3000);
+            con.setReadTimeout(Constant.HTTP_TIME_OUT);
+            con.setConnectTimeout(Constant.HTTP_TIME_OUT);
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream is = con.getInputStream();
                 int length = con.getContentLength();
@@ -190,8 +190,8 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             URL url = new URL(apkUrl);
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            con.setReadTimeout(3000);
-            con.setConnectTimeout(3000);
+            con.setReadTimeout(Constant.HTTP_TIME_OUT);
+            con.setConnectTimeout(Constant.HTTP_TIME_OUT);
             int length = 0;
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 length = con.getContentLength();
