@@ -1,6 +1,6 @@
 ## 目录
 
-* [编译问题](#依赖库版本问题)
+* [编译问题](#编译问题)
 * [功能介绍](#功能介绍)
 * [DownloadManager](#downloadmanager配置文档)
 * [UpdateConfiguration](#updateconfiguration配置文档)

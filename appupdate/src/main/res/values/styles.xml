@@ -18,4 +18,9 @@
         <!--背景变暗-->
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+    <!--对话框的样式-->
+    <style name="UpdateDialog" parent="DialogActivity">
+        <!--背景变暗-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
 </resources>
