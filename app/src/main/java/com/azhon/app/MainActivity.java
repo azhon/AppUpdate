@@ -27,28 +27,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     }
 
     public void Update(View view) {
-//        new AlertDialog.Builder(this).setIcon(R.mipmap.ic_launcher)
-//                .setTitle("有新版本")
-//                .setMessage("----QQ·乐在沟通-----\n" +
-//                        "√服务超过90%的移动互联网用户\n" +
-//                        "√多人视频、文件多端互传，不断创新满足沟通所需\n" +
-//                        "√致力于打造欢乐无限的沟通、娱乐...")
-//                .setPositiveButton("更新", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        startUpdate();
-//                    }
-//                })
-//                .setNegativeButton("不更新", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                }).create().show();
-
         startUpdate();
-
     }
 
     private void startUpdate() {
@@ -73,10 +52,12 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         DownloadManager manager = DownloadManager.getInstance(this);
         manager.setApkName("QQ.apk")
                 .setApkUrl("http://gdown.baidu.com/data/wisegame/9d24e3f43ca2de66/mojitianqi_7030202.apk")
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setApkVersionCode(2)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setConfiguration(configuration)
+                .setApkVersionName("2.1.8")
+                .setApkSize("20.4")
+                .setApkDescription("1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程\n5.支持 设备>=Android M 动态权限的申请\n6.支持通知栏进度条展示(或者自定义显示进度)")
                 .download();
     }
 
