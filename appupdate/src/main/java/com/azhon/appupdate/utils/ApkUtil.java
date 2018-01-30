@@ -2,6 +2,8 @@ package com.azhon.appupdate.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
@@ -40,5 +42,37 @@ public final class ApkUtil {
         }
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
         context.startActivity(intent);
+    }
+
+    /**
+     * 获取当前app的升级版本号
+     *
+     * @param context 上下文
+     */
+    public static int getVersionCode(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    /**
+     * 获取当前app的版本号
+     *
+     * @param context 上下文
+     */
+    public static String getVersionName(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "1.0.0";
+        }
     }
 }
