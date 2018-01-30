@@ -44,7 +44,7 @@ public class DownloadManager {
      */
     private String downloadPath;
     /**
-     * 图通知栏的标 资源路径
+     * 通知栏的图标 资源路径
      */
     private int smallIcon = -1;
     /**
