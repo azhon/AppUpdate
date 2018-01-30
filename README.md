@@ -10,7 +10,7 @@
 ### 编译问题
 
 * 因为适配了Android O的通知栏，所以依赖的v7包版本比较高`appcompat-v7:26.1.0`
-* 使用的gradle版本为`gradle-4.1-all`，所以建议使用`Android Studio 3.0`以上的版本打开此项目
+* 使用的gradle版本为`gradle-4.1-all`，所以建议使用`Android Studio 3.0`及以上的版本打开此项目
 
 
 ### 功能介绍
