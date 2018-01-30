@@ -6,7 +6,7 @@
 * [DownloadManager](#downloadmanager配置文档)
 * [UpdateConfiguration](#updateconfiguration配置文档)
 * [使用步骤](#使用步骤)
-* [Demo下载体验](#Demo下载体验)
+* [Demo下载体验](#demo下载体验)
 * [结语](#结语)
 
 ### 编译问题
