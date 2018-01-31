@@ -28,7 +28,7 @@ public class DownloadManager {
     /**
      * 上下文
      */
-    private Context context;
+    private static Context context;
     /**
      * 要更新apk的下载地址
      */
@@ -71,8 +71,9 @@ public class DownloadManager {
 
     public static DownloadManager getInstance(Context context) {
         if (manager == null) {
-            manager = new DownloadManager(context);
+            manager = new DownloadManager();
         }
+        DownloadManager.context = context;
         return manager;
     }
 
@@ -87,10 +88,6 @@ public class DownloadManager {
             throw new RuntimeException("请先调用 getInstance(Context context) !");
         }
         return manager;
-    }
-
-    private DownloadManager(Context context) {
-        this.context = context;
     }
 
     public String getApkUrl() {
