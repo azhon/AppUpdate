@@ -60,7 +60,7 @@ showNotification | 是否显示通知栏进度（后台下载提示）  | true
 * `build.gradle`进行依赖
 
 	```
-	compile 'com.azhon:appupdate:1.1.0'
+	implementation 'com.azhon:appupdate:1.1.0'
 	```
 
 * 简单用法：创建`DownloadManager`
