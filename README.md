@@ -57,6 +57,12 @@ jumpInstallPage | 下载完成是否自动弹出安装页面  | true
 showNotification | 是否显示通知栏进度（后台下载提示）  | true
 
 ### 使用步骤
+* `build.gradle`进行依赖
+
+	```
+	compile 'com.azhon:appupdate:1.1.0'
+	```
+
 * 简单用法：创建`DownloadManager`
 
 ```
@@ -95,6 +101,7 @@ manager.setApkName("QQ.apk")
 </paths>
 ```
 * 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
+* 温馨提示：升级对话框中的内容是可以上下滑动的哦😄！
 
 ### Demo下载体验
  [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
