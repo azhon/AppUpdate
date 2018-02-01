@@ -65,6 +65,11 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            //删除之前的安装包
+            int length = SharePreUtil.getInt(context, Constant.PROGRESS, 0);
+            if (length == 0 && FileUtil.fileExists(downloadPath, apkName)) {
+                FileUtil.delete(downloadPath, apkName);
+            }
             //检查是否需要断点下载
             boolean breakpoint = DownloadManager.getInstance().getConfiguration().isBreakpointDownload();
             if (breakpoint) {

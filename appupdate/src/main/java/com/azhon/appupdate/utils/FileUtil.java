@@ -62,4 +62,14 @@ public final class FileUtil {
         return new File(downloadPath, fileName).exists();
     }
 
+    /**
+     * 删除一个文件
+     *
+     * @param downloadPath 路径
+     * @param fileName     名字
+     * @return true | false
+     */
+    public static boolean delete(String downloadPath, String fileName) {
+        return new File(downloadPath, fileName).delete();
+    }
 }
