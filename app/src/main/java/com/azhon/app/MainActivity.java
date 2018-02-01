@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setOnDownloadListener(this);
 
         DownloadManager manager = DownloadManager.getInstance(this);
-        manager.setApkName("QQ.apk")
-                .setApkUrl("https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk")
+        manager.setApkName("appupdate.apk")
+                .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setConfiguration(configuration)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            progressBar.setMax(msg.arg1 / 1000);
-            progressBar.setProgress(msg.arg2 / 1000);
+            progressBar.setMax(msg.arg1);
+            progressBar.setProgress(msg.arg2);
         }
     };
 }
