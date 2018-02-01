@@ -102,6 +102,11 @@ manager.setApkName("QQ.apk")
 ```
 * 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
 * 温馨提示：升级对话框中的内容是可以上下滑动的哦😄！
+* 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager` 并使用listener更新进度
+
+```
+public class MyDownload extends BaseHttpDownloadManager {}
+```
 
 ### Demo下载体验
  [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
