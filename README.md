@@ -67,8 +67,8 @@ showNotification | 是否显示通知栏进度（后台下载提示）  | true
 
 ```
 DownloadManager manager = DownloadManager.getInstance(this);
-manager.setApkName("QQ.apk")
-        .setApkUrl("http://gdown.baidu.com/data/wisegame/74dadae1bde205b0/QQ_776.apk")
+manager.setApkName("appupdate.apk")
+        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
         .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
         .setSmallIcon(R.mipmap.ic_launcher)
         //可设置，可不设置
