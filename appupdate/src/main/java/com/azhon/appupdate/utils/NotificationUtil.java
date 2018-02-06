@@ -146,7 +146,7 @@ public final class NotificationUtil {
     }
 
     /**
-     * 适配 android O 通知渠道
+     * 适配 Android O 通知渠道
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static void afterO(NotificationManager manager) {
@@ -166,6 +166,8 @@ public final class NotificationUtil {
             channel.enableLights(true);
             //是否在久按桌面图标时显示此渠道的通知
             channel.setShowBadge(true);
+            //在Android O 上更新进度 不震动
+            channel.enableVibration(false);
         }
         manager.createNotificationChannel(channel);
     }
