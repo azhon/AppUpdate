@@ -120,13 +120,8 @@ public class MyDownload extends BaseHttpDownloadManager {}
 	* 修复部分手机请求权限时抛出：`Only fullscreen opaque activities can request orientation`
 	
 * v1.3.0
-	* 修复大于Android O设备更新进度手机一直震动问题
+	* 大于Android O设备更新进度手机一直震动问题 (有解决的麻烦告知一下)
 	
-	```
-	NotificationChannel channel = new NotificationChannel("id",importance)
-	//在Android O 上更新进度 不震动
-	channel.enableVibration(false);
-	```	
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issuse告知。
 * 如果大家有什么好的建议或者需求，也可以提Issuse或者发送邮件至：958460248@qq.com
