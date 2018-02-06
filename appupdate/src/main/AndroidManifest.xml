@@ -10,7 +10,6 @@
         <activity
             android:name=".activity.PermissionActivity"
             android:label=""
-            android:screenOrientation="portrait"
             android:theme="@style/DialogActivity" />
         <service android:name=".service.DownloadService" />
     </application>
