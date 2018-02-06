@@ -7,6 +7,7 @@
 * [UpdateConfiguration](#updateconfiguration配置文档)
 * [使用步骤](#使用步骤)
 * [Demo下载体验](#demo下载体验)
+* [版本更新记录](#版本更新记录)
 * [结语](#结语)
 
 ### 编译问题
@@ -61,7 +62,7 @@ showNotification | 是否显示通知栏进度（后台下载提示）  | true
 * `build.gradle`进行依赖
 
 	```
-	implementation 'com.azhon:appupdate:1.1.0'
+	implementation 'com.azhon:appupdate:1.2.0'
 	```
 
 * 简单用法：创建`DownloadManager`
@@ -111,6 +112,13 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Demo下载体验
  [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
+
+### 版本更新记录
+
+* v1.2.0
+	* 添加是否提示用户 "当前已是最新版本" 的布尔值 
+	* 修复部分手机请求权限时抛出：`Only fullscreen opaque activities can request orientation`
+ 
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issuse告知。
 * 如果大家有什么好的建议或者需求，也可以提Issuse或者发送邮件至：958460248@qq.com
