@@ -11,6 +11,7 @@ import com.azhon.appupdate.dialog.UpdateDialog;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
+import com.azhon.appupdate.utils.LogUtil;
 import com.azhon.appupdate.utils.PermissionUtil;
 
 /**
@@ -25,6 +26,9 @@ import com.azhon.appupdate.utils.PermissionUtil;
 
 
 public class DownloadManager {
+
+    private static final String TAG = "DownloadManager";
+
     /**
      * 上下文
      */
@@ -41,6 +45,12 @@ public class DownloadManager {
      * apk 下载存放的位置
      */
     private String downloadPath;
+    /**
+     * 是否提示用户 "当前已是最新版本"
+     * <p>
+     * {@link #download()}
+     */
+    private boolean showNewerToast = false;
     /**
      * 通知栏的图标 资源路径
      */
@@ -126,6 +136,15 @@ public class DownloadManager {
         return this;
     }
 
+    public DownloadManager setShowNewerToast(boolean showNewerToast) {
+        this.showNewerToast = showNewerToast;
+        return this;
+    }
+
+    public boolean isShowNewerToast() {
+        return showNewerToast;
+    }
+
     public int getSmallIcon() {
         return smallIcon;
     }
@@ -189,7 +208,10 @@ public class DownloadManager {
                 UpdateDialog dialog = new UpdateDialog(context);
                 dialog.show();
             } else {
-                Toast.makeText(context, "当前已是最新版本!", Toast.LENGTH_SHORT).show();
+                if (showNewerToast) {
+                    Toast.makeText(context, "当前已是最新版本!", Toast.LENGTH_SHORT).show();
+                }
+                LogUtil.e(TAG, "当前已是最新版本");
             }
         }
     }

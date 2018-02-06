@@ -37,6 +37,7 @@ context | 上下文  | null | true
 apkUrl | apk的下载地址 | null | true
 apkName | apk下载好的名字 | null | true
 downloadPath | apk下载的位置 | null | true
+showNewerToast | 是否提示用户 "当前已是最新版本" | false | false
 smallIcon | 通知栏的图标(资源id)  | -1 |  true
 configuration | 这个库的额外配置 | null |  false
 apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会进行版本判断<br>下面的属性也就需要设置了)  | 1 | false

@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         manager.setApkName("appupdate.apk")
                 .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
                 .setSmallIcon(R.mipmap.ic_launcher)
+                .setShowNewerToast(true)
                 .setConfiguration(configuration)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setApkVersionCode(2)
