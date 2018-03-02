@@ -160,14 +160,15 @@ public final class NotificationUtil {
         }
         //如果用户没有设置
         if (channel == null) {
+            //IMPORTANCE_LOW：默认关闭声音与震动、IMPORTANCE_DEFAULT：开启声音与震动
             channel = new NotificationChannel(Constant.DEFAULT_CHANNEL_ID, Constant.DEFAULT_CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager.IMPORTANCE_LOW);
             //是否在桌面icon右上角展示小圆点
             channel.enableLights(true);
             //是否在久按桌面图标时显示此渠道的通知
             channel.setShowBadge(true);
             //在Android O 上更新进度 不震动
-            channel.enableVibration(false);
+//            channel.enableVibration(true);
         }
         manager.createNotificationChannel(channel);
     }

@@ -15,6 +15,16 @@ import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import java.io.File;
 
+/**
+ * 项目名:    AppUpdate
+ * 包名       com.azhon.app
+ * 文件名:    MyDownload
+ * 创建时间:  2018/1/27 on 19:25
+ * 描述:     TODO 一个简单好用的版本更新库
+ *
+ * @author 阿钟
+ */
+
 public class MainActivity extends AppCompatActivity implements OnDownloadListener {
 
     private NumberProgressBar progressBar;
