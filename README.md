@@ -62,7 +62,7 @@ showNotification | 是否显示通知栏进度（后台下载提示）  | true
 * `build.gradle`进行依赖
 
 	```
-	implementation 'com.azhon:appupdate:1.3.0'
+	implementation 'com.azhon:appupdate:1.4.0'
 	```
 
 * 简单用法：创建`DownloadManager`
@@ -119,8 +119,8 @@ public class MyDownload extends BaseHttpDownloadManager {}
 	* 添加是否提示用户 "当前已是最新版本" 的布尔值 
 	* 修复部分手机请求权限时抛出：`Only fullscreen opaque activities can request orientation`
 	
-* v1.3.0
-	* 大于Android O设备更新进度手机一直震动问题 (有解决的麻烦告知一下)
+* v1.4.0
+	* 修复在Android O设备上更新进度手机一直震动问题
 	
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issuse告知。
