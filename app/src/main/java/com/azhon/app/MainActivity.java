@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     private void startUpdate1() {
         new AlertDialog.Builder(this)
                 .setTitle("发现新版本")
-                .setMessage("1. 支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程")
+                .setMessage("1. 支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程\n5.支持 设备>=Android M 动态权限的申请")
                 .setPositiveButton("升级", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
