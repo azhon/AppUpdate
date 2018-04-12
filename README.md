@@ -16,7 +16,7 @@
 * 使用的gradle版本为`gradle-4.1-all`，所以建议使用`Android Studio 3.0`及以上的版本打开此项目
 
 ### 效果图
-<img src="https://img-blog.csdn.net/2018041216145771" width="300">　<img src="https://img-blog.csdn.net/20180412161439587" width="300">
+<img src="https://img-blog.csdn.net/20180412162242853" width="300">　<img src="https://img-blog.csdn.net/20180412161439587" width="300">
 <img src="http://img.blog.csdn.net/20180130212521314" width="300">　<img src="http://img.blog.csdn.net/20180130212630909" width="300">
 <img src="http://img.blog.csdn.net/20180130212731751" width="300">　<img src="http://img.blog.csdn.net/20180130212801442" width="300">
 
