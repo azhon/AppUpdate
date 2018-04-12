@@ -1,10 +1,12 @@
 package com.azhon.app;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -25,7 +27,7 @@ import java.io.File;
  * @author 阿钟
  */
 
-public class MainActivity extends AppCompatActivity implements OnDownloadListener {
+public class MainActivity extends AppCompatActivity implements OnDownloadListener, View.OnClickListener {
 
     private NumberProgressBar progressBar;
 
@@ -35,13 +37,55 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         setContentView(R.layout.activity_main);
         setTitle("一个简单好用的版本更新库");
         progressBar = findViewById(R.id.number_progress_bar);
+        findViewById(R.id.btn_1).setOnClickListener(this);
+        findViewById(R.id.btn_2).setOnClickListener(this);
+        findViewById(R.id.btn_3).setOnClickListener(this);
     }
 
-    public void Update(View view) {
-        startUpdate();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_1:
+                startUpdate1();
+                break;
+            case R.id.btn_2:
+                startUpdate2();
+                break;
+            case R.id.btn_3:
+                startUpdate3();
+                break;
+            default:
+                break;
+        }
     }
 
-    private void startUpdate() {
+    private void startUpdate1() {
+        new AlertDialog.Builder(this)
+                .setTitle("发现新版本")
+                .setMessage("1. 支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程")
+                .setPositiveButton("升级", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DownloadManager manager = DownloadManager.getInstance(MainActivity.this);
+                        manager.setApkName("appupdate.apk")
+                                .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+                                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .download();
+                    }
+                }).create().show();
+    }
+
+    private void startUpdate2() {
+        DownloadManager manager = DownloadManager.getInstance(MainActivity.this);
+        manager.setApkName("appupdate.apk")
+                .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .download();
+    }
+
+    private void startUpdate3() {
         /*
          * 整个库允许配置的内容
          * 非必选

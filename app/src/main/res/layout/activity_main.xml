@@ -14,12 +14,28 @@
         android:layout_marginHorizontal="16dp" />
 
     <Button
+        android:id="@+id/btn_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="40dp"
-        android:onClick="Update"
-        android:text="更新" />
+        android:text="使用自己的对话框更新" />
+
+    <Button
+        android:id="@+id/btn_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:text="简单使用" />
+
+    <Button
+        android:id="@+id/btn_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:text="使用版本库内置的对话框更新" />
 
 </LinearLayout>
