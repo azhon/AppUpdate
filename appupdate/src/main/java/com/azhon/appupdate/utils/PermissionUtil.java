@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 
 /**
@@ -58,5 +59,15 @@ public final class PermissionUtil {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static boolean checkOreoInstallPermission(Context context) {
         return context.getPackageManager().canRequestPackageInstalls();
+    }
+
+    /**
+     * 检查通知权限
+     *
+     * @return false 没有权限，需要申请
+     */
+    public static boolean checkNotificationPermission(Context context) {
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
+        return managerCompat.areNotificationsEnabled();
     }
 }
