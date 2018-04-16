@@ -48,7 +48,7 @@ public class PermissionActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         //用户勾选了不在询问
-                        getAppDetailPage(PermissionActivity.this);
+                        goToAppDetailPage(PermissionActivity.this);
                     }
                 }
             }
@@ -59,14 +59,14 @@ public class PermissionActivity extends AppCompatActivity {
     /**
      * 开始下载
      */
-    public void download() {
+    private void download() {
         startService(new Intent(this, DownloadService.class));
     }
 
     /**
      * 跳转至详情界面
      */
-    public void getAppDetailPage(Context context) {
+    private void goToAppDetailPage(Context context) {
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
