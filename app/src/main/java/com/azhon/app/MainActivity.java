@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //设置是否显示通知栏进度
                 .setShowNotification(true)
                 //设置强制更新
-                .setForcedUpgrade(true)
+                .setForcedUpgrade(false)
                 //设置下载过程的监听
                 .setOnDownloadListener(this);
 

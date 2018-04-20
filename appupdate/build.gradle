@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 6
-        versionName "1.5.0"
+        versionCode 7
+        versionName "1.5.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,7 +41,7 @@ def gitUrl = 'https://github.com/azhon/AppUpdate.git'   //gitHub仓库的地址
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-version = "1.5.0"//version
+version = "1.5.1"//version
 group = "com.azhon"//groupId
 bintray {
     user = properties.getProperty("bintray.user")
@@ -56,10 +56,10 @@ bintray {
         publish = true // 是否是公开项目。
 
         version {
-            name = '1.5.0'//版本号
-            desc = '添加强制更新功能'//版本描述
+            name = '1.5.1'//版本号
+            desc = '修复魅族Pro 6 更新通知栏态频繁导致通知栏卡顿问题'//版本描述
             released = new Date()
-            vcsTag = 'v1.5.0'
+            vcsTag = 'v1.5.1'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
