@@ -58,13 +58,15 @@ enableLog | 是否需要日志输出  | true
 onDownloadListener | 下载过程的回调  | null
 jumpInstallPage | 下载完成是否自动弹出安装页面  | true
 showNotification | 是否显示通知栏进度（后台下载提示）  | true
+forcedUpgrade | 是否强制升级  | false
 
 ### 使用步骤
 * `build.gradle`进行依赖
 
 	```
-	implementation 'com.azhon:appupdate:1.4.0'
+	implementation 'com.azhon:appupdate:1.5.1'
 	```
+* 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
 * 简单用法：创建`DownloadManager`
 
@@ -122,6 +124,12 @@ public class MyDownload extends BaseHttpDownloadManager {}
 	
 * v1.4.0
 	* 修复在Android O设备上更新进度手机一直震动问题
+	
+* v1.5.0
+    * 添加强制更新逻辑
+
+* v1.5.1
+    * 修复部分手机频繁更新通知栏造成通知栏卡顿问题
 	
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issues告知。

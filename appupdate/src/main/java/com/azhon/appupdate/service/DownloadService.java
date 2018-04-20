@@ -41,6 +41,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     private OnDownloadListener listener;
     private boolean showNotification;
     private boolean jumpInstallPage;
+    private int lastProgress;
     /**
      * 是否正在下载，防止重复点击
      */
@@ -104,7 +105,12 @@ public final class DownloadService extends Service implements OnDownloadListener
     @Override
     public void downloading(int max, int progress) {
         if (showNotification) {
-            NotificationUtil.showProgressNotification(this, smallIcon, "正在下载新版本", "", max, progress);
+            //优化通知栏更新，减少通知栏更新次数
+            int curr = (int) (progress / (double) max * 100.0);
+            if (curr != lastProgress) {
+                lastProgress = curr;
+                NotificationUtil.showProgressNotification(this, smallIcon, "正在下载新版本", "", max, progress);
+            }
         }
         if (listener != null) {
             listener.downloading(max, progress);

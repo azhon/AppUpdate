@@ -49,6 +49,10 @@ public class UpdateConfiguration {
      * 下载完成是否自动弹出安装页面 (默认为true)
      */
     private boolean jumpInstallPage = true;
+    /**
+     * 是否强制升级(默认为false)
+     */
+    private boolean forcedUpgrade = false;
 
 
     public int getNotifyId() {
@@ -123,4 +127,12 @@ public class UpdateConfiguration {
         return this;
     }
 
+    public boolean isForcedUpgrade() {
+        return forcedUpgrade;
+    }
+
+    public UpdateConfiguration setForcedUpgrade(boolean forcedUpgrade) {
+        this.forcedUpgrade = forcedUpgrade;
+        return this;
+    }
 }
