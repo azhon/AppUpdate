@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //设置自定义的下载
                 //.setHttpManager()
                 //下载完成自动跳动安装页面
-                .setJumpInstallPage(true)
+                .setJumpInstallPage(false)
                 //支持断点下载
                 .setBreakpointDownload(true)
                 //设置是否显示通知栏进度
