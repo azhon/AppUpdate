@@ -42,8 +42,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private DownloadManager manager;
     private boolean forcedUpgrade;
-    private boolean isDownloaded;//是否已经下载
-    private File downloadedApkFile;//已下载到文件
+
     private Button update;
 
 
@@ -115,10 +114,6 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
                 dismiss();
             }
         } else if (id == R.id.btn_update) {
-            if (isDownloaded && downloadedApkFile != null && downloadedApkFile.exists()) {
-                ApkUtil.installApk(context, downloadedApkFile);
-                return;
-            }
             if (forcedUpgrade) {
                 update.setEnabled(false);
                 update.setText("正在后台下载新版本...");

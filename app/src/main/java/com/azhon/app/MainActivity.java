@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setApkVersionCode(2)
                 .setApkVersionName("2.1.8")
+                .setApkMd5("8131282da8c5ad12f1e5d47b9aa872be")
                 .setApkSize("20.4")
                 .setApkDescription("1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程\n5.支持 设备>=Android M 动态权限的申请\n6.支持通知栏进度条展示(或者自定义显示进度)")
                 .download();
