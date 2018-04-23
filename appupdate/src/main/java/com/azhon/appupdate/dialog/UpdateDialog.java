@@ -19,8 +19,12 @@ import com.azhon.appupdate.R;
 import com.azhon.appupdate.activity.PermissionActivity;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.azhon.appupdate.service.DownloadService;
+import com.azhon.appupdate.utils.ApkUtil;
+import com.azhon.appupdate.utils.FileUtil;
 import com.azhon.appupdate.utils.PermissionUtil;
 import com.azhon.appupdate.utils.ScreenUtil;
+
+import java.io.File;
 
 /**
  * 项目名:    AppUpdate
@@ -38,7 +42,10 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private DownloadManager manager;
     private boolean forcedUpgrade;
+    private boolean isDownloaded;//是否已经下载
+    private File downloadedApkFile;//已下载到文件
     private Button update;
+
 
     public UpdateDialog(@NonNull Context context) {
         super(context, R.style.UpdateDialog);
@@ -87,6 +94,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
             size.setText(String.format("新版本大小：%sM", manager.getApkSize()));
             size.setVisibility(View.VISIBLE);
         }
+
         description.setText(manager.getApkDescription());
     }
 
@@ -107,6 +115,10 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
                 dismiss();
             }
         } else if (id == R.id.btn_update) {
+            if (isDownloaded && downloadedApkFile != null && downloadedApkFile.exists()) {
+                ApkUtil.installApk(context, downloadedApkFile);
+                return;
+            }
             if (forcedUpgrade) {
                 update.setEnabled(false);
                 update.setText("正在后台下载新版本...");

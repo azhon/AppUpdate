@@ -76,6 +76,11 @@ public class DownloadManager {
      */
     private String apkSize = "";
 
+    /**
+     * 安装包md5
+     */
+    private String fileMd5 = "";
+
 
     private static DownloadManager manager;
 
@@ -188,6 +193,15 @@ public class DownloadManager {
     public DownloadManager setApkSize(String apkSize) {
         this.apkSize = apkSize;
         return this;
+    }
+
+    public DownloadManager setFileMd5(String fileMd5) {
+        this.fileMd5 = fileMd5;
+        return this;
+    }
+
+    public String getFileMd5() {
+        return fileMd5;
     }
 
     /**

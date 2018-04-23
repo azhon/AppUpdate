@@ -1,8 +1,11 @@
 package com.azhon.appupdate.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 /**
  * 项目名:    AppUpdate
@@ -71,5 +74,40 @@ public final class FileUtil {
      */
     public static boolean delete(String downloadPath, String fileName) {
         return new File(downloadPath, fileName).delete();
+    }
+
+    /**
+     * @param file 获取一个文件
+     * @return  文件md5值
+     */
+    public static String md5(File file) {
+        MessageDigest digest = null;
+        FileInputStream fis = null;
+        byte[] buffer = new byte[1024];
+
+        try {
+            if (!file.isFile()) {
+                return "";
+            }
+
+            digest = MessageDigest.getInstance("MD5");
+            fis = new FileInputStream(file);
+
+            while (true) {
+                int len;
+                if ((len = fis.read(buffer, 0, 1024)) == -1) {
+                    fis.close();
+                    break;
+                }
+
+                digest.update(buffer, 0, len);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        BigInteger var5 = new BigInteger(1, digest.digest());
+        return String.format("%1$032x", new Object[]{var5});
     }
 }
