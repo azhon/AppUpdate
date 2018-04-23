@@ -64,7 +64,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         apkName = DownloadManager.getInstance().getApkName();
         downloadPath = DownloadManager.getInstance().getDownloadPath();
         smallIcon = DownloadManager.getInstance().getSmallIcon();
-        versionFileMd5 = DownloadManager.getInstance().getFileMd5();
+        versionFileMd5 = DownloadManager.getInstance().getApkMd5();
         //创建apk文件存储文件夹
         FileUtil.createDirDirectory(downloadPath);
 
@@ -78,23 +78,21 @@ public final class DownloadService extends Service implements OnDownloadListener
     }
 
     /**
-     * @return 检查是否已经下载过
+     * @return 检查是否已经下载过。校验md5
      */
     private synchronized boolean checkDownload() {
         //验证md5
-        String downFilePath = downloadPath + apkName;
-        if (!TextUtils.isEmpty(downFilePath)) {
-            File downloadedApkFile = new File(downFilePath);
-            if (downloadedApkFile.exists()) {
-                String downloaderFileMd5 = FileUtil.md5(downloadedApkFile);
-                if (!TextUtils.isEmpty(versionFileMd5) && !TextUtils.isEmpty(downloaderFileMd5) &&
-                        versionFileMd5.toLowerCase()
-                                .equals(downloaderFileMd5.toLowerCase())) {
-                    done(downloadedApkFile);
-                    return true;
-                }
-
+        if (FileUtil.fileExists(downloadPath, apkName)) {
+            File downloadedApkFile = FileUtil.createFile(downloadPath, apkName);
+            String downloaderFileMd5 = FileUtil.md5(downloadedApkFile);
+            if (!TextUtils.isEmpty(versionFileMd5) && !TextUtils.isEmpty(downloaderFileMd5) &&
+                    versionFileMd5.toLowerCase()
+                            .equals(downloaderFileMd5.toLowerCase())) {
+                done(downloadedApkFile);
+                return true;
             }
+
+
         }
         return false;
     }

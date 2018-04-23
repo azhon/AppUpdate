@@ -79,7 +79,7 @@ public class DownloadManager {
     /**
      * 安装包md5
      */
-    private String fileMd5 = "";
+    private String apkMd5 = "";
 
 
     private static DownloadManager manager;
@@ -195,13 +195,13 @@ public class DownloadManager {
         return this;
     }
 
-    public DownloadManager setFileMd5(String fileMd5) {
-        this.fileMd5 = fileMd5;
+    public DownloadManager setApkMd5(String apkMd5) {
+        this.apkMd5 = apkMd5;
         return this;
     }
 
-    public String getFileMd5() {
-        return fileMd5;
+    public String getApkMd5() {
+        return apkMd5;
     }
 
     /**
