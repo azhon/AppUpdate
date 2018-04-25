@@ -238,10 +238,7 @@ public class DownloadManager {
      * 检查参数
      */
     private boolean checkParams() {
-        if (apkVersionCode < 1) {
-            return false;
-
-        }
+    
         if (TextUtils.isEmpty(apkUrl)) {
             throw new RuntimeException("apkUrl can not be empty!");
         }
