@@ -253,6 +253,10 @@ public class DownloadManager {
         if (configuration == null) {
             configuration = new UpdateConfiguration();
         }
+        if (apkVersionCode < 1) {
+            return false;
+
+        }
         //设置了 VersionCode 则库中进行对话框逻辑处理
         if (apkVersionCode > 1) {
             if (TextUtils.isEmpty(apkDescription)) {
