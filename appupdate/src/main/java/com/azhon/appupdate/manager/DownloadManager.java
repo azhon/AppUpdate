@@ -86,7 +86,11 @@ public class DownloadManager {
 
     public static DownloadManager getInstance(Context context) {
         if (manager == null) {
-            manager = new DownloadManager();
+            synchronized (DownloadManager.class) {
+                if (manager == null) {
+                    manager = new DownloadManager();
+                }
+            }
         }
         DownloadManager.context = context;
         return manager;
@@ -264,6 +268,10 @@ public class DownloadManager {
                 throw new RuntimeException("apkDescription can not be empty!");
             }
             return false;
+        }
+        //如果设置了小于的versionCode 你不是在写bug就是脑子瓦塌拉
+        if (apkVersionCode < 1) {
+            throw new RuntimeException("apkVersionCode can not be < 1");
         }
         return true;
     }
