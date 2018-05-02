@@ -19,8 +19,12 @@ import com.azhon.appupdate.R;
 import com.azhon.appupdate.activity.PermissionActivity;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.azhon.appupdate.service.DownloadService;
+import com.azhon.appupdate.utils.ApkUtil;
+import com.azhon.appupdate.utils.FileUtil;
 import com.azhon.appupdate.utils.PermissionUtil;
 import com.azhon.appupdate.utils.ScreenUtil;
+
+import java.io.File;
 
 /**
  * 项目名:    AppUpdate
@@ -38,7 +42,9 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
     private Context context;
     private DownloadManager manager;
     private boolean forcedUpgrade;
+
     private Button update;
+
 
     public UpdateDialog(@NonNull Context context) {
         super(context, R.style.UpdateDialog);
@@ -87,6 +93,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
             size.setText(String.format("新版本大小：%sM", manager.getApkSize()));
             size.setVisibility(View.VISIBLE);
         }
+
         description.setText(manager.getApkDescription());
     }
 

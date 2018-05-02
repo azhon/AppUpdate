@@ -76,6 +76,11 @@ public class DownloadManager {
      */
     private String apkSize = "";
 
+    /**
+     * 安装包md5
+     */
+    private String apkMd5 = "";
+
 
     private static DownloadManager manager;
 
@@ -194,6 +199,15 @@ public class DownloadManager {
         return this;
     }
 
+    public DownloadManager setApkMd5(String apkMd5) {
+        this.apkMd5 = apkMd5;
+        return this;
+    }
+
+    public String getApkMd5() {
+        return apkMd5;
+    }
+
     /**
      * 开始下载
      */
@@ -224,6 +238,7 @@ public class DownloadManager {
      * 检查参数
      */
     private boolean checkParams() {
+    
         if (TextUtils.isEmpty(apkUrl)) {
             throw new RuntimeException("apkUrl can not be empty!");
         }
@@ -243,6 +258,7 @@ public class DownloadManager {
         if (configuration == null) {
             configuration = new UpdateConfiguration();
         }
+
         //设置了 VersionCode 则库中进行对话框逻辑处理
         if (apkVersionCode > 1) {
             if (TextUtils.isEmpty(apkDescription)) {

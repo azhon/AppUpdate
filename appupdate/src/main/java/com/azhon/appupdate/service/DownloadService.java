@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
@@ -38,6 +39,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     private String apkUrl;
     private String apkName;
     private String downloadPath;
+    private String versionFileMd5;
     private OnDownloadListener listener;
     private boolean showNotification;
     private boolean jumpInstallPage;
@@ -62,19 +64,45 @@ public final class DownloadService extends Service implements OnDownloadListener
         apkName = DownloadManager.getInstance().getApkName();
         downloadPath = DownloadManager.getInstance().getDownloadPath();
         smallIcon = DownloadManager.getInstance().getSmallIcon();
+        versionFileMd5 = DownloadManager.getInstance().getApkMd5();
         //创建apk文件存储文件夹
         FileUtil.createDirDirectory(downloadPath);
 
         listener = DownloadManager.getInstance().getConfiguration().getOnDownloadListener();
         showNotification = DownloadManager.getInstance().getConfiguration().isShowNotification();
         jumpInstallPage = DownloadManager.getInstance().getConfiguration().isJumpInstallPage();
-        download();
+        if (!checkDownload()) {
+            download();
+        }
+
     }
+
+    /**
+     * @return 检查是否已经下载过。校验md5
+     */
+    private synchronized boolean checkDownload() {
+        //验证md5
+        if (FileUtil.fileExists(downloadPath, apkName)) {
+            File downloadedApkFile = FileUtil.createFile(downloadPath, apkName);
+            String downloaderFileMd5 = FileUtil.md5(downloadedApkFile);
+            if (!TextUtils.isEmpty(versionFileMd5) && !TextUtils.isEmpty(downloaderFileMd5) &&
+                    versionFileMd5.toLowerCase()
+                            .equals(downloaderFileMd5.toLowerCase())) {
+                done(downloadedApkFile);
+                return true;
+            }
+
+
+        }
+        return false;
+    }
+
 
     /**
      * 获取下载管理者
      */
     private synchronized void download() {
+
         if (downloading) {
             LogUtil.e(TAG, "download: 当前正在下载，请务重复下载！");
             return;

@@ -46,6 +46,7 @@ apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会�
 apkVersionName | 更新apk的versionName  | null | false
 apkDescription | 更新描述  | null | false
 apkSize | 新版本的安装包大小（单位M）  | null | false
+apkMd5 | 新版本的安装包md5校验值  | null | false
 
 ### UpdateConfiguration：配置文档
 属性      | 描述		| 默认值
