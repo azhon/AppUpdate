@@ -59,12 +59,13 @@ onDownloadListener | 下载过程的回调  | null
 jumpInstallPage | 下载完成是否自动弹出安装页面  | true
 showNotification | 是否显示通知栏进度（后台下载提示）  | true
 forcedUpgrade | 是否强制升级  | false
+onButtonClickListener | 按钮点击事件回调  | null
 
 ### 使用步骤
 * `build.gradle`进行依赖
 
 	```
-	implementation 'com.azhon:appupdate:1.5.1'
+	implementation 'com.azhon:appupdate:1.5.2'
 	```
 * 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
@@ -130,7 +131,11 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 * v1.5.1
     * 修复部分手机频繁更新通知栏造成通知栏卡顿问题
-	
+
+* v1.5.2
+    * 添加对话框按钮点击事件监听
+    * 启动下载服务时增加了通知栏开关状态检查，结果以打印日志的形式反馈。
+
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issues告知。
 * 如果大家有什么好的建议或者需求，也可以提Issues或者发送邮件至：958460248@qq.com
