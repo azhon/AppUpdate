@@ -3,6 +3,7 @@ package com.azhon.appupdate.config;
 import android.app.NotificationChannel;
 
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
+import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
 
 /**
@@ -45,6 +46,10 @@ public class UpdateConfiguration {
      * 下载过程回调
      */
     private OnDownloadListener onDownloadListener;
+    /**
+     * 按钮点击事件回调
+     */
+    private OnButtonClickListener onButtonClickListener;
     /**
      * 下载完成是否自动弹出安装页面 (默认为true)
      */
@@ -134,5 +139,14 @@ public class UpdateConfiguration {
     public UpdateConfiguration setForcedUpgrade(boolean forcedUpgrade) {
         this.forcedUpgrade = forcedUpgrade;
         return this;
+    }
+
+    public UpdateConfiguration setButtonClickListener(OnButtonClickListener onButtonClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
+        return this;
+    }
+
+    public OnButtonClickListener getOnButtonClickListener() {
+        return onButtonClickListener;
     }
 }

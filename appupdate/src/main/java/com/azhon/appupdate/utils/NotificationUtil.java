@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
@@ -143,6 +144,16 @@ public final class NotificationUtil {
                 .setContentIntent(pi)
                 .setDefaults(Notification.DEFAULT_SOUND);
         manager.notify(DownloadManager.getInstance().getConfiguration().getNotifyId(), builder.build());
+    }
+
+    /**
+     * 获取通知栏开关状态
+     *
+     * @return true |false
+     */
+    public static boolean notificationEnable(Context context) {
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+        return notificationManagerCompat.areNotificationsEnabled();
     }
 
     /**

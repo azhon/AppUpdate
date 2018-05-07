@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.azhon.appupdate.R;
 import com.azhon.appupdate.activity.PermissionActivity;
+import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.PermissionUtil;
@@ -39,6 +40,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
     private DownloadManager manager;
     private boolean forcedUpgrade;
     private Button update;
+    private OnButtonClickListener buttonClickListener;
 
     public UpdateDialog(@NonNull Context context) {
         super(context, R.style.UpdateDialog);
@@ -52,6 +54,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
         this.context = context;
         manager = DownloadManager.getInstance();
         forcedUpgrade = manager.getConfiguration().isForcedUpgrade();
+        buttonClickListener = manager.getConfiguration().getOnButtonClickListener();
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_update, null);
         setContentView(view);
         setWindowSize(context);
@@ -106,12 +109,20 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
             if (!forcedUpgrade) {
                 dismiss();
             }
+            //回调点击事件
+            if (buttonClickListener != null) {
+                buttonClickListener.onButtonClick(OnButtonClickListener.CANCEL);
+            }
         } else if (id == R.id.btn_update) {
             if (forcedUpgrade) {
                 update.setEnabled(false);
                 update.setText("正在后台下载新版本...");
             } else {
                 dismiss();
+            }
+            //回调点击事件
+            if (buttonClickListener != null) {
+                buttonClickListener.onButtonClick(OnButtonClickListener.UPDATE);
             }
             //检查权限
             if (!PermissionUtil.checkStoragePermission(context)) {

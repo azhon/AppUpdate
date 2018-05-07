@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.azhon.appupdate.config.UpdateConfiguration;
+import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
+import com.azhon.appupdate.utils.LogUtil;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import java.io.File;
@@ -27,7 +29,7 @@ import java.io.File;
  * @author 阿钟
  */
 
-public class MainActivity extends AppCompatActivity implements OnDownloadListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements OnDownloadListener, View.OnClickListener, OnButtonClickListener {
 
     private NumberProgressBar progressBar;
 
@@ -103,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setShowNotification(true)
                 //设置强制更新
                 .setForcedUpgrade(false)
+                //设置对话框按钮的点击监听
+                .setButtonClickListener(this)
                 //设置下载过程的监听
                 .setOnDownloadListener(this);
 
@@ -152,4 +156,9 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
             progressBar.setProgress(msg.arg2);
         }
     };
+
+    @Override
+    public void onButtonClick(int id) {
+        LogUtil.e("TAG", id);
+    }
 }

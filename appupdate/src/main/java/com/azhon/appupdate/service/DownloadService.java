@@ -68,6 +68,9 @@ public final class DownloadService extends Service implements OnDownloadListener
         listener = DownloadManager.getInstance().getConfiguration().getOnDownloadListener();
         showNotification = DownloadManager.getInstance().getConfiguration().isShowNotification();
         jumpInstallPage = DownloadManager.getInstance().getConfiguration().isJumpInstallPage();
+        //获取app通知开关是否打开
+        boolean enable = NotificationUtil.notificationEnable(this);
+        LogUtil.e(TAG, enable ? "应用的通知栏开关状态：已打开" : "应用的通知栏开关状态：已关闭");
         download();
     }
 
