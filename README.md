@@ -1,3 +1,5 @@
+[![Travis](https://img.shields.io/badge/star-100%2B-ff69b4.svg)](#目录)
+
 ## 目录
 
 * [编译问题](#编译问题)
