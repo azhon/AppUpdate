@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.Constant;
+import com.azhon.appupdate.utils.LogUtil;
 import com.azhon.appupdate.utils.PermissionUtil;
 
 /**
@@ -29,6 +30,8 @@ import com.azhon.appupdate.utils.PermissionUtil;
 
 public class PermissionActivity extends AppCompatActivity {
 
+    private static final String TAG = "PermissionActivity";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +42,21 @@ public class PermissionActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constant.PERMISSION_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //授予了权限
-                download();
+            if (grantResults.length == 0) {
+                // do something...
+                LogUtil.e(TAG, "权限请求回调：grantResults.length = 0");
             } else {
-                //拒绝了
-                Toast.makeText(PermissionActivity.this, "请允许使用[存储空间]权限!", Toast.LENGTH_LONG).show();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        //用户勾选了不在询问
-                        goToAppDetailPage(PermissionActivity.this);
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //授予了权限
+                    download();
+                } else {
+                    //拒绝了
+                    Toast.makeText(PermissionActivity.this, "请允许使用[存储空间]权限!", Toast.LENGTH_LONG).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            //用户勾选了不在询问
+                            goToAppDetailPage(PermissionActivity.this);
+                        }
                     }
                 }
             }
