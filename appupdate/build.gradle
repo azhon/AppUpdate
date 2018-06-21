@@ -41,7 +41,7 @@ def gitUrl = 'https://github.com/azhon/AppUpdate.git'   //gitHub仓库的地址
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-version = "1.5.2"//version
+version = "1.5.3"//version
 group = "com.azhon"//groupId
 bintray {
     user = properties.getProperty("bintray.user")
@@ -56,10 +56,10 @@ bintray {
         publish = true // 是否是公开项目。
 
         version {
-            name = '1.5.2'//版本号
-            desc = '添加对话框按钮点击事件监听'//版本描述
+            name = '1.5.3'//版本号
+            desc = '修复权限申请返回结果数组为空的情况'//版本描述
             released = new Date()
-            vcsTag = 'v1.5.2'
+            vcsTag = 'v1.5.3'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
