@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 8
-        versionName "1.5.2"
+        versionCode 9
+        versionName "1.5.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,7 +41,7 @@ def gitUrl = 'https://github.com/azhon/AppUpdate.git'   //gitHub仓库的地址
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-version = "1.5.3"//version
+version = "1.5.5"//version
 group = "com.azhon"//groupId
 bintray {
     user = properties.getProperty("bintray.user")
@@ -56,10 +56,10 @@ bintray {
         publish = true // 是否是公开项目。
 
         version {
-            name = '1.5.3'//版本号
-            desc = '修复权限申请返回结果数组为空的情况'//版本描述
+            name = '1.5.5'//版本号
+            desc = '解决部分下载地址无法获取到文件大小问题'//版本描述
             released = new Date()
-            vcsTag = 'v1.5.3'
+            vcsTag = 'v1.5.5'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
