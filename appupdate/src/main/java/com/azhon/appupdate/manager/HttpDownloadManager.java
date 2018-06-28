@@ -96,6 +96,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             con.setRequestMethod("GET");
             con.setReadTimeout(Constant.HTTP_TIME_OUT);
             con.setConnectTimeout(Constant.HTTP_TIME_OUT);
+            con.setRequestProperty("Accept-Encoding", "identity");
             //判断上一次下载一半的文件是否存在
             if (!FileUtil.fileExists(downloadPath, apkName)) {
                 //不存在 则从头开始下载
@@ -156,6 +157,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             con.setRequestMethod("GET");
             con.setReadTimeout(Constant.HTTP_TIME_OUT);
             con.setConnectTimeout(Constant.HTTP_TIME_OUT);
+            con.setRequestProperty("Accept-Encoding", "identity");
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream is = con.getInputStream();
                 int length = con.getContentLength();
@@ -197,6 +199,8 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             con.setRequestMethod("GET");
             con.setReadTimeout(Constant.HTTP_TIME_OUT);
             con.setConnectTimeout(Constant.HTTP_TIME_OUT);
+            //使用 gzip方式获取 解决部分链接无法获取到文件大小问题
+            con.setRequestProperty("Accept-Encoding", "identity");
             int length = 0;
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 length = con.getContentLength();
