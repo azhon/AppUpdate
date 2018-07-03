@@ -48,6 +48,7 @@ apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会�
 apkVersionName | 更新apk的versionName  | null | false
 apkDescription | 更新描述  | null | false
 apkSize | 新版本的安装包大小（单位M）  | null | false
+authorities | 兼容Android N uri授权  | 应用包名 | false
 
 ### UpdateConfiguration：配置文档
 属性      | 描述		| 默认值
@@ -86,7 +87,9 @@ manager.setApkName("appupdate.apk")
 * 兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
 
 ```
-<!--android:authorities="${applicationId}" 这个不用改-->
+<font color="red"
+android:authorities="${applicationId}" 
+这个值必须与DownloadManager中的authorities一致（不设置则为应用包名）/>
 <provider
     android:name="android.support.v4.content.FileProvider"
     android:authorities="${applicationId}"
