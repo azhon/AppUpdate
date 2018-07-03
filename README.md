@@ -86,9 +86,9 @@ manager.setApkName("appupdate.apk")
 * 兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
 
 ```
+<!--android:authorities="${applicationId}" 这个不用改-->
 <provider
     android:name="android.support.v4.content.FileProvider"
-    <!--这个不用改-->
     android:authorities="${applicationId}"
     android:exported="false"
     android:grantUriPermissions="true">
