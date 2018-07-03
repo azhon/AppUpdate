@@ -93,13 +93,15 @@ public final class NotificationUtil {
     /**
      * 显示下载完成的通知,点击进行安装
      *
-     * @param context 上下文
-     * @param icon    图标
-     * @param title   标题
-     * @param content 内容
-     * @param apk     安装包
+     * @param context     上下文
+     * @param icon        图标
+     * @param title       标题
+     * @param content     内容
+     * @param authorities Android N 授权
+     * @param apk         安装包
      */
-    public static void showDoneNotification(Context context, int icon, String title, String content, File apk) {
+    public static void showDoneNotification(Context context, int icon, String title, String content,
+                                            String authorities, File apk) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //不知道为什么需要先取消之前的进度通知，才能显示完成的通知。
         manager.cancel(DownloadManager.getInstance().getConfiguration().getNotifyId());
@@ -109,7 +111,7 @@ public final class NotificationUtil {
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(context, context.getPackageName(), apk);
+            uri = FileProvider.getUriForFile(context, authorities, apk);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         } else {
             uri = Uri.fromFile(apk);
