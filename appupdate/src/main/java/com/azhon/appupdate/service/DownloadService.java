@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
@@ -38,6 +39,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     private String apkUrl;
     private String apkName;
     private String downloadPath;
+    private String authorities;
     private OnDownloadListener listener;
     private boolean showNotification;
     private boolean jumpInstallPage;
@@ -62,6 +64,11 @@ public final class DownloadService extends Service implements OnDownloadListener
         apkName = DownloadManager.getInstance().getApkName();
         downloadPath = DownloadManager.getInstance().getDownloadPath();
         smallIcon = DownloadManager.getInstance().getSmallIcon();
+        authorities = DownloadManager.getInstance().getAuthorities();
+        //如果没有设置则为包名
+        if (TextUtils.isEmpty(authorities)) {
+            authorities = getPackageName();
+        }
         //创建apk文件存储文件夹
         FileUtil.createDirDirectory(downloadPath);
 
@@ -124,14 +131,14 @@ public final class DownloadService extends Service implements OnDownloadListener
     public void done(File apk) {
         downloading = false;
         if (showNotification) {
-            NotificationUtil.showDoneNotification(this, smallIcon, "下载完成", "点击进行安装", apk);
+            NotificationUtil.showDoneNotification(this, smallIcon, "下载完成", "点击进行安装", authorities, apk);
         }
         //如果用户设置了回调 则先处理用户的事件 在执行自己的
         if (listener != null) {
             listener.done(apk);
         }
         if (jumpInstallPage) {
-            ApkUtil.installApk(this, apk);
+            ApkUtil.installApk(this, authorities, apk);
         }
         releaseResources();
     }

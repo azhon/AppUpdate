@@ -75,7 +75,10 @@ public class DownloadManager {
      * 安装包大小 单位 M
      */
     private String apkSize = "";
-
+    /**
+     * 兼容Android N 添加uri权限 authorities
+     */
+    private String authorities = "";
 
     private static DownloadManager manager;
 
@@ -191,6 +194,15 @@ public class DownloadManager {
 
     public DownloadManager setApkSize(String apkSize) {
         this.apkSize = apkSize;
+        return this;
+    }
+
+    public String getAuthorities() {
+        return authorities;
+    }
+
+    public DownloadManager setAuthorities(String authorities) {
+        this.authorities = authorities;
         return this;
     }
 
