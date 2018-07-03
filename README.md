@@ -87,9 +87,9 @@ manager.setApkName("appupdate.apk")
 * 兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
 
 ```
-<font color="red"
-android:authorities="${applicationId}" 
-这个值必须与DownloadManager中的authorities一致（不设置则为应用包名）/>
+<--! android:authorities="${applicationId}" 
+这个值必须与DownloadManager中的authorities一致（不设置则为应用包名）-->
+
 <provider
     android:name="android.support.v4.content.FileProvider"
     android:authorities="${applicationId}"
