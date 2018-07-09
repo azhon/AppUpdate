@@ -68,7 +68,7 @@ onButtonClickListener | 按钮点击事件回调  | null
 * `build.gradle`进行依赖
 
 	```
-	implementation 'com.azhon:appupdate:1.5.5'
+	implementation 'com.azhon:appupdate:1.5.6'
 	```
 * 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
@@ -146,6 +146,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
      
 * v1.5.5
     * 解决部分下载地址无法获取到文件大小问题
+    
+* v1.5.6
+    * 新增Android N uri authorities授权设置
 
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issues告知。
