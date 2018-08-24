@@ -13,13 +13,20 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:text="使用说明：三个方式不能并行\n请等待一个方式下载完成在使用其他方式"
+        android:textColor="#6351b3" />
+
     <Button
         android:id="@+id/btn_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="40dp"
         android:text="使用自己的对话框更新" />
 
     <Button
