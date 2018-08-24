@@ -68,6 +68,12 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setPositiveButton("升级", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            DownloadManager.getInstance().release();
+                            progressBar.setProgress(0);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         DownloadManager manager = DownloadManager.getInstance(MainActivity.this);
                         manager.setApkName("appupdate.apk")
                                 .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
@@ -79,6 +85,12 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     }
 
     private void startUpdate2() {
+        try {
+            DownloadManager.getInstance().release();
+            progressBar.setProgress(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         DownloadManager manager = DownloadManager.getInstance(MainActivity.this);
         manager.setApkName("appupdate.apk")
                 .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
