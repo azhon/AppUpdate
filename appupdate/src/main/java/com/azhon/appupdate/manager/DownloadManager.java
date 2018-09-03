@@ -271,11 +271,4 @@ public class DownloadManager {
         }
         return true;
     }
-
-    /**
-     * 释放资源
-     */
-    public void release() {
-        manager = null;
-    }
 }
