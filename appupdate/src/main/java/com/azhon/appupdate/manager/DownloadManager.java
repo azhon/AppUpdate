@@ -32,7 +32,7 @@ public class DownloadManager {
     /**
      * 上下文
      */
-    private static Context context;
+    private Context context;
     /**
      * 要更新apk的下载地址
      */
@@ -86,12 +86,15 @@ public class DownloadManager {
         if (manager == null) {
             synchronized (DownloadManager.class) {
                 if (manager == null) {
-                    manager = new DownloadManager();
+                    manager = new DownloadManager(context);
                 }
             }
         }
-        DownloadManager.context = context;
         return manager;
+    }
+
+    private DownloadManager(Context context) {
+        this.context = context.getApplicationContext();
     }
 
     /**
