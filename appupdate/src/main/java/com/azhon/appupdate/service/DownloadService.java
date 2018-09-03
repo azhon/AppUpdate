@@ -164,7 +164,6 @@ public final class DownloadService extends Service implements OnDownloadListener
             handler.removeCallbacksAndMessages(null);
         }
         stopSelf();
-        DownloadManager.getInstance().release();
     }
 
     @SuppressLint("HandlerLeak")
