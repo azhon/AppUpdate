@@ -16,16 +16,16 @@
 * 使用的gradle版本为`gradle-4.1-all`，所以建议使用`Android Studio 3.0`及以上的版本打开此项目
 
 ### 效果图
-<img src="https://img-blog.csdn.net/20180412162242853" width="300">　<img src="https://img-blog.csdn.net/20180412161439587" width="300">
-<img src="http://img.blog.csdn.net/20180130212521314" width="300">　<img src="http://img.blog.csdn.net/20180130212630909" width="300">
-<img src="http://img.blog.csdn.net/20180130212731751" width="300">　<img src="http://img.blog.csdn.net/20180130212801442" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/01.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/02.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/03.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/04.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/05.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/06.png" width="300">
 
 ### 功能介绍
 * [x] 支持断点下载
 * [x] 支持后台下载
 * [x] 支持自定义下载过程
 * [x] 支持 设备 >= Android M 动态权限的申请
-* [x] 支持通知栏进度条展示(或者自定义显示进度)
+* [x] 支持通知栏进度条展示(或者自定义显示进度)s
 * [x] 支持Android N
 * [x] 支持Android O
 
