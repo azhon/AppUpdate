@@ -94,7 +94,7 @@ public class DownloadManager {
     }
 
     private DownloadManager(Context context) {
-        this.context = context.getApplicationContext();
+        this.context = context;
     }
 
     /**
