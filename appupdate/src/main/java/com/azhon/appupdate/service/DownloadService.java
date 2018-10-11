@@ -114,6 +114,7 @@ public final class DownloadService extends Service implements OnDownloadListener
 
     @Override
     public void downloading(int max, int progress) {
+        LogUtil.e(TAG, "max: " + max + " --- progress: " + progress);
         if (showNotification) {
             //优化通知栏更新，减少通知栏更新次数
             int curr = (int) (progress / (double) max * 100.0);
