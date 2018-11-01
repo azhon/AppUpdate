@@ -28,6 +28,8 @@
 * [x] 支持通知栏进度条展示(或者自定义显示进度)
 * [x] 支持Android N
 * [x] 支持Android O
+* [x] 支持中/英文双语
+* [x] 支持自定内置对话框的样式
 
 
 ### DownloadManager：配置文档
@@ -61,6 +63,9 @@ jumpInstallPage | 下载完成是否自动弹出安装页面  | true
 showNotification | 是否显示通知栏进度（后台下载提示）  | true
 forcedUpgrade | 是否强制升级  | false
 onButtonClickListener | 按钮点击事件回调  | null
+dialogImage | 对话框背景图片资源(图片规范参考demo)  | -1
+dialogButtonColor | 对话框按钮的颜色  | -1
+dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 
 ### 使用步骤
 * `build.gradle`进行依赖
@@ -122,34 +127,37 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v1.2.0
-	* 添加是否提示用户 "当前已是最新版本" 的布尔值 
-	* 修复部分手机请求权限时抛出：`Only fullscreen opaque activities can request orientation`
-	
-* v1.4.0
-	* 修复在Android O设备上更新进度手机一直震动问题
-	
-* v1.5.0
-    * 添加强制更新逻辑
-
-* v1.5.1
-    * 修复部分手机频繁更新通知栏造成通知栏卡顿问题
-
-* v1.5.2
-    * 添加对话框按钮点击事件监听
-    * 启动下载服务时增加了通知栏开关状态检查，结果以打印日志的形式反馈
-    
-* v1.5.3
-    * 修复权限申请返回结果数组为空的情况   
      
-* v1.5.5
-    * 解决部分下载地址无法获取到文件大小问题
+* v1.7.0
+    * 优化Log日志输出，所有Log的Tag以AppUpdate开头
+    * 对话框背景图片支持自定义了
+    * 支持中/英文双语
     
 * v1.5.6
     * 新增Android N uri authorities授权设置
     
-* v1.6.0
-    * 修复单例对象引用context引起的内存泄漏问题
+* v1.5.5
+    * 解决部分下载地址无法获取到文件大小问题
+   
+* v1.5.3
+    * 修复权限申请返回结果数组为空的情况   
+
+* v1.5.2
+    * 添加对话框按钮点击事件监听
+    * 启动下载服务时增加了通知栏开关状态检查，结果以打印日志的形式反馈
+
+* v1.5.1
+    * 修复部分手机频繁更新通知栏造成通知栏卡顿问题
+	
+* v1.5.0
+    * 添加强制更新逻辑
+    
+* v1.4.0
+	* 修复在Android O设备上更新进度手机一直震动问题
+    
+* v1.2.0
+	* 添加是否提示用户 "当前已是最新版本" 的布尔值 
+	* 修复部分手机请求权限时抛出：`Only fullscreen opaque activities can request orientation`
 
 ### 结语
 * 如果大家在使用的过程中有什么问题，欢迎提Issues告知。
