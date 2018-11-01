@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@drawable/ic_dialog_default" />
@@ -32,8 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
             android:textColor="#757575"
             android:textSize="14sp"
             android:visibility="gone"
@@ -43,8 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
             android:overScrollMode="never"
             android:scrollbars="none">
 
@@ -61,14 +62,14 @@
         <Button
             android:id="@+id/btn_update"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_button"
             android:text="升级"
-            android:textColor="@android:color/white"
-            android:theme="@style/Button" />
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <View

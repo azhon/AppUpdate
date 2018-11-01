@@ -2,6 +2,7 @@ package com.azhon.app;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -111,6 +112,12 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //.setHttpManager()
                 //下载完成自动跳动安装页面
                 .setJumpInstallPage(true)
+                //设置对话框背景图片 (图片规范参照demo中的示例图)
+                //.setDialogImage(R.drawable.ic_dialog)
+                //设置按钮的颜色
+                //.setDialogButtonColor(Color.parseColor("#E743DA"))
+                //设置按钮的文字颜色
+                .setDialogButtonTextColor(Color.WHITE)
                 //支持断点下载
                 .setBreakpointDownload(true)
                 //设置是否显示通知栏进度
