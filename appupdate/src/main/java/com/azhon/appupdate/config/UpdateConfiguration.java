@@ -1,6 +1,7 @@
 package com.azhon.appupdate.config;
 
 import android.app.NotificationChannel;
+import android.support.annotation.ColorInt;
 
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.listener.OnButtonClickListener;
@@ -58,7 +59,18 @@ public class UpdateConfiguration {
      * 是否强制升级(默认为false)
      */
     private boolean forcedUpgrade = false;
-
+    /**
+     * 内置对话框的背景图片资源id （图片规范参照demo中的示例图大小）
+     */
+    private int dialogImage = -1;
+    /**
+     * 内置对话框的按钮的颜色
+     */
+    private int dialogButtonColor = -1;
+    /**
+     * 内置对话框的按钮的文字颜色
+     */
+    private int dialogButtonTextColor = -1;
 
     public int getNotifyId() {
         return notifyId;
@@ -139,6 +151,33 @@ public class UpdateConfiguration {
     public UpdateConfiguration setForcedUpgrade(boolean forcedUpgrade) {
         this.forcedUpgrade = forcedUpgrade;
         return this;
+    }
+
+    public UpdateConfiguration setDialogImage(int dialogImage) {
+        this.dialogImage = dialogImage;
+        return this;
+    }
+
+    public int getDialogImage() {
+        return dialogImage;
+    }
+
+    public UpdateConfiguration setDialogButtonColor(@ColorInt int dialogButtonColor) {
+        this.dialogButtonColor = dialogButtonColor;
+        return this;
+    }
+
+    public UpdateConfiguration setDialogButtonTextColor(int dialogButtonTextColor) {
+        this.dialogButtonTextColor = dialogButtonTextColor;
+        return this;
+    }
+
+    public int getDialogButtonTextColor() {
+        return dialogButtonTextColor;
+    }
+
+    public int getDialogButtonColor() {
+        return dialogButtonColor;
     }
 
     public UpdateConfiguration setButtonClickListener(OnButtonClickListener onButtonClickListener) {
