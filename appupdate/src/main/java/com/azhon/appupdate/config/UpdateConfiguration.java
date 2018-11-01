@@ -60,15 +60,15 @@ public class UpdateConfiguration {
      */
     private boolean forcedUpgrade = false;
     /**
-     * 内置对话框的背景图片资源id （图片规范参照demo中的示例图大小）
+     * 内置对话框背景图片资源id （图片规范参照demo中的示例图大小）
      */
     private int dialogImage = -1;
     /**
-     * 内置对话框的按钮的颜色
+     * 内置对话框按钮的颜色
      */
     private int dialogButtonColor = -1;
     /**
-     * 内置对话框的按钮的文字颜色
+     * 内置对话框按钮的文字颜色
      */
     private int dialogButtonTextColor = -1;
 
