@@ -75,7 +75,7 @@ dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 	```
 * 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
-* 简单用法：创建`DownloadManager`
+* 简单用法：创建`DownloadManager`，更多用法请查看Demo
 
 ```
 DownloadManager manager = DownloadManager.getInstance(this);
@@ -109,9 +109,11 @@ manager.setApkName("appupdate.apk")
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <external-path
-        name="app_update"
-        <!--这里的 AppUpdate 要与你设置的下载目录一致-->
-        path="AppUpdate" />
+        name="app_update_external"
+        path="/" />
+    <external-cache-path
+        name="app_update_cache"
+        path="/" />
 </paths>
 ```
 * 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)

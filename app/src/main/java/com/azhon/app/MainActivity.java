@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowNewerToast(true)
                 .setConfiguration(configuration)
-                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
+//                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setApkVersionCode(2)
                 .setApkVersionName("2.1.8")
                 .setApkSize("20.4")

@@ -45,6 +45,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
     private DownloadManager manager;
     private boolean forcedUpgrade;
     private Button update;
+    private String downloadPath;
     private OnButtonClickListener buttonClickListener;
     private int dialogImage, dialogButtonTextColor, dialogButtonColor;
 
@@ -60,6 +61,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
         this.context = context;
         manager = DownloadManager.getInstance();
         UpdateConfiguration configuration = manager.getConfiguration();
+        downloadPath = manager.getDownloadPath();
         forcedUpgrade = configuration.isForcedUpgrade();
         buttonClickListener = configuration.getOnButtonClickListener();
         dialogImage = configuration.getDialogImage();
@@ -153,11 +155,13 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
             if (buttonClickListener != null) {
                 buttonClickListener.onButtonClick(OnButtonClickListener.UPDATE);
             }
-            //检查权限
-            if (!PermissionUtil.checkStoragePermission(context)) {
-                //没有权限,去申请权限
-                context.startActivity(new Intent(context, PermissionActivity.class));
-                return;
+            //使用缓存目录不申请权限
+            if (!downloadPath.equals(context.getExternalCacheDir().getPath())) {
+                if (!PermissionUtil.checkStoragePermission(context)) {
+                    //没有权限,去申请权限
+                    context.startActivity(new Intent(context, PermissionActivity.class));
+                    return;
+                }
             }
             context.startService(new Intent(context, DownloadService.class));
         }
