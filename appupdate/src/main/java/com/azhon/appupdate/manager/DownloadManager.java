@@ -211,11 +211,13 @@ public class DownloadManager {
      */
     public void download() {
         if (checkParams()) {
-            //检查权限
-            if (!PermissionUtil.checkStoragePermission(context)) {
-                //没有权限,去申请权限
-                context.startActivity(new Intent(context, PermissionActivity.class));
-                return;
+            //使用缓存目录不申请权限
+            if (!downloadPath.equals(context.getExternalCacheDir().getPath())) {
+                //检查权限
+                if (!PermissionUtil.checkStoragePermission(context)) {
+                    context.startActivity(new Intent(context, PermissionActivity.class));
+                    return;
+                }
             }
             context.startService(new Intent(context, DownloadService.class));
         } else {
@@ -245,8 +247,13 @@ public class DownloadManager {
         if (!apkName.endsWith(Constant.APK_SUFFIX)) {
             throw new RuntimeException("apkName must endsWith .apk!");
         }
+        /*
+            这里需要注意，如果用户没有设置保存目录则使用缓存目录
+            路径为:/storage/emulated/0/Android/data/ your packageName /cache
+            如果使用的是缓存路径，则不申请内存权限
+         */
         if (TextUtils.isEmpty(downloadPath)) {
-            throw new RuntimeException("downloadPath can not be empty!");
+            downloadPath = context.getExternalCacheDir().getPath();
         }
         if (smallIcon == -1) {
             throw new RuntimeException("smallIcon can not be empty!");
