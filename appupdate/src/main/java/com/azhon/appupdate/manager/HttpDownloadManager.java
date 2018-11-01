@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HttpDownloadManager extends BaseHttpDownloadManager {
 
-    private static final String TAG = "HttpDownloadManager";
+    private static final String TAG = Constant.TAG + "HttpDownloadManager";
     private Context context;
     private String apkUrl, apkName, downloadPath;
     private OnDownloadListener listener;

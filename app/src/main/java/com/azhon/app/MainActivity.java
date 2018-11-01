@@ -8,13 +8,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
-import com.azhon.appupdate.utils.LogUtil;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import java.io.File;
@@ -172,6 +172,6 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     @Override
     public void onButtonClick(int id) {
-        LogUtil.e("TAG", id);
+        Log.e("TAG", String.valueOf(id));
     }
 }

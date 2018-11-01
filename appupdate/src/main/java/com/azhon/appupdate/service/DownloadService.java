@@ -10,11 +10,13 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.azhon.appupdate.R;
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.azhon.appupdate.manager.HttpDownloadManager;
 import com.azhon.appupdate.utils.ApkUtil;
+import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.FileUtil;
 import com.azhon.appupdate.utils.LogUtil;
 import com.azhon.appupdate.utils.NotificationUtil;
@@ -34,7 +36,7 @@ import java.io.File;
 
 public final class DownloadService extends Service implements OnDownloadListener {
 
-    private static final String TAG = "DownloadService";
+    private static final String TAG = Constant.TAG + "DownloadService";
     private int smallIcon;
     private String apkUrl;
     private String apkName;
@@ -77,7 +79,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         jumpInstallPage = DownloadManager.getInstance().getConfiguration().isJumpInstallPage();
         //获取app通知开关是否打开
         boolean enable = NotificationUtil.notificationEnable(this);
-        LogUtil.e(TAG, enable ? "应用的通知栏开关状态：已打开" : "应用的通知栏开关状态：已关闭");
+        LogUtil.d(TAG, enable ? "应用的通知栏开关状态：已打开" : "应用的通知栏开关状态：已关闭");
         download();
     }
 
@@ -105,7 +107,9 @@ public final class DownloadService extends Service implements OnDownloadListener
     public void start() {
         if (showNotification) {
             handler.sendEmptyMessage(0);
-            NotificationUtil.showNotification(this, smallIcon, "开始下载", "可稍后查看下载进度");
+            String startDownload = getResources().getString(R.string.start_download);
+            String startDownloadHint = getResources().getString(R.string.start_download_hint);
+            NotificationUtil.showNotification(this, smallIcon, startDownload, startDownloadHint);
         }
         if (listener != null) {
             listener.start();
@@ -114,13 +118,14 @@ public final class DownloadService extends Service implements OnDownloadListener
 
     @Override
     public void downloading(int max, int progress) {
-        LogUtil.e(TAG, "max: " + max + " --- progress: " + progress);
+        LogUtil.i(TAG, "max: " + max + " --- progress: " + progress);
         if (showNotification) {
             //优化通知栏更新，减少通知栏更新次数
             int curr = (int) (progress / (double) max * 100.0);
             if (curr != lastProgress) {
                 lastProgress = curr;
-                NotificationUtil.showProgressNotification(this, smallIcon, "正在下载新版本", "", max, progress);
+                String downloading = getResources().getString(R.string.start_downloading);
+                NotificationUtil.showProgressNotification(this, smallIcon, downloading, "", max, progress);
             }
         }
         if (listener != null) {
@@ -132,7 +137,9 @@ public final class DownloadService extends Service implements OnDownloadListener
     public void done(File apk) {
         downloading = false;
         if (showNotification) {
-            NotificationUtil.showDoneNotification(this, smallIcon, "下载完成", "点击进行安装", authorities, apk);
+            String downloadCompleted = getResources().getString(R.string.download_completed);
+            String clickHint = getResources().getString(R.string.click_hint);
+            NotificationUtil.showDoneNotification(this, smallIcon, downloadCompleted, clickHint, authorities, apk);
         }
         //如果用户设置了回调 则先处理用户的事件 在执行自己的
         if (listener != null) {
@@ -149,7 +156,9 @@ public final class DownloadService extends Service implements OnDownloadListener
         LogUtil.e(TAG, "error: " + e);
         downloading = false;
         if (showNotification) {
-            NotificationUtil.showErrorNotification(this, smallIcon, "下载出错", "点击继续下载");
+            String downloadError = getResources().getString(R.string.download_error);
+            String conDownloading = getResources().getString(R.string.continue_downloading);
+            NotificationUtil.showErrorNotification(this, smallIcon, downloadError, conDownloading);
         }
         if (listener != null) {
             listener.error(e);
@@ -171,7 +180,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            Toast.makeText(DownloadService.this, "正在后台下载新版本...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DownloadService.this, R.string.background_downloading, Toast.LENGTH_SHORT).show();
 
         }
     };
