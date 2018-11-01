@@ -111,10 +111,12 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
         }
         //设置界面数据
         if (!TextUtils.isEmpty(manager.getApkVersionName())) {
-            title.setText(String.format("发现新版v%s可以下载啦！", manager.getApkVersionName()));
+            String newVersion = context.getResources().getString(R.string.dialog_new);
+            title.setText(String.format(newVersion, manager.getApkVersionName()));
         }
         if (!TextUtils.isEmpty(manager.getApkSize())) {
-            size.setText(String.format("新版本大小：%sM", manager.getApkSize()));
+            String newVersionSize = context.getResources().getString(R.string.dialog_new_size);
+            size.setText(String.format(newVersionSize, manager.getApkSize()));
             size.setVisibility(View.VISIBLE);
         }
         description.setText(manager.getApkDescription());
@@ -143,7 +145,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
         } else if (id == R.id.btn_update) {
             if (forcedUpgrade) {
                 update.setEnabled(false);
-                update.setText("正在后台下载新版本...");
+                update.setText(R.string.background_downloading);
             } else {
                 dismiss();
             }
