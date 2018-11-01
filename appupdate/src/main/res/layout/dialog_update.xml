@@ -26,7 +26,7 @@
             android:layout_marginRight="16dp"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            tools:text="哇，有新版v5.0可以下载啦！" />
+            tools:text="发现新版v2.0.1可以下载啦！" />
 
         <TextView
             android:id="@+id/tv_size"
@@ -68,7 +68,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/bg_button"
-            android:text="升级"
+            android:text="@string/update"
+            android:textAllCaps="false"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
