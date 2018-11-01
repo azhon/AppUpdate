@@ -27,7 +27,7 @@ import com.azhon.appupdate.utils.PermissionUtil;
 
 public class DownloadManager {
 
-    private static final String TAG = "DownloadManager";
+    private static final String TAG = Constant.TAG + "DownloadManager";
 
     /**
      * 上下文

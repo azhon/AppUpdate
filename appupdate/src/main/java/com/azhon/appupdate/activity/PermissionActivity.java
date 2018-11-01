@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.azhon.appupdate.R;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.LogUtil;
@@ -30,7 +31,7 @@ import com.azhon.appupdate.utils.PermissionUtil;
 
 public class PermissionActivity extends AppCompatActivity {
 
-    private static final String TAG = "PermissionActivity";
+    private static final String TAG = Constant.TAG + "PermissionActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class PermissionActivity extends AppCompatActivity {
                     download();
                 } else {
                     //拒绝了
-                    Toast.makeText(PermissionActivity.this, "请允许使用[存储空间]权限!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PermissionActivity.this, R.string.permission_hint, Toast.LENGTH_LONG).show();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                             //用户勾选了不在询问

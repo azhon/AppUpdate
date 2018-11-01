@@ -17,6 +17,8 @@ public final class Constant {
 
     public static final int PERMISSION_REQUEST_CODE = 1997;
 
+    public static final String TAG = "AppUpdate.";
+
     public static final String DEFAULT_CHANNEL_ID = "appUpdate";
 
     public static final String DEFAULT_CHANNEL_NAME = "版本更新";
