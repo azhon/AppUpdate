@@ -1,3 +1,10 @@
+## 写在前面
+
+[![Travis](https://img.shields.io/badge/miniSdk-15%2B-blue.svg)]()　[![Travis](https://img.shields.io/badge/jcenter-1.7.0-brightgreen.svg)]()　[![Travis](https://img.shields.io/badge/star-200+-%23EE2C2C.svg)]()　[![Travis](https://img.shields.io/badge/author-azhon-%23E066FF.svg)]()　[![Travis](https://img.shields.io/badge/license-Apache2.0-orange.svg)]()
+#### 框架内部支持中/英文
+#### 内部对话框背景图片、按钮支持自定义了
+#### <font color="blue">**重点：**如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录，同时不会申请[存储]权限！</font>
+
 ## 目录
 
 * [编译问题](#编译问题)
@@ -40,7 +47,7 @@
 context | 上下文  | null | true
 apkUrl | apk的下载地址 | null | true
 apkName | apk下载好的名字 | null | true
-downloadPath | apk下载的位置 | null | true
+downloadPath | apk下载的位置 | getExternalCacheDir() | false
 showNewerToast | 是否提示用户 "当前已是最新版本" | false | false
 smallIcon | 通知栏的图标(资源id)  | -1 |  true
 configuration | 这个库的额外配置 | null |  false
@@ -68,10 +75,10 @@ dialogButtonColor | 对话框按钮的颜色  | -1
 dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 
 ### 使用步骤
-* `build.gradle`进行依赖
+* `app/build.gradle`进行依赖
 
 	```
-	implementation 'com.azhon:appupdate:1.6.0'
+	implementation 'com.azhon:appupdate:1.7.0'
 	```
 * 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
@@ -132,6 +139,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
      
 * v1.7.0
     * 优化Log日志输出，所有Log的Tag以AppUpdate开头
+    * 优化使用`getExternalCacheDir()`目录时，不申请[存储]权限
     * 对话框背景图片支持自定义了
     * 支持中/英文双语
     
