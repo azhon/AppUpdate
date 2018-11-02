@@ -135,6 +135,7 @@ public final class DownloadService extends Service implements OnDownloadListener
 
     @Override
     public void done(File apk) {
+        LogUtil.d(TAG, "done: 文件已下载至" + apk.toString());
         downloading = false;
         if (showNotification) {
             String downloadCompleted = getResources().getString(R.string.download_completed);
