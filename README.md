@@ -82,7 +82,7 @@ dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 	```
 * 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
-* 简单用法：创建`DownloadManager`，更多用法请查看Demo
+* 简单用法：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```
 DownloadManager manager = DownloadManager.getInstance(this);
