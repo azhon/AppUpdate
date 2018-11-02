@@ -3,6 +3,7 @@
 [![Travis](https://img.shields.io/badge/miniSdk-15%2B-blue.svg)]()　[![Travis](https://img.shields.io/badge/jcenter-1.7.0-brightgreen.svg)]()　[![Travis](https://img.shields.io/badge/star-200+-%23EE2C2C.svg)]()　[![Travis](https://img.shields.io/badge/author-azhon-%23E066FF.svg)]()　[![Travis](https://img.shields.io/badge/license-Apache2.0-orange.svg)]()
 #### 框架内部支持中/英文
 #### 内部对话框背景图片、按钮支持自定义了
+#### 查看版本中的Log只需要过滤`AppUpdate`开头的Tag
 #### **重点：** 如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录，同时不会申请[存储]权限！
 
 ## 目录
