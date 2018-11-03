@@ -89,7 +89,6 @@ dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 DownloadManager manager = DownloadManager.getInstance(this);
 manager.setApkName("appupdate.apk")
         .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
-        .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
         .setSmallIcon(R.mipmap.ic_launcher)
         //可设置，可不设置
         .setConfiguration(configuration)
