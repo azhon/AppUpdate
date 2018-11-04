@@ -6,6 +6,8 @@
     <string name="click_hint">点击进行安装</string>
     <string name="download_error">下载出错</string>
     <string name="continue_downloading">点击继续下载</string>
+    <string name="error_config">错误的项目配置</string>
+    <string name="read_readme">请参考说明文档第三、四步！</string>
     <string name="background_downloading">正在后台下载新版本…</string>
     <string name="permission_hint">请允许使用[存储空间]权限!</string>
     <string name="dialog_new">发现新版本v%s可以下载啦！</string>

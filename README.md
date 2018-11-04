@@ -1,7 +1,7 @@
 ## 写在前面
 
 [![Travis](https://img.shields.io/badge/miniSdk-15%2B-blue.svg)]()　[![Travis](https://img.shields.io/badge/jcenter-1.7.0-brightgreen.svg)]()　[![Travis](https://img.shields.io/badge/star-200+-%23EE2C2C.svg)]()　[![Travis](https://img.shields.io/badge/author-azhon-%23E066FF.svg)]()　[![Travis](https://img.shields.io/badge/license-Apache2.0-orange.svg)]()
-#### 框架内部支持中/英文
+#### 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
 #### 内部对话框背景图片、按钮支持自定义了
 #### 查看版本中的Log只需要过滤`AppUpdate`开头的Tag
 #### **重点：** 如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录，同时不会申请[存储]权限！
@@ -75,15 +75,16 @@ dialogImage | 对话框背景图片资源(图片规范参考demo)  | -1
 dialogButtonColor | 对话框按钮的颜色  | -1
 dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 
+#### 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
+
 ### 使用步骤
-* `app/build.gradle`进行依赖
+#### 第一步： `app/build.gradle`进行依赖
 
 	```
-	implementation 'com.azhon:appupdate:1.7.0'
+	implementation 'com.azhon:appupdate:1.7.1'
 	```
-* 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
-* 简单用法：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```
 DownloadManager manager = DownloadManager.getInstance(this);
@@ -94,7 +95,7 @@ manager.setApkName("appupdate.apk")
         .setConfiguration(configuration)
         .download();
 ```
-* 兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
+#### 第三步：兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
 
 ```
 <--! android:authorities="${applicationId}" 
@@ -110,7 +111,7 @@ manager.setApkName("appupdate.apk")
         android:resource="@xml/file_paths_public" />
 </provider>
 ```
-* 资源文件`res/xml/file_paths_public.xml`内容
+#### 第四步：资源文件`res/xml/file_paths_public.xml`内容
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -136,7 +137,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-     
+* v1.7.1
+    * 优化下载成功安装步骤出错时，通知栏提示不合理问题
+         
 * v1.7.0
     * 优化Log日志输出，所有Log的Tag以AppUpdate开头
     * 优化使用`getExternalCacheDir()`目录时，不申请[存储]权限
