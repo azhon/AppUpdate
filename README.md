@@ -80,9 +80,10 @@ dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 ### 使用步骤
 #### 第一步： `app/build.gradle`进行依赖
 
-	```
-	implementation 'com.azhon:appupdate:1.7.1'
-	```
+```
+implementation 'com.azhon:appupdate:1.7.1'
+
+```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
