@@ -157,8 +157,14 @@ public final class DownloadService extends Service implements OnDownloadListener
         LogUtil.e(TAG, "error: " + e);
         downloading = false;
         if (showNotification) {
+            String msg = e.getMessage();
             String downloadError = getResources().getString(R.string.download_error);
             String conDownloading = getResources().getString(R.string.continue_downloading);
+            if (!TextUtils.isEmpty(msg) &&
+                    msg.contains("android.content.res.XmlResourceParser")) {
+                downloadError = getResources().getString(R.string.error_config);
+                conDownloading = getResources().getString(R.string.read_readme);
+            }
             NotificationUtil.showErrorNotification(this, smallIcon, downloadError, conDownloading);
         }
         if (listener != null) {
