@@ -1,4 +1,5 @@
 <resources>
+    <string name="latest_version">当前已是最新版本!</string>
     <string name="start_download">开始下载</string>
     <string name="start_download_hint">可稍后查看下载进度</string>
     <string name="start_downloading">正在下载新版本</string>
