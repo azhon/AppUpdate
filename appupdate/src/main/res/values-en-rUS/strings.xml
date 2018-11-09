@@ -1,4 +1,5 @@
 <resources>
+    <string name="latest_version">Currently the latest version!</string>
     <string name="start_download">Start download</string>
     <string name="start_download_hint">You can check the download progress later</string>
     <string name="start_downloading">Downloading new version</string>

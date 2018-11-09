@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.azhon.appupdate.R;
 import com.azhon.appupdate.activity.PermissionActivity;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.dialog.UpdateDialog;
@@ -227,7 +228,7 @@ public class DownloadManager {
                 dialog.show();
             } else {
                 if (showNewerToast) {
-                    Toast.makeText(context, "当前已是最新版本!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.latest_version, Toast.LENGTH_SHORT).show();
                 }
                 LogUtil.e(TAG, "当前已是最新版本");
             }
