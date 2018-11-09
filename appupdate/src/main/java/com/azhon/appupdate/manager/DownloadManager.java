@@ -83,6 +83,12 @@ public class DownloadManager {
 
     private static DownloadManager manager;
 
+    /**
+     * 框架初始化
+     *
+     * @param context 上下文
+     * @return {@link DownloadManager}
+     */
     public static DownloadManager getInstance(Context context) {
         DownloadManager.context = context;
         if (manager == null) {
@@ -108,100 +114,170 @@ public class DownloadManager {
         return manager;
     }
 
+    /**
+     * 获取apk下载地址
+     */
     public String getApkUrl() {
         return apkUrl;
     }
 
+    /**
+     * 设置apk下载地址
+     */
     public DownloadManager setApkUrl(String apkUrl) {
         this.apkUrl = apkUrl;
         return this;
     }
 
+    /**
+     * 获取apk的VersionCode
+     */
     public int getApkVersionCode() {
         return apkVersionCode;
     }
 
+    /**
+     * 设置apk的VersionCode
+     */
     public DownloadManager setApkVersionCode(int apkVersionCode) {
         this.apkVersionCode = apkVersionCode;
         return this;
     }
 
+    /**
+     * 获取apk的名称
+     */
     public String getApkName() {
         return apkName;
     }
 
+    /**
+     * 设置apk的名称
+     */
     public DownloadManager setApkName(String apkName) {
         this.apkName = apkName;
         return this;
     }
 
+    /**
+     * 获取apk的保存路径
+     */
     public String getDownloadPath() {
         return downloadPath;
     }
 
+    /**
+     * 设置apk的保存路径
+     */
     public DownloadManager setDownloadPath(String downloadPath) {
         this.downloadPath = downloadPath;
         return this;
     }
 
+    /**
+     * 设置是否提示用户"当前已是最新版本"
+     */
     public DownloadManager setShowNewerToast(boolean showNewerToast) {
         this.showNewerToast = showNewerToast;
         return this;
     }
 
+    /**
+     * 获取是否提示用户"当前已是最新版本"
+     */
     public boolean isShowNewerToast() {
         return showNewerToast;
     }
 
+    /**
+     * 获取通知栏图片资源id
+     */
     public int getSmallIcon() {
         return smallIcon;
     }
 
+    /**
+     * 设置通知栏图片资源id
+     */
     public DownloadManager setSmallIcon(int smallIcon) {
         this.smallIcon = smallIcon;
         return this;
     }
 
+    /**
+     * 设置这个库的额外配置信息
+     *
+     * @see UpdateConfiguration
+     */
     public DownloadManager setConfiguration(UpdateConfiguration configuration) {
         this.configuration = configuration;
         return this;
     }
 
+    /**
+     * 获取这个库的额外配置信息
+     *
+     * @see UpdateConfiguration
+     */
     public UpdateConfiguration getConfiguration() {
         return configuration;
     }
 
+    /**
+     * 获取apk的versionName
+     */
     public String getApkVersionName() {
         return apkVersionName;
     }
 
+    /**
+     * 设置apk的versionName
+     */
     public DownloadManager setApkVersionName(String apkVersionName) {
         this.apkVersionName = apkVersionName;
         return this;
     }
 
+    /**
+     * 获取新版本描述信息
+     */
     public String getApkDescription() {
         return apkDescription;
     }
 
+    /**
+     * 设置新版本描述信息
+     */
     public DownloadManager setApkDescription(String apkDescription) {
         this.apkDescription = apkDescription;
         return this;
     }
 
+    /**
+     * 获取新版本文件大小
+     */
     public String getApkSize() {
         return apkSize;
     }
 
+    /**
+     * 设置新版本文件大小
+     */
     public DownloadManager setApkSize(String apkSize) {
         this.apkSize = apkSize;
         return this;
     }
 
+    /**
+     * 设置Android N Uri授权authorities
+     */
     public String getAuthorities() {
         return authorities;
     }
 
+    /**
+     * 获取Android N Uri授权authorities
+     */
     public DownloadManager setAuthorities(String authorities) {
         this.authorities = authorities;
         return this;
