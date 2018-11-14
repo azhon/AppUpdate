@@ -86,8 +86,12 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
     private void breakpointDownload() {
         listener.start();
         int length = getContentLength();
-        if (length <= 0) {
+        if (length < 0) {
             listener.error(new RuntimeException("获取到的文件大小为0！"));
+            if (length == -1) {
+                LogUtil.e(TAG, "此下载地址响应信息未设置 content-length，使用全量下载！");
+                fullDownload();
+            }
             return;
         }
         try {

@@ -86,7 +86,9 @@ public final class NotificationUtil {
                                                 int max, int progress) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = builderNotification(context, icon, title, content)
-                .setProgress(max, progress, false);
+                //indeterminate:true表示不确定进度，false表示确定进度
+                //当下载进度没有获取到content-length时，使用不确定进度条
+                .setProgress(max, progress, max == -1);
         manager.notify(DownloadManager.getInstance().getConfiguration().getNotifyId(), builder.build());
     }
 
