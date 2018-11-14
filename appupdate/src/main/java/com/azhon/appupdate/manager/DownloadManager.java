@@ -287,7 +287,11 @@ public class DownloadManager {
      * 开始下载
      */
     public void download() {
-        if (checkParams()) {
+        if (!checkParams()) {
+            //参数设置出错....
+            return;
+        }
+        if (checkVersionCode()) {
             //使用缓存目录不申请权限
             if (!downloadPath.equals(context.getExternalCacheDir().getPath())) {
                 //检查权限
@@ -316,13 +320,16 @@ public class DownloadManager {
      */
     private boolean checkParams() {
         if (TextUtils.isEmpty(apkUrl)) {
-            throw new RuntimeException("apkUrl can not be empty!");
+            LogUtil.e(TAG, "apkUrl can not be empty!");
+            return false;
         }
         if (TextUtils.isEmpty(apkName)) {
-            throw new RuntimeException("apkName can not be empty!");
+            LogUtil.e(TAG, "apkName can not be empty!");
+            return false;
         }
         if (!apkName.endsWith(Constant.APK_SUFFIX)) {
-            throw new RuntimeException("apkName must endsWith .apk!");
+            LogUtil.e(TAG, "apkName must endsWith .apk!");
+            return false;
         }
         /*
             这里需要注意，如果用户没有设置保存目录则使用缓存目录
@@ -333,23 +340,35 @@ public class DownloadManager {
             downloadPath = context.getExternalCacheDir().getPath();
         }
         if (smallIcon == -1) {
-            throw new RuntimeException("smallIcon can not be empty!");
+            LogUtil.e(TAG, "smallIcon can not be empty!");
+            return false;
         }
         //如果用户没有进行配置，则使用默认的配置
         if (configuration == null) {
             configuration = new UpdateConfiguration();
         }
-        //设置了 VersionCode 则库中进行对话框逻辑处理
+        return true;
+    }
+
+    /**
+     * 检查设置的apkVersionCode 如果是大于1则使用内置的对话框
+     * 如果小于等于1则直接启动服务下载
+     */
+    private boolean checkVersionCode() {
+        //如果设置了小于的versionCode 你不是在写bug就是脑子瓦塌拉
+        if (apkVersionCode < 1) {
+            apkVersionCode = 1;
+            LogUtil.e(TAG, "apkVersionCode can not be < 1 !");
+            return true;
+        }
         if (apkVersionCode > 1) {
+            //设置了 VersionCode 则库中进行对话框逻辑处理
             if (TextUtils.isEmpty(apkDescription)) {
-                throw new RuntimeException("apkDescription can not be empty!");
+                LogUtil.e(TAG, "apkDescription can not be empty!");
             }
             return false;
         }
-        //如果设置了小于的versionCode 你不是在写bug就是脑子瓦塌拉
-        if (apkVersionCode < 1) {
-            throw new RuntimeException("apkVersionCode can not be < 1");
-        }
+        //等于1的情况
         return true;
     }
 
