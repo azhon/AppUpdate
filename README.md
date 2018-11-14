@@ -141,12 +141,6 @@ public class MyDownload extends BaseHttpDownloadManager {}
 * v1.7.3
     * 当下载地址返回http code 200且content-length = -1时，使用全量下载
     * 优化下载参数检查将throw new exception改成return
-
-* v1.7.0
-    * 优化Log日志输出，所有Log的Tag以AppUpdate开头
-    * 优化使用`getExternalCacheDir()`目录时，不申请[存储]权限
-    * 对话框背景图片支持自定义了
-    * 支持中/英文双语
     
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/blob/master/UPDATE_LOG.md)
 

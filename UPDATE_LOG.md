@@ -1,6 +1,12 @@
 * v1.7.1
     * 优化下载成功安装步骤出错时，通知栏提示不合理问题
 
+* v1.7.0
+    * 优化Log日志输出，所有Log的Tag以AppUpdate开头
+    * 优化使用`getExternalCacheDir()`目录时，不申请[存储]权限
+    * 对话框背景图片支持自定义了
+    * 支持中/英文双语
+
 * v1.5.6
     * 新增Android N uri authorities授权设置
     
