@@ -1,6 +1,6 @@
 ## 写在前面
 
-[![Travis](https://img.shields.io/badge/miniSdk-15%2B-blue.svg)]()　[![Travis](https://img.shields.io/badge/jcenter-1.7.1-brightgreen.svg)]()　[![Travis](https://img.shields.io/badge/star-200+-%23EE2C2C.svg)]()　[![Travis](https://img.shields.io/badge/author-azhon-%23E066FF.svg)]()　[![Travis](https://img.shields.io/badge/license-Apache2.0-orange.svg)]()
+[![Travis](https://img.shields.io/badge/miniSdk-15%2B-blue.svg)]()　[![Travis](https://img.shields.io/badge/jcenter-1.7.3-brightgreen.svg)]()　[![Travis](https://img.shields.io/badge/star-200+-%23EE2C2C.svg)]()　[![Travis](https://img.shields.io/badge/author-azhon-%23E066FF.svg)]()　[![Travis](https://img.shields.io/badge/license-Apache2.0-orange.svg)]()
 #### 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
 #### 内部对话框背景图片、按钮支持自定义了
 #### 查看版本中的Log只需要过滤`AppUpdate`开头的Tag
@@ -82,7 +82,7 @@ dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 #### 第一步： `app/build.gradle`进行依赖
 
 ```
-implementation 'com.azhon:appupdate:1.7.1'
+implementation 'com.azhon:appupdate:1.7.3'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -138,9 +138,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v1.7.1
-    * 优化下载成功安装步骤出错时，通知栏提示不合理问题
-         
+* v1.7.3
+    * 当下载地址返回http code 200且content-length = -1时，使用全量下载
+    * 优化下载参数检查将throw new exception改成return
+
 * v1.7.0
     * 优化Log日志输出，所有Log的Tag以AppUpdate开头
     * 优化使用`getExternalCacheDir()`目录时，不申请[存储]权限
