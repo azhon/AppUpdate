@@ -38,6 +38,7 @@
 * [x] 支持Android O
 * [x] 支持中/英文双语
 * [x] 支持自定内置对话框的样式
+* [x] 使用HttpURLConnection下载，未集成其他第三方框架
 
 ### 更加详细的文档参阅此处[《AppUpdate API文档》](http://azhon.github.io/AppUpdate/index.html)
 
