@@ -146,5 +146,6 @@ public class MyDownload extends BaseHttpDownloadManager {}
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/blob/master/UPDATE_LOG.md)
 
 ### 结语
+* 欢迎大家加入《通往Android的神奇之旅》群号码：555974449
 * 如果大家在使用的过程中有什么问题，欢迎提Issues告知。
 * 如果大家有什么好的建议或者需求，也可以提Issues或者发送邮件至：958460248@qq.com
