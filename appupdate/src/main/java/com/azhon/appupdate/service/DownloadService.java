@@ -92,13 +92,13 @@ public final class DownloadService extends Service implements OnDownloadListener
             return;
         }
         BaseHttpDownloadManager manager = DownloadManager.getInstance().getConfiguration().getHttpManager();
-        //如果用户自己定义了下载过程
-        if (manager != null) {
-            manager.download(apkUrl, apkName, this);
-        } else {
-            //使用自己的下载
-            new HttpDownloadManager(this, downloadPath).download(apkUrl, apkName, this);
+        //使用自己的下载
+        if (manager == null) {
+            manager = new HttpDownloadManager(this, downloadPath);
+            DownloadManager.getInstance().getConfiguration().setHttpManager(manager);
         }
+        //如果用户自己定义了下载过程
+        manager.download(apkUrl, apkName, this);
         downloading = true;
     }
 
@@ -150,6 +150,17 @@ public final class DownloadService extends Service implements OnDownloadListener
             ApkUtil.installApk(this, authorities, apk);
         }
         releaseResources();
+    }
+
+    @Override
+    public void cancel() {
+        downloading = false;
+        if (showNotification) {
+            NotificationUtil.cancelNotification(this);
+        }
+        if (listener != null) {
+            listener.cancel();
+        }
     }
 
     @Override
