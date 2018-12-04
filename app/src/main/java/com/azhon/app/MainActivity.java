@@ -33,6 +33,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity implements OnDownloadListener, View.OnClickListener, OnButtonClickListener {
 
     private NumberProgressBar progressBar;
+    private DownloadManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         findViewById(R.id.btn_1).setOnClickListener(this);
         findViewById(R.id.btn_2).setOnClickListener(this);
         findViewById(R.id.btn_3).setOnClickListener(this);
+        findViewById(R.id.btn_4).setOnClickListener(this);
+//        删除旧版本安装包
 //        boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
     }
 
@@ -57,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 break;
             case R.id.btn_3:
                 startUpdate3();
+                break;
+            case R.id.btn_4:
+                if (manager != null) {
+                    manager.cancel();
+                }
                 break;
             default:
                 break;
@@ -130,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //设置下载过程的监听
                 .setOnDownloadListener(this);
 
-        DownloadManager manager = DownloadManager.getInstance(this);
+        manager = DownloadManager.getInstance(this);
         manager.setApkName("appupdate.apk")
                 .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -160,6 +168,11 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     @Override
     public void done(File apk) {
+
+    }
+
+    @Override
+    public void cancel() {
 
     }
 
