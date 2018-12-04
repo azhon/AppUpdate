@@ -146,7 +146,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
     * 当下载地址返回http code 200且content-length = -1时，使用全量下载
     * 优化下载参数检查将throw new exception改成return
     
-#### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/blob/master/UPDATE_LOG.md)
+#### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
 ### 结语
 * 欢迎大家加入《通往Android的神奇之旅》群号码：555974449
