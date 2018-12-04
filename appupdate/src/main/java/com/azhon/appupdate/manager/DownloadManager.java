@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.azhon.appupdate.R;
 import com.azhon.appupdate.activity.PermissionActivity;
+import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.dialog.UpdateDialog;
 import com.azhon.appupdate.service.DownloadService;
@@ -313,6 +314,22 @@ public class DownloadManager {
                 LogUtil.e(TAG, "当前已是最新版本");
             }
         }
+    }
+
+    /**
+     * 取消下载
+     */
+    public void cancel() {
+        if (configuration == null) {
+            LogUtil.e(TAG, "还未开始下载");
+            return;
+        }
+        BaseHttpDownloadManager httpManager = configuration.getHttpManager();
+        if (httpManager == null) {
+            LogUtil.e(TAG, "还未开始下载");
+            return;
+        }
+        httpManager.cancel();
     }
 
     /**
