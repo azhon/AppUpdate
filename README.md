@@ -41,6 +41,8 @@
 * [x] 支持Android O
 * [x] 支持中/英文双语
 * [x] 支持自定内置对话框的样式
+* [x] 支持取消下载(如果发送了通知栏消息，则会移除)
+* [x] 支持下载完成 打开新版本后删除旧安装包文件
 * [x] 使用HttpURLConnection下载，未集成其他第三方框架
 
 ### 更加详细的文档参阅此处[《AppUpdate API文档》](http://azhon.github.io/AppUpdate/index.html)
@@ -86,7 +88,7 @@ dialogButtonTextColor | 对话框按钮的文字颜色  | -1
 #### 第一步： `app/build.gradle`进行依赖
 
 ```
-implementation 'com.azhon:appupdate:1.7.3'
+implementation 'com.azhon:appupdate:2.0.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -129,6 +131,22 @@ manager.setApkName("appupdate.apk")
         path="/" />
 </paths>
 ```
+#### 第五步：取消下载，取消下载后继续下载请参照文档第二步
+
+```
+private DownloadManager manager;
+//取消下载
+manager.cancel();
+```
+
+#### 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
+
+```
+//旧版本apk的文件保存地址
+boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
+
+```
+
 * 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
 * 温馨提示：升级对话框中的内容是可以上下滑动的哦😄！
 * 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager` 并使用listener更新进度
@@ -142,10 +160,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v1.7.3
-    * 当下载地址返回http code 200且content-length = -1时，使用全量下载
-    * 优化下载参数检查将throw new exception改成return
-    
+* v2.0.0
+    * 新增安装完成启动新版本删除旧安装包文件
+    * 新增取消下载功能
+     
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
 ### 结语
