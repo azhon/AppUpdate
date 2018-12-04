@@ -376,6 +376,7 @@ public class DownloadManager {
      * 释放资源
      */
     public void release() {
+        context = null;
         manager = null;
     }
 }

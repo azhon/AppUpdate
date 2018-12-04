@@ -62,6 +62,42 @@ public final class ApkUtil {
     }
 
     /**
+     * 删除旧版本apk
+     *
+     * @param context    上下文
+     * @param oldApkPath 旧版本保存的文件路径
+     * @return 是否删除成功
+     */
+    public static boolean deleteOldApk(Context context, String oldApkPath) {
+        int curVersionCode = getVersionCode(context);
+        //文件存在
+        try {
+            File apk = new File(oldApkPath);
+            if (apk.exists()) {
+                int oldVersionCode = getVersionCodeByPath(context, oldApkPath);
+                if (curVersionCode > oldVersionCode) {
+                    return apk.delete();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 对一个apk文件获取相应的信息
+     *
+     * @param context 上下文
+     * @param path    apk路径
+     */
+    public static int getVersionCodeByPath(Context context, String path) {
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
+        return packageInfo.versionCode;
+    }
+
+    /**
      * 获取当前app的版本号
      *
      * @param context 上下文
