@@ -151,6 +151,16 @@ public final class NotificationUtil {
     }
 
     /**
+     * 取消通知
+     *
+     * @param context 上下文
+     */
+    public static void cancelNotification(Context context) {
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.cancel(DownloadManager.getInstance().getConfiguration().getNotifyId());
+    }
+
+    /**
      * 获取通知栏开关状态
      *
      * @return true |false
