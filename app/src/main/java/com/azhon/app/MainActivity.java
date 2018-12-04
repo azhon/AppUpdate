@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        DownloadManager manager = DownloadManager.getInstance(MainActivity.this);
+                        manager = DownloadManager.getInstance(MainActivity.this);
                         manager.setApkName("appupdate.apk")
                                 .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
                                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         } catch (Exception e) {
             e.printStackTrace();
         }
-        DownloadManager manager = DownloadManager.getInstance(MainActivity.this);
+        manager = DownloadManager.getInstance(MainActivity.this);
         manager.setApkName("appupdate.apk")
                 .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
