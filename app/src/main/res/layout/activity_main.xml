@@ -45,4 +45,12 @@
         android:layout_marginHorizontal="16dp"
         android:text="使用版本库内置的对话框更新" />
 
+    <Button
+        android:id="@+id/btn_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:text="取消下载" />
+
 </LinearLayout>
