@@ -36,12 +36,12 @@ import java.util.concurrent.TimeUnit;
 public class HttpDownloadManager extends BaseHttpDownloadManager {
 
     private static final String TAG = Constant.TAG + "HttpDownloadManager";
-    private Context context;
+    private boolean shutdown = false;
     private String apkUrl, apkName, downloadPath;
     private OnDownloadListener listener;
 
     public HttpDownloadManager(Context context, String downloadPath) {
-        this.context = context;
+        super(context);
         this.downloadPath = downloadPath;
     }
 
@@ -60,6 +60,11 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             }
         });
         executor.execute(runnable);
+    }
+
+    @Override
+    public void cancel() {
+        shutdown = true;
     }
 
     private Runnable runnable = new Runnable() {
@@ -120,7 +125,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                     //当前已下载完成的进度 (包括之前下载的进度)
                     int progress = start;
                     byte[] buffer = new byte[1024 * 4];
-                    while ((len = is.read(buffer)) != -1) {
+                    while ((len = is.read(buffer)) != -1 && !shutdown) {
                         //写入文件
                         accessFile.write(buffer, 0, len);
                         progress += len;
@@ -128,12 +133,18 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                         SharePreUtil.putInt(context, Constant.PROGRESS, progress);
                         listener.downloading(length, progress);
                     }
-                    //下载完成,将之前保存的进度清0
-                    SharePreUtil.putInt(context, Constant.PROGRESS, 0);
-                    //释放资源
+                    if (shutdown) {
+                        //取消了下载 同时再恢复状态
+                        shutdown = false;
+                        LogUtil.d(TAG, "breakpointDownload: 取消了下载");
+                        listener.cancel();
+                    } else {
+                        //下载完成,将之前保存的进度清0
+                        SharePreUtil.putInt(context, Constant.PROGRESS, 0);
+                        //释放资源
+                        listener.done(FileUtil.createFile(downloadPath, apkName));
+                    }
                     accessFile.close();
-                    listener.done(FileUtil.createFile(downloadPath, apkName));
-
                 } else {
                     listener.error(new RuntimeException("apk存储文件创建失败！"));
                 }
@@ -171,17 +182,24 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                 byte[] buffer = new byte[1024 * 4];
                 File file = FileUtil.createFile(downloadPath, apkName);
                 FileOutputStream stream = new FileOutputStream(file);
-                while ((len = is.read(buffer)) != -1) {
+                while ((len = is.read(buffer)) != -1 && !shutdown) {
                     //将获取到的流写入文件中
                     stream.write(buffer, 0, len);
                     progress += len;
                     listener.downloading(length, progress);
                 }
+                if (shutdown) {
+                    //取消了下载 同时再恢复状态
+                    shutdown = false;
+                    LogUtil.d(TAG, "fullDownload: 取消了下载");
+                    listener.cancel();
+                } else {
+                    listener.done(file);
+                }
                 //完成io操作,释放资源
                 stream.flush();
                 stream.close();
                 is.close();
-                listener.done(file);
             } else {
                 listener.error(new SocketTimeoutException("连接超时！"));
             }
