@@ -23,4 +23,9 @@ public abstract class BaseHttpDownloadManager {
      * @param listener 回调
      */
     public abstract void download(String apkUrl, String apkName, OnDownloadListener listener);
+
+    /**
+     * 取消下载apk
+     */
+    public abstract void cancel();
 }
