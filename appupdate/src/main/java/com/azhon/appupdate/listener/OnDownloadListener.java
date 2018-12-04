@@ -36,6 +36,11 @@ public interface OnDownloadListener {
     void done(File apk);
 
     /**
+     * 取消下载
+     */
+    void cancel();
+
+    /**
      * 下载出错
      *
      * @param e 错误信息
