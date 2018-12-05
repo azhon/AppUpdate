@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'appUpdate'
+            keyPassword '123456'
+            storeFile file('./../app.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.azhon.app"
@@ -14,6 +22,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
