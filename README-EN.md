@@ -1,56 +1,56 @@
-## [English Doc](https://github.com/azhon/AppUpdate/blob/master/README-EN.md)
+## [中文 文档](https://github.com/azhon/AppUpdate/blob/master/README.md)
 
-## 写在前面
+## Written in front
 
 [![Travis](https://img.shields.io/badge/miniSdk-15%2B-blue.svg)]()　[![Travis](https://img.shields.io/badge/jcenter-2.0.0-brightgreen.svg)]()　[![Travis](https://img.shields.io/badge/star-300+-%23EE2C2C.svg)]()　[![Travis](https://img.shields.io/badge/author-azhon-%23E066FF.svg)]()　[![Travis](https://img.shields.io/badge/license-Apache2.0-orange.svg)]()
 
 ![](https://github.com/azhon/AppUpdate/blob/master/img/logo.png)
 
-#### 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
+#### The framework supports Chinese/English internally (other languages only need to take the same name in the corresponding `string.xml`)
 
-#### 内部对话框背景图片、按钮支持自定义了
+#### Internal dialog background image, button support customization
 
-#### 查看版本中的Log只需要过滤`AppUpdate`开头的Tag
+#### To view the Log in the library, you only need to filter the `tag` at the beginning of `AppUpdate`
 
-#### **重点：** 如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录，同时不会申请[存储]权限！
+#### **Focus：** If `downloadPath` is empty, the default is `getExternalCacheDir()` directory, and the [storage] permission will not be applied!
 
-## 目录
+## Table of Contents
 
-* [效果图](#效果图)
-* [功能介绍](#功能介绍)
-* [DownloadManager](#downloadmanager配置文档)
-* [UpdateConfiguration](#updateconfiguration配置文档)
-* [使用步骤](#使用步骤)
-* [Demo下载体验](#demo下载体验)
-* [版本更新记录](#版本更新记录)
-* [结语](#结语)
+* [Rendering](#rendering)
+* [Function introduction](#function introduction)
+* [DownloadManager](#downloadmanager configuration doc)
+* [UpdateConfiguration](#updateconfiguration configuration Doc)
+* [Steps for usage](#steps for usage)
+* [Demo download experience](#demo download experience)
+* [Version update record](#version update record)
+* [Conclusion](#conclusion)
 
-### 效果图
+### Rendering
 
 <img src="https://github.com/azhon/AppUpdate/blob/master/img/01.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/02.png" width="300">
 <img src="https://github.com/azhon/AppUpdate/blob/master/img/03.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/04.png" width="300">
 <img src="https://github.com/azhon/AppUpdate/blob/master/img/05.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/06.png" width="300">
 
-### 功能介绍
+### Function introduction
 
-* [x] 支持断点下载
-* [x] 支持后台下载
-* [x] 支持自定义下载过程
-* [x] 支持 设备 >= Android M 动态权限的申请
-* [x] 支持通知栏进度条展示(或者自定义显示进度)
-* [x] 支持Android N
-* [x] 支持Android O
-* [x] 支持中/英文双语
-* [x] 支持自定内置对话框的样式
-* [x] 支持取消下载(如果发送了通知栏消息，则会移除)
-* [x] 支持下载完成 打开新版本后删除旧安装包文件
-* [x] 使用HttpURLConnection下载，未集成其他第三方框架
+* [x] Support breakpoint download
+* [x] Support background download
+* [x] Support for custom download process
+* [x] Support Device >= Android M Dynamic Access Request
+* [x] Support notification progress bar display (or custom display progress)
+* [x] Support Android N
+* [x] Support Android O
+* [x] Support Chinese/English 
+* [x] Support for custom built-in dialog styles
+* [x] Support for canceling the download (if the notification bar message is sent, it will be removed)
+* [x] Support download completion Delete old APK file after opening new version
+* [x] Download using HttpURLConnection, no other third-party framework is integrated
 
-### 更加详细的文档参阅此处[《AppUpdate API文档》](http://azhon.github.io/AppUpdate/index.html)
+### More detailed documentation see here[《AppUpdate API Doc》](http://azhon.github.io/AppUpdate/index.html)
 
-### DownloadManager：配置文档
+### DownloadManager：Configuration Doc
 
-> 初始化使用`DownloadManager.getInstance(this)`
+> Initial use`DownloadManager.getInstance(this)`
 
 | 属性             | 描述                                                        | 默认值                   | 是否必须设置 |
 |:-------------- |:--------------------------------------------------------- |:--------------------- |:------ |
@@ -67,7 +67,7 @@
 | apkSize        | 新版本的安装包大小（单位M）                                            | null                  | false  |
 | authorities    | 兼容Android N uri授权                                         | 应用包名                  | false  |
 
-### UpdateConfiguration：配置文档
+### UpdateConfiguration：Configuration Doc
 
 | 属性                    | 描述                    | 默认值    |
 |:--------------------- |:--------------------- |:------ |
@@ -85,17 +85,17 @@
 | dialogButtonColor     | 对话框按钮的颜色              | -1     |
 | dialogButtonTextColor | 对话框按钮的文字颜色            | -1     |
 
-#### 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
+#### All versions：[Click to view](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
-### 使用步骤
+### Steps for usage
 
-#### 第一步： `app/build.gradle`进行依赖
+#### Step1： `app/build.gradle` Dependent
 
 ```groovy
 implementation 'com.azhon:appupdate:2.0.0'
 ```
 
-#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
 DownloadManager manager = DownloadManager.getInstance(this);
@@ -107,9 +107,9 @@ manager.setApkName("appupdate.apk")
         .download();
 ```
 
-#### 第三步：兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
+#### Step3：Compatible with Android N and above，Add the following code to your app's `Manifest.xml`
 
-```
+```java
 <--! android:authorities="${applicationId}" 
 这个值必须与DownloadManager中的authorities一致（不设置则为应用包名）-->
 
@@ -124,9 +124,9 @@ manager.setApkName("appupdate.apk")
 </provider>
 ```
 
-#### 第四步：资源文件`res/xml/file_paths_public.xml`内容
+#### Step4：Resource file `res/xml/file_paths_public.xml` content
 
-```
+```java
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <external-path
@@ -138,43 +138,41 @@ manager.setApkName("appupdate.apk")
 </paths>
 ```
 
-#### 第五步：取消下载，取消下载后继续下载请参照文档第二步
+#### Step5：Cancel the download, cancel the download and continue downloading. Please refer to the `Step2` of the document
 
-```
+```java
 private DownloadManager manager;
 //取消下载
 manager.cancel();
 ```
 
-#### 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
+#### Download completed Delete old APK file after opening new version
 
 ```
 //旧版本apk的文件保存地址
 boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
 ```
 
-* 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
-* 温馨提示：升级对话框中的内容是可以上下滑动的哦！
-* 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager` 并使用listener更新进度
+* Compatible with Android O and above, you need to set `NotificationChannel`; the library has been written to go to view[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
+* Tips: The contents of the upgrade dialog can be swiped up and down！
+* If you need to implement your own set of download process, you only need to `extends` `BaseHttpDownloadManager` and update the progress with listener.
 
 ```
 public class MyDownload extends BaseHttpDownloadManager {}
 ```
 
-### Demo下载体验
+### Demo download experience
 
- [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
+ [Click to download Demo to experience](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
 
-### 版本更新记录
+### Version update record
 
 * v2.0.0
-  * 新增安装完成启动新版本删除旧安装包文件
-  * 新增取消下载功能
+  * New installation completes the startup of the new version to delete the old APK file
+  * Added cancel download function
 
-#### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
+#### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
-### 结语
+### Conclusion
 
-* 欢迎大家加入《通往Android的神奇之旅》群号码：555974449
-* 如果大家在使用的过程中有什么问题，欢迎提Issues告知。
-* 如果大家有什么好的建议或者需求，也可以提Issues或者发送邮件至：958460248@qq.com
+* If you encounter problems during use, please feel free to ask Issues.
