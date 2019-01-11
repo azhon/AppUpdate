@@ -56,7 +56,7 @@
 |:-------------- |:---------------------------------------------------------------------------------------------------------------------------- |:--------------------- |:----------- |
 | context        | Context                                                                                                                      | null                  | true        |
 | apkUrl         | Apk download Url                                                                                                             | null                  | true        |
-| apkName        | Apk download  name                                                                                                           | null                  | true        |
+| apkName        | Apk download  name                                                                                                           | null                  | true        |
 | downloadPath   | apk download path                                                                                                            | getExternalCacheDir() | false       |
 | showNewerToast | Whether to prompt the user<br> "currently the latest version" toast                                                          | false                 | false       |
 | smallIcon      | Notification icon (resource id)                                                                                              | -1                    | true        |
@@ -69,21 +69,21 @@
 
 ### UpdateConfiguration：Configuration Doc
 
-| Attributes            | Description                                                                         | Default Value |
-|:--------------------- |:----------------------------------------------------------------------------------- |:------------- |
-| notifyId              | notification id                                                                     | 1011          |
-| notificationChannel   | Adapt to Android O  notifications                                                   | 详情查阅源码        |
-| httpManager           | Set up your own download process                                                    | null          |
-| breakpointDownload    | Whether need to support breakpoint downloads                                        | true          |
-| enableLog             | Whether need to log output                                                          | true          |
-| onDownloadListener    | Callback of the download process                                                    | null          |
-| jumpInstallPage       | Whether the download completes automatically pops up the installation page          | true          |
-| showNotification      | Whether to display the progress of the notification bar (background download toast) | true          |
-| forcedUpgrade         | Whether to force an upgrade                                                         | false         |
-| onButtonClickListener | Button click event listener                                                         | null          |
-| dialogImage           | Dialog background image resource (picture specification reference demo)             | -1            |
-| dialogButtonColor     | The color of the dialog button                                                      | -1            |
-| dialogButtonTextColor | The text color of the dialog button                                                 | -1            |
+| Attributes            | Description                                                                             | Default Value              |
+|:--------------------- |:--------------------------------------------------------------------------------------- |:-------------------------- |
+| notifyId              | notification id                                                                         | 1011                       |
+| notificationChannel   | Adapt to Android O  notifications                                                       | See the source for details |
+| httpManager           | Set up your own download process                                                        | null                       |
+| breakpointDownload    | Whether need to support breakpoint downloads                                            | true                       |
+| enableLog             | Whether need to log output                                                              | true                       |
+| onDownloadListener    | Callback of the download process                                                        | null                       |
+| jumpInstallPage       | Whether the download completes automatically<br> pops up the installation page          | true                       |
+| showNotification      | Whether to display the progress of the<br> notification bar (background download toast) | true                       |
+| forcedUpgrade         | Whether to force an upgrade                                                             | false                      |
+| onButtonClickListener | Button click event listener                                                             | null                       |
+| dialogImage           | Dialog background image resource<br> (picture specification reference demo)             | -1                         |
+| dialogButtonColor     | The color of the dialog button                                                          | -1                         |
+| dialogButtonTextColor | The text color of the dialog button                                                     | -1                         |
 
 #### All versions：[Click to view](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
