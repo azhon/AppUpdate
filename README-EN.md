@@ -16,14 +16,14 @@
 
 ## Table of Contents
 
-* [Rendering](#rendering)
-* [Function introduction](#function introduction)
-* [DownloadManager](#downloadmanager configuration doc)
-* [UpdateConfiguration](#updateconfiguration configuration Doc)
-* [Steps for usage](#steps for usage)
-* [Demo download experience](#demo download experience)
-* [Version update record](#version update record)
-* [Conclusion](#conclusion)
+* Rendering
+* Function introduction]
+* DownloadManager
+* UpdateConfiguration
+* Steps for usage
+* Demo download experience
+* Version update record
+* Conclusion
 
 ### Rendering
 
