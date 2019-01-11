@@ -52,38 +52,38 @@
 
 > Initial use`DownloadManager.getInstance(this)`
 
-| 属性             | 描述                                                        | 默认值                   | 是否必须设置 |
-|:-------------- |:--------------------------------------------------------- |:--------------------- |:------ |
-| context        | 上下文                                                       | null                  | true   |
-| apkUrl         | apk的下载地址                                                  | null                  | true   |
-| apkName        | apk下载好的名字                                                 | null                  | true   |
-| downloadPath   | apk下载的位置                                                  | getExternalCacheDir() | false  |
-| showNewerToast | 是否提示用户 "当前已是最新版本"                                         | false                 | false  |
-| smallIcon      | 通知栏的图标(资源id)                                              | -1                    | true   |
-| configuration  | 这个库的额外配置                                                  | null                  | false  |
-| apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会进行版本判断<br>下面的属性也就需要设置了) | 1                     | false  |
-| apkVersionName | 更新apk的versionName                                         | null                  | false  |
-| apkDescription | 更新描述                                                      | null                  | false  |
-| apkSize        | 新版本的安装包大小（单位M）                                            | null                  | false  |
-| authorities    | 兼容Android N uri授权                                         | 应用包名                  | false  |
+| Attributes     | Description                                                                                                                  | Default Value         | Must be set |
+|:-------------- |:---------------------------------------------------------------------------------------------------------------------------- |:--------------------- |:----------- |
+| context        | Context                                                                                                                      | null                  | true        |
+| apkUrl         | Apk download Url                                                                                                             | null                  | true        |
+| apkName        | Apk download  name                                                                                                           | null                  | true        |
+| downloadPath   | apk download path                                                                                                            | getExternalCacheDir() | false       |
+| showNewerToast | Whether to prompt the user<br> "currently the latest version" toast                                                          | false                 | false       |
+| smallIcon      | Notification icon (resource id)                                                                                              | -1                    | true        |
+| configuration  | Additional configuration of this library                                                                                     | null                  | false       |
+| apkVersionCode | new apk versionCode <br>(If set, the version will be judged in the library,<br>The following properties also need to be set) | 1                     | false       |
+| apkVersionName | new apk versionName                                                                                                          | null                  | false       |
+| apkDescription | Update description                                                                                                           | null                  | false       |
+| apkSize        | New version of the apk size (unit M)                                                                                         | null                  | false       |
+| authorities    | Support Android N uri license                                                                                                | package Name          | false       |
 
 ### UpdateConfiguration：Configuration Doc
 
-| 属性                    | 描述                    | 默认值    |
-|:--------------------- |:--------------------- |:------ |
-| notifyId              | 通知栏消息id               | 1011   |
-| notificationChannel   | 适配Android O的渠道通知      | 详情查阅源码 |
-| httpManager           | 设置自己的下载过程             | null   |
-| breakpointDownload    | 是否需要支持断点下载            | true   |
-| enableLog             | 是否需要日志输出              | true   |
-| onDownloadListener    | 下载过程的回调               | null   |
-| jumpInstallPage       | 下载完成是否自动弹出安装页面        | true   |
-| showNotification      | 是否显示通知栏进度（后台下载提示）     | true   |
-| forcedUpgrade         | 是否强制升级                | false  |
-| onButtonClickListener | 按钮点击事件回调              | null   |
-| dialogImage           | 对话框背景图片资源(图片规范参考demo) | -1     |
-| dialogButtonColor     | 对话框按钮的颜色              | -1     |
-| dialogButtonTextColor | 对话框按钮的文字颜色            | -1     |
+| Attributes            | Description                                                                         | Default Value |
+|:--------------------- |:----------------------------------------------------------------------------------- |:------------- |
+| notifyId              | notification id                                                                     | 1011          |
+| notificationChannel   | Adapt to Android O  notifications                                                   | 详情查阅源码        |
+| httpManager           | Set up your own download process                                                    | null          |
+| breakpointDownload    | Whether need to support breakpoint downloads                                        | true          |
+| enableLog             | Whether need to log output                                                          | true          |
+| onDownloadListener    | Callback of the download process                                                    | null          |
+| jumpInstallPage       | Whether the download completes automatically pops up the installation page          | true          |
+| showNotification      | Whether to display the progress of the notification bar (background download toast) | true          |
+| forcedUpgrade         | Whether to force an upgrade                                                         | false         |
+| onButtonClickListener | Button click event listener                                                         | null          |
+| dialogImage           | Dialog background image resource (picture specification reference demo)             | -1            |
+| dialogButtonColor     | The color of the dialog button                                                      | -1            |
+| dialogButtonTextColor | The text color of the dialog button                                                 | -1            |
 
 #### All versions：[Click to view](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
