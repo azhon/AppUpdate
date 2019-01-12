@@ -6,18 +6,18 @@
 
 ![](https://github.com/azhon/AppUpdate/blob/master/img/logo.png)
 
-#### The framework supports Chinese/English internally (other languages only need to take the same name in the corresponding `string.xml`)
+#### The library supports Chinese/English (other languages only need to take the same name in the corresponding `string.xml`)
 
 #### Internal dialog background image, button support customization
 
 #### To view the Log in the library, you only need to filter the `tag` at the beginning of `AppUpdate`
 
-#### **Focus：** If `downloadPath` is empty, the default is `getExternalCacheDir()` directory, and the [storage] permission will not be applied!
+#### **Focus：** If `downloadPath` is empty, the default is `getExternalCacheDir()` directory, and the [storage] permission will not be request!
 
 ## Table of Contents
 
 * Rendering
-* Function introduction]
+* Function introduction
 * DownloadManager
 * UpdateConfiguration
 * Steps for usage
@@ -37,7 +37,7 @@
 * [x] Support background download
 * [x] Support for custom download process
 * [x] Support Device >= Android M Dynamic Access Request
-* [x] Support notification progress bar display (or custom display progress)
+* [x] Support notification progress display (or custom display progress)
 * [x] Support Android N
 * [x] Support Android O
 * [x] Support Chinese/English 
