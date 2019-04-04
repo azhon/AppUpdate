@@ -80,6 +80,7 @@
 | jumpInstallPage       | Whether the download completes automatically<br> pops up the installation page          | true                       |
 | showNotification      | Whether to display the progress of the<br> notification bar (background download toast) | true                       |
 | forcedUpgrade         | Whether to force an upgrade                                                             | false                      |
+| showBgdToast          | Whether need to “Downloading new version in the background…”                            | true                       |
 | onButtonClickListener | Button click event listener                                                             | null                       |
 | dialogImage           | Dialog background image resource<br> (picture specification reference demo)             | -1                         |
 | dialogButtonColor     | The color of the dialog button                                                          | -1                         |

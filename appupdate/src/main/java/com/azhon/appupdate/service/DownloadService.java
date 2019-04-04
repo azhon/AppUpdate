@@ -44,6 +44,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     private String authorities;
     private OnDownloadListener listener;
     private boolean showNotification;
+    private boolean showBgdToast;
     private boolean jumpInstallPage;
     private int lastProgress;
     /**
@@ -76,6 +77,7 @@ public final class DownloadService extends Service implements OnDownloadListener
 
         listener = DownloadManager.getInstance().getConfiguration().getOnDownloadListener();
         showNotification = DownloadManager.getInstance().getConfiguration().isShowNotification();
+        showBgdToast = DownloadManager.getInstance().getConfiguration().isShowBgdToast();
         jumpInstallPage = DownloadManager.getInstance().getConfiguration().isJumpInstallPage();
         //获取app通知开关是否打开
         boolean enable = NotificationUtil.notificationEnable(this);
@@ -106,7 +108,9 @@ public final class DownloadService extends Service implements OnDownloadListener
     @Override
     public void start() {
         if (showNotification) {
-            handler.sendEmptyMessage(0);
+            if (showBgdToast) {
+                handler.sendEmptyMessage(0);
+            }
             String startDownload = getResources().getString(R.string.start_download);
             String startDownloadHint = getResources().getString(R.string.start_download_hint);
             NotificationUtil.showNotification(this, smallIcon, startDownload, startDownloadHint);
