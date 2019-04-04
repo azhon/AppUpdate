@@ -33,6 +33,7 @@
 
 ### Function introduction
 
+* [x] Support AndroidX
 * [x] Support breakpoint download
 * [x] Support background download
 * [x] Support for custom download process
@@ -93,7 +94,13 @@
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.0.0'
+implementation 'com.azhon:appupdate:2.1.0'
+```
+
+- If you are using `AndroidX`, please implementation `appupdateX`
+
+```groovy
+implementation 'com.azhon:appupdateX:2.1.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -168,9 +175,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.0.0
-  * New installation completes the startup of the new version to delete the old APK file
-  * Added cancel download function
+* v2.1.0
+  * Added  "Downloading new version in the background…" Toast switch
+  * Added support for AndroidX
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 

@@ -33,6 +33,7 @@
 
 ### 功能介绍
 
+* [x] 支持AndroidX
 * [x] 支持断点下载
 * [x] 支持后台下载
 * [x] 支持自定义下载过程
@@ -80,7 +81,7 @@
 | jumpInstallPage       | 下载完成是否自动弹出安装页面        | true   |
 | showNotification      | 是否显示通知栏进度（后台下载提示）     | true   |
 | forcedUpgrade         | 是否强制升级                | false  |
-| showBgdToast          | 是否提示 "正在后台下载新版本…" | true |
+| showBgdToast          | 是否提示 "正在后台下载新版本…"     | true   |
 | onButtonClickListener | 按钮点击事件回调              | null   |
 | dialogImage           | 对话框背景图片资源(图片规范参考demo) | -1     |
 | dialogButtonColor     | 对话框按钮的颜色              | -1     |
@@ -93,7 +94,13 @@
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.0.0'
+implementation 'com.azhon:appupdate:2.1.0'
+```
+
+- 如果你使用的是`AndroidX`，请依赖`appupdateX`
+
+```groovy
+implementation 'com.azhon:appupdateX:2.1.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -168,9 +175,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.0.0
-  * 新增安装完成启动新版本删除旧安装包文件
-  * 新增取消下载功能
+* v2.1.0
+  * 新增后台"正在后台下载新版本Toast"Toast开关
+  * 新增支持AndroidX
 
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
