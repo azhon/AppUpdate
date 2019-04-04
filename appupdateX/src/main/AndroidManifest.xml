@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.azhon.appupdate">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--适配Android O 应用安装-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <application>
+        <activity
+            android:name=".activity.PermissionActivity"
+            android:label=""
+            android:theme="@style/DialogActivity" />
+        <service android:name=".service.DownloadService" />
+    </application>
+</manifest>
