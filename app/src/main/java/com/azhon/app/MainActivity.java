@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setBreakpointDownload(true)
                 //设置是否显示通知栏进度
                 .setShowNotification(true)
+                //设置是否提示后台下载toast
+                .setShowBgdToast(false)
                 //设置强制更新
                 .setForcedUpgrade(false)
                 //设置对话框按钮的点击监听

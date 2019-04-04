@@ -56,6 +56,10 @@ public class UpdateConfiguration {
      */
     private boolean jumpInstallPage = true;
     /**
+     * 下载开始时是否提示 "正在后台下载新版本…" (默认为true)
+     */
+    private boolean showBgdToast = true;
+    /**
      * 是否强制升级(默认为false)
      */
     private boolean forcedUpgrade = false;
@@ -205,6 +209,21 @@ public class UpdateConfiguration {
      */
     public boolean isForcedUpgrade() {
         return forcedUpgrade;
+    }
+
+    /**
+     * 设置是否提示 "正在后台下载新版本…"
+     */
+    public UpdateConfiguration setShowBgdToast(boolean showBgdToast) {
+        this.showBgdToast = showBgdToast;
+        return this;
+    }
+
+    /**
+     * 是否提示 "正在后台下载新版本…"
+     */
+    public boolean isShowBgdToast() {
+        return showBgdToast;
     }
 
     /**

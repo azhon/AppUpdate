@@ -80,6 +80,7 @@
 | jumpInstallPage       | 下载完成是否自动弹出安装页面        | true   |
 | showNotification      | 是否显示通知栏进度（后台下载提示）     | true   |
 | forcedUpgrade         | 是否强制升级                | false  |
+| showBgdToast          | 是否提示 "正在后台下载新版本…" | true |
 | onButtonClickListener | 按钮点击事件回调              | null   |
 | dialogImage           | 对话框背景图片资源(图片规范参考demo) | -1     |
 | dialogButtonColor     | 对话框按钮的颜色              | -1     |
