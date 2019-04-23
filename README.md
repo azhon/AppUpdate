@@ -1,7 +1,5 @@
 ## [English Doc](https://github.com/azhon/AppUpdate/blob/master/README-EN.md)
 
-## 写在前面
-
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 
 <p align="center">
@@ -10,6 +8,8 @@
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
+
+## 写在前面
 
 #### 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
 
