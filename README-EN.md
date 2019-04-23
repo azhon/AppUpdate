@@ -41,6 +41,7 @@
 * [x] Support notification progress display (or custom display progress)
 * [x] Support Android N
 * [x] Support Android O
+* [x] Support Android P
 * [x] Support Chinese/English 
 * [x] Support for custom built-in dialog styles
 * [x] Support for canceling the download (if the notification bar message is sent, it will be removed)
