@@ -2,9 +2,14 @@
 
 ## 写在前面
 
-[![Travis](https://img.shields.io/badge/miniSdk-15%2B-blue.svg)]()　[![Travis](https://img.shields.io/badge/jcenter%20version-2.0.0-brightgreen.svg)]()　[![Travis](https://img.shields.io/badge/author-azhon-%23E066FF.svg)]()　[![Travis](https://img.shields.io/badge/license-Apache2.0-orange.svg)]()
+<p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 
-![](https://github.com/azhon/AppUpdate/blob/master/img/logo.png)
+<p align="center">
+  <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-2.0.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
+  <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
+</p>
 
 #### 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
 
