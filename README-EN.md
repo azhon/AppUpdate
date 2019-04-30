@@ -123,10 +123,11 @@ manager.setApkName("appupdate.apk")
 
 #### Step3：Compatible with Android N and above，Add the following code to your app's `Manifest.xml`
 
-```java
-<--! android:authorities="${applicationId}" 
-这个值必须与DownloadManager中的authorities一致（不设置则为应用包名）-->
+> The authorities value set in the provider must be the same as the authorities set in the DownloadManager (the application package name is not set)
+> 
+> android:authorities="${applicationId}"
 
+```java
 <provider
     android:name="android.support.v4.content.FileProvider"
     android:authorities="${applicationId}"
@@ -137,6 +138,20 @@ manager.setApkName("appupdate.apk")
         android:resource="@xml/file_paths_public" />
 </provider>
 ```
+
+- If you implementation the `appupdateX` version
+
+  ```java
+  <provider
+      android:name="androidx.core.content.FileProvider"
+      android:authorities="${applicationId}"
+      android:exported="false"
+      android:grantUriPermissions="true">
+      <meta-data
+          android:name="android.support.FILE_PROVIDER_PATHS"
+          android:resource="@xml/file_paths_public" />
+  </provider>
+  ```
 
 #### Step4：Resource file `res/xml/file_paths_public.xml` content
 
