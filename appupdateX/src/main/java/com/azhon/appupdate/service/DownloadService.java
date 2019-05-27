@@ -48,10 +48,6 @@ public final class DownloadService extends Service implements OnDownloadListener
     private boolean showBgdToast;
     private boolean jumpInstallPage;
     private int lastProgress;
-    /**
-     * 是否正在下载，防止重复点击
-     */
-    private boolean downloading;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -90,7 +86,7 @@ public final class DownloadService extends Service implements OnDownloadListener
      * 获取下载管理者
      */
     private synchronized void download() {
-        if (downloading) {
+        if (DownloadManager.getInstance().isDownloading()) {
             LogUtil.e(TAG, "download: 当前正在下载，请务重复下载！");
             return;
         }
@@ -102,7 +98,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         }
         //如果用户自己定义了下载过程
         manager.download(apkUrl, apkName, this);
-        downloading = true;
+        DownloadManager.getInstance().setState(true);
     }
 
 
@@ -130,7 +126,7 @@ public final class DownloadService extends Service implements OnDownloadListener
             if (curr != lastProgress) {
                 lastProgress = curr;
                 String downloading = getResources().getString(R.string.start_downloading);
-                NotificationUtil.showProgressNotification(this, smallIcon, downloading, "", max, progress);
+                NotificationUtil.showProgressNotification(this, smallIcon, downloading, curr + "%", max, progress);
             }
         }
         if (listener != null) {
@@ -141,7 +137,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     @Override
     public void done(File apk) {
         LogUtil.d(TAG, "done: 文件已下载至" + apk.toString());
-        downloading = false;
+        DownloadManager.getInstance().setState(false);
         if (showNotification) {
             String downloadCompleted = getResources().getString(R.string.download_completed);
             String clickHint = getResources().getString(R.string.click_hint);
@@ -159,7 +155,7 @@ public final class DownloadService extends Service implements OnDownloadListener
 
     @Override
     public void cancel() {
-        downloading = false;
+        DownloadManager.getInstance().setState(false);
         if (showNotification) {
             NotificationUtil.cancelNotification(this);
         }
@@ -171,7 +167,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     @Override
     public void error(Exception e) {
         LogUtil.e(TAG, "error: " + e);
-        downloading = false;
+        DownloadManager.getInstance().setState(false);
         if (showNotification) {
             String msg = e.getMessage();
             String downloadError = getResources().getString(R.string.download_error);
