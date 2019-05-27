@@ -153,8 +153,6 @@ manager.setApkName("appupdate.apk")
   </provider>
   ```
 
-  
-
 #### 第四步：资源文件`res/xml/file_paths_public.xml`内容
 
 ```
@@ -169,12 +167,19 @@ manager.setApkName("appupdate.apk")
 </paths>
 ```
 
-#### 第五步：取消下载，取消下载后继续下载请参照文档第二步
+#### 第五步：取消下载，取消下载后继续下载请参照文档第二步*
 
 ```
 private DownloadManager manager;
 //取消下载
 manager.cancel();
+```
+
+#### 第六步：混淆打包，只需保持`Activity`、`Service`不混淆
+
+```
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Service
 ```
 
 #### 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
