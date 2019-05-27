@@ -81,6 +81,10 @@ public class DownloadManager {
      * 兼容Android N 添加uri权限 authorities
      */
     private String authorities = "";
+    /**
+     * 当前下载状态
+     */
+    private boolean state = false;
 
     private static DownloadManager manager;
 
@@ -285,6 +289,15 @@ public class DownloadManager {
     }
 
     /**
+     * 设置当前状态
+     *
+     * @hide
+     */
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    /**
      * 开始下载
      */
     public void download() {
@@ -330,6 +343,13 @@ public class DownloadManager {
             return;
         }
         httpManager.cancel();
+    }
+
+    /**
+     * 当前是否正在下载
+     */
+    public boolean isDownloading() {
+        return state;
     }
 
     /**
