@@ -175,6 +175,15 @@ private DownloadManager manager;
 manager.cancel();
 ```
 
+#### Step6：ProGuard Rules
+
+```
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Service
+```
+
+
+
 #### Download completed Delete old APK file after opening new version
 
 ```
