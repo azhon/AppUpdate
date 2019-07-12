@@ -116,7 +116,7 @@ DownloadManager manager = DownloadManager.getInstance(this);
 manager.setApkName("appupdate.apk")
         .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
         .setSmallIcon(R.mipmap.ic_launcher)
-        //可设置，可不设置
+        //Can be set, can not be set
         .setConfiguration(configuration)
         .download();
 ```
@@ -171,7 +171,7 @@ manager.setApkName("appupdate.apk")
 
 ```java
 private DownloadManager manager;
-//取消下载
+//cancle download
 manager.cancel();
 ```
 
@@ -187,7 +187,7 @@ manager.cancel();
 #### Download completed Delete old APK file after opening new version
 
 ```
-//旧版本apk的文件保存地址
+//Old version apk file save address
 boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
 ```
 
@@ -205,9 +205,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.1.0
-  * Added  "Downloading new version in the background…" Toast switch
-  * Added support for AndroidX
+* v2.2.0
+  * Added access to current download status * Notification bar download
+  * progress support display percentage * Added support for redirect
+  * address Url address download (http return code 301/302)
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 

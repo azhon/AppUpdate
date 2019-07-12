@@ -203,9 +203,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.1.0
-  * 新增后台"正在后台下载新版本Toast"Toast开关
-  * 新增支持AndroidX
+* v2.2.0
+  * 新增获取当前下载状态
+  * 通知栏下载进度支持显示百分比
+  * 新增支持重定向地址Url地址下载（http返回码301/302)
 
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
