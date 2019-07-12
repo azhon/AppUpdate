@@ -202,6 +202,13 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                 stream.flush();
                 stream.close();
                 is.close();
+                //重定向
+            } else if (con.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM ||
+                    con.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP) {
+                apkUrl = con.getHeaderField("Location");
+                con.disconnect();
+                LogUtil.d(TAG, "fullDownload: 当前地址是重定向Url，定向后的地址：" + apkUrl);
+                fullDownload();
             } else {
                 listener.error(new SocketTimeoutException("连接超时！"));
             }
@@ -228,6 +235,15 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
             int length = 0;
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 length = con.getContentLength();
+                //重定向
+            } else if (con.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM ||
+                    con.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP) {
+                //获取定向后的地址
+                apkUrl = con.getHeaderField("Location");
+                LogUtil.d(TAG, "getContentLength: 当前地址是重定向Url，定向后的地址：" + apkUrl);
+                //关闭连接
+                con.disconnect();
+                return getContentLength();
             }
             con.disconnect();
             //返回文件长度
