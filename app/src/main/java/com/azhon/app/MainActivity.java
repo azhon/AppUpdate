@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     private NumberProgressBar progressBar;
     private DownloadManager manager;
+    private String url = "https://dc2d8d5b0b9641aa7fb44379ca67b370.dd.cdntips.com/imtt.dd.qq.com/16891/34D3EECDE5B27CFBE996173932357FE9.apk?mkey=5d2873007ae0dcd2&f=184b&fsname=com.tencent.mobileqq_8.0.8_1218.apk&csr=1bbd&cip=122.224.250.39&proto=https";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                             e.printStackTrace();
                         }
                         manager = DownloadManager.getInstance(MainActivity.this);
-                        manager.setApkName("appupdate.apk")
-                                .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+                        manager.setApkName("QQ.apk")
+                                .setApkUrl(url)
                                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                                 .setSmallIcon(R.mipmap.ic_launcher)
                                 .download();
@@ -102,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
             e.printStackTrace();
         }
         manager = DownloadManager.getInstance(MainActivity.this);
-        manager.setApkName("appupdate.apk")
-                .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+        manager.setApkName("QQ.apk")
+                .setApkUrl(url)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .download();
@@ -141,8 +142,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setOnDownloadListener(this);
 
         manager = DownloadManager.getInstance(this);
-        manager.setApkName("appupdate.apk")
-                .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+        manager.setApkName("QQ.apk")
+                .setApkUrl(url)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowNewerToast(true)
                 .setConfiguration(configuration)

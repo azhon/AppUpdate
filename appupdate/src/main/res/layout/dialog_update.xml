@@ -46,8 +46,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
-            android:overScrollMode="never"
-            android:scrollbars="none">
+            android:overScrollMode="never">
 
             <TextView
                 android:id="@+id/tv_description"
