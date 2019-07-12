@@ -2,11 +2,11 @@ ext {
     compileSdkVersion = 26
     minSdkVersion = 15
     targetSdkVersion = 26
-    versionCode = 21
-    versionName = "2.1.0"
+    versionCode = 22
+    versionName = "2.2.0"
 
     //新版本描述信息
-    versionDesc = "1.新增后台'正在后台下载新版本Toast'开关，2.新增支持AndroidX"
+    versionDesc = "1.新增获取当前下载状态，2.通知栏下载进度支持显示百分比，3.新增支持重定向地址Url地址下载（http返回码301/302)"
     //项目的主页
     siteUrl = "https://github.com/azhon/AppUpdate"
     //gitHub仓库的地址

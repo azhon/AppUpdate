@@ -100,13 +100,13 @@
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.1.0'
+implementation 'com.azhon:appupdate:2.2.0'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.1.0'
+implementation 'com.azhon:appupdateX:2.2.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
