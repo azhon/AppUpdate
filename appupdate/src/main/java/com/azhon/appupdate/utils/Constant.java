@@ -31,7 +31,7 @@ public final class Constant {
     /**
      * 渠道通知名称
      */
-    public static final String DEFAULT_CHANNEL_NAME = "版本更新";
+    public static final String DEFAULT_CHANNEL_NAME = "AppUpdate";
     /**
      * 新版本下载线程名称
      */
