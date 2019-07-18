@@ -127,7 +127,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                     int len;
                     //当前已下载完成的进度 (包括之前下载的进度)
                     int progress = start;
-                    byte[] buffer = new byte[1024 * 4];
+                    byte[] buffer = new byte[1024 * 2];
                     while ((len = is.read(buffer)) != -1 && !shutdown) {
                         //写入文件
                         accessFile.write(buffer, 0, len);
@@ -182,7 +182,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                 int len;
                 //当前已下载完成的进度
                 int progress = 0;
-                byte[] buffer = new byte[1024 * 4];
+                byte[] buffer = new byte[1024 * 2];
                 File file = FileUtil.createFile(downloadPath, apkName);
                 FileOutputStream stream = new FileOutputStream(file);
                 while ((len = is.read(buffer)) != -1 && !shutdown) {
