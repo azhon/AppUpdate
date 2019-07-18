@@ -100,13 +100,13 @@
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.2.0'
+implementation 'com.azhon:appupdate:2.3.0'
 ```
 
 - If you are using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.2.0'
+implementation 'com.azhon:appupdateX:2.3.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -206,9 +206,8 @@ public class MyDownload extends BaseHttpDownloadManager {}
 ### Version update record
 
 * v2.2.0
-  * Added access to current download status * Notification bar download
-  * progress support display percentage * Added support for redirect
-  * address Url address download (http return code 301/302)
+  * Optimize the DownloadManager.getInstance() null pointer problem
+  * Breakpoint download random read and write add buffer, double the speed
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
