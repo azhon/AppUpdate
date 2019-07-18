@@ -100,13 +100,13 @@
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.2.0'
+implementation 'com.azhon:appupdate:2.3.0'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.2.0'
+implementation 'com.azhon:appupdateX:2.3.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -203,10 +203,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.2.0
-  * 新增获取当前下载状态
-  * 通知栏下载进度支持显示百分比
-  * 新增支持重定向地址Url地址下载（http返回码301/302)
+* v2.3.0
+  * 优化DownloadManager.getInstance()空指针问题
+  * 断点下载随机读写添加缓冲，速度提升了一倍
 
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
