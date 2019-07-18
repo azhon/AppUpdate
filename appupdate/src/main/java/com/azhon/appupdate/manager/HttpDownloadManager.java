@@ -38,12 +38,14 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
     private static final String TAG = Constant.TAG + "HttpDownloadManager";
     private Context context;
     private boolean shutdown = false;
+    private boolean breakpoint;
     private String apkUrl, apkName, downloadPath;
     private OnDownloadListener listener;
 
-    public HttpDownloadManager(Context context, String downloadPath) {
+    public HttpDownloadManager(Context context, String downloadPath, boolean breakpoint) {
         this.context = context;
         this.downloadPath = downloadPath;
+        this.breakpoint = breakpoint;
     }
 
     @Override
@@ -77,7 +79,6 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                 FileUtil.delete(downloadPath, apkName);
             }
             //检查是否需要断点下载
-            boolean breakpoint = DownloadManager.getInstance().getConfiguration().isBreakpointDownload();
             if (breakpoint) {
                 breakpointDownload();
             } else {
