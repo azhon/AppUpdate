@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     private NumberProgressBar progressBar;
     private DownloadManager manager;
-    private String url = "https://dc2d8d5b0b9641aa7fb44379ca67b370.dd.cdntips.com/imtt.dd.qq.com/16891/34D3EECDE5B27CFBE996173932357FE9.apk?mkey=5d2873007ae0dcd2&f=184b&fsname=com.tencent.mobileqq_8.0.8_1218.apk&csr=1bbd&cip=122.224.250.39&proto=https";
+    private String url = "https://6be0527b4ce07d30a8260fe78599460c.dd.cdntips.com/imtt.dd.qq.com/16891/apk/4930D062BB950D0CB156EDA29DF813C0.apk?mkey=5d302acf7ae0dcd2&f=1026&fsname=com.ss.android.article.video_3.7.4_374.apk&csr=1bbd&cip=122.224.250.39&proto=https";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
