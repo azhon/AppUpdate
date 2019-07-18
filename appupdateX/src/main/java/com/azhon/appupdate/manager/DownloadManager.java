@@ -113,9 +113,6 @@ public class DownloadManager {
      * @hide
      */
     public static DownloadManager getInstance() {
-        if (manager == null) {
-            throw new RuntimeException("请先调用 getInstance(Context context) !");
-        }
         return manager;
     }
 
