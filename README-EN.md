@@ -205,7 +205,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.2.0
+* v2.3.0
   * Optimize the DownloadManager.getInstance() null pointer problem
   * Breakpoint download random read and write add buffer, double the speed
 
