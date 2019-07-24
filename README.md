@@ -32,9 +32,9 @@
 
 ### 效果图
 
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/01.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/02.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/03.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/04.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/05.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/06.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_2.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_4.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_6.png" width="300">
 
 ### 功能介绍
 
