@@ -28,7 +28,7 @@
 * Steps for usage
 * Demo download experience
 * Version update record
-* Conclusion
+* End
 
 ### Rendering
 
