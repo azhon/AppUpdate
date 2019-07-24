@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("一个简单好用的版本更新库");
+        setTitle(R.string.app_title);
         progressBar = findViewById(R.id.number_progress_bar);
         findViewById(R.id.btn_1).setOnClickListener(this);
         findViewById(R.id.btn_2).setOnClickListener(this);
         findViewById(R.id.btn_3).setOnClickListener(this);
         findViewById(R.id.btn_4).setOnClickListener(this);
-//        删除旧版本安装包
+        //delete old apk file...
 //        boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
     }
 
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     private void startUpdate1() {
         new AlertDialog.Builder(this)
-                .setTitle("发现新版本")
-                .setMessage("1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程\n5.支持 设备>=Android M 动态权限的申请")
-                .setPositiveButton("升级", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.dialog_title)
+                .setMessage(R.string.dialog_msg)
+                .setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setApkVersionName("2.1.8")
                 .setApkSize("20.4")
                 .setAuthorities(getPackageName())
-                .setApkDescription("1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程\n5.支持 设备>=Android M 动态权限的申请\n6.支持通知栏进度条展示(或者自定义显示进度)")
+                .setApkDescription(getString(R.string.dialog_msg))
                 .download();
     }
 
