@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="40dp"
-        android:text="使用说明：三个方式不能并行\n请等待一个方式下载完成在使用其他方式"
-        android:textColor="#6351b3" />
+        android:text="@string/layout_msg"
+        android:textColor="@color/colorAccent" />
 
     <Button
         android:id="@+id/btn_1"
@@ -27,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:text="使用自己的对话框更新" />
+        android:text="@string/layout_custom_dialog"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_2"
@@ -35,7 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:text="简单使用" />
+        android:text="@string/layout_simple_use"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_3"
@@ -43,7 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:text="使用版本库内置的对话框更新" />
+        android:text="@string/layout_library_dialog"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_4"
@@ -51,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:text="取消下载" />
+        android:text="@string/layout_cancel"
+        android:textAllCaps="false" />
 
 </LinearLayout>
