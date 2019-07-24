@@ -32,9 +32,9 @@
 
 ### Rendering
 
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/01.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/02.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/03.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/04.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/05.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/06.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_2.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_4.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_6.png" width="300">
 
 ### Function introduction
 
@@ -182,8 +182,6 @@ manager.cancel();
 -keep public class * extends android.app.Service
 ```
 
-
-
 #### Download completed Delete old APK file after opening new version
 
 ```
@@ -211,6 +209,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
-### Conclusion
+### End
 
 * If you encounter problems during use, please feel free to ask Issues.
+* If you have any good suggestions, you can also mention Issues or send  email to: `azhon.cn@gmail.com`.
