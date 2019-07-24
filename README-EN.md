@@ -212,4 +212,4 @@ public class MyDownload extends BaseHttpDownloadManager {}
 ### End
 
 * If you encounter problems during use, please feel free to ask Issues.
-* If you have any good suggestions, you can also mention Issues or send  email to: `azhon.cn@gmail.com`.
+* If you have any good suggestions, you can also mention Issues or send  email to: azhon.cn@gmail.com.
