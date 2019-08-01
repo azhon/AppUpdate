@@ -206,6 +206,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
 * v2.3.0
   * 优化DownloadManager.getInstance()空指针问题
   * 断点下载随机读写添加缓冲，速度提升了一倍
+  * 解决强制更新下载失败，内置对话框无法关闭bug
 
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
