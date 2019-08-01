@@ -86,6 +86,11 @@ public class DownloadManager {
      */
     private boolean state = false;
 
+    /**
+     * 内置对话框
+     */
+    private UpdateDialog dialog;
+
     private static DownloadManager manager;
 
     /**
@@ -295,6 +300,20 @@ public class DownloadManager {
     }
 
     /**
+     * 当前是否正在下载
+     */
+    public boolean isDownloading() {
+        return state;
+    }
+
+    /**
+     * 获取内置对话框
+     */
+    public UpdateDialog getDefaultDialog() {
+        return dialog;
+    }
+
+    /**
      * 开始下载
      */
     public void download() {
@@ -315,7 +334,7 @@ public class DownloadManager {
         } else {
             //对版本进行判断，是否显示升级对话框
             if (apkVersionCode > ApkUtil.getVersionCode(context)) {
-                UpdateDialog dialog = new UpdateDialog(context);
+                dialog = new UpdateDialog(context);
                 dialog.show();
             } else {
                 if (showNewerToast) {
@@ -342,12 +361,6 @@ public class DownloadManager {
         httpManager.cancel();
     }
 
-    /**
-     * 当前是否正在下载
-     */
-    public boolean isDownloading() {
-        return state;
-    }
 
     /**
      * 检查参数

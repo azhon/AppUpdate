@@ -6,7 +6,7 @@ ext {
     versionName = "2.3.0"
 
     //新版本描述信息
-    versionDesc = "1.优化DownloadManager.getInstance()空指针问题，2.断点下载随机读写添加缓冲，速度提升了一倍"
+    versionDesc = "1.优化DownloadManager.getInstance()空指针问题，2.断点下载随机读写添加缓冲，速度提升了一倍，3.解决强制更新下载失败，内置对话框无法关闭bug"
     //项目的主页
     siteUrl = "https://github.com/azhon/AppUpdate"
     //gitHub仓库的地址

@@ -206,6 +206,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
 * v2.3.0
   * Optimize the DownloadManager.getInstance() null pointer problem
   * Breakpoint download random read and write add buffer, double the speed
+  * Resolve forced update download failed, built-in dialog cannot close bug
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
