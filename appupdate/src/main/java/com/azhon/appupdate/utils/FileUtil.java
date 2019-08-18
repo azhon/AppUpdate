@@ -1,9 +1,8 @@
 package com.azhon.appupdate.utils;
 
-import com.azhon.appupdate.io.BufferedRandomAccessFile;
-
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 
 /**
  * 项目名:    AppUpdate
@@ -31,10 +30,10 @@ public final class FileUtil {
     /**
      * 创建一个随机读写
      */
-    public static BufferedRandomAccessFile createRAFile(String downloadPath, String fileName) {
+    public static RandomAccessFile createRAFile(String downloadPath, String fileName) {
         //断点读写
         try {
-            return new BufferedRandomAccessFile(createFile(downloadPath, fileName), "rwd");
+            return new RandomAccessFile(createFile(downloadPath, fileName), "rwd");
         } catch (IOException e) {
             e.printStackTrace();
         }
