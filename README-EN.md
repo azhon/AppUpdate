@@ -81,7 +81,6 @@
 | notifyId              | notification id                                                                         | 1011                       |
 | notificationChannel   | Adapt to Android O  notifications                                                       | See the source for details |
 | httpManager           | Set up your own download process                                                        | null                       |
-| breakpointDownload    | Whether need to support breakpoint downloads                                            | true                       |
 | enableLog             | Whether need to log output                                                              | true                       |
 | onDownloadListener    | Callback of the download process                                                        | null                       |
 | jumpInstallPage       | Whether the download completes automatically<br> pops up the installation page          | true                       |
@@ -205,7 +204,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 * v2.3.0
   * Optimize the DownloadManager.getInstance() null pointer problem
-  * Breakpoint download random read and write add buffer, double the speed
+  * Remove the breakpoint download, using full downloads.
   * Resolve forced update download failed, built-in dialog cannot close bug
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)

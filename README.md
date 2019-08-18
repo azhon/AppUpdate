@@ -81,7 +81,6 @@
 | notifyId              | 通知栏消息id               | 1011   |
 | notificationChannel   | 适配Android O的渠道通知      | 详情查阅源码 |
 | httpManager           | 设置自己的下载过程             | null   |
-| breakpointDownload    | 是否需要支持断点下载            | true   |
 | enableLog             | 是否需要日志输出              | true   |
 | onDownloadListener    | 下载过程的回调               | null   |
 | jumpInstallPage       | 下载完成是否自动弹出安装页面        | true   |
@@ -205,7 +204,7 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 * v2.3.0
   * 优化DownloadManager.getInstance()空指针问题
-  * 断点下载随机读写添加缓冲，速度提升了一倍
+  * 移除断点下载逻辑，全部使用全量下载。
   * 解决强制更新下载失败，内置对话框无法关闭bug
 
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
@@ -214,4 +213,4 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 * 欢迎大家加入《通往Android的神奇之旅》群号码：555974449
 * 如果大家在使用的过程中有什么问题，欢迎提Issues告知。
-* 如果大家有什么好的建议或者需求，也可以提Issues或者发送邮件至：958460248@qq.com
+* 如果大家有什么好的建议或者需求，也可以提Issues或者发送邮件至：958460248@qq.com˛
