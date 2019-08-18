@@ -37,10 +37,6 @@ public final class Constant {
      */
     public static final String THREAD_NAME = "app update thread";
     /**
-     * 新版本断点下载保存下载进度的key
-     */
-    public static final String PROGRESS = "app_update_progress";
-    /**
      * apk文件后缀
      */
     public static final String APK_SUFFIX = ".apk";
