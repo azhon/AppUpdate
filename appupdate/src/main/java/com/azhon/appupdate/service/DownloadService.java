@@ -99,7 +99,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         BaseHttpDownloadManager manager = configuration.getHttpManager();
         //使用自己的下载
         if (manager == null) {
-            manager = new HttpDownloadManager(this, downloadPath, configuration.isBreakpointDownload());
+            manager = new HttpDownloadManager(downloadPath);
             configuration.setHttpManager(manager);
         }
         //如果用户自己定义了下载过程

@@ -128,8 +128,6 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //.setDialogButtonColor(Color.parseColor("#E743DA"))
                 //设置按钮的文字颜色
                 .setDialogButtonTextColor(Color.WHITE)
-                //支持断点下载
-                .setBreakpointDownload(true)
                 //设置是否显示通知栏进度
                 .setShowNotification(true)
                 //设置是否提示后台下载toast

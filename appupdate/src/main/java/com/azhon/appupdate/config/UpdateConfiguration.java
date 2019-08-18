@@ -32,10 +32,6 @@ public class UpdateConfiguration {
      */
     private BaseHttpDownloadManager httpManager;
     /**
-     * 是否需要支持断点下载 (默认是支持的)
-     */
-    private boolean breakpointDownload = true;
-    /**
      * 是否需要日志输出（错误日志）
      */
     private boolean enableLog = true;
@@ -106,20 +102,6 @@ public class UpdateConfiguration {
         return httpManager;
     }
 
-    /**
-     * 设置是否支持断点下载
-     */
-    public UpdateConfiguration setBreakpointDownload(boolean breakpointDownload) {
-        this.breakpointDownload = breakpointDownload;
-        return this;
-    }
-
-    /**
-     * 是否需要断点下载
-     */
-    public boolean isBreakpointDownload() {
-        return breakpointDownload;
-    }
 
     /**
      * 设置是否输出日志信息
