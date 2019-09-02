@@ -24,6 +24,7 @@ import com.azhon.appupdate.utils.LogUtil;
 import com.azhon.appupdate.utils.NotificationUtil;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * 项目名:    AppUpdate
@@ -44,7 +45,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     private String apkName;
     private String downloadPath;
     private String authorities;
-    private OnDownloadListener listener;
+    private List<OnDownloadListener> listeners;
     private boolean showNotification;
     private boolean showBgdToast;
     private boolean jumpInstallPage;
@@ -80,7 +81,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         FileUtil.createDirDirectory(downloadPath);
 
         UpdateConfiguration configuration = downloadManager.getConfiguration();
-        listener = configuration.getOnDownloadListener();
+        listeners = configuration.getOnDownloadListener();
         showNotification = configuration.isShowNotification();
         showBgdToast = configuration.isShowBgdToast();
         jumpInstallPage = configuration.isJumpInstallPage();
@@ -120,9 +121,7 @@ public final class DownloadService extends Service implements OnDownloadListener
             String startDownloadHint = getResources().getString(R.string.start_download_hint);
             NotificationUtil.showNotification(this, smallIcon, startDownload, startDownloadHint);
         }
-        if (listener != null) {
-            listener.start();
-        }
+        handler.sendEmptyMessage(1);
     }
 
     @Override
@@ -137,9 +136,7 @@ public final class DownloadService extends Service implements OnDownloadListener
                 NotificationUtil.showProgressNotification(this, smallIcon, downloading, curr + "%", max, progress);
             }
         }
-        if (listener != null) {
-            listener.downloading(max, progress);
-        }
+        handler.obtainMessage(2, max, progress).sendToTarget();
     }
 
     @Override
@@ -152,9 +149,7 @@ public final class DownloadService extends Service implements OnDownloadListener
             NotificationUtil.showDoneNotification(this, smallIcon, downloadCompleted, clickHint, authorities, apk);
         }
         //如果用户设置了回调 则先处理用户的事件 在执行自己的
-        if (listener != null) {
-            listener.done(apk);
-        }
+        handler.obtainMessage(3, apk).sendToTarget();
         if (jumpInstallPage) {
             ApkUtil.installApk(this, authorities, apk);
         }
@@ -167,9 +162,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         if (showNotification) {
             NotificationUtil.cancelNotification(this);
         }
-        if (listener != null) {
-            listener.cancel();
-        }
+        handler.sendEmptyMessage(4);
     }
 
     @Override
@@ -187,15 +180,52 @@ public final class DownloadService extends Service implements OnDownloadListener
             }
             NotificationUtil.showErrorNotification(this, smallIcon, downloadError, conDownloading);
         }
-        if (listener != null) {
-            listener.error(e);
-        }
+        handler.obtainMessage(5, e).sendToTarget();
     }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Toast.makeText(DownloadService.this, R.string.background_downloading, Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    for (OnDownloadListener listener : listeners) {
+                        listener.start();
+                    }
+                    break;
+                case 2:
+                    for (OnDownloadListener listener : listeners) {
+                        listener.downloading(msg.arg1, msg.arg2);
+                    }
+                    break;
+                case 3:
+                    for (OnDownloadListener listener : listeners) {
+                        listener.done((File) msg.obj);
+                    }
+                    break;
+                case 4:
+                    for (OnDownloadListener listener : listeners) {
+                        listener.cancel();
+                    }
+                    break;
+                case 5:
+                    for (OnDownloadListener listener : listeners) {
+                        listener.error((Exception) msg.obj);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    };
 
     /**
      * 下载完成释放资源
      */
-
     private void releaseResources() {
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
@@ -203,15 +233,6 @@ public final class DownloadService extends Service implements OnDownloadListener
         stopSelf();
         downloadManager.release();
     }
-
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            Toast.makeText(DownloadService.this, R.string.background_downloading, Toast.LENGTH_SHORT).show();
-
-        }
-    };
 
     @Nullable
     @Override
