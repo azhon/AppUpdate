@@ -7,6 +7,9 @@ import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 项目名:    AppUpdate
  * 包名       com.azhon.appupdate.config
@@ -42,7 +45,7 @@ public class UpdateConfiguration {
     /**
      * 下载过程回调
      */
-    private OnDownloadListener onDownloadListener;
+    private List<OnDownloadListener> onDownloadListeners = new ArrayList<>();
     /**
      * 按钮点击事件回调
      */
@@ -122,15 +125,15 @@ public class UpdateConfiguration {
      * 设置下载监听器
      */
     public UpdateConfiguration setOnDownloadListener(OnDownloadListener onDownloadListener) {
-        this.onDownloadListener = onDownloadListener;
+        this.onDownloadListeners.add(onDownloadListener);
         return this;
     }
 
     /**
      * 获取下载监听器
      */
-    public OnDownloadListener getOnDownloadListener() {
-        return onDownloadListener;
+    public List<OnDownloadListener> getOnDownloadListener() {
+        return onDownloadListeners;
     }
 
     /**

@@ -1,12 +1,9 @@
 package com.azhon.app;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -34,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     private NumberProgressBar progressBar;
     private DownloadManager manager;
-    private String url = "https://6be0527b4ce07d30a8260fe78599460c.dd.cdntips.com/imtt.dd.qq.com/16891/apk/4930D062BB950D0CB156EDA29DF813C0.apk?mkey=5d302acf7ae0dcd2&f=1026&fsname=com.ss.android.article.video_3.7.4_374.apk&csr=1bbd&cip=122.224.250.39&proto=https";
+    private String url = "https://f29addac654be01c67d351d1b4282d53.dd.cdntips.com/imtt.dd.qq.com/16891/DC501F04BBAA458C9DC33008EFED5E7F.apk?mkey=5d6d132d73c4febb&f=0c2f&fsname=com.estrongs.android.pop_4.2.0.2.1_10027.apk&csr=1bbd&cip=115.196.216.78&proto=https";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,10 +158,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     @Override
     public void downloading(int max, int progress) {
-        Message msg = new Message();
-        msg.arg1 = max;
-        msg.arg2 = progress;
-        handler.sendMessage(msg);
+        progressBar.setMax(max);
+        progressBar.setProgress(progress);
     }
 
     @Override
@@ -181,16 +176,6 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     public void error(Exception e) {
 
     }
-
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            progressBar.setMax(msg.arg1);
-            progressBar.setProgress(msg.arg2);
-        }
-    };
 
     @Override
     public void onButtonClick(int id) {
