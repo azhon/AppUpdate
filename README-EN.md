@@ -10,12 +10,9 @@
 
 ## Written in front
 
+#### [AppUpdate is collecting user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
 #### The library supports Chinese/English (other languages only need to take the same name in the corresponding `string.xml`)
-
-#### Internal dialog background image, button support customization
-
 #### To view the Log in the library, you only need to filter the `tag` at the beginning of `AppUpdate`
-
 #### **Focus：** If `downloadPath` is empty, the default is `getExternalCacheDir()` directory, and the [storage] permission will not be request!
 
 ## Table of Contents
