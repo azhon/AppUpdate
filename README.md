@@ -10,12 +10,9 @@
 
 ## 写在前面
 
+#### [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
 #### 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
-
-#### 内部对话框背景图片、按钮支持自定义了
-
 #### 查看版本中的Log只需要过滤`AppUpdate`开头的Tag
-
 #### **重点：** 如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录，同时不会申请[存储]权限！
 
 ## 目录
