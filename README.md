@@ -1,10 +1,9 @@
 ## [English Doc](https://github.com/azhon/AppUpdate/blob/master/README-EN.md)
 
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
-
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.3.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-2.4.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -39,7 +38,6 @@
 ### 功能介绍
 
 * [x] 支持AndroidX
-* [x] 支持断点下载
 * [x] 支持后台下载
 * [x] 支持自定义下载过程
 * [x] 支持 设备 >= Android M 动态权限的申请
@@ -99,13 +97,13 @@
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.3.0'
+implementation 'com.azhon:appupdate:2.4.0'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.3.0'
+implementation 'com.azhon:appupdateX:2.4.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -126,7 +124,7 @@ manager.setApkName("appupdate.apk")
 > 
 > android:authorities="${applicationId}"
 
-```java
+```xml
 <provider
     android:name="android.support.v4.content.FileProvider"
     android:authorities="${applicationId}"
@@ -140,7 +138,7 @@ manager.setApkName("appupdate.apk")
 
 - 如果你引入的是`appupdateX`版本
 
-  ```java
+  ```xml
   <provider
       android:name="androidx.core.content.FileProvider"
       android:authorities="${applicationId}"
@@ -154,7 +152,7 @@ manager.setApkName("appupdate.apk")
 
 #### 第四步：资源文件`res/xml/file_paths_public.xml`内容
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <external-path
@@ -168,7 +166,7 @@ manager.setApkName("appupdate.apk")
 
 #### 第五步：取消下载，取消下载后继续下载请参照文档第二步*
 
-```
+```java
 private DownloadManager manager;
 //取消下载
 manager.cancel();
@@ -176,14 +174,14 @@ manager.cancel();
 
 #### 第六步：混淆打包，只需保持`Activity`、`Service`不混淆
 
-```
+```groovy
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Service
 ```
 
 #### 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
 
-```
+```java
 //旧版本apk的文件保存地址
 boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
 ```
@@ -192,7 +190,7 @@ boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appup
 * 温馨提示：升级对话框中的内容是可以上下滑动的哦！
 * 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager` 并使用listener更新进度
 
-```
+```java
 public class MyDownload extends BaseHttpDownloadManager {}
 ```
 
@@ -202,10 +200,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.3.0
-  * 优化DownloadManager.getInstance()空指针问题
-  * 移除断点下载逻辑，全部使用全量下载。
-  * 解决强制更新下载失败，内置对话框无法关闭bug
+* v2.4.0
+  * 优化下载监听回调执行在主线程中
+  * 解决强制更新状态下去安装，用户取消安装Dialog无法继续安装bug
 
 #### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
