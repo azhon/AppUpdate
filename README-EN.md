@@ -1,10 +1,9 @@
 ## [中文 文档](https://github.com/azhon/AppUpdate/blob/master/README.md)
 
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
-
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.3.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-2.4.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -39,7 +38,6 @@
 ### Function introduction
 
 * [x] Support AndroidX
-* [x] Support breakpoint download
 * [x] Support background download
 * [x] Support for custom download process
 * [x] Support Device >= Android M Dynamic Access Request
@@ -99,13 +97,13 @@
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.3.0'
+implementation 'com.azhon:appupdate:2.4.0'
 ```
 
 - If you are using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.3.0'
+implementation 'com.azhon:appupdateX:2.4.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -126,7 +124,7 @@ manager.setApkName("appupdate.apk")
 > 
 > android:authorities="${applicationId}"
 
-```java
+```xml
 <provider
     android:name="android.support.v4.content.FileProvider"
     android:authorities="${applicationId}"
@@ -140,7 +138,7 @@ manager.setApkName("appupdate.apk")
 
 - If you implementation the `appupdateX` version
 
-  ```java
+  ```xml
   <provider
       android:name="androidx.core.content.FileProvider"
       android:authorities="${applicationId}"
@@ -154,7 +152,7 @@ manager.setApkName("appupdate.apk")
 
 #### Step4：Resource file `res/xml/file_paths_public.xml` content
 
-```java
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <external-path
@@ -176,14 +174,14 @@ manager.cancel();
 
 #### Step6：ProGuard Rules
 
-```
+```groovy
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Service
 ```
 
 #### Download completed Delete old APK file after opening new version
 
-```
+```java
 //Old version apk file save address
 boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
 ```
@@ -192,7 +190,7 @@ boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appup
 * Tips: The contents of the upgrade dialog can be swiped up and down！
 * If you need to implement your own set of download process, you only need to `extends` `BaseHttpDownloadManager` and update the progress with listener.
 
-```
+```java
 public class MyDownload extends BaseHttpDownloadManager {}
 ```
 
@@ -202,10 +200,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.3.0
-  * Optimize the DownloadManager.getInstance() null pointer problem
-  * Remove the breakpoint download, using full downloads.
-  * Resolve forced update download failed, built-in dialog cannot close bug
+* v2.4.0
+  * Optimize the download listener callback execution in the main thread
+  * Resolve the forced update status and install, the user cancels the installation Dialog and cannot continue to install the bug
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
