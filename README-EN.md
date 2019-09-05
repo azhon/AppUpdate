@@ -8,21 +8,17 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-## Written in front
-
-#### [AppUpdate is collecting user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
-#### The library supports Chinese/English (other languages only need to take the same name in the corresponding `string.xml`)
-#### To view the Log in the library, you only need to filter the `tag` at the beginning of `AppUpdate`
-#### **Focus：** If `downloadPath` is empty, the default is `getExternalCacheDir()` directory, and the [storage] permission will not be request!
+#### [AppUpdate is collecting frame user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
 
 ## Table of Contents
 
 * Rendering
 * Function introduction
+* Demo download experience
 * DownloadManager
 * UpdateConfiguration
 * Steps for usage
-* Demo download experience
+* Skills
 * Version update record
 * End
 
@@ -35,7 +31,6 @@
 ### Function introduction
 
 * [x] Support AndroidX
-* [x] Support background download
 * [x] Support for custom download process
 * [x] Support Device >= Android M Dynamic Access Request
 * [x] Support notification progress display (or custom display progress)
@@ -48,7 +43,7 @@
 * [x] Support download completion Delete old APK file after opening new version
 * [x] Download using HttpURLConnection, no other third-party framework is integrated
 
-### More detailed documentation see here[《AppUpdate API Doc》](http://azhon.github.io/AppUpdate/index.html)
+### [Demo download experience](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
 
 ### DownloadManager：Configuration Doc
 
@@ -87,7 +82,6 @@
 | dialogButtonColor     | The color of the dialog button                                                          | -1                         |
 | dialogButtonTextColor | The text color of the dialog button                                                     | -1                         |
 
-#### All versions：[Click to view](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
 ### Steps for usage
 
@@ -161,39 +155,31 @@ manager.setApkName("appupdate.apk")
 </paths>
 ```
 
-#### Step5：Cancel the download, cancel the download and continue downloading. Please refer to the `Step2` of the document
-
-```java
-private DownloadManager manager;
-//cancle download
-manager.cancel();
-```
-
-#### Step6：ProGuard Rules
+#### Step5：ProGuard Rules
 
 ```groovy
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Service
 ```
 
-#### Download completed Delete old APK file after opening new version
+### Skills
+
+* Internal support Chinese / English (other languages only need to take the same name in the corresponding `string.xml`
+* To view the Log, you only need to filter the Tag at the beginning of `AppUpdate`
+* If `downloadPath` is not set, the default is the `getExternalCacheDir()` directory and will not apply for [storage] permissions.
+* Download completed Delete old APK file after opening new version
 
 ```java
-//Old version apk file save address
+//Old version apk file save path
 boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
 ```
 
-* Compatible with Android O and above, you need to set `NotificationChannel`; the library has been written to go to view[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
 * Tips: The contents of the upgrade dialog can be swiped up and down！
 * If you need to implement your own set of download process, you only need to `extends` `BaseHttpDownloadManager` and update the progress with listener.
 
 ```java
 public class MyDownload extends BaseHttpDownloadManager {}
 ```
-
-### Demo download experience
-
- [Click to download Demo to experience](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
 
 ### Version update record
 
