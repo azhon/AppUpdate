@@ -8,21 +8,17 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-## 写在前面
-
 #### [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
-#### 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
-#### 查看版本中的Log只需要过滤`AppUpdate`开头的Tag
-#### **重点：** 如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录，同时不会申请[存储]权限！
 
 ## 目录
 
 * [效果图](#效果图)
 * [功能介绍](#功能介绍)
+* [Demo下载体验](#demo下载体验)
 * [DownloadManager](#downloadmanager配置文档)
 * [UpdateConfiguration](#updateconfiguration配置文档)
 * [使用步骤](#使用步骤)
-* [Demo下载体验](#demo下载体验)
+* [使用技巧](#使用技巧)
 * [版本更新记录](#版本更新记录)
 * [结语](#结语)
 
@@ -48,7 +44,9 @@
 * [x] 支持下载完成 打开新版本后删除旧安装包文件
 * [x] 使用HttpURLConnection下载，未集成其他第三方框架
 
-### 更加详细的文档参阅此处[《AppUpdate API文档》](http://azhon.github.io/AppUpdate/index.html)
+### Demo下载体验
+
+ [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
 
 ### DownloadManager：配置文档
 
@@ -86,8 +84,6 @@
 | dialogImage           | 对话框背景图片资源(图片规范参考demo) | -1     |
 | dialogButtonColor     | 对话框按钮的颜色              | -1     |
 | dialogButtonTextColor | 对话框按钮的文字颜色            | -1     |
-
-#### 所有版本：[点击查看](https://dl.bintray.com/azhon/azhon/com/azhon/appupdate/)
 
 ### 使用步骤
 
@@ -161,29 +157,25 @@ manager.setApkName("appupdate.apk")
 </paths>
 ```
 
-#### 第五步：取消下载，取消下载后继续下载请参照文档第二步*
-
-```java
-private DownloadManager manager;
-//取消下载
-manager.cancel();
-```
-
-#### 第六步：混淆打包，只需保持`Activity`、`Service`不混淆
+#### 第五步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Service
 ```
 
-#### 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
+### 使用技巧
+
+* 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
+* 查看版本库中的Log只需要过滤`AppUpdate`开头的Tag
+* 如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录同时不会申请[存储]权限！
+* 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
 
 ```java
 //旧版本apk的文件保存地址
 boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
 ```
 
-* 兼容Android O及以上版本，需要设置`NotificationChannel(通知渠道)`；库中已经写好可以前往查阅[NotificationUtil.java](https://github.com/azhon/AppUpdate/blob/master/appupdate/src/main/java/com/azhon/appupdate/utils/NotificationUtil.java)
 * 温馨提示：升级对话框中的内容是可以上下滑动的哦！
 * 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager` 并使用listener更新进度
 
@@ -191,17 +183,15 @@ boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appup
 public class MyDownload extends BaseHttpDownloadManager {}
 ```
 
-### Demo下载体验
-
- [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
 
 ### 版本更新记录
 
 * v2.4.0
+
   * 优化下载监听回调执行在主线程中
   * 解决强制更新状态下去安装，用户取消安装Dialog无法继续安装bug
 
-#### [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
+* [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
 ### 结语
 
