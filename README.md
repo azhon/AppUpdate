@@ -195,7 +195,18 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 哪些App正在使用
 
-<img src=""http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/00d2e4e2668ac84d7fb7d0ef130f15aec9d4202bc>
+<table cellspacing="8" >
+  <tr>
+    <td></td>
+    <td><a href="http://app.mi.com/details?id=com.xy.xydoctor"><img src="http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/00d2e4e2668ac84d7fb7d0ef130f15aec9d4202bc" width="100"></a></td>
+    <td><a href="http://app.mi.com/details?id=com.vice.bloodpressure"><img src="http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/019b1555a24c734ce9c12843ef137edc01f43ec8e" width="100"></a></td>
+  </tr>
+    <tr>
+    <th>易果无忧</th>
+    <th>慧健康</th>
+    <th>慧健康医生版</th>
+  </tr>
+</table>
 
 ### 结语
 
