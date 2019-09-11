@@ -20,6 +20,7 @@
 * [使用步骤](#使用步骤)
 * [使用技巧](#使用技巧)
 * [版本更新记录](#版本更新记录)
+* [哪些App正在使用](哪些App正在使用)
 * [结语](#结语)
 
 ### 效果图
@@ -183,7 +184,6 @@ boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appup
 public class MyDownload extends BaseHttpDownloadManager {}
 ```
 
-
 ### 版本更新记录
 
 * v2.4.0
@@ -192,6 +192,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
   * 解决强制更新状态下去安装，用户取消安装Dialog无法继续安装bug
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
+
+### 哪些App正在使用
+
+<img src=""http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/00d2e4e2668ac84d7fb7d0ef130f15aec9d4202bc>
 
 ### 结语
 
