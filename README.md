@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-#### [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
+## [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
 
 ## 目录
 
