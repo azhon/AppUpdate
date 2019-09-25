@@ -1,4 +1,4 @@
-## [English Doc](https://github.com/azhon/AppUpdate/blob/master/README-EN.md)
+﻿## [English Doc](https://github.com/azhon/AppUpdate/blob/master/README-EN.md)
 
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
@@ -9,6 +9,10 @@
 </p>
 
 ## [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
+
+## 扫码加入QQ群
+
+<img src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 
 ## 目录
 
@@ -21,7 +25,6 @@
 * [使用技巧](#使用技巧)
 * [版本更新记录](#版本更新记录)
 * [哪些App正在使用](#哪些App正在使用)
-* [结语](#结语)
 
 ### 效果图
 
@@ -208,8 +211,3 @@ public class MyDownload extends BaseHttpDownloadManager {}
   </tr>
 </table>
 
-### 结语
-
-* 欢迎大家加入《通往Android的神奇之旅》群号码：555974449
-* 如果大家在使用的过程中有什么问题，欢迎提Issues告知。
-* 如果大家有什么好的建议或者需求，也可以提Issues或者发送邮件至：958460248@qq.com˛
