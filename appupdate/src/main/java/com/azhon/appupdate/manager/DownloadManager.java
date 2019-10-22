@@ -82,6 +82,10 @@ public class DownloadManager {
      */
     private String authorities = "";
     /**
+     * 新安装包md5文件校验（32位)，校验重复下载
+     */
+    private String apkMD5 = "";
+    /**
      * 当前下载状态
      */
     private boolean state = false;
@@ -288,6 +292,21 @@ public class DownloadManager {
     public DownloadManager setAuthorities(String authorities) {
         this.authorities = authorities;
         return this;
+    }
+
+    /**
+     * 新安装包md5文件校验
+     */
+    public DownloadManager setApkMD5(String apkMD5) {
+        this.apkMD5 = apkMD5;
+        return this;
+    }
+
+    /**
+     * 新安装包md5文件校验
+     */
+    public String getApkMD5() {
+        return apkMD5;
     }
 
     /**

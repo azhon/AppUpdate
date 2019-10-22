@@ -88,7 +88,27 @@ public final class DownloadService extends Service implements OnDownloadListener
         //获取app通知开关是否打开
         boolean enable = NotificationUtil.notificationEnable(this);
         LogUtil.d(TAG, enable ? "应用的通知栏开关状态：已打开" : "应用的通知栏开关状态：已关闭");
-        download(configuration);
+        if (checkApkMD5()) {
+            LogUtil.d(TAG, "文件已经存在直接进行安装");
+            //直接调用完成监听即可
+            done(FileUtil.createFile(downloadPath, apkName));
+        } else {
+            LogUtil.d(TAG, "文件不存在开始下载");
+            download(configuration);
+        }
+    }
+
+    /**
+     * 校验Apk是否已经下载好了，不重复下载
+     *
+     * @return 是否下载完成
+     */
+    private boolean checkApkMD5() {
+        if (FileUtil.fileExists(downloadPath, apkName)) {
+            String fileMD5 = FileUtil.getFileMD5(FileUtil.createFile(downloadPath, apkName));
+            return fileMD5.equalsIgnoreCase(downloadManager.getApkMD5());
+        }
+        return false;
     }
 
     /**
