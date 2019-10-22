@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -72,7 +73,7 @@ public final class NotificationUtil {
         }
         NotificationCompat.Builder builder = builderNotification(context, icon, title, content)
                 .setDefaults(Notification.DEFAULT_SOUND);
-        manager.notify(DownloadManager.getInstance().getConfiguration().getNotifyId(), builder.build());
+        manager.notify(requireManagerNotNull().getNotifyId(), builder.build());
     }
 
     /**
@@ -90,7 +91,7 @@ public final class NotificationUtil {
                 //indeterminate:true表示不确定进度，false表示确定进度
                 //当下载进度没有获取到content-length时，使用不确定进度条
                 .setProgress(max, progress, max == -1);
-        manager.notify(DownloadManager.getInstance().getConfiguration().getNotifyId(), builder.build());
+        manager.notify(requireManagerNotNull().getNotifyId(), builder.build());
     }
 
     /**
@@ -107,7 +108,7 @@ public final class NotificationUtil {
                                             String authorities, File apk) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //不知道为什么需要先取消之前的进度通知，才能显示完成的通知。
-        manager.cancel(DownloadManager.getInstance().getConfiguration().getNotifyId());
+        manager.cancel(requireManagerNotNull().getNotifyId());
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setAction(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -125,7 +126,7 @@ public final class NotificationUtil {
                 .setContentIntent(pi);
         Notification notification = builder.build();
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
-        manager.notify(DownloadManager.getInstance().getConfiguration().getNotifyId(), notification);
+        manager.notify(requireManagerNotNull().getNotifyId(), notification);
     }
 
     /**
@@ -148,7 +149,7 @@ public final class NotificationUtil {
                 .setOngoing(false)
                 .setContentIntent(pi)
                 .setDefaults(Notification.DEFAULT_SOUND);
-        manager.notify(DownloadManager.getInstance().getConfiguration().getNotifyId(), builder.build());
+        manager.notify(requireManagerNotNull().getNotifyId(), builder.build());
     }
 
     /**
@@ -158,7 +159,7 @@ public final class NotificationUtil {
      */
     public static void cancelNotification(Context context) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.cancel(DownloadManager.getInstance().getConfiguration().getNotifyId());
+        manager.cancel(requireManagerNotNull().getNotifyId());
     }
 
     /**
@@ -176,14 +177,8 @@ public final class NotificationUtil {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static void afterO(NotificationManager manager) {
-        NotificationChannel channel;
-        UpdateConfiguration config = DownloadManager.getInstance().getConfiguration();
-        if (config != null) {
-            channel = config.getNotificationChannel();
-        } else {
-            //用户没有设置
-            channel = null;
-        }
+        UpdateConfiguration config = requireManagerNotNull();
+        NotificationChannel channel = config.getNotificationChannel();
         //如果用户没有设置
         if (channel == null) {
             //IMPORTANCE_LOW：默认关闭声音与震动、IMPORTANCE_DEFAULT：开启声音与震动
@@ -206,7 +201,7 @@ public final class NotificationUtil {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static String getNotificationChannelId() {
-        NotificationChannel channel = DownloadManager.getInstance().getConfiguration().getNotificationChannel();
+        NotificationChannel channel = requireManagerNotNull().getNotificationChannel();
         if (channel == null) {
             return Constant.DEFAULT_CHANNEL_ID;
         }
@@ -215,5 +210,13 @@ public final class NotificationUtil {
             return Constant.DEFAULT_CHANNEL_ID;
         }
         return channelId;
+    }
+
+    @NonNull
+    private static UpdateConfiguration requireManagerNotNull() {
+        if (DownloadManager.getInstance() == null) {
+            return new UpdateConfiguration();
+        }
+        return DownloadManager.getInstance().getConfiguration();
     }
 }
