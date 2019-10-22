@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                             e.printStackTrace();
                         }
                         manager = DownloadManager.getInstance(MainActivity.this);
-                        manager.setApkName("QQ.apk")
+                        manager.setApkName("ESFileExplorer.apk")
                                 .setApkUrl(url)
                                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
             e.printStackTrace();
         }
         manager = DownloadManager.getInstance(MainActivity.this);
-        manager.setApkName("QQ.apk")
+        manager.setApkName("ESFileExplorer.apk")
                 .setApkUrl(url)
                 .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setOnDownloadListener(this);
 
         manager = DownloadManager.getInstance(this);
-        manager.setApkName("QQ.apk")
+        manager.setApkName("ESFileExplorer.apk")
                 .setApkUrl(url)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowNewerToast(true)
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setApkSize("20.4")
                 .setAuthorities(getPackageName())
                 .setApkDescription(getString(R.string.dialog_msg))
+                .setApkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
                 .download();
     }
 
