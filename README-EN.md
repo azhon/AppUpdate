@@ -63,6 +63,7 @@
 | apkDescription | Update description                                                                                                           | null                  | false       |
 | apkSize        | New version of the apk size (unit M)                                                                                         | null                  | false       |
 | authorities    | Support Android N uri license                                                                                                | package Name          | false       |
+| apkMD5         | Md5 (32 bit) of the new apk                                                                                                  | null                  | false       |
 
 ### UpdateConfiguration：Configuration Doc
 
@@ -82,19 +83,18 @@
 | dialogButtonColor     | The color of the dialog button                                                          | -1                         |
 | dialogButtonTextColor | The text color of the dialog button                                                     | -1                         |
 
-
 ### Steps for usage
 
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.4.0'
+implementation 'com.azhon:appupdate:2.5.0'
 ```
 
 - If you are using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.4.0'
+implementation 'com.azhon:appupdateX:2.5.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -183,9 +183,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.4.0
-  * Optimize the download listener callback execution in the main thread
-  * Resolve the forced update status and install, the user cancels the installation Dialog and cannot continue to install the bug
+* v2.5.0
+  * Added apk download MD5 check to prevent repeated downloads
+  * Optimize NotificationUtil NullPointerException bug
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
