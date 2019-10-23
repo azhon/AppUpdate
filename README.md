@@ -70,6 +70,7 @@
 | apkDescription | 更新描述                                                      | null                  | false  |
 | apkSize        | 新版本的安装包大小（单位M）                                            | null                  | false  |
 | authorities    | 兼容Android N uri授权                                         | 应用包名                  | false  |
+| apkMD5         | 新安装包的md5（32位)                                             | null                  | false  |
 
 ### UpdateConfiguration：配置文档
 
@@ -94,13 +95,13 @@
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.4.0'
+implementation 'com.azhon:appupdate:2.5.0'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.4.0'
+implementation 'com.azhon:appupdateX:2.5.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -189,10 +190,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.4.0
+* v2.5.0
 
-  * 优化下载监听回调执行在主线程中
-  * 解决强制更新状态下去安装，用户取消安装Dialog无法继续安装bug
+  * 新增加apk下载MD5校验防止重复下载
+  * 优化NotificationUtil偶现空指针问题
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
@@ -210,4 +211,3 @@ public class MyDownload extends BaseHttpDownloadManager {}
     <th>慧健康医生版</th>
   </tr>
 </table>
-
