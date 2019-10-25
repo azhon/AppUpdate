@@ -166,12 +166,11 @@ public final class DownloadService extends Service implements OnDownloadListener
             String clickHint = getResources().getString(R.string.click_hint);
             NotificationUtil.showDoneNotification(this, smallIcon, downloadCompleted, clickHint, authorities, apk);
         }
-        //如果用户设置了回调 则先处理用户的事件 在执行自己的
-        handler.obtainMessage(3, apk).sendToTarget();
         if (jumpInstallPage) {
             ApkUtil.installApk(this, authorities, apk);
         }
-        releaseResources();
+        //如果用户设置了回调 则先处理用户的事件 在执行自己的
+        handler.obtainMessage(3, apk).sendToTarget();
     }
 
     @Override
@@ -223,6 +222,8 @@ public final class DownloadService extends Service implements OnDownloadListener
                     for (OnDownloadListener listener : listeners) {
                         listener.done((File) msg.obj);
                     }
+                    //执行了完成开始释放资源
+                    releaseResources();
                     break;
                 case 4:
                     for (OnDownloadListener listener : listeners) {
