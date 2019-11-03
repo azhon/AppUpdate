@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.4.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-2.5.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -37,7 +37,7 @@
 * [x] Support Android N
 * [x] Support Android O
 * [x] Support Android P
-- [x] Support Android Q
+* [x] Support Android Q
 * [x] Support Chinese/English 
 * [x] Support for custom built-in dialog styles
 * [x] Support for canceling the download (if the notification bar message is sent, it will be removed)
