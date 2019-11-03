@@ -42,6 +42,7 @@
 * [x] 支持Android N
 * [x] 支持Android O
 * [x] 支持Android P
+- [x] 支持Android Q
 * [x] 支持中/英文双语
 * [x] 支持自定内置对话框的样式
 * [x] 支持取消下载(如果发送了通知栏消息，则会移除)

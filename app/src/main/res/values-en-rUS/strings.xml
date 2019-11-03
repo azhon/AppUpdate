@@ -2,7 +2,7 @@
     <string name="app_name">AppUpdate</string>
     <string name="app_title">A simple version update library</string>
     <string name="dialog_title">New version</string>
-    <string name="dialog_msg">1.Support breakpoint download\n2.Support Android N\n3.Support Android O\n4.Support Android P\n5.Support for custom download process\n6.Support SDK_INT>=M permission request\n7.Support notification bar progress</string>
+    <string name="dialog_msg">1.Support breakpoint download\n2.Support Android N\n3.Support Android O\n4.Support Android P\n5.Support Android Q\n6.Support for custom download process\n7.Support SDK_INT>=M permission request\n8.Support notification bar progress</string>
     <string name="dialog_confirm">Upgrade</string>
     <string name="layout_msg">Instructions for use: Three ways can not be parallel\nPlease wait for one way to download completed in other ways</string>
     <string name="layout_custom_dialog">Use your own dialog</string>

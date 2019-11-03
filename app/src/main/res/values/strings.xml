@@ -2,7 +2,7 @@
     <string name="app_name">版本更新</string>
     <string name="app_title">一个简单好用的版本更新库</string>
     <string name="dialog_title">发现新版本</string>
-    <string name="dialog_msg">1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持Android P\n5.支持自定义下载过程\n6.支持 设备>=Android M 动态权限的申请\n7.支持通知栏进度条展示</string>
+    <string name="dialog_msg">1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持Android P\n5.支持Android Q\n6.支持自定义下载过程\n7.支持 设备>=Android M 动态权限的申请\n8.支持通知栏进度条展示</string>
     <string name="dialog_confirm">升级</string>
     <string name="layout_msg">使用说明：三个方式不能并行 请等待一个方式下载完成在使用其他方式</string>
     <string name="layout_custom_dialog">使用自己的对话框更新</string>
