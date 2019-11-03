@@ -37,6 +37,7 @@
 * [x] Support Android N
 * [x] Support Android O
 * [x] Support Android P
+- [x] Support Android Q
 * [x] Support Chinese/English 
 * [x] Support for custom built-in dialog styles
 * [x] Support for canceling the download (if the notification bar message is sent, it will be removed)
