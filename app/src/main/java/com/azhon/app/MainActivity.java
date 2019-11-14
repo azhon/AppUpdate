@@ -76,12 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            DownloadManager.getInstance().release();
-                            progressBar.setProgress(0);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        progressBar.setProgress(0);
                         manager = DownloadManager.getInstance(MainActivity.this);
                         manager.setApkName("ESFileExplorer.apk")
                                 .setApkUrl(url)
@@ -93,12 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
     }
 
     private void startUpdate2() {
-        try {
-            DownloadManager.getInstance().release();
-            progressBar.setProgress(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        progressBar.setProgress(0);
         manager = DownloadManager.getInstance(MainActivity.this);
         manager.setApkName("ESFileExplorer.apk")
                 .setApkUrl(url)
