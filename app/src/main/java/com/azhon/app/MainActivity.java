@@ -149,8 +149,9 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
 
     @Override
     public void downloading(int max, int progress) {
-        progressBar.setMax(max);
-        progressBar.setProgress(progress);
+        int curr = (int) (progress / (double) max * 100.0);
+        progressBar.setMax(100);
+        progressBar.setProgress(curr);
     }
 
     @Override
