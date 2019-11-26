@@ -121,7 +121,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                 LogUtil.d(TAG, "fullDownload: 当前地址是重定向Url，定向后的地址：" + apkUrl);
                 fullDownload();
             } else {
-                listener.error(new SocketTimeoutException("连接超时！"));
+                listener.error(new SocketTimeoutException("下载失败：Http ResponseCode = " + con.getResponseCode()));
             }
             con.disconnect();
         } catch (Exception e) {
