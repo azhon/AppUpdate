@@ -3,6 +3,7 @@ package com.azhon.appupdate.service;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -164,7 +165,9 @@ public final class DownloadService extends Service implements OnDownloadListener
     public void done(File apk) {
         LogUtil.d(TAG, "done: 文件已下载至" + apk.toString());
         downloadManager.setState(false);
-        if (showNotification) {
+        //如果是android q及其以上版本showNotification=false也会发送一个下载完成通知
+        boolean Q = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+        if (showNotification || Q) {
             String downloadCompleted = getResources().getString(R.string.download_completed);
             String clickHint = getResources().getString(R.string.click_hint);
             NotificationUtil.showDoneNotification(this, smallIcon, downloadCompleted, clickHint, authorities, apk);
