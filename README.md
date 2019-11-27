@@ -9,7 +9,7 @@
 </p>
 
 ### [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
-### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification设置，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
+### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 
 ## 扫码加入QQ群
 
