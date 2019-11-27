@@ -164,7 +164,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         LogUtil.d(TAG, "done: 文件已下载至" + apk.toString());
         downloadManager.setState(false);
         //如果是android Q（api=29）及其以上版本showNotification=false也会发送一个下载完成通知
-        if (showNotification || Build.VERSION.SDK_INT >= 29) {
+        if (showNotification || Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             String downloadCompleted = getResources().getString(R.string.download_completed);
             String clickHint = getResources().getString(R.string.click_hint);
             NotificationUtil.showDoneNotification(this, smallIcon, downloadCompleted, clickHint, authorities, apk);
