@@ -50,9 +50,10 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
     private DownloadManager manager;
     private boolean forcedUpgrade;
     private Button update;
+    private NumberProgressBar progressBar;
     private String downloadPath;
     private OnButtonClickListener buttonClickListener;
-    private int dialogImage, dialogButtonTextColor, dialogButtonColor;
+    private int dialogImage, dialogButtonTextColor, dialogButtonColor, dialogProgressBarColor;
     private File apk;
     private final int install = 0x45F;
 
@@ -75,6 +76,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
         dialogImage = configuration.getDialogImage();
         dialogButtonTextColor = configuration.getDialogButtonTextColor();
         dialogButtonColor = configuration.getDialogButtonColor();
+        dialogProgressBarColor = configuration.getDialogProgressBarColor();
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_update, null);
         setContentView(view);
         setWindowSize(context);
@@ -87,6 +89,8 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
         TextView title = view.findViewById(R.id.tv_title);
         TextView size = view.findViewById(R.id.tv_size);
         TextView description = view.findViewById(R.id.tv_description);
+        progressBar = view.findViewById(R.id.np_bar);
+        progressBar.setVisibility(forcedUpgrade ? View.VISIBLE : View.GONE);
         update = view.findViewById(R.id.btn_update);
         update.setTag(0);
         View line = view.findViewById(R.id.line);
@@ -107,6 +111,10 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
             drawable.addState(new int[]{android.R.attr.state_pressed}, colorDrawable);
             drawable.addState(new int[]{}, colorDrawable);
             update.setBackgroundDrawable(drawable);
+        }
+        if (dialogProgressBarColor != -1) {
+            progressBar.setReachedBarColor(dialogProgressBarColor);
+            progressBar.setProgressTextColor(dialogProgressBarColor);
         }
         //强制升级
         if (forcedUpgrade) {
@@ -199,7 +207,10 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
 
     @Override
     public void downloading(int max, int progress) {
-
+        if (max != -1 && progressBar.getVisibility() == View.VISIBLE) {
+            int curr = (int) (progress / (double) max * 100.0);
+            progressBar.setProgress(curr);
+        }
     }
 
     @Override

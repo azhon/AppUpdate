@@ -58,6 +58,14 @@
                 tools:text="" />
         </ScrollView>
 
+        <com.azhon.appupdate.dialog.NumberProgressBar
+            android:id="@+id/np_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp" />
+
         <Button
             android:id="@+id/btn_update"
             android:layout_width="match_parent"
