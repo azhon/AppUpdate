@@ -23,4 +23,12 @@
         <!--背景变暗-->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    <!--进度条样式-->
+    <declare-styleable name="NumberProgressBar">
+        <attr name="progress_unreached_color" format="color" />
+        <attr name="progress_reached_color" format="color" />
+
+        <attr name="progress_text_size" format="dimension" />
+        <attr name="progress_text_color" format="color" />
+    </declare-styleable>
 </resources>

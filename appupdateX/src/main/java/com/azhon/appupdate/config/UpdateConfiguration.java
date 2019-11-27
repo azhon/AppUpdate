@@ -75,6 +75,10 @@ public class UpdateConfiguration {
      * 内置对话框按钮的文字颜色
      */
     private int dialogButtonTextColor = -1;
+    /**
+     * 内置对话框强制更新时进度条和文字的颜色
+     */
+    private int dialogProgressBarColor = -1;
 
     /**
      * 设置通知栏消息id
@@ -255,6 +259,21 @@ public class UpdateConfiguration {
      */
     public int getDialogButtonTextColor() {
         return dialogButtonTextColor;
+    }
+
+    /**
+     * 设置内置对话框强制更新时进度条和文字的颜色
+     */
+    public UpdateConfiguration setDialogProgressBarColor(int dialogProgressBarColor) {
+        this.dialogProgressBarColor = dialogProgressBarColor;
+        return this;
+    }
+
+    /**
+     * 获取内置对话框强制更新时进度条和文字的颜色
+     */
+    public int getDialogProgressBarColor() {
+        return dialogProgressBarColor;
     }
 
     /**
