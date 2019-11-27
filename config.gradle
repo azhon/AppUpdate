@@ -2,11 +2,11 @@ ext {
     compileSdkVersion = 29
     minSdkVersion = 15
     targetSdkVersion = 29
-    versionCode = 25
-    versionName = "2.5.0"
+    versionCode = 26
+    versionName = "2.6.0"
 
     //新版本描述信息
-    versionDesc = "1.新增加apk下载MD5校验防止重复下载。2.优化NotificationUtil偶现空指针问题"
+    versionDesc = "1.新增强制更新时内置对话框显示下载进度；2.优化Android Q下载完成无法弹出安装界面，显示一个完成通知；3.优化下载失败日志打印"
     //项目的主页
     siteUrl = "https://github.com/azhon/AppUpdate"
     //gitHub仓库的地址
