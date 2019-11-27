@@ -3,12 +3,13 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.5.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-2.6.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-#### [AppUpdate is collecting frame user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
+### [AppUpdate is collecting frame user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
+### [Since Android Q version restricts background apps from launching Activity, a notification will be sent to the notification bar when the download is complete (ignoring the showNotification value, you need to allow notifications to be sent)](https://developer.android.google.cn/guide/components/activities/background-starts)
 
 ## Table of Contents
 
@@ -83,19 +84,20 @@
 | dialogImage           | Dialog background image resource<br> (picture specification reference demo)             | -1                         |
 | dialogButtonColor     | The color of the dialog button                                                          | -1                         |
 | dialogButtonTextColor | The text color of the dialog button                                                     | -1                         |
+| dialogProgressBarColor | Dialog progress bar and text color                                                     | -1                         |
 
 ### Steps for usage
 
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.5.0'
+implementation 'com.azhon:appupdate:2.6.0'
 ```
 
-- If you are using `AndroidX`, please implementation `appupdateX`
+- If you using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.5.0'
+implementation 'com.azhon:appupdateX:2.6.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -184,9 +186,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.5.0
-  * Added apk download MD5 check to prevent repeated downloads
-  * Optimize NotificationUtil NullPointerException bug
+* v2.6.0
+  * Added dialog to show download progress during forced update
+  * Optimized the Android Q downloading completed can't jump to the installation page, display a completion notification
+  * Optimized download failure log printing
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 

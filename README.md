@@ -3,12 +3,13 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.5.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-2.6.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-## [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
+### [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
+### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification设置，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 
 ## 扫码加入QQ群
 
@@ -91,19 +92,20 @@
 | dialogImage           | 对话框背景图片资源(图片规范参考demo) | -1     |
 | dialogButtonColor     | 对话框按钮的颜色              | -1     |
 | dialogButtonTextColor | 对话框按钮的文字颜色            | -1     |
+| dialogProgressBarColor | 对话框进度条和文字颜色          | -1     |
 
 ### 使用步骤
 
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.5.0'
+implementation 'com.azhon:appupdate:2.6.0'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.5.0'
+implementation 'com.azhon:appupdateX:2.6.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -192,10 +194,11 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.5.0
+* v2.6.0
 
-  * 新增加apk下载MD5校验防止重复下载
-  * 优化NotificationUtil偶现空指针问题
+  * 新增强制更新时内置对话框显示下载进度
+  * 优化Android Q下载完成无法弹出安装界面，显示一个完成通知
+  * 优化下载失败日志打印
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
