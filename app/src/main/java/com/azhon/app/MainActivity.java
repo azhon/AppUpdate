@@ -10,10 +10,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.azhon.appupdate.config.UpdateConfiguration;
+import com.azhon.appupdate.dialog.NumberProgressBar;
 import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
-import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import java.io.File;
 
@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //.setDialogImage(R.drawable.ic_dialog)
                 //设置按钮的颜色
                 //.setDialogButtonColor(Color.parseColor("#E743DA"))
+                //设置对话框强制更新时进度条和文字的颜色
+                //.setDialogProgressBarColor(Color.parseColor("#E743DA"))
                 //设置按钮的文字颜色
                 .setDialogButtonTextColor(Color.WHITE)
                 //设置是否显示通知栏进度
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setApkSize("20.4")
                 .setAuthorities(getPackageName())
                 .setApkDescription(getString(R.string.dialog_msg))
-                .setApkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
+//                .setApkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
                 .download();
     }
 
