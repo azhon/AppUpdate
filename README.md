@@ -10,6 +10,7 @@
 
 ### [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
+### [由于Android Q版本限制应用访问外部存储目录（访问需要同时满足两个条件详情见文档）所以Q版本以上不要调用setDownloadPath()）](https://developer.android.google.cn/training/data-storage/files/external-scoped)
 
 ## 扫码加入QQ群
 

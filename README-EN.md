@@ -10,6 +10,7 @@
 
 ### [AppUpdate is collecting frame user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
 ### [Since Android Q version restricts background apps from launching Activity, a notification will be sent to the notification bar when the download is complete (ignoring the showNotification value, you need to allow notifications to be sent)](https://developer.android.google.cn/guide/components/activities/background-starts)
+### [Since Android Q version restricts access to external storage (access needs to meet two conditions at the same time, see the documentation for details), so don't setDownloadPath() above Q version](https://developer.android.google.cn/training/data-storage/files/external-scoped)
 
 ## Table of Contents
 
