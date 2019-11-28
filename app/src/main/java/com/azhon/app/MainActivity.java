@@ -3,7 +3,6 @@ package com.azhon.app;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +22,16 @@ import java.io.File;
  * 文件名:    MyDownload
  * 创建时间:  2018/1/27 on 19:25
  * 描述:     TODO 一个简单好用的版本更新库
+ * <p/>
+ * <div>
+ * 由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）
+ * <a href="https://developer.android.google.cn/guide/components/activities/background-starts"/>
+ * </div>
+ * <div>
+ * 由于Android Q版本限制应用访问外部存储目录（访问需要同时满足两个条件详情见文档）所以Q版本以上不要设置下载目录
+ * <a href="https://developer.android.google.cn/training/data-storage/files/external-scoped"/>
+ * </div>
+ * https://developer.android.google.cn/training/data-storage/files/external-scoped
  *
  * @author 阿钟
  */
@@ -80,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                         manager = DownloadManager.getInstance(MainActivity.this);
                         manager.setApkName("ESFileExplorer.apk")
                                 .setApkUrl(url)
-                                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                                 .setSmallIcon(R.mipmap.ic_launcher)
                                 .download();
                     }
@@ -92,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         manager = DownloadManager.getInstance(MainActivity.this);
         manager.setApkName("ESFileExplorer.apk")
                 .setApkUrl(url)
-                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .download();
     }
@@ -134,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowNewerToast(true)
                 .setConfiguration(configuration)
-//                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setApkVersionCode(2)
                 .setApkVersionName("2.1.8")
                 .setApkSize("20.4")
