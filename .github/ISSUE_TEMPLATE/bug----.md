@@ -1,38 +1,31 @@
 ---
 name: Bug提交模板
 about: Issues提交Bug模板
-title: ''
+title: BUG
 labels: bug
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Bug标题**
+清楚简明的描述你遇到的问题
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**AppUpdate参数设置**
+截图`DownloadManager`配置
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**复现步骤**
+1. 点击下载
+2. ......
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**错误Logcat日志截图**
+日志截图
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**软件版本信息**
+ - Android Studio：[eg：3.6]
+ - AppUpdate：[eg：2.6.0]
+ - 设备品牌：[eg：Google]
+ - 设备型号：[eg：Pixel 2]
+ - 设备系统版本：[eg：9.0]
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+**额外有用的信息**
+补充额外有用的信息
