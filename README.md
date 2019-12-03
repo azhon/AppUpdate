@@ -176,9 +176,10 @@ manager.setApkName("appupdate.apk")
 
 ### 使用技巧
 
-* 框架内部支持中/英文（其他语言只需要在对应的`string.xml`中取相同的名字即可）
+* 框架内部支持中/英文 国际化（其他语言只需要在对应的`string.xml`中取相同的名字即可）
 * 查看版本库中的Log只需要过滤`AppUpdate`开头的Tag
 * 如果没有设置`downloadPath`则默认为`getExternalCacheDir()`目录同时不会申请[存储]权限！
+* 支持校验安装包的MD5避免重复下载，只需要`DownloadManager`设置安装包的MD5即可
 * 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
 
 ```java
