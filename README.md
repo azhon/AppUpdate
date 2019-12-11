@@ -112,12 +112,11 @@ implementation 'com.azhon:appupdateX:2.6.0'
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
+//Context不能是ApplicationContext
 DownloadManager manager = DownloadManager.getInstance(this);
 manager.setApkName("appupdate.apk")
         .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
         .setSmallIcon(R.mipmap.ic_launcher)
-        //可设置，可不设置
-        .setConfiguration(configuration)
         .download();
 ```
 
@@ -217,10 +216,12 @@ public class MyDownload extends BaseHttpDownloadManager {}
     <td></td>
     <td><a href="http://app.mi.com/details?id=com.vice.bloodpressure"><img src="http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/00d2e4e2668ac84d7fb7d0ef130f15aec9d4202bc" width="100"></a></td>
     <td><a href="http://app.mi.com/details?id=com.xy.xydoctor"><img src="http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/019b1555a24c734ce9c12843ef137edc01f43ec8e" width="100"></a></td>
+    <td><a href="http://zhushou.360.cn/detail/index/soft_id/3994008?recrefer=SE_D_%E5%90%8E%E4%B9%90%E5%85%89%E4%BC%8F%E7%9B%91%E6%8E%A7"><img src="http://p16.qhimg.com/t01cce7a7c3e6b133b7.png" width="100"></a></td>
   </tr>
     <tr>
     <th>易果无忧</th>
     <th>慧健康</th>
     <th>慧健康医生版</th>
+    <th>后乐光伏监控</th>
   </tr>
 </table>
