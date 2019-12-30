@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.azhon.appupdate.R;
-import com.azhon.appupdate.activity.PermissionActivity;
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.dialog.UpdateDialog;
@@ -14,7 +13,6 @@ import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.LogUtil;
-import com.azhon.appupdate.utils.PermissionUtil;
 
 /**
  * 项目名:    AppUpdate
@@ -179,9 +177,11 @@ public class DownloadManager {
 
     /**
      * 设置apk的保存路径
+     * 由于Android Q版本限制应用访问外部存储目录，所以不再支持设置存储目录
+     * 使用的路径为:/storage/emulated/0/Android/data/ your packageName /cache
      */
+    @Deprecated
     public DownloadManager setDownloadPath(String downloadPath) {
-        this.downloadPath = downloadPath;
         return this;
     }
 
@@ -342,14 +342,6 @@ public class DownloadManager {
             return;
         }
         if (checkVersionCode()) {
-            //使用缓存目录不申请权限
-            if (!downloadPath.equals(context.getExternalCacheDir().getPath())) {
-                //检查权限
-                if (!PermissionUtil.checkStoragePermission(context)) {
-                    context.startActivity(new Intent(context, PermissionActivity.class));
-                    return;
-                }
-            }
             context.startService(new Intent(context, DownloadService.class));
         } else {
             //对版本进行判断，是否显示升级对话框
@@ -397,14 +389,7 @@ public class DownloadManager {
             LogUtil.e(TAG, "apkName must endsWith .apk!");
             return false;
         }
-        /*
-            这里需要注意，如果用户没有设置保存目录则使用缓存目录
-            路径为:/storage/emulated/0/Android/data/ your packageName /cache
-            如果使用的是缓存路径，则不申请内存权限
-         */
-        if (TextUtils.isEmpty(downloadPath)) {
-            downloadPath = context.getExternalCacheDir().getPath();
-        }
+        downloadPath = context.getExternalCacheDir().getPath();
         if (smallIcon == -1) {
             LogUtil.e(TAG, "smallIcon can not be empty!");
             return false;

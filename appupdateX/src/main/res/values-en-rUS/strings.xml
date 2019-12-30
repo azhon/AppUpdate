@@ -10,7 +10,6 @@
     <string name="error_config">Wrong project configuration</string>
     <string name="read_readme">Please refer to the third and fourth steps of the document!</string>
     <string name="background_downloading">Downloading new version in the background…</string>
-    <string name="permission_hint">Please allow access to [storage] permissions!</string>
     <string name="dialog_new">The new version v%s can be downloaded!</string>
     <string name="dialog_new_size">New version size：%sM</string>
     <string name="update">Update</string>

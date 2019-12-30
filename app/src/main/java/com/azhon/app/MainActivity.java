@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
         findViewById(R.id.btn_2).setOnClickListener(this);
         findViewById(R.id.btn_3).setOnClickListener(this);
         findViewById(R.id.btn_4).setOnClickListener(this);
-        //delete old apk file...
-//        boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
+        //删除旧安装包
+//        boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/ESFileExplorer.apk");
     }
 
     @Override
