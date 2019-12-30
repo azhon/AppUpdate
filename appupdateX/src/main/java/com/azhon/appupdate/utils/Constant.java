@@ -15,11 +15,7 @@ public final class Constant {
     /**
      * 网络连接超时时间
      */
-    public static final int HTTP_TIME_OUT = 5000;
-    /**
-     * 动态申请权限请求码
-     */
-    public static final int PERMISSION_REQUEST_CODE = 1997;
+    public static final int HTTP_TIME_OUT = 30_000;
     /**
      * Logcat日志输出Tag
      */

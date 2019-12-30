@@ -154,8 +154,9 @@ public final class DownloadService extends Service implements OnDownloadListener
             if (curr != lastProgress) {
                 lastProgress = curr;
                 String downloading = getResources().getString(R.string.start_downloading);
+                String content = curr < 0 ? "" : curr + "%";
                 NotificationUtil.showProgressNotification(this, smallIcon, downloading,
-                        curr + "%", max == -1 ? -1 : 100, curr);
+                        content, max == -1 ? -1 : 100, curr);
             }
         }
         handler.obtainMessage(2, max, progress).sendToTarget();
