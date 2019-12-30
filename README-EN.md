@@ -3,14 +3,14 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.6.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-2.7.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
 ### [AppUpdate is collecting frame user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
 ### [Since Android Q version restricts background apps from launching Activity, a notification will be sent to the notification bar when the download is complete (ignoring the showNotification value, you need to allow notifications to be sent)](https://developer.android.google.cn/guide/components/activities/background-starts)
-### [Since Android Q version restricts access to external storage (access needs to meet two conditions at the same time, see the documentation for details), so don't setDownloadPath() above Q version](https://developer.android.google.cn/training/data-storage/files/external-scoped)
+### [Since Android Q version restricts access to external storage，so removed setDownloadPath()](https://developer.android.google.cn/training/data-storage/files/external-scoped)
 
 ## Table of Contents
 
@@ -57,7 +57,7 @@
 | context        | Context                                                                                                                      | null                  | true        |
 | apkUrl         | Apk download Url                                                                                                             | null                  | true        |
 | apkName        | Apk download  name                                                                                                           | null                  | true        |
-| downloadPath   | apk download path                                                                                                            | getExternalCacheDir() | false       |
+| downloadPath   | apk download path(2.7.0 or higher is deprecated)                                                                             | getExternalCacheDir() | false       |
 | showNewerToast | Whether to prompt the user<br> "currently the latest version" toast                                                          | false                 | false       |
 | smallIcon      | Notification icon (resource id)                                                                                              | -1                    | true        |
 | configuration  | Additional configuration of this library                                                                                     | null                  | false       |
@@ -92,13 +92,13 @@
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.6.0'
+implementation 'com.azhon:appupdate:2.7.0'
 ```
 
 - If you using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.6.0'
+implementation 'com.azhon:appupdateX:2.7.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -170,7 +170,6 @@ manager.setApkName("appupdate.apk")
 
 * Internal support Chinese / English (other languages only need to take the same name in the corresponding `string.xml`
 * To view the Log, you only need to filter the Tag at the beginning of `AppUpdate`
-* If `downloadPath` is not set, the default is the `getExternalCacheDir()` directory and will not apply for [storage] permissions.
 * Download completed Delete old APK file after opening new version
 
 ```java
@@ -187,10 +186,12 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.6.0
-  * Added dialog to show download progress during forced update
-  * Optimized the Android Q downloading completed can't jump to the installation page, display a completion notification
-  * Optimized download failure log printing
+* v2.7.0（2019/12/30）
+
+  * Upgrade dialog hides progress bar when download progress Max equals -1
+  * When the download progress Max is equal to -1, the progress of the notification bar does not show the percentage
+  * Remove custom download directory and `[storage permission]` 
+  * Optimized network connection timeout time to 30 seconds
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
