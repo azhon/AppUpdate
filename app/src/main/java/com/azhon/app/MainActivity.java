@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .setApkVersionCode(2)
                 .setApkVersionName("2.1.8")
                 .setApkSize("20.4")
-                .setAuthorities(getPackageName())
                 .setApkDescription(getString(R.string.dialog_msg))
 //                .setApkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
                 .download();
