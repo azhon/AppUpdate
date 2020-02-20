@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt;
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
+import com.azhon.appupdate.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +36,6 @@ public class UpdateConfiguration {
      * 用户自定义的下载管理
      */
     private BaseHttpDownloadManager httpManager;
-    /**
-     * 是否需要日志输出（错误日志）
-     */
-    private boolean enableLog = true;
     /**
      * 是否需要显示通知栏进度
      */
@@ -115,15 +112,8 @@ public class UpdateConfiguration {
      * 设置是否输出日志信息
      */
     public UpdateConfiguration setEnableLog(boolean enableLog) {
-        this.enableLog = enableLog;
+        LogUtil.enable(enableLog);
         return this;
-    }
-
-    /**
-     * 是否输出日志信息
-     */
-    public boolean isEnableLog() {
-        return enableLog;
     }
 
     /**

@@ -2,8 +2,6 @@ package com.azhon.appupdate.utils;
 
 import android.util.Log;
 
-import com.azhon.appupdate.manager.DownloadManager;
-
 /**
  * 项目名:    AppUpdate
  * 包名       com.azhon.appupdate.utils
@@ -20,11 +18,12 @@ public final class LogUtil {
     /**
      * 日志开关
      */
-    private static boolean b;
+    private static boolean b = true;
 
-    static {
-        b = DownloadManager.getInstance().getConfiguration().isEnableLog();
+    public static void enable(boolean enable) {
+        b = enable;
     }
+
 
     /**
      * 输出Error信息
