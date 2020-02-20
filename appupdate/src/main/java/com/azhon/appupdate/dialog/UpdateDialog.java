@@ -25,6 +25,7 @@ import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.ApkUtil;
+import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.DensityUtil;
 import com.azhon.appupdate.utils.ScreenUtil;
 
@@ -179,12 +180,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
      * 强制更新，点击进行安装
      */
     private void installApk() {
-        String authorities = manager.getAuthorities();
-        //如果没有设置则为包名
-        if (TextUtils.isEmpty(authorities)) {
-            authorities = context.getPackageName();
-        }
-        ApkUtil.installApk(context, authorities, apk);
+        ApkUtil.installApk(context, Constant.AUTHORITIES, apk);
     }
 
     @Override

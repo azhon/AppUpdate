@@ -36,5 +36,8 @@ public final class Constant {
      * apk文件后缀
      */
     public static final String APK_SUFFIX = ".apk";
-
+    /**
+     * 兼容Android N Uri 授权
+     */
+    public static final String AUTHORITIES = "com.azhon.appupdate.fileProvider";
 }

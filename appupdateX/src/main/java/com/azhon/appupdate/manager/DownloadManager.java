@@ -76,10 +76,6 @@ public class DownloadManager {
      */
     private String apkSize = "";
     /**
-     * 兼容Android N 添加uri权限 authorities
-     */
-    private String authorities = "";
-    /**
      * 新安装包md5文件校验（32位)，校验重复下载
      */
     private String apkMD5 = "";
@@ -276,21 +272,6 @@ public class DownloadManager {
      */
     public DownloadManager setApkSize(String apkSize) {
         this.apkSize = apkSize;
-        return this;
-    }
-
-    /**
-     * 设置Android N Uri授权authorities
-     */
-    public String getAuthorities() {
-        return authorities;
-    }
-
-    /**
-     * 获取Android N Uri授权authorities
-     */
-    public DownloadManager setAuthorities(String authorities) {
-        this.authorities = authorities;
         return this;
     }
 

@@ -45,7 +45,6 @@ public final class DownloadService extends Service implements OnDownloadListener
     private String apkUrl;
     private String apkName;
     private String downloadPath;
-    private String authorities;
     private List<OnDownloadListener> listeners;
     private boolean showNotification;
     private boolean showBgdToast;
@@ -73,11 +72,6 @@ public final class DownloadService extends Service implements OnDownloadListener
         apkName = downloadManager.getApkName();
         downloadPath = downloadManager.getDownloadPath();
         smallIcon = downloadManager.getSmallIcon();
-        authorities = downloadManager.getAuthorities();
-        //如果没有设置则为包名
-        if (TextUtils.isEmpty(authorities)) {
-            authorities = getPackageName();
-        }
         //创建apk文件存储文件夹
         FileUtil.createDirDirectory(downloadPath);
 
@@ -170,10 +164,11 @@ public final class DownloadService extends Service implements OnDownloadListener
         if (showNotification || Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             String downloadCompleted = getResources().getString(R.string.download_completed);
             String clickHint = getResources().getString(R.string.click_hint);
-            NotificationUtil.showDoneNotification(this, smallIcon, downloadCompleted, clickHint, authorities, apk);
+            NotificationUtil.showDoneNotification(this, smallIcon, downloadCompleted,
+                    clickHint, Constant.AUTHORITIES, apk);
         }
         if (jumpInstallPage) {
-            ApkUtil.installApk(this, authorities, apk);
+            ApkUtil.installApk(this, Constant.AUTHORITIES, apk);
         }
         //如果用户设置了回调 则先处理用户的事件 在执行自己的
         handler.obtainMessage(3, apk).sendToTarget();
