@@ -18,6 +18,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //每个应用拥有不同的authorities，防止相同在同一个手机上无法同时安装
+        resValue "string", "authorities", applicationId
+
     }
     buildTypes {
         release {
