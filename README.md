@@ -69,11 +69,10 @@
 | showNewerToast | 是否提示用户 "当前已是最新版本"                                                           | false                 | false        |
 | smallIcon      | 通知栏的图标(资源id)                                                                      | -1                    | true         |
 | configuration  | 这个库的额外配置                                                                          | null                  | false        |
-| apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会进行版本判断<br>下面的属性也就需要设置了) | 1                     | false        |
+| apkVersionCode | 更新apk的versionCode <br>(如果设置了那么库中将会进行版本判断<br>下面的属性也就需要设置了)           | Integer.MIN_VALUE     | false        |
 | apkVersionName | 更新apk的versionName                                                                      | null                  | false        |
 | apkDescription | 更新描述                                                                                  | null                  | false        |
 | apkSize        | 新版本的安装包大小（单位M）                                                               | null                  | false        |
-| authorities    | 兼容Android N uri授权                                                                     | 应用包名              | false        |
 | apkMD5         | 新安装包的md5（32位)                                                                      | null                  | false        |
 
 ### UpdateConfiguration：配置文档
@@ -100,13 +99,13 @@
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.7.0'
+implementation 'com.azhon:appupdate:2.8.0'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.7.0'
+implementation 'com.azhon:appupdateX:2.8.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -119,53 +118,7 @@ manager.setApkName("appupdate.apk")
         .download();
 ```
 
-#### 第三步：兼容Android N 及以上版本，在你应用的`Manifest.xml`添加如下代码
-
-> provider中设置的authorities值必须与DownloadManager中设置的authorities一致（不设置则为应用包名）
-> 
-> android:authorities="${applicationId}"
-
-```xml
-<provider
-    android:name="android.support.v4.content.FileProvider"
-    android:authorities="${applicationId}"
-    android:exported="false"
-    android:grantUriPermissions="true">
-    <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_paths_public" />
-</provider>
-```
-
-- 如果你引入的是`appupdateX`版本
-
-  ```xml
-  <provider
-      android:name="androidx.core.content.FileProvider"
-      android:authorities="${applicationId}"
-      android:exported="false"
-      android:grantUriPermissions="true">
-      <meta-data
-          android:name="android.support.FILE_PROVIDER_PATHS"
-          android:resource="@xml/file_paths_public" />
-  </provider>
-  ```
-
-#### 第四步：资源文件`res/xml/file_paths_public.xml`内容
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <external-path
-        name="app_update_external"
-        path="/" />
-    <external-cache-path
-        name="app_update_cache"
-        path="/" />
-</paths>
-```
-
-#### 第五步：混淆打包，只需保持`Activity`、`Service`不混淆
+#### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy
 -keep public class * extends android.app.Activity
@@ -193,12 +146,11 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.7.0（2019/12/30）
+* v2.8.0（2020/02/21）
 
-  * [修复] 升级对话框当下载进度Max等于-1时，隐藏进度条
-  * [修复] 当下载进度Max等于-1时通知栏进度不显示百分比
-  * [优化] 移除自定义下载目录和`[存储权限]`申请代码
-  * [优化] 网络连接超时时间为30秒
+  * [修复] LogUtil偶现空指针问题
+  * [优化] FileProvider改为框架内置，用户无需手动配置
+  * [优化] apkVersionCode的判断
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
