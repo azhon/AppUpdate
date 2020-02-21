@@ -376,6 +376,8 @@ public class DownloadManager {
             LogUtil.e(TAG, "smallIcon can not be empty!");
             return false;
         }
+        //加载用户设置的authorities
+        Constant.AUTHORITIES = context.getString(R.string.authorities);
         //如果用户没有进行配置，则使用默认的配置
         if (configuration == null) {
             configuration = new UpdateConfiguration();
