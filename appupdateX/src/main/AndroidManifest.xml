@@ -8,7 +8,7 @@
         <service android:name=".service.DownloadService" />
         <provider
             android:name="com.azhon.appupdate.config.AppUpdateFileProvider"
-            android:authorities="com.azhon.appupdate.fileProvider"
+            android:authorities="@string/authorities"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
