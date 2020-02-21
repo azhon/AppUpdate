@@ -112,7 +112,17 @@ manager.setApkName("appupdate.apk")
         .download();
 ```
 
-#### Step3：ProGuard Rules
+#### Step3：Compatible with Android N and above，Add the following code to your app's `build.gradle`
+
+```java
+defaultConfig {
+
+    //Each application has different authorities, preventing the same cannot be installed on the same phone at the same time
+    resValue "string", "authorities", applicationId
+}
+```
+
+#### Step4：ProGuard Rules
 
 ```groovy
 -keep public class * extends android.app.Activity
