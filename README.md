@@ -107,18 +107,7 @@ implementation 'com.azhon:appupdate:2.8.0'
 ```groovy
 implementation 'com.azhon:appupdateX:2.8.0'
 ```
-
-#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
-
-```java
-DownloadManager manager = DownloadManager.getInstance(this);
-manager.setApkName("appupdate.apk")
-        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
-        .setSmallIcon(R.mipmap.ic_launcher)
-        .download();
-```
-
-#### 第三步：兼容Android N 及以上版本，在你应用的`build.gradle`添加如下代码
+#### 第二步：兼容Android N 及以上版本，在你应用的`build.gradle`添加如下代码
 
 ```java
 defaultConfig {
@@ -126,6 +115,16 @@ defaultConfig {
     //每个应用拥有不同的authorities，防止相同的在同一个手机上无法同时安装
     resValue "string", "authorities", applicationId
 }
+```
+
+#### 第三步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+
+```java
+DownloadManager manager = DownloadManager.getInstance(this);
+manager.setApkName("appupdate.apk")
+        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+        .setSmallIcon(R.mipmap.ic_launcher)
+        .download();
 ```
 
 #### 第四步：混淆打包，只需保持`Activity`、`Service`不混淆
