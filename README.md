@@ -118,7 +118,17 @@ manager.setApkName("appupdate.apk")
         .download();
 ```
 
-#### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
+#### 第三步：兼容Android N 及以上版本，在你应用的`build.gradle`添加如下代码
+
+```java
+defaultConfig {
+
+    //每个应用拥有不同的authorities，防止相同的在同一个手机上无法同时安装
+    resValue "string", "authorities", applicationId
+}
+```
+
+#### 第四步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy
 -keep public class * extends android.app.Activity
