@@ -61,11 +61,10 @@
 | showNewerToast | Whether to prompt the user<br> "currently the latest version" toast                                                          | false                 | false       |
 | smallIcon      | Notification icon (resource id)                                                                                              | -1                    | true        |
 | configuration  | Additional configuration of this library                                                                                     | null                  | false       |
-| apkVersionCode | new apk versionCode <br>(If set, the version will be judged in the library,<br>The following properties also need to be set) | 1                     | false       |
+| apkVersionCode | new apk versionCode <br>(If set, the version will be judged in the library,<br>The following properties also need to be set) | Integer.MIN_VALUE     | false       |
 | apkVersionName | new apk versionName                                                                                                          | null                  | false       |
 | apkDescription | Update description                                                                                                           | null                  | false       |
 | apkSize        | New version of the apk size (unit M)                                                                                         | null                  | false       |
-| authorities    | Support Android N uri license                                                                                                | package Name          | false       |
 | apkMD5         | Md5 (32 bit) of the new apk                                                                                                  | null                  | false       |
 
 ### UpdateConfiguration：Configuration Doc
@@ -92,13 +91,13 @@
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.7.0'
+implementation 'com.azhon:appupdate:2.8.0'
 ```
 
 - If you using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.7.0'
+implementation 'com.azhon:appupdateX:2.8.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -113,53 +112,7 @@ manager.setApkName("appupdate.apk")
         .download();
 ```
 
-#### Step3：Compatible with Android N and above，Add the following code to your app's `Manifest.xml`
-
-> The authorities value set in the provider must be the same as the authorities set in the DownloadManager (the application package name is not set)
-> 
-> android:authorities="${applicationId}"
-
-```xml
-<provider
-    android:name="android.support.v4.content.FileProvider"
-    android:authorities="${applicationId}"
-    android:exported="false"
-    android:grantUriPermissions="true">
-    <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_paths_public" />
-</provider>
-```
-
-- If you implementation the `appupdateX` version
-
-  ```xml
-  <provider
-      android:name="androidx.core.content.FileProvider"
-      android:authorities="${applicationId}"
-      android:exported="false"
-      android:grantUriPermissions="true">
-      <meta-data
-          android:name="android.support.FILE_PROVIDER_PATHS"
-          android:resource="@xml/file_paths_public" />
-  </provider>
-  ```
-
-#### Step4：Resource file `res/xml/file_paths_public.xml` content
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <external-path
-        name="app_update_external"
-        path="/" />
-    <external-cache-path
-        name="app_update_cache"
-        path="/" />
-</paths>
-```
-
-#### Step5：ProGuard Rules
+#### Step3：ProGuard Rules
 
 ```groovy
 -keep public class * extends android.app.Activity
@@ -186,12 +139,11 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.7.0（2019/12/30）
+* v2.8.0（2020/02/21）
 
-  * Upgrade dialog hides progress bar when download progress Max equals -1
-  * When the download progress Max is equal to -1, the progress of the notification bar does not show the percentage
-  * Remove custom download directory and `[storage permission]` 
-  * Optimized network connection timeout time to 30 seconds
+  * Fix LogUtil even null pointer problem
+  * Optimized FileProvider to be built into the framework
+  * Optimize the judgment of apkVersionCode
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
