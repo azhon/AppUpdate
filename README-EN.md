@@ -100,7 +100,17 @@ implementation 'com.azhon:appupdate:2.8.0'
 implementation 'com.azhon:appupdateX:2.8.0'
 ```
 
-#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+#### Step2：Compatible with Android N and above，Add the following code to your app's `build.gradle`
+
+```java
+defaultConfig {
+
+    //Each application has different authorities, preventing the same cannot be installed on the same phone at the same time
+    resValue "string", "authorities", applicationId
+}
+```
+
+#### Step3：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
 DownloadManager manager = DownloadManager.getInstance(this);
@@ -110,16 +120,6 @@ manager.setApkName("appupdate.apk")
         //Can be set, can not be set
         .setConfiguration(configuration)
         .download();
-```
-
-#### Step3：Compatible with Android N and above，Add the following code to your app's `build.gradle`
-
-```java
-defaultConfig {
-
-    //Each application has different authorities, preventing the same cannot be installed on the same phone at the same time
-    resValue "string", "authorities", applicationId
-}
 ```
 
 #### Step4：ProGuard Rules
