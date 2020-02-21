@@ -62,7 +62,7 @@ public class DownloadManager {
     /**
      * 要更新apk的versionCode
      */
-    private int apkVersionCode = 1;
+    private int apkVersionCode = Integer.MIN_VALUE;
     /**
      * 显示给用户的版本号
      */
@@ -383,25 +383,18 @@ public class DownloadManager {
     }
 
     /**
-     * 检查设置的apkVersionCode 如果是大于1则使用内置的对话框
-     * 如果小于等于1则直接启动服务下载
+     * 检查设置的{@link this#apkVersionCode} 如果不是默认值则使用内置的对话框
+     * 如果是默认值{@link Integer#MIN_VALUE}直接启动服务下载
      */
     private boolean checkVersionCode() {
-        //如果设置了小于的versionCode 你不是在写bug就是脑子瓦塌拉
-        if (apkVersionCode < 1) {
-            apkVersionCode = 1;
-            LogUtil.e(TAG, "apkVersionCode can not be < 1 !");
+        if (apkVersionCode == Integer.MIN_VALUE) {
             return true;
         }
-        if (apkVersionCode > 1) {
-            //设置了 VersionCode 则库中进行对话框逻辑处理
-            if (TextUtils.isEmpty(apkDescription)) {
-                LogUtil.e(TAG, "apkDescription can not be empty!");
-            }
-            return false;
+        //设置了 VersionCode 则库中进行对话框逻辑处理
+        if (TextUtils.isEmpty(apkDescription)) {
+            LogUtil.e(TAG, "apkDescription can not be empty!");
         }
-        //等于1的情况
-        return true;
+        return false;
     }
 
     /**
