@@ -54,7 +54,7 @@
 
 ### Demo下载体验
 
- [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
+ [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/download/2.8.0/appupdate.apk)
 
 ### DownloadManager：配置文档
 
@@ -107,7 +107,7 @@ implementation 'com.azhon:appupdate:2.8.0'
 ```groovy
 implementation 'com.azhon:appupdateX:2.8.0'
 ```
-#### 第二步：兼容Android N 及以上版本，在你应用的`build.gradle`添加如下代码
+#### 第二步：兼容Android N 及以上版本，在`app/build.gradle`添加如下代码
 
 ```java
 defaultConfig {

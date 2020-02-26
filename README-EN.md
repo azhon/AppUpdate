@@ -46,7 +46,7 @@
 * [x] Support download completion Delete old APK file after opening new version
 * [x] Download using HttpURLConnection, no other third-party framework is integrated
 
-### [Demo download experience](https://github.com/azhon/AppUpdate/tree/master/apk/appupdate.apk)
+### [Demo download experience](https://github.com/azhon/AppUpdate/releases/download/2.8.0/appupdate.apk)
 
 ### DownloadManager：Configuration Doc
 
@@ -100,7 +100,7 @@ implementation 'com.azhon:appupdate:2.8.0'
 implementation 'com.azhon:appupdateX:2.8.0'
 ```
 
-#### Step2：Compatible with Android N and above，Add the following code to your app's `build.gradle`
+#### Step2：Compatible with Android N and above，Add the following code to your `app/build.gradle`
 
 ```java
 defaultConfig {
