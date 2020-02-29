@@ -14,18 +14,17 @@ assignees: ''
 截图`DownloadManager`配置
 
 **复现步骤**
-1. 点击下载
-2. ......
+
 
 **错误Logcat日志截图**
 日志截图
 
 **软件版本信息**
- - Android Studio：[eg：3.6]
- - AppUpdate：[eg：2.6.0]
- - 设备品牌：[eg：Google]
- - 设备型号：[eg：Pixel 2]
- - 设备系统版本：[eg：9.0]
+ - Android Studio：
+ - AppUpdate：
+ - 设备品牌：
+ - 设备型号：
+ - 设备系统版本：
 
 **额外有用的信息**
 补充额外有用的信息
