@@ -126,6 +126,7 @@ manager.setApkName("appupdate.apk")
         .setSmallIcon(R.mipmap.ic_launcher)
         .download();
 ```
+如果需要显示内置的对话框那么你需要调用`manager.setApkVersionCode()`将新版本的versionCode填进去
 
 #### 第四步：混淆打包，只需保持`Activity`、`Service`不混淆
 
