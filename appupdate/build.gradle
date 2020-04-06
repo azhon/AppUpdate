@@ -12,8 +12,7 @@ android {
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        //FileProvider Uri 授权
-        resValue "string", "authorities", "com.azhon.appupdate.fileProvider"
+
     }
 
     buildTypes {
