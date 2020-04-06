@@ -377,7 +377,7 @@ public class DownloadManager {
             return false;
         }
         //加载用户设置的authorities
-        Constant.AUTHORITIES = context.getString(R.string.authorities);
+        Constant.AUTHORITIES = context.getPackageName() + ".fileProvider";
         //如果用户没有进行配置，则使用默认的配置
         if (configuration == null) {
             configuration = new UpdateConfiguration();
