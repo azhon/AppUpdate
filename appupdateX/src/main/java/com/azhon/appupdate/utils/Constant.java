@@ -39,5 +39,5 @@ public final class Constant {
     /**
      * 兼容Android N Uri 授权
      */
-    public static String AUTHORITIES = "com.azhon.appupdate.fileProvider";
+    public static String AUTHORITIES;
 }
