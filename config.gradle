@@ -2,11 +2,11 @@ ext {
     compileSdkVersion = 29
     minSdkVersion = 15
     targetSdkVersion = 29
-    versionCode = 28
-    versionName = "2.8.0"
+    versionCode = 29
+    versionName = "2.9.0"
 
     //新版本描述信息
-    versionDesc = "[修复] LogUtil偶现空指针问题，[优化] FileProvider改为框架内置，用户无需手动配置，[优化] apkVersionCode的判断"
+    versionDesc = "[优化] FileProvider改为框架内置用户无需手动配置，使用更简单"
     //项目的主页
     siteUrl = "https://github.com/azhon/AppUpdate"
     //gitHub仓库的地址
