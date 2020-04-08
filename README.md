@@ -107,17 +107,8 @@ implementation 'com.azhon:appupdate:2.8.0'
 ```groovy
 implementation 'com.azhon:appupdateX:2.8.0'
 ```
-#### 第二步：兼容Android N 及以上版本，在`app/build.gradle`添加如下代码
 
-```java
-defaultConfig {
-
-    //每个应用拥有不同的authorities，防止相同的在同一个手机上无法同时安装
-    resValue "string", "authorities", applicationId
-}
-```
-
-#### 第三步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
 DownloadManager manager = DownloadManager.getInstance(this);
@@ -128,7 +119,7 @@ manager.setApkName("appupdate.apk")
 ```
 如果需要显示内置的对话框那么你需要调用`manager.setApkVersionCode()`将新版本的versionCode填进去
 
-#### 第四步：混淆打包，只需保持`Activity`、`Service`不混淆
+#### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy
 -keep public class * extends android.app.Activity
@@ -156,11 +147,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.8.0（2020/02/21）
+* v2.9.0（2020/04/08）
 
-  * [修复] LogUtil偶现空指针问题
-  * [优化] FileProvider改为框架内置，用户无需手动配置
-  * [优化] apkVersionCode的判断
+  * [优化] FileProvider改为框架内置用户无需手动配置，使用更简单
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 

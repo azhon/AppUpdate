@@ -100,17 +100,7 @@ implementation 'com.azhon:appupdate:2.8.0'
 implementation 'com.azhon:appupdateX:2.8.0'
 ```
 
-#### Step2：Compatible with Android N and above，Add the following code to your `app/build.gradle`
-
-```java
-defaultConfig {
-
-    //Each application has different authorities, preventing the same cannot be installed on the same phone at the same time
-    resValue "string", "authorities", applicationId
-}
-```
-
-#### Step3：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
 DownloadManager manager = DownloadManager.getInstance(this);
@@ -122,7 +112,7 @@ manager.setApkName("appupdate.apk")
         .download();
 ```
 
-#### Step4：ProGuard Rules
+#### Step3：ProGuard Rules
 
 ```groovy
 -keep public class * extends android.app.Activity
@@ -149,11 +139,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.8.0（2020/02/21）
+* v2.9.0（2020/04/08）
 
-  * Fix LogUtil even null pointer problem
-  * Optimized FileProvider to be built into the framework
-  * Optimize the judgment of apkVersionCode
+  * Optimized FileProvider to be built into the framework，simple to use.
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
