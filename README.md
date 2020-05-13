@@ -12,9 +12,10 @@
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 ### [由于Android Q版本限制应用访问外部存储目录，所以移除了setDownloadPath()功能](https://developer.android.google.cn/training/data-storage/files/external-scoped)
 
-## 扫码加入QQ群
+## 扫码加入QQ群(群号：828385813)
 
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
+<img
+src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 
 ## 目录
 
