@@ -27,7 +27,6 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 * [使用步骤](#使用步骤)
 * [使用技巧](#使用技巧)
 * [版本更新记录](#版本更新记录)
-* [哪些App正在使用](#哪些App正在使用)
 
 ### 效果图
 
@@ -159,24 +158,3 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 
 <img src="https://github.com/azhon/AppUpdate/blob/master/img/money.jpg" width="600"/>
-
-### 哪些App正在使用
-
-<table cellspacing="8" >
-  <tr>
-    <td></td>
-    <td><a href="http://app.mi.com/details?id=com.vice.bloodpressure"><img src="http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/00d2e4e2668ac84d7fb7d0ef130f15aec9d4202bc" width="100"></a></td>
-    <td><a href="http://app.mi.com/details?id=com.xy.xydoctor"><img src="http://file.market.xiaomi.com/thumbnail/PNG/l114/AppStore/019b1555a24c734ce9c12843ef137edc01f43ec8e" width="100"></a></td>
-    <td><a href="http://zhushou.360.cn/detail/index/soft_id/3994008?recrefer=SE_D_%E5%90%8E%E4%B9%90%E5%85%89%E4%BC%8F%E7%9B%91%E6%8E%A7"><img src="http://p16.qhimg.com/t01cce7a7c3e6b133b7.png" width="100"></a></td>
-    <td><a href="https://sj.qq.com/myapp/detail.htm?apkName=com.wexiami.xmsh"><img src="https://pp.myapp.com/ma_icon/0/icon_52810342_1582728457/96" width="100"></a></td>
-    <td><a href="https://a.app.qq.com/o/simple.jsp?pkgname=com.hitotech.idoru"><img src="https://pp.myapp.com/ma_icon/0/icon_42386889_1585899098/96" width="100"></a></td>
-  </tr>
-    <tr>
-    <th>易果无忧</th>
-    <th>慧健康</th>
-    <th>慧健康医生版</th>
-    <th>后乐光伏监控</th>
-    <th>虾米生活</th>
-    <th>爱多路</th>
-  </tr>
-</table>
