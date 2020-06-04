@@ -12,6 +12,7 @@ import com.azhon.appupdate.dialog.UpdateDialog;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
+import com.azhon.appupdate.utils.HttpUtil;
 import com.azhon.appupdate.utils.LogUtil;
 
 /**
@@ -318,6 +319,7 @@ public class DownloadManager {
      * 开始下载
      */
     public void download() {
+        HttpUtil.postUsage(context);
         if (!checkParams()) {
             //参数设置出错....
             return;
