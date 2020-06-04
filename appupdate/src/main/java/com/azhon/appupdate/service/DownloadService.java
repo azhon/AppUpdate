@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.azhon.appupdate.R;
@@ -19,6 +20,7 @@ import com.azhon.appupdate.manager.HttpDownloadManager;
 import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.FileUtil;
+import com.azhon.appupdate.utils.HttpUtil;
 import com.azhon.appupdate.utils.LogUtil;
 import com.azhon.appupdate.utils.NotificationUtil;
 
@@ -183,6 +185,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     @Override
     public void error(Exception e) {
         LogUtil.e(TAG, "error: " + e);
+        HttpUtil.postException(this, apkUrl, e.toString(), Log.getStackTraceString(e));
         downloadManager.setState(false);
         if (showNotification) {
             String downloadError = getResources().getString(R.string.download_error);
