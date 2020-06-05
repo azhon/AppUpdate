@@ -2,6 +2,7 @@ package com.azhon.appupdate.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -112,5 +113,21 @@ public final class ApkUtil {
             e.printStackTrace();
             return "1.0.0";
         }
+    }
+
+    /**
+     * 获取app名字
+     *
+     * @param context 上下文
+     */
+    public static String getAppName(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), 0);
+            return (String) packageManager.getApplicationLabel(applicationInfo);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
