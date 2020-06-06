@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-### 自3.0.0版本开始可以使用[AppUpdate日志查询](http://azhong.tk:8088/app/)可以查看哪些App正在使用，也可以一起来讨论问题哦！
+### 自3.0.0版本开始可以使用[AppUpdate日志查询](http://azhong.tk:8088/app/)可以查看下载的异常信息，也可以查看哪些App正在使用，还可以一起来讨论问题哦！
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 ### [由于Android Q版本限制应用访问外部存储目录，所以移除了setDownloadPath()功能](https://developer.android.google.cn/training/data-storage/files/external-scoped)
 
