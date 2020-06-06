@@ -98,8 +98,9 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 ### 使用提醒
 
 因为目前会配合[AppUpdate日志查询](http://azhong.tk:8088/app/)平台会产生一些网络数据，这些信息收集绝不用于任何恶意用途。
+如果你不想使用，可以下载源代码进行集成并将HttpUtil代码移除即可。
 
-* 统计有多少用户集成了AppUpdate</br>
+* 统计有多少App集成了AppUpdate</br>
 HttpUtil#postUsage
 * 上报下载的错误信息</br>
 HttpUtil#postException
