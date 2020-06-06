@@ -3,12 +3,12 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.9.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-3.0.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-### [AppUpdate正在征集框架使用者信息，希望得到大家的支持](https://github.com/azhon/AppUpdate/issues/58)
+### 自3.0.0版本开始可以使用[AppUpdate日志查询](http://azhong.tk:8088/app/)可以查看哪些App正在使用，也可以一起来讨论问题哦！
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 ### [由于Android Q版本限制应用访问外部存储目录，所以移除了setDownloadPath()功能](https://developer.android.google.cn/training/data-storage/files/external-scoped)
 
@@ -24,6 +24,7 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 * [Demo下载体验](#demo下载体验)
 * [DownloadManager](#downloadmanager配置文档)
 * [UpdateConfiguration](#updateconfiguration配置文档)
+* [使用提醒](#使用提醒)
 * [使用步骤](#使用步骤)
 * [使用技巧](#使用技巧)
 * [版本更新记录](#版本更新记录)
@@ -94,18 +95,27 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 | dialogButtonTextColor | 对话框按钮的文字颜色                   | -1           |
 | dialogProgressBarColor| 对话框进度条和文字颜色                 | -1           |
 
+### 使用提醒
+
+因为目前会配合[AppUpdate日志查询](http://azhong.tk:8088/app/)平台会产生一些网络数据，这些信息收集绝不用于任何恶意用途。
+
+* 统计有多少用户集成了AppUpdate</br>
+HttpUtil#postUsage
+* 上报下载的错误信息</br>
+HttpUtil#postException
+
 ### 使用步骤
 
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:2.9.0'
+implementation 'com.azhon:appupdate:3.0.0'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.9.0'
+implementation 'com.azhon:appupdateX:3.0.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -147,9 +157,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v2.9.0（2020/04/08）
+* v3.0.0（2020/06/05）
 
-  * [优化] FileProvider改为框架内置用户无需手动配置，使用更简单
+  * [修复] 解决高版本不能使用http明文网络请求问题
+  * [新增] 上报错误信息至服务器
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
