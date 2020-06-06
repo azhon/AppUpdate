@@ -3,12 +3,12 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-2.9.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-3.0.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-### [AppUpdate is collecting frame user information and hopes to get everyone's support](https://github.com/azhon/AppUpdate/issues/58)
+### Since version 3.0.0, you can use [AppUpdate log query] (http://azhong.tk:8088/app/) to see which apps are in use, and you can also discuss issues together!
 ### [Since Android Q version restricts background apps from launching Activity, a notification will be sent to the notification bar when the download is complete (ignoring the showNotification value, you need to allow notifications to be sent)](https://developer.android.google.cn/guide/components/activities/background-starts)
 ### [Since Android Q version restricts access to external storage，so removed setDownloadPath()](https://developer.android.google.cn/training/data-storage/files/external-scoped)
 
@@ -19,6 +19,7 @@
 * Demo download experience
 * DownloadManager
 * UpdateConfiguration
+* Use reminder
 * Steps for usage
 * Skills
 * Version update record
@@ -86,18 +87,27 @@
 | dialogButtonTextColor | The text color of the dialog button                                                     | -1                         |
 | dialogProgressBarColor | Dialog progress bar and text color                                                     | -1                         |
 
+### Usage reminder
+
+Because it will cooperate with the [AppUpdate log query] (http://azhong.tk:8088/app/) platform to generate some network data, this information collection will never be used for any malicious purposes.
+
+* Count how many Apps used AppUpdate</br>
+HttpUtil#postUsage
+* Report the download error log</br>
+HttpUtil#postException
+
 ### Steps for usage
 
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:2.9.0'
+implementation 'com.azhon:appupdate:3.0.0'
 ```
 
 - If you using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:2.9.0'
+implementation 'com.azhon:appupdateX:3.0.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -139,9 +149,10 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v2.9.0（2020/04/08）
+* v3.0.0 (2020/06/05)
 
-  * Optimized FileProvider to be built into the framework，simple to use.
+   * [Fix] Solve the problem that the high version cannot use http clear text network request
+   * [New] Report error information to the server
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
