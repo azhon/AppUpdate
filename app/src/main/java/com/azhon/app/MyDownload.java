@@ -1,6 +1,6 @@
 package com.azhon.app;
 
-import android.os.Environment;
+import android.content.Context;
 
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.listener.OnDownloadListener;
@@ -27,6 +27,12 @@ import java.net.URL;
 
 public class MyDownload extends BaseHttpDownloadManager {
 
+    private Context context;
+
+    public MyDownload(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void download(final String apkUrl, final String apkName, final OnDownloadListener listener) {
         listener.start();
@@ -43,7 +49,7 @@ public class MyDownload extends BaseHttpDownloadManager {
                 //当前已下载完成的进度
                 int progress = 0;
                 byte[] buffer = new byte[1024 * 4];
-                File file = FileUtil.createFile(Environment.getExternalStorageDirectory() + "/AppUpdate", apkName);
+                File file = FileUtil.createFile(context.getExternalCacheDir().getPath(), apkName);
                 FileOutputStream stream = new FileOutputStream(file);
                 while ((len = is.read(buffer)) != -1) {
                     //将获取到的流写入文件中
