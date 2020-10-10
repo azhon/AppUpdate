@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-3.0.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-3.0.1-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -47,7 +47,7 @@
 * [x] Support download completion Delete old APK file after opening new version
 * [x] Download using HttpURLConnection, no other third-party framework is integrated
 
-### [Demo download experience](https://github.com/azhon/AppUpdate/releases/download/2.8.0/appupdate.apk)
+### [Demo download experience](https://github.com/azhon/AppUpdate/releases/download/3.0.1/appupdate.apk)
 
 ### DownloadManager：Configuration Doc
 
@@ -101,13 +101,13 @@ HttpUtil#postException
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:3.0.0'
+implementation 'com.azhon:appupdate:3.0.1'
 ```
 
 - If you using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:3.0.0'
+implementation 'com.azhon:appupdateX:3.0.1'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -149,10 +149,11 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v3.0.0 (2020/06/05)
+* v3.0.1 (2020/10/10)
 
-   * [Fix] Solve the problem that the high version cannot use http clear text network request
-   * [New] Report error information to the server
+  *  [New] Add the download listener adapter 
+  *  [Fix] Context uses soft references 
+  *  [Fix] Remove all listeners after downloading
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
