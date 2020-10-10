@@ -2,8 +2,6 @@ package com.azhon.appupdate.utils;
 
 import android.content.Context;
 
-import com.azhon.appupdate.BuildConfig;
-
 import org.json.JSONObject;
 
 import java.io.BufferedWriter;
@@ -37,7 +35,7 @@ public class HttpUtil {
             params.put("appName", ApkUtil.getAppName(context));
             params.put("versionCode", ApkUtil.getVersionCode(context));
             params.put("versionName", ApkUtil.getVersionName(context));
-            params.put("appUpdateVersion", BuildConfig.VERSION_NAME);
+            params.put("appUpdateVersion", "3.0.1");
             params.put("time", yyyyMMddHHmmss());
             post("usage/add", params.toString());
         } catch (Exception e) {
@@ -57,7 +55,7 @@ public class HttpUtil {
             params.put("appName", ApkUtil.getAppName(context));
             params.put("versionCode", ApkUtil.getVersionCode(context));
             params.put("versionName", ApkUtil.getVersionName(context));
-            params.put("appUpdateVersion", BuildConfig.VERSION_NAME);
+            params.put("appUpdateVersion", "3.0.1");
             params.put("notification", NotificationUtil.notificationEnable(context) ? 1 : 0);
             params.put("apkUrl", url);
             params.put("title", exceptionTitle);

@@ -11,10 +11,8 @@ import android.view.View;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.dialog.NumberProgressBar;
 import com.azhon.appupdate.listener.OnButtonClickListener;
-import com.azhon.appupdate.listener.OnDownloadListener;
+import com.azhon.appupdate.listener.OnDownloadListenerAdapter;
 import com.azhon.appupdate.manager.DownloadManager;
-
-import java.io.File;
 
 /**
  * 项目名:    AppUpdate
@@ -36,11 +34,11 @@ import java.io.File;
  * @author 阿钟
  */
 
-public class MainActivity extends AppCompatActivity implements OnDownloadListener, View.OnClickListener, OnButtonClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnButtonClickListener {
 
     private NumberProgressBar progressBar;
     private DownloadManager manager;
-    private String url = "https://89e03ca66219bbe3cf0d65cd0d800c50.dd.cdntips.com/imtt.dd.qq.com/16891/apk/86E914A33DAF7E2B88725E486E907288.apk?mkey=5e8b026fb79c5ff3&f=1026&fsname=com.estrongs.android.pop_4.2.2.3_10063.apk&csr=1bbd&cip=183.156.121.6&proto=https";
+    private String url = "https://imtt.dd.qq.com/16891/apk/FA48766BA12A41A1D619CB4B152889C6.apk?fsname=com.estrongs.android.pop_4.2.3.3_10089.apk&csr=1bbd";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 //设置对话框按钮的点击监听
                 .setButtonClickListener(this)
                 //设置下载过程的监听
-                .setOnDownloadListener(this);
+                .setOnDownloadListener(listenerAdapter);
 
         manager = DownloadManager.getInstance(this);
         manager.setApkName("ESFileExplorer.apk")
@@ -149,32 +147,20 @@ public class MainActivity extends AppCompatActivity implements OnDownloadListene
                 .download();
     }
 
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void downloading(int max, int progress) {
-        int curr = (int) (progress / (double) max * 100.0);
-        progressBar.setMax(100);
-        progressBar.setProgress(curr);
-    }
-
-    @Override
-    public void done(File apk) {
-
-    }
-
-    @Override
-    public void cancel() {
-
-    }
-
-    @Override
-    public void error(Exception e) {
-
-    }
+    private OnDownloadListenerAdapter listenerAdapter = new OnDownloadListenerAdapter() {
+        /**
+         * 下载中
+         *
+         * @param max      总进度
+         * @param progress 当前进度
+         */
+        @Override
+        public void downloading(int max, int progress) {
+            int curr = (int) (progress / (double) max * 100.0);
+            progressBar.setMax(100);
+            progressBar.setProgress(curr);
+        }
+    };
 
     @Override
     public void onButtonClick(int id) {
