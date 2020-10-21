@@ -2,11 +2,11 @@ ext {
     compileSdkVersion = 29
     minSdkVersion = 15
     targetSdkVersion = 29
-    versionCode = 31
-    versionName = "3.0.1"
+    versionCode = 32
+    versionName = "3.0.2"
 
     //新版本描述信息
-    versionDesc = "1、增加下载过程监听适配器 2、context使用软引用 3、下载完成移除所有监听器"
+    versionDesc = "1、下载完成HttpDownloadManager释放下载监听器"
     //项目的主页
     siteUrl = "https://github.com/azhon/AppUpdate"
     //gitHub仓库的地址

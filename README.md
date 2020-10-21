@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-3.0.1-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-3.0.2-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -110,13 +110,13 @@ HttpUtil#postException
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:3.0.1'
+implementation 'com.azhon:appupdate:3.0.2'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:3.0.1'
+implementation 'com.azhon:appupdateX:3.0.2'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -159,11 +159,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v3.0.1（2020/10/10）
+* v3.0.2（2020/10/21）
 
-  * [新增]增加下载过程监听适配器
-  * [优化]context使用软引用
-  * [优化]下载完成移除所有监听器
+  * [优化] 下载完成HttpDownloadManager释放下载监听器
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
