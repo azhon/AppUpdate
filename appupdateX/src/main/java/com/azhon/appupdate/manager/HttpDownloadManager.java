@@ -63,6 +63,11 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
         shutdown = true;
     }
 
+    @Override
+    public void release() {
+        listener = null;
+    }
+
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {

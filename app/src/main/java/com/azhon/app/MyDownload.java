@@ -77,4 +77,9 @@ public class MyDownload extends BaseHttpDownloadManager {
     public void cancel() {
 
     }
+
+    @Override
+    public void release() {
+
+    }
 }
