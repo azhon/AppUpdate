@@ -35,7 +35,7 @@ public class HttpUtil {
             params.put("appName", ApkUtil.getAppName(context));
             params.put("versionCode", ApkUtil.getVersionCode(context));
             params.put("versionName", ApkUtil.getVersionName(context));
-            params.put("appUpdateVersion", "3.0.1");
+            params.put("appUpdateVersion", "3.0.2");
             params.put("time", yyyyMMddHHmmss());
             post("usage/add", params.toString());
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class HttpUtil {
             params.put("appName", ApkUtil.getAppName(context));
             params.put("versionCode", ApkUtil.getVersionCode(context));
             params.put("versionName", ApkUtil.getVersionName(context));
-            params.put("appUpdateVersion", "3.0.1");
+            params.put("appUpdateVersion", "3.0.2");
             params.put("notification", NotificationUtil.notificationEnable(context) ? 1 : 0);
             params.put("apkUrl", url);
             params.put("title", exceptionTitle);
