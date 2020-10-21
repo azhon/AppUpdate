@@ -28,4 +28,9 @@ public abstract class BaseHttpDownloadManager {
      * 取消下载apk
      */
     public abstract void cancel();
+
+    /**
+     * 释放资源
+     */
+    public abstract void release();
 }
