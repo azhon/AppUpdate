@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-3.0.2-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-3.0.3-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -81,6 +81,7 @@
 | showNotification      | Whether to display the progress of the<br> notification bar (background download toast) | true                       |
 | forcedUpgrade         | Whether to force an upgrade                                                             | false                      |
 | showBgdToast          | Whether need to “Downloading new version in the background…”                            | true                       |
+| usePlatform           | Whether to use AppUpdate website                                                        | true                       |
 | onButtonClickListener | Button click event listener                                                             | null                       |
 | dialogImage           | Dialog background image resource<br> (picture specification reference demo)             | -1                         |
 | dialogButtonColor     | The color of the dialog button                                                          | -1                         |
@@ -101,13 +102,13 @@ HttpUtil#postException
 #### Step1： `app/build.gradle` Dependent
 
 ```groovy
-implementation 'com.azhon:appupdate:3.0.2'
+implementation 'com.azhon:appupdate:3.0.3'
 ```
 
 - If you using `AndroidX`, please implementation `appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:3.0.2'
+implementation 'com.azhon:appupdateX:3.0.3'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -149,9 +150,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v3.0.2 (2020/10/21)
+* v3.0.3 (2020/12/24)
 
-  *  [Fix] Download complete HttpDownloadManager release listener 
+  *  [New] add whether to use AppUpdate website switch
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
