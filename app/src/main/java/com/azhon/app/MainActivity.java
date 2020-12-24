@@ -126,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setShowNotification(true)
                 //设置是否提示后台下载toast
                 .setShowBgdToast(false)
+                //设置是否上报数据
+                .setUsePlatform(true)
                 //设置强制更新
                 .setForcedUpgrade(false)
                 //设置对话框按钮的点击监听
