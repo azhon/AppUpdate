@@ -23,6 +23,7 @@ import java.util.Date;
 
 public class HttpUtil {
     private final static String API = "http://azhong.tk:8081/api/";
+    private final static String APP_UPDATE_VERSION = "3.0.3";
 
     /**
      * 上报信息
@@ -35,7 +36,7 @@ public class HttpUtil {
             params.put("appName", ApkUtil.getAppName(context));
             params.put("versionCode", ApkUtil.getVersionCode(context));
             params.put("versionName", ApkUtil.getVersionName(context));
-            params.put("appUpdateVersion", "3.0.2");
+            params.put("appUpdateVersion", APP_UPDATE_VERSION);
             params.put("time", yyyyMMddHHmmss());
             post("usage/add", params.toString());
         } catch (Exception e) {
@@ -56,7 +57,7 @@ public class HttpUtil {
             params.put("appName", ApkUtil.getAppName(context));
             params.put("versionCode", ApkUtil.getVersionCode(context));
             params.put("versionName", ApkUtil.getVersionName(context));
-            params.put("appUpdateVersion", "3.0.2");
+            params.put("appUpdateVersion", APP_UPDATE_VERSION);
             params.put("notification", NotificationUtil.notificationEnable(context) ? 1 : 0);
             params.put("apkUrl", url);
             params.put("title", exceptionTitle);
