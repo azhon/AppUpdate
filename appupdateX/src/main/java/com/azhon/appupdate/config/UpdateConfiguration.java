@@ -61,6 +61,11 @@ public class UpdateConfiguration {
      */
     private boolean forcedUpgrade = false;
     /**
+     * 是否使用AppUpdate平台(默认为true)
+     * {@see <a href=http://azhong.tk:8088/app/#/ />}
+     */
+    private boolean usePlatform = true;
+    /**
      * 内置对话框背景图片资源id （图片规范参照demo中的示例图大小）
      */
     private int dialogImage = -1;
@@ -279,5 +284,20 @@ public class UpdateConfiguration {
      */
     public OnButtonClickListener getOnButtonClickListener() {
         return onButtonClickListener;
+    }
+
+    /**
+     * 设置是否上报数据至平台
+     */
+    public UpdateConfiguration setUsePlatform(boolean usePlatform) {
+        this.usePlatform = usePlatform;
+        return this;
+    }
+
+    /**
+     * 获取是否上报数据至平台
+     */
+    public boolean isUsePlatform() {
+        return usePlatform;
     }
 }

@@ -50,6 +50,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     private boolean showNotification;
     private boolean showBgdToast;
     private boolean jumpInstallPage;
+    private boolean usePlatform;
     private int lastProgress;
     private DownloadManager downloadManager;
     private BaseHttpDownloadManager httpManager;
@@ -82,6 +83,7 @@ public final class DownloadService extends Service implements OnDownloadListener
         showNotification = configuration.isShowNotification();
         showBgdToast = configuration.isShowBgdToast();
         jumpInstallPage = configuration.isJumpInstallPage();
+        usePlatform = configuration.isUsePlatform();
         //获取app通知开关是否打开
         boolean enable = NotificationUtil.notificationEnable(this);
         LogUtil.d(TAG, enable ? "应用的通知栏开关状态：已打开" : "应用的通知栏开关状态：已关闭");
@@ -188,7 +190,7 @@ public final class DownloadService extends Service implements OnDownloadListener
     @Override
     public void error(Exception e) {
         LogUtil.e(TAG, "error: " + e);
-        HttpUtil.postException(this, apkUrl, e.toString(), Log.getStackTraceString(e));
+        HttpUtil.postException(this, usePlatform, apkUrl, e.toString(), Log.getStackTraceString(e));
         downloadManager.setState(false);
         if (showNotification) {
             String downloadError = getResources().getString(R.string.download_error);

@@ -27,8 +27,8 @@ public class HttpUtil {
     /**
      * 上报信息
      */
-    public static void postUsage(Context context) {
-        if (context == null) return;
+    public static void postUsage(Context context, boolean usePlatform) {
+        if (context == null || !usePlatform) return;
         try {
             JSONObject params = new JSONObject();
             params.put("applicationId", context.getPackageName());
@@ -47,8 +47,9 @@ public class HttpUtil {
     /**
      * 上报信息
      */
-    public static void postException(Context context, String url, String exceptionTitle, String exception) {
-        if (context == null) return;
+    public static void postException(Context context, boolean usePlatform, String url,
+                                     String exceptionTitle, String exception) {
+        if (context == null || !usePlatform) return;
         try {
             JSONObject params = new JSONObject();
             params.put("applicationId", context.getPackageName());
@@ -85,6 +86,7 @@ public class HttpUtil {
                     writer.write(body);
                     writer.close();
                     int responseCode = connection.getResponseCode();
+                    connection.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

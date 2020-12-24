@@ -321,11 +321,11 @@ public class DownloadManager {
      * 开始下载
      */
     public void download() {
-        HttpUtil.postUsage(context.get());
         if (!checkParams()) {
             //参数设置出错....
             return;
         }
+        HttpUtil.postUsage(context.get(), configuration.isUsePlatform());
         if (checkVersionCode()) {
             context.get().startService(new Intent(context.get(), DownloadService.class));
         } else {
