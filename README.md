@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jcenter%20version-3.0.2-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jcenter%20version-3.0.3-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -89,6 +89,7 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 | showNotification      | 是否显示通知栏进度（后台下载提示）     | true         |
 | forcedUpgrade         | 是否强制升级                           | false        |
 | showBgdToast          | 是否提示 "正在后台下载新版本…"        | true         |
+| usePlatform           | 是否使用AppUpdate平台                | true         |
 | onButtonClickListener | 按钮点击事件回调                       | null         |
 | dialogImage           | 对话框背景图片资源(图片规范参考demo)   | -1           |
 | dialogButtonColor     | 对话框按钮的颜色                       | -1           |
@@ -110,13 +111,13 @@ HttpUtil#postException
 #### 第一步： `app/build.gradle`进行依赖
 
 ```groovy
-implementation 'com.azhon:appupdate:3.0.2'
+implementation 'com.azhon:appupdate:3.0.3'
 ```
 
 - 如果你使用的是`AndroidX`，请依赖`appupdateX`
 
 ```groovy
-implementation 'com.azhon:appupdateX:3.0.2'
+implementation 'com.azhon:appupdateX:3.0.3'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -159,9 +160,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v3.0.2（2020/10/21）
+* v3.0.3（2020/12/24）
 
-  * [优化] 下载完成HttpDownloadManager释放下载监听器
+  * [新增] 增加是否使用AppUpdate开关
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
