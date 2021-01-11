@@ -10,7 +10,8 @@
 
 ### 自3.0.0版本开始可以使用[AppUpdate日志查询](http://azhong.tk:8088/app/)可以查看下载的异常信息，也可以查看哪些App正在使用，还可以一起来讨论问题哦！
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
-### [由于Android Q版本限制应用访问外部存储目录，所以移除了setDownloadPath()功能](https://developer.android.google.cn/training/data-storage/files/external-scoped)
+
+[![Stargazers over time](https://starchart.cc/azhon/AppUpdate.svg)](https://starchart.cc/azhon/AppUpdate)
 
 ## 扫码加入QQ群(群号：828385813)
 
@@ -99,7 +100,7 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 ### 使用提醒
 
 因为目前会配合[AppUpdate日志查询](http://azhong.tk:8088/app/)平台会产生一些网络数据，这些信息收集绝不用于任何恶意用途。
-如果你不想使用，可以下载源代码进行集成并将HttpUtil代码移除即可。
+如果你不想使用，可以调用`configration.setUsePlatform(false)`
 
 * 统计有多少App集成了AppUpdate</br>
 HttpUtil#postUsage
