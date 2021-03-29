@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private NumberProgressBar progressBar;
     private DownloadManager manager;
-    private String url = "https://imtt.dd.qq.com/16891/apk/FA48766BA12A41A1D619CB4B152889C6.apk?fsname=com.estrongs.android.pop_4.2.3.3_10089.apk&csr=1bbd";
+    private String url = "http://s.duapps.com/apks/own/ESFileExplorer-cn.apk";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
