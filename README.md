@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-3.0.3-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-3.0.4-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -97,10 +97,23 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 
 ### 使用步骤
 
-#### 第一步： `app/build.gradle`进行依赖
+#### 第一步：
+
+- `root/build.gradle`添加如下代码
 
 ```groovy
-implementation 'com.azhon:appupdateX:3.0.3'
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+- `app/build.gradle`添加依赖
+
+```groovy
+implementation 'com.azhon:appupdateX:3.0.4'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -143,9 +156,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v3.0.3（2020/12/24）
+* v3.0.4（2021/05/07）
 
-  * [新增] 增加是否使用AppUpdate开关
+  * [新增] 迁移至jitpack
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
