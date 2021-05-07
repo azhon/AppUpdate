@@ -1,1 +1,1 @@
-include ':app', ':appupdate','appupdateX'
+include ':app', 'appupdateX'

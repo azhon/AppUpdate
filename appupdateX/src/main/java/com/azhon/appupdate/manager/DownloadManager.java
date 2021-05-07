@@ -12,7 +12,6 @@ import com.azhon.appupdate.dialog.UpdateDialog;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
-import com.azhon.appupdate.utils.HttpUtil;
 import com.azhon.appupdate.utils.LogUtil;
 
 import java.lang.ref.SoftReference;
@@ -325,7 +324,6 @@ public class DownloadManager {
             //参数设置出错....
             return;
         }
-        HttpUtil.postUsage(context.get(), configuration.isUsePlatform());
         if (checkVersionCode()) {
             context.get().startService(new Intent(context.get(), DownloadService.class));
         } else {
