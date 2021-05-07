@@ -113,7 +113,7 @@ allprojects {
 - `app/build.gradle`添加依赖
 
 ```groovy
-implementation 'com.azhon:appupdateX:3.0.4'
+implementation 'com.github.azhon:AppUpdate:3.0.4'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)

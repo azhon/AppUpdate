@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-3.0.3-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-3.0.4-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -87,10 +87,23 @@
 
 ### Steps for usage
 
-#### Step1： `app/build.gradle` Dependent
+#### Step1：
+
+- `root/build.gradle`
 
 ```groovy
-implementation 'com.azhon:appupdateX:3.0.3'
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+- `app/build.gradle`
+
+```groovy
+implementation 'com.github.azhon:AppUpdate:3.0.4'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
