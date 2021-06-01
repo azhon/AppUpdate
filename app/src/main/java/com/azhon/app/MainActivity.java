@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.dialog.NumberProgressBar;
 import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListenerAdapter;
 import com.azhon.appupdate.manager.DownloadManager;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * 项目名:    AppUpdate
@@ -127,8 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setShowNotification(true)
                 //设置是否提示后台下载toast
                 .setShowBgdToast(false)
-                //设置是否上报数据
-                .setUsePlatform(true)
                 //设置强制更新
                 .setForcedUpgrade(false)
                 //设置对话框按钮的点击监听

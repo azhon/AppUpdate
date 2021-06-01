@@ -9,8 +9,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
 import com.azhon.appupdate.R;
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.config.UpdateConfiguration;
@@ -25,6 +23,8 @@ import com.azhon.appupdate.utils.NotificationUtil;
 
 import java.io.File;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * 项目名:    AppUpdate
@@ -48,7 +48,6 @@ public final class DownloadService extends Service implements OnDownloadListener
     private boolean showNotification;
     private boolean showBgdToast;
     private boolean jumpInstallPage;
-    private boolean usePlatform;
     private int lastProgress;
     private DownloadManager downloadManager;
     private BaseHttpDownloadManager httpManager;
@@ -81,7 +80,6 @@ public final class DownloadService extends Service implements OnDownloadListener
         showNotification = configuration.isShowNotification();
         showBgdToast = configuration.isShowBgdToast();
         jumpInstallPage = configuration.isJumpInstallPage();
-        usePlatform = configuration.isUsePlatform();
         //获取app通知开关是否打开
         boolean enable = NotificationUtil.notificationEnable(this);
         LogUtil.d(TAG, enable ? "应用的通知栏开关状态：已打开" : "应用的通知栏开关状态：已关闭");
