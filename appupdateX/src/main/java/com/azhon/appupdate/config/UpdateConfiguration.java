@@ -2,8 +2,6 @@ package com.azhon.appupdate.config;
 
 import android.app.NotificationChannel;
 
-import androidx.annotation.ColorInt;
-
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
@@ -11,6 +9,8 @@ import com.azhon.appupdate.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
 
 /**
  * 项目名:    AppUpdate
@@ -60,11 +60,7 @@ public class UpdateConfiguration {
      * 是否强制升级(默认为false)
      */
     private boolean forcedUpgrade = false;
-    /**
-     * 是否使用AppUpdate平台(默认为true)
-     * {@see <a href=http://azhong.tk:8088/app/#/ />}
-     */
-    private boolean usePlatform = true;
+
     /**
      * 内置对话框背景图片资源id （图片规范参照demo中的示例图大小）
      */
@@ -284,20 +280,5 @@ public class UpdateConfiguration {
      */
     public OnButtonClickListener getOnButtonClickListener() {
         return onButtonClickListener;
-    }
-
-    /**
-     * 设置是否上报数据至平台
-     */
-    public UpdateConfiguration setUsePlatform(boolean usePlatform) {
-        this.usePlatform = usePlatform;
-        return this;
-    }
-
-    /**
-     * 获取是否上报数据至平台
-     */
-    public boolean isUsePlatform() {
-        return usePlatform;
     }
 }
