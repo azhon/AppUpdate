@@ -83,7 +83,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
      * 全部下载
      */
     private void fullDownload() {
-        listener.start();
+        if (listener != null) listener.start();
         try {
             URL url = new URL(apkUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -104,15 +104,15 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                     //将获取到的流写入文件中
                     stream.write(buffer, 0, len);
                     progress += len;
-                    listener.downloading(length, progress);
+                    if (listener != null) listener.downloading(length, progress);
                 }
                 if (shutdown) {
                     //取消了下载 同时再恢复状态
                     shutdown = false;
                     LogUtil.d(TAG, "fullDownload: 取消了下载");
-                    listener.cancel();
+                    if (listener != null) listener.cancel();
                 } else {
-                    listener.done(file);
+                    if (listener != null) listener.done(file);
                 }
                 //完成io操作,释放资源
                 stream.flush();
@@ -126,11 +126,12 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
                 LogUtil.d(TAG, "fullDownload: 当前地址是重定向Url，定向后的地址：" + apkUrl);
                 fullDownload();
             } else {
-                listener.error(new SocketTimeoutException("下载失败：Http ResponseCode = " + con.getResponseCode()));
+                if (listener != null)
+                    listener.error(new SocketTimeoutException("下载失败：Http ResponseCode = " + con.getResponseCode()));
             }
             con.disconnect();
         } catch (Exception e) {
-            listener.error(e);
+            if (listener != null) listener.error(e);
             e.printStackTrace();
         }
     }
