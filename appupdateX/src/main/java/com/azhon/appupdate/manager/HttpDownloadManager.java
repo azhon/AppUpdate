@@ -33,9 +33,20 @@ import java.util.concurrent.TimeUnit;
 public class HttpDownloadManager extends BaseHttpDownloadManager {
 
     private static final String TAG = Constant.TAG + "HttpDownloadManager";
+    private String apkUrl;
+    private String apkName;
     private boolean shutdown = false;
-    private String apkUrl, apkName, downloadPath;
+    private final String downloadPath;
     private OnDownloadListener listener;
+    private final ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1,
+            0L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactory() {
+        @Override
+        public Thread newThread(@NonNull Runnable r) {
+            Thread thread = new Thread(r);
+            thread.setName(Constant.THREAD_NAME);
+            return thread;
+        }
+    });
 
     public HttpDownloadManager(String downloadPath) {
         this.downloadPath = downloadPath;
@@ -46,15 +57,6 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
         this.apkUrl = apkUrl;
         this.apkName = apkName;
         this.listener = listener;
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<Runnable>(), new ThreadFactory() {
-            @Override
-            public Thread newThread(@NonNull Runnable r) {
-                Thread thread = new Thread(r);
-                thread.setName(Constant.THREAD_NAME);
-                return thread;
-            }
-        });
         executor.execute(runnable);
     }
 
@@ -66,6 +68,7 @@ public class HttpDownloadManager extends BaseHttpDownloadManager {
     @Override
     public void release() {
         listener = null;
+        executor.shutdown();
     }
 
     private Runnable runnable = new Runnable() {
