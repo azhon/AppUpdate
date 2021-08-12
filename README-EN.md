@@ -103,7 +103,7 @@ allprojects {
 - `app/build.gradle`
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:3.0.4'
+implementation 'com.github.azhon:AppUpdate:3.0.5'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -145,9 +145,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v3.0.3 (2020/12/24)
+* v3.0.5 (2021/08/15)
 
-  *  [New] add whether to use AppUpdate website switch
+  *  [New] Optimize download thread pool
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 

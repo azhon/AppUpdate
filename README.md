@@ -113,7 +113,7 @@ allprojects {
 - `app/build.gradle`添加依赖
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:3.0.4'
+implementation 'com.github.azhon:AppUpdate:3.0.5'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -156,9 +156,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### 版本更新记录
 
-* v3.0.4（2021/05/07）
+* v3.0.5（2021/08/12）
 
-  * [新增] 迁移至jitpack
+  * [修复] 优化下载线程池
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
