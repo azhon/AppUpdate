@@ -109,12 +109,17 @@ implementation 'com.github.azhon:AppUpdate:3.0.5'
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
+UpdateConfiguration configuration = new UpdateConfiguration()
+
 DownloadManager manager = DownloadManager.getInstance(this);
 manager.setApkName("appupdate.apk")
         .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
         .setSmallIcon(R.mipmap.ic_launcher)
-        //Can be set, can not be set
+        //Optional parameters
         .setConfiguration(configuration)
+        //If this parameter is set, it will automatically determine whether to show tip dialog
+        .setApkVersionCode(2)
+        .setApkDescription("description...")
         .download();
 ```
 
