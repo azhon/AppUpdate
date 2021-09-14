@@ -10,8 +10,6 @@
 
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 
-[![Stargazers over time](https://starchart.cc/azhon/AppUpdate.svg)](https://starchart.cc/azhon/AppUpdate)
-
 ## 扫码加入QQ群(群号：828385813)
 
 <img
@@ -119,10 +117,17 @@ implementation 'com.github.azhon:AppUpdate:3.0.5'
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
+UpdateConfiguration configuration = new UpdateConfiguration()
+
 DownloadManager manager = DownloadManager.getInstance(this);
 manager.setApkName("appupdate.apk")
         .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
         .setSmallIcon(R.mipmap.ic_launcher)
+        //非必须参数
+        .setConfiguration(configuration)
+        //设置了此参数，那么会自动判断是否需要更新弹出提示框
+        .setApkVersionCode(2)
+        .setApkDescription("更新描述信息")
         .download();
 ```
 如果需要显示内置的对话框那么你需要调用`manager.setApkVersionCode()`将新版本的versionCode填进去
