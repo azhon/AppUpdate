@@ -127,7 +127,7 @@ manager.setApkName("appupdate.apk")
         .setConfiguration(configuration)
         //设置了此参数，那么会自动判断是否需要更新弹出提示框
         .setApkVersionCode(2)
-        .setApkDescription("更新描述信息")
+        .setApkDescription("更新描述信息(取服务端返回数据)")
         .download();
 ```
 如果需要显示内置的对话框那么你需要调用`manager.setApkVersionCode()`将新版本的versionCode填进去
