@@ -17,8 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.azhon.appupdate.R;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.listener.OnButtonClickListener;
@@ -31,6 +29,8 @@ import com.azhon.appupdate.utils.DensityUtil;
 import com.azhon.appupdate.utils.ScreenUtil;
 
 import java.io.File;
+
+import androidx.annotation.NonNull;
 
 /**
  * 项目名:    AppUpdate
@@ -49,6 +49,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
     private DownloadManager manager;
     private boolean forcedUpgrade;
     private Button update;
+    private Button btn_background;
     private NumberProgressBar progressBar;
     private OnButtonClickListener buttonClickListener;
     private int dialogImage, dialogButtonTextColor, dialogButtonColor, dialogProgressBarColor;
@@ -87,11 +88,15 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
         TextView size = view.findViewById(R.id.tv_size);
         TextView description = view.findViewById(R.id.tv_description);
         progressBar = view.findViewById(R.id.np_bar);
-        progressBar.setVisibility(forcedUpgrade ? View.VISIBLE : View.GONE);
+//        progressBar.setVisibility(forcedUpgrade ? View.VISIBLE : View.GONE);
+        progressBar.setVisibility(View.GONE);
+        btn_background = view.findViewById(R.id.btn_background);
         update = view.findViewById(R.id.btn_update);
         update.setTag(0);
+        btn_background.setTag(1);
         View line = view.findViewById(R.id.line);
         update.setOnClickListener(this);
+        btn_background.setOnClickListener(this);
         ibClose.setOnClickListener(this);
         //自定义
         if (dialogImage != -1) {
@@ -141,7 +146,7 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
     private void setWindowSize(Context context) {
         Window dialogWindow = this.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.width = (int) (ScreenUtil.getWith(context) * 0.7f);
+        lp.width = (int) (ScreenUtil.getWith(context) * 0.8f);
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.gravity = Gravity.CENTER;
         dialogWindow.setAttributes(lp);
@@ -163,17 +168,22 @@ public class UpdateDialog extends Dialog implements View.OnClickListener, OnDown
                 installApk();
                 return;
             }
+            progressBar.setVisibility(View.VISIBLE);
             if (forcedUpgrade) {
                 update.setEnabled(false);
                 update.setText(R.string.background_downloading);
             } else {
-                dismiss();
+                update.setVisibility(View.GONE);
+                btn_background.setVisibility(View.VISIBLE);
+//                dismiss();
             }
             //回调点击事件
             if (buttonClickListener != null) {
                 buttonClickListener.onButtonClick(OnButtonClickListener.UPDATE);
             }
             context.startService(new Intent(context, DownloadService.class));
+        } else if (id == R.id.btn_background) {
+            dismiss();
         }
     }
 

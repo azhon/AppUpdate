@@ -60,6 +60,7 @@
 
         <com.azhon.appupdate.dialog.NumberProgressBar
             android:id="@+id/np_bar"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -76,6 +77,20 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/bg_button"
             android:text="@string/update"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_background"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/background_update"
             android:textAllCaps="false"
             android:textColor="@android:color/white" />
     </LinearLayout>
