@@ -11,5 +11,6 @@
     <string name="dialog_new">The new version v%s can be downloaded!</string>
     <string name="dialog_new_size">New version size：%sM</string>
     <string name="update">Update</string>
+    <string name="background_update">background update</string>
 
 </resources>
