@@ -1,6 +1,6 @@
-## [English Doc](https://github.com/azhon/AppUpdate/blob/master/README-EN.md)
+## [English Doc](https://github.com/azhon/AppUpdate/blob/main/README-EN.md)
 
-<p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
+<p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
   <img src="https://img.shields.io/badge/jitpack%20version-3.0.5-brightgreen.svg">
@@ -13,7 +13,7 @@
 ## 扫码加入QQ群(群号：828385813)
 
 <img
-src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
+src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ## 目录
 
@@ -27,9 +27,9 @@ src="https://github.com/azhon/AppUpdate/blob/master/img/qq_group.png">
 
 ### 效果图
 
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_2.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_4.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/zh/zh_6.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_2.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_4.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_6.png" width="300">
 
 ### 功能介绍
 
@@ -75,14 +75,14 @@ allprojects {
 implementation 'com.github.azhon:AppUpdate:3.0.5'
 ```
 
-#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
 UpdateConfiguration configuration = new UpdateConfiguration()
 
 DownloadManager manager = DownloadManager.getInstance(this);
 manager.setApkName("appupdate.apk")
-        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/main/apk/appupdate.apk")
         .setSmallIcon(R.mipmap.ic_launcher)
         //非必须参数
         .setConfiguration(configuration)
@@ -132,4 +132,4 @@ public class MyDownload extends BaseHttpDownloadManager {}
 > 如果这个库有帮助到你并且你很想支持库的后续开发和维护，那么你可以扫描下方二维码随意打赏我，我将不胜感激[赞赏列表](https://github.com/azhon/AppUpdate/wiki/%E8%B5%9E%E8%B5%8F%E5%88%97%E8%A1%A8)
 
 
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/money.jpg" width="600"/>
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/money.jpg" width="600"/>

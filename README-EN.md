@@ -1,6 +1,6 @@
-## [中文 文档](https://github.com/azhon/AppUpdate/blob/master/README.md)
+## [中文 文档](https://github.com/azhon/AppUpdate/blob/main/README.md)
 
-<p align="center"><img src="https://github.com/azhon/AppUpdate/blob/master/img/logo.png"></p>
+<p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
   <img src="https://img.shields.io/badge/jitpack%20version-3.0.5-brightgreen.svg">
@@ -24,9 +24,9 @@
 
 ### Rendering
 
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_2.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_4.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/master/img/en/en_6.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_2.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_4.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_6.png" width="300">
 
 ### Function introduction
 
@@ -106,14 +106,14 @@ allprojects {
 implementation 'com.github.azhon:AppUpdate:3.0.5'
 ```
 
-#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/master/app/src/main/java/com/azhon/app/MainActivity.java)
+#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.java)
 
 ```java
 UpdateConfiguration configuration = new UpdateConfiguration()
 
 DownloadManager manager = DownloadManager.getInstance(this);
 manager.setApkName("appupdate.apk")
-        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/master/apk/appupdate.apk")
+        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/main/apk/appupdate.apk")
         .setSmallIcon(R.mipmap.ic_launcher)
         //Optional parameters
         .setConfiguration(configuration)
