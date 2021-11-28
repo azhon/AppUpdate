@@ -58,8 +58,8 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 #### 第一步：
 
-- `root/build.gradle`添加如下代码
-
+##### 添加`maven`参考地址
+- `gradle:7.0.0`以下在`root/build.gradle`添加如下代码
 ```groovy
 allprojects {
     repositories {
@@ -68,8 +68,17 @@ allprojects {
     }
 }
 ```
+- `gradle:7.0.0`或以上在`setting.gradle`中添加如下代码
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+````
 
-- `app/build.gradle`添加依赖
+##### `app/build.gradle`添加依赖
 
 ```groovy
 implementation 'com.github.azhon:AppUpdate:3.0.5'
