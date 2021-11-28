@@ -58,7 +58,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 #### 第一步：
 
-##### 添加`maven`参考地址
+##### 添加`maven`仓库地址
 - `gradle:7.0.0`以下在`root/build.gradle`添加如下代码
 ```groovy
 allprojects {
