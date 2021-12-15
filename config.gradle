@@ -3,7 +3,7 @@ ext {
     minSdkVersion = 15
     targetSdkVersion = 29
     versionCode = 33
-    versionName = "3.0.3"
+    versionName = "3.0.6"
 
     //新版本描述信息
     versionDesc = "1、增加是否使用AppUpdate开关"
