@@ -8,13 +8,11 @@ import android.widget.Toast;
 import com.azhon.appupdate.R;
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.config.UpdateConfiguration;
-import com.azhon.appupdate.dialog.UpdateDialog;
+import com.azhon.appupdate.dialog.UpdateDialogActivity;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.LogUtil;
-
-import java.lang.ref.SoftReference;
 
 /**
  * 项目名:    AppUpdate
@@ -34,7 +32,7 @@ public class DownloadManager {
     /**
      * 上下文
      */
-    private static SoftReference<Context> context;
+    private Context context;
     /**
      * 要更新apk的下载地址
      */
@@ -86,11 +84,6 @@ public class DownloadManager {
      */
     private boolean state = false;
 
-    /**
-     * 内置对话框
-     */
-    private UpdateDialog dialog;
-
     private static DownloadManager manager;
 
     /**
@@ -100,15 +93,18 @@ public class DownloadManager {
      * @return {@link DownloadManager}
      */
     public static DownloadManager getInstance(Context context) {
-        DownloadManager.context = new SoftReference<>(context);
         if (manager == null) {
             synchronized (DownloadManager.class) {
                 if (manager == null) {
-                    manager = new DownloadManager();
+                    manager = new DownloadManager(context);
                 }
             }
         }
         return manager;
+    }
+
+    private DownloadManager(Context context) {
+        this.context = context.getApplicationContext();
     }
 
     /**
@@ -310,13 +306,6 @@ public class DownloadManager {
     }
 
     /**
-     * 获取内置对话框
-     */
-    public UpdateDialog getDefaultDialog() {
-        return dialog;
-    }
-
-    /**
      * 开始下载
      */
     public void download() {
@@ -325,15 +314,15 @@ public class DownloadManager {
             return;
         }
         if (checkVersionCode()) {
-            context.get().startService(new Intent(context.get(), DownloadService.class));
+            context.startService(new Intent(context, DownloadService.class));
         } else {
             //对版本进行判断，是否显示升级对话框
-            if (apkVersionCode > ApkUtil.getVersionCode(context.get())) {
-                dialog = new UpdateDialog(context.get());
-                dialog.show();
+            if (apkVersionCode > ApkUtil.getVersionCode(context)) {
+                context.startActivity(new Intent(context, UpdateDialogActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             } else {
                 if (showNewerToast) {
-                    Toast.makeText(context.get(), R.string.latest_version, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.latest_version, Toast.LENGTH_SHORT).show();
                 }
                 LogUtil.e(TAG, "当前已是最新版本");
             }
@@ -372,13 +361,13 @@ public class DownloadManager {
             LogUtil.e(TAG, "apkName must endsWith .apk!");
             return false;
         }
-        downloadPath = context.get().getExternalCacheDir().getPath();
+        downloadPath = context.getExternalCacheDir().getPath();
         if (smallIcon == -1) {
             LogUtil.e(TAG, "smallIcon can not be empty!");
             return false;
         }
         //加载用户设置的authorities
-        Constant.AUTHORITIES = context.get().getPackageName() + ".fileProvider";
+        Constant.AUTHORITIES = context.getPackageName() + ".fileProvider";
         //如果用户没有进行配置，则使用默认的配置
         if (configuration == null) {
             configuration = new UpdateConfiguration();
@@ -402,10 +391,21 @@ public class DownloadManager {
     }
 
     /**
-     * 释放资源
+     * 宿主Activity被销毁，需要移除
+     * {@link com.azhon.appupdate.listener.OnDownloadListener}
+     * {@link com.azhon.appupdate.listener.OnButtonClickListener}
+     */
+    public void onDestroy() {
+        if (configuration != null) {
+            configuration.setButtonClickListener(null);
+            configuration.getOnDownloadListener().clear();
+        }
+    }
+
+    /**
+     * 释放资源，框架内部使用
      */
     public void release() {
-        context.clear();
         context = null;
         manager = null;
         if (configuration != null) {
