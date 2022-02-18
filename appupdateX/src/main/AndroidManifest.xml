@@ -18,5 +18,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/app_update_file" />
         </provider>
+        <activity
+            android:name=".dialog.UpdateDialogActivity"
+            android:theme="@style/UpdateDialog" />
     </application>
 </manifest>
