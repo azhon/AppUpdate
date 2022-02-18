@@ -167,4 +167,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onButtonClick(int id) {
         Log.e("TAG", String.valueOf(id));
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (manager != null) {
+            manager.onDestroy();
+        }
+    }
 }
