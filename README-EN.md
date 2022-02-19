@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-3.0.6-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-3.0.7-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -103,7 +103,7 @@ allprojects {
 - `app/build.gradle`
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:3.0.6'
+implementation 'com.github.azhon:AppUpdate:3.0.7'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.java)
@@ -158,9 +158,9 @@ public class MyDownload extends BaseHttpDownloadManager {}
 
 ### Version update record
 
-* v3.0.6 (2021/12/15)
+* v3.0.7 (2022/02/19)
 
-  *  [Fix] Android 10 or higher sending notification message bug
+  *  [Fix] Fix the problem of content leakage when the host activity is destroy
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
