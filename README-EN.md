@@ -44,7 +44,7 @@
 * [x] Support download completion Delete old APK file after opening new version
 * [x] Download using HttpURLConnection, no other third-party framework is integrated
 
-### [Demo download experience](https://github.com/azhon/AppUpdate/releases/download/3.0.1/appupdate.apk)
+### [Demo download experience](https://github.com/azhon/AppUpdate/releases/tag/3.0.7)
 
 ### DownloadManager：Configuration Doc
 
