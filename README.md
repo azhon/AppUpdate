@@ -51,7 +51,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ### Demo下载体验
 
- [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/V3.0.1)
+ [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/3.0.7)
 
 
 ### 使用步骤
