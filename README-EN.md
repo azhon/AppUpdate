@@ -121,14 +121,6 @@ manager.setApkName("appupdate.apk")
         .setApkVersionCode(2)
         .setApkDescription("description...")
         .download();
-
- @Override
- protected void onDestroy() {
-     super.onDestroy();
-     if (manager != null) {
-         manager.onDestroy();
-     }
- }
 ```
 
 #### Step3：ProGuard Rules
