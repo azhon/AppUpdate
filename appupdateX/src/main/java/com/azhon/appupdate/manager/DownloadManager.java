@@ -1,5 +1,6 @@
 package com.azhon.appupdate.manager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -9,10 +10,13 @@ import com.azhon.appupdate.R;
 import com.azhon.appupdate.base.BaseHttpDownloadManager;
 import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.dialog.UpdateDialogActivity;
+import com.azhon.appupdate.listener.LifecycleCallbacksAdapter;
 import com.azhon.appupdate.service.DownloadService;
 import com.azhon.appupdate.utils.ApkUtil;
 import com.azhon.appupdate.utils.Constant;
 import com.azhon.appupdate.utils.LogUtil;
+
+import androidx.annotation.NonNull;
 
 /**
  * 项目名:    AppUpdate
@@ -89,22 +93,32 @@ public class DownloadManager {
     /**
      * 框架初始化
      *
-     * @param context 上下文
+     * @param activity 上下文
      * @return {@link DownloadManager}
      */
-    public static DownloadManager getInstance(Context context) {
+    public static DownloadManager getInstance(Activity activity) {
         if (manager == null) {
             synchronized (DownloadManager.class) {
                 if (manager == null) {
-                    manager = new DownloadManager(context);
+                    manager = new DownloadManager(activity);
                 }
             }
         }
         return manager;
     }
 
-    private DownloadManager(Context context) {
-        this.context = context.getApplicationContext();
+    private DownloadManager(Activity activity) {
+        this.context = activity.getApplicationContext();
+        final String className = activity.getClass().getName();
+        activity.getApplication().registerActivityLifecycleCallbacks(new LifecycleCallbacksAdapter() {
+            @Override
+            public void onActivityDestroyed(@NonNull Activity activity) {
+                super.onActivityDestroyed(activity);
+                if (className.equals(activity.getClass().getName())) {
+                    onDestroy();
+                }
+            }
+        });
     }
 
     /**
@@ -392,10 +406,8 @@ public class DownloadManager {
 
     /**
      * 宿主Activity被销毁，需要移除
-     * {@link com.azhon.appupdate.listener.OnDownloadListener}
-     * {@link com.azhon.appupdate.listener.OnButtonClickListener}
      */
-    public void onDestroy() {
+    private void onDestroy() {
         if (configuration != null) {
             configuration.setButtonClickListener(null);
             configuration.getOnDownloadListener().clear();

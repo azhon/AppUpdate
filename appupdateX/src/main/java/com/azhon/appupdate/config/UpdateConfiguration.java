@@ -43,7 +43,7 @@ public class UpdateConfiguration {
     /**
      * 下载过程回调
      */
-    private List<OnDownloadListener> onDownloadListeners = new ArrayList<>();
+    private final List<OnDownloadListener> onDownloadListeners = new ArrayList<>();
     /**
      * 按钮点击事件回调
      */
