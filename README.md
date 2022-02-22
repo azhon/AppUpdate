@@ -99,15 +99,6 @@ manager.setApkName("appupdate.apk")
         .setApkVersionCode(2)
         .setApkDescription("更新描述信息(取服务端返回数据)")
         .download();
-
-//解决宿主关闭内存泄露问题
- @Override
- protected void onDestroy() {
-     super.onDestroy();
-     if (manager != null) {
-         manager.onDestroy();
-     }
- }
 ```
 如果需要显示内置的对话框那么你需要调用`manager.setApkVersionCode()`将新版本的versionCode填进去
 
