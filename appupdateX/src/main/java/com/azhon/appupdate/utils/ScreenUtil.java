@@ -22,7 +22,7 @@ public final class ScreenUtil {
      * @param context 上下文
      * @return px
      */
-    public static int getWith(Context context) {
+    public static int getWidth(Context context) {
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
         return dm.widthPixels;
     }
