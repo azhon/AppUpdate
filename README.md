@@ -8,6 +8,7 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
+## [需要上架至GooglePlay的App请主动移除此SDK依赖，否则可能导致您的应用被下架或者封禁](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en&ref_topic=9877467)
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 
 ## 扫码加入QQ群(群号：828385813)
