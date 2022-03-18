@@ -22,7 +22,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="40dp"
         android:text="@string/layout_msg"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/purple_200" />
 
     <Button
         android:id="@+id/btn_1"

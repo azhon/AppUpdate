@@ -130,7 +130,7 @@ public class UpdateDialogActivity extends AppCompatActivity implements View.OnCl
     private void setWindowSize() {
         Window dialogWindow = this.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.width = (int) (ScreenUtil.getWith(this) * 0.7f);
+        lp.width = (int) (ScreenUtil.getWidth(this) * 0.7f);
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.gravity = Gravity.CENTER;
         dialogWindow.setAttributes(lp);
