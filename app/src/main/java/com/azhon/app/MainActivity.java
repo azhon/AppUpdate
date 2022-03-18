@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * 包名       com.azhon.app
  * 文件名:    MyDownload
  * 创建时间:  2018/1/27 on 19:25
- * 描述:     TODO 一个简单好用的版本更新库
+ * 描述:     一个简单好用的版本更新库
  * <p/>
  * <div>
  * 由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //设置是否提示后台下载toast
                 .setShowBgdToast(false)
                 //设置强制更新
-                .setForcedUpgrade(false)
+                .setForcedUpgrade(true)
                 //设置对话框按钮的点击监听
                 .setButtonClickListener(this)
                 //设置下载过程的监听
