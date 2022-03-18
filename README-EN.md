@@ -32,7 +32,6 @@
 
 * [x] Support AndroidX
 * [x] Support for custom download process
-* [x] Support Device >= Android M Dynamic Access Request
 * [x] Support notification progress display (or custom display progress)
 * [x] Support Android N
 * [x] Support Android O
