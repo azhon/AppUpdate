@@ -21,7 +21,6 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 * [效果图](#效果图)
 * [功能介绍](#功能介绍)
 * [Demo下载体验](#demo下载体验)
-* [DownloadManager配置](https://github.com/azhon/AppUpdate/wiki)
 * [使用步骤](#使用步骤)
 * [使用技巧](#使用技巧)
 * [版本更新记录](#版本更新记录)
@@ -134,7 +133,7 @@ class MyDownload : BaseHttpDownloadManager() {}
 
   * [重构] 使用Kotlin和协程进行重构
 
-* [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
+* [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
 ### 赞赏
 > 如果这个库有帮助到你并且你很想支持库的后续开发和维护，那么你可以扫描下方二维码随意打赏我，我将不胜感激[赞赏列表](https://github.com/azhon/AppUpdate/wiki/%E8%B5%9E%E8%B5%8F%E5%88%97%E8%A1%A8)
