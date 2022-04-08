@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-3.0.7-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.0.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -51,7 +51,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ### Demo下载体验
 
- [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/3.0.7)
+ [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/4.0.0)
 
 
 ### 使用步骤
@@ -81,24 +81,23 @@ dependencyResolutionManagement {
 ##### `app/build.gradle`添加依赖
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:3.0.7'
+implementation 'com.github.azhon:AppUpdate:4.0.0'
 ```
 
-#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.java)
+#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
 
 ```java
-UpdateConfiguration configuration = new UpdateConfiguration()
-
-DownloadManager manager = DownloadManager.getInstance(this);
-manager.setApkName("appupdate.apk")
-        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/main/apk/appupdate.apk")
-        .setSmallIcon(R.mipmap.ic_launcher)
-        //非必须参数
-        .setConfiguration(configuration)
-        //设置了此参数，那么会自动判断是否需要更新弹出提示框
-        .setApkVersionCode(2)
-        .setApkDescription("更新描述信息(取服务端返回数据)")
-        .download();
+val manager = DownloadManager.Builder(this).run {
+    apkUrl("your apk url")
+    apkName("appupdate.apk")
+    smallIcon(R.mipmap.ic_launcher)
+    //设置了此参数，那么会自动判断是否需要更新弹出提示框
+    apkVersionCode(2)
+    apkDescription("更新描述信息(取服务端返回数据)")
+    //省略一些非必须参数...
+    build()
+}
+manager?.download()
 ```
 如果需要显示内置的对话框那么你需要调用`manager.setApkVersionCode()`将新版本的versionCode填进去
 
@@ -119,21 +118,21 @@ manager.setApkName("appupdate.apk")
 
 ```java
 //旧版本apk的文件保存地址
-boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
+val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/appupdate.apk")
 ```
 
 * 温馨提示：升级对话框中的内容是可以上下滑动的哦！
 * 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager` 并使用listener更新进度
 
 ```java
-public class MyDownload extends BaseHttpDownloadManager {}
+class MyDownload : BaseHttpDownloadManager() {}
 ```
 
 ### 版本更新记录
 
-* v3.0.7（2022/02/19）
+* v4.0.0（2022/04/08）
 
-  * [修复] 修复宿主页面关闭内容泄漏问题
+  * [重构] 使用Kotlin和协程进行重构
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/更新日志)
 

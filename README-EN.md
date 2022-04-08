@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-15%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-3.0.7-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.0.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -15,8 +15,6 @@
 * Rendering
 * Function introduction
 * Demo download experience
-* DownloadManager
-* UpdateConfiguration
 * Steps for usage
 * Skills
 * Version update record
@@ -43,46 +41,7 @@
 * [x] Support download completion Delete old APK file after opening new version
 * [x] Download using HttpURLConnection, no other third-party framework is integrated
 
-### [Demo download experience](https://github.com/azhon/AppUpdate/releases/tag/3.0.7)
-
-### DownloadManager：Configuration Doc
-
-> Initial use`DownloadManager.getInstance(this)`
-
-| Attributes     | Description                                                                                                                  | Default Value         | Must be set |
-|:-------------- |:---------------------------------------------------------------------------------------------------------------------------- |:--------------------- |:----------- |
-| context        | Context                                                                                                                      | null                  | true        |
-| apkUrl         | Apk download Url                                                                                                             | null                  | true        |
-| apkName        | Apk download  name                                                                                                           | null                  | true        |
-| downloadPath   | apk download path(2.7.0 or higher is deprecated)                                                                             | getExternalCacheDir() | false       |
-| showNewerToast | Whether to prompt the user<br> "currently the latest version" toast                                                          | false                 | false       |
-| smallIcon      | Notification icon (resource id)                                                                                              | -1                    | true        |
-| configuration  | Additional configuration of this library                                                                                     | null                  | false       |
-| apkVersionCode | new apk versionCode <br>(If set, the version will be judged in the library,<br>The following properties also need to be set) | Integer.MIN_VALUE     | false       |
-| apkVersionName | new apk versionName                                                                                                          | null                  | false       |
-| apkDescription | Update description                                                                                                           | null                  | false       |
-| apkSize        | New version of the apk size (unit M)                                                                                         | null                  | false       |
-| apkMD5         | Md5 (32 bit) of the new apk                                                                                                  | null                  | false       |
-
-### UpdateConfiguration：Configuration Doc
-
-| Attributes            | Description                                                                             | Default Value              |
-|:--------------------- |:--------------------------------------------------------------------------------------- |:-------------------------- |
-| notifyId              | notification id                                                                         | 1011                       |
-| notificationChannel   | Adapt to Android O  notifications                                                       | See the source for details |
-| httpManager           | Set up your own download process                                                        | null                       |
-| enableLog             | Whether need to log output                                                              | true                       |
-| onDownloadListener    | Callback of the download process                                                        | null                       |
-| jumpInstallPage       | Whether the download completes automatically<br> pops up the installation page          | true                       |
-| showNotification      | Whether to display the progress of the<br> notification bar (background download toast) | true                       |
-| forcedUpgrade         | Whether to force an upgrade                                                             | false                      |
-| showBgdToast          | Whether need to “Downloading new version in the background…”                            | true                       |
-| usePlatform           | Whether to use AppUpdate website                                                        | true                       |
-| onButtonClickListener | Button click event listener                                                             | null                       |
-| dialogImage           | Dialog background image resource<br> (picture specification reference demo)             | -1                         |
-| dialogButtonColor     | The color of the dialog button                                                          | -1                         |
-| dialogButtonTextColor | The text color of the dialog button                                                     | -1                         |
-| dialogProgressBarColor | Dialog progress bar and text color                                                     | -1                         |
+### [Demo download experience](https://github.com/azhon/AppUpdate/releases/tag/4.0.0)
 
 ### Steps for usage
 
@@ -102,24 +61,23 @@ allprojects {
 - `app/build.gradle`
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:3.0.7'
+implementation 'com.github.azhon:AppUpdate:4.0.0'
 ```
 
-#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.java)
+#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
 
 ```java
-UpdateConfiguration configuration = new UpdateConfiguration()
-
-DownloadManager manager = DownloadManager.getInstance(this);
-manager.setApkName("appupdate.apk")
-        .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/main/apk/appupdate.apk")
-        .setSmallIcon(R.mipmap.ic_launcher)
-        //Optional parameters
-        .setConfiguration(configuration)
-        //If this parameter is set, it will automatically determine whether to show tip dialog
-        .setApkVersionCode(2)
-        .setApkDescription("description...")
-        .download();
+val manager = DownloadManager.Builder(this).run {
+    apkUrl("your apk url")
+    apkName("appupdate.apk")
+    smallIcon(R.mipmap.ic_launcher)
+    //If this parameter is set, it will automatically determine whether to show tip dialog
+    apkVersionCode(2)
+    apkDescription("description...")
+    //Optional parameters...
+    build()
+}
+manager?.download()
 ```
 
 #### Step3：ProGuard Rules
@@ -137,21 +95,21 @@ manager.setApkName("appupdate.apk")
 
 ```java
 //Old version apk file save path
-boolean b = ApkUtil.deleteOldApk(this, getExternalCacheDir().getPath() + "/appupdate.apk");
+val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/appupdate.apk")
 ```
 
 * Tips: The contents of the upgrade dialog can be swiped up and down！
 * If you need to implement your own set of download process, you only need to `extends` `BaseHttpDownloadManager` and update the progress with listener.
 
 ```java
-public class MyDownload extends BaseHttpDownloadManager {}
+class MyDownload : BaseHttpDownloadManager() {}
 ```
 
 ### Version update record
 
-* v3.0.7 (2022/02/19)
+* v4.0.0 (2022/04/08)
 
-  *  [Fix] Fix the problem of content leakage when the host activity is destroy
+  *  [Refactor] Refactoring with Kotlin and coroutines
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
 
