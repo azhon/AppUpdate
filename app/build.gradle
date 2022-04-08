@@ -16,7 +16,7 @@ android {
     compileSdk 31
     defaultConfig {
         applicationId "com.azhon.app"
-        minSdk 15
+        minSdk 16
         targetSdk 31
         versionCode 1
         versionName "1.0"
