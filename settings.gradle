@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "AppUpdate"
-include ':app', 'appupdateX'
+include ':app'
+include ':appupdate'
