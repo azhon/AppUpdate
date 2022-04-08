@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.azhon.app.MainActivity">
+    tools:context=".MainActivity">
 
-    <com.azhon.appupdate.dialog.NumberProgressBar
+    <com.azhon.appupdate.view.NumberProgressBar
         android:id="@+id/number_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,5 +59,4 @@
         android:layout_marginHorizontal="16dp"
         android:text="@string/layout_cancel"
         android:textAllCaps="false" />
-
 </LinearLayout>
