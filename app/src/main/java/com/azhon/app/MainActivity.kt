@@ -8,12 +8,9 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.azhon.appupdate.listener.OnButtonClickListener
-import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.listener.OnDownloadListenerAdapter
 import com.azhon.appupdate.manager.DownloadManager
-import com.azhon.appupdate.util.ApkUtil
 import com.azhon.appupdate.view.NumberProgressBar
-import java.io.File
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickListener {
 
