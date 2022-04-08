@@ -1,0 +1,15 @@
+<resources>
+    <string name="latest_version">Currently the latest version!</string>
+    <string name="start_download">Start download</string>
+    <string name="start_download_hint">You can check the download progress later</string>
+    <string name="start_downloading">Downloading new version</string>
+    <string name="download_completed">Download completed</string>
+    <string name="click_hint">Click to install</string>
+    <string name="download_error">Download error</string>
+    <string name="continue_downloading">Click to continue downloading</string>
+    <string name="background_downloading">Downloading new version in the background…</string>
+    <string name="dialog_new">The new version v%s can be downloaded!</string>
+    <string name="dialog_new_size">New version size：%sM</string>
+    <string name="update">Update</string>
+
+</resources>
