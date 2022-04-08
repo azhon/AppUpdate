@@ -1,0 +1,14 @@
+<resources>
+    <string name="latest_version">当前已是最新版本!</string>
+    <string name="start_download">开始下载</string>
+    <string name="start_download_hint">可稍后查看下载进度</string>
+    <string name="start_downloading">正在下载新版本</string>
+    <string name="download_completed">下载完成</string>
+    <string name="click_hint">点击进行安装</string>
+    <string name="download_error">下载出错</string>
+    <string name="continue_downloading">点击继续下载</string>
+    <string name="background_downloading">正在后台下载新版本…</string>
+    <string name="dialog_new">发现新版本v%s可以下载啦！</string>
+    <string name="dialog_new_size">新版本大小：%sM</string>
+    <string name="update">升级</string>
+</resources>

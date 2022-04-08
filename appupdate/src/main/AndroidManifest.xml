@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.azhon.appupdate">
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:usesCleartextTraffic="true">
+        <service android:name=".service.DownloadService" />
+
+        <provider
+            android:name="com.azhon.appupdate.config.AppUpdateFileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/app_update_file" />
+        </provider>
+        <activity
+            android:name=".view.UpdateDialogActivity"
+            android:theme="@style/UpdateDialog" />
+    </application>
+</manifest>
