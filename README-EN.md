@@ -111,7 +111,7 @@ class MyDownload : BaseHttpDownloadManager() {}
 
   *  [Refactor] Refactoring with Kotlin and coroutines
 
-#### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/更新日志)
+#### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 
 ### End
 
