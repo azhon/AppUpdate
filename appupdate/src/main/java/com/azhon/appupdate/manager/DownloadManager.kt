@@ -40,7 +40,6 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         }
     }
 
-    @Transient
     var application: Application = builder.application
     var contextClsName: String = builder.contextClsName
     var downloadState: Boolean = false
