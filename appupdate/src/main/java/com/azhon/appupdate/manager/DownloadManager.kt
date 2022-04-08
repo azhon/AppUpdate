@@ -74,8 +74,8 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         apkName = builder.apkName
         apkVersionCode = builder.apkVersionCode
         apkVersionName = builder.apkVersionName
-        downloadPath = builder.downloadPath
-            ?: "/storage/emulated/0/Android/data/${application.packageName}/cache"
+        downloadPath =
+            builder.downloadPath ?: String.format(Constant.APK_PATH, application.packageName)
         showNewerToast = builder.showNewerToast
         smallIcon = builder.smallIcon
         apkDescription = builder.apkDescription

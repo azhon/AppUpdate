@@ -46,4 +46,9 @@ object Constant {
      * Compat Android N file uri
      */
     var AUTHORITIES: String? = null
+
+    /**
+     * Apk path
+     */
+    var APK_PATH = "/storage/emulated/0/Android/data/%s/cache"
 }
