@@ -98,7 +98,7 @@ val manager = DownloadManager.Builder(this).run {
 }
 manager?.download()
 ```
-如果需要显示内置的对话框那么你需要调用`manager.setApkVersionCode()`将新版本的versionCode填进去
+如果需要显示内置的对话框那么你需要调用`builder.apkVersionCode()`将新版本的versionCode填进去
 
 #### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
 
@@ -112,7 +112,7 @@ manager?.download()
 * 框架内部支持中/英文 国际化（其他语言只需要在对应的`string.xml`中取相同的名字即可）
 * 如果你需要修改框架内部的一些文字，你只需要在`string.xml`中取相同的名字即可以覆盖框架内设定的
 * 查看版本库中的Log只需要过滤`AppUpdate`开头的Tag
-* 支持校验安装包的MD5避免重复下载，只需要`DownloadManager`设置安装包的MD5即可
+* 支持校验安装包的MD5避免重复下载，只需要`Builder`设置安装包的MD5即可
 * 下载完成 打开新版本后删除旧安装包文件，[实现思路请移步此处](https://github.com/azhon/AppUpdate/wiki/常见问题)
 
 ```java
