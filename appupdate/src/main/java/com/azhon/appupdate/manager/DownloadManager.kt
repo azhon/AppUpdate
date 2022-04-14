@@ -171,7 +171,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
     /**
      * release objects
      */
-    fun release() {
+    internal fun release() {
         instance = null
         clearListener()
     }

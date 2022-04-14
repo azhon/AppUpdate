@@ -1,17 +1,16 @@
 package com.azhon.appupdate.manager
 
 import com.azhon.appupdate.base.BaseHttpDownloadManager
+import com.azhon.appupdate.base.bean.DownloadStatus
 import com.azhon.appupdate.config.Constant
-import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.util.LogUtil
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
-import java.util.concurrent.CancellationException
 
 
 /**
@@ -31,32 +30,22 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
     }
 
     private var shutdown: Boolean = false
-    private var job: Job? = null
 
-    override fun download(apkUrl: String, apkName: String, listener: OnDownloadListener?) {
+    override fun download(apkUrl: String, apkName: String): Flow<DownloadStatus> {
         shutdown = false
-
         File(path, apkName).let {
             if (it.exists()) it.delete()
         }
-        val coroutineName = CoroutineName(Constant.COROUTINE_NAME)
-        job = GlobalScope.launch(Dispatchers.Main + coroutineName) {
-            listener?.start()
-            try {
-                withContext(Dispatchers.IO + coroutineName) {
-                    connectToDownload(apkUrl, apkName, listener)
-                }
-            } catch (e: CancellationException) {
-                if (shutdown) listener?.cancel()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                listener?.error(e)
-            }
-        }
+        return flow {
+            emit(DownloadStatus.Start(Unit))
+            connectToDownload(apkUrl, apkName, this)
+        }.catch {
+            emit(DownloadStatus.Error(it))
+        }.flowOn(Dispatchers.IO)
     }
 
     private suspend fun connectToDownload(
-        apkUrl: String, apkName: String, listener: OnDownloadListener?
+        apkUrl: String, apkName: String, flow: FlowCollector<DownloadStatus>
     ) {
         val con = URL(apkUrl).openConnection() as HttpURLConnection
         con.apply {
@@ -76,15 +65,17 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
             while (inStream.read(buffer).also { len = it } != -1 && !shutdown) {
                 outSteam.write(buffer, 0, len)
                 progress += len
-                withContext(Dispatchers.Main) { listener?.downloading(length, progress) }
+                flow.emit(DownloadStatus.Downloading(length, progress))
             }
             outSteam.run {
                 flush()
                 close()
             }
             inStream.close()
-            if (!shutdown) {
-                withContext(Dispatchers.Main) { listener?.done(file) }
+            if (shutdown) {
+                flow.emit(DownloadStatus.Cancel(Unit))
+            } else {
+                flow.emit(DownloadStatus.Done(file))
             }
         } else if (con.responseCode == HttpURLConnection.HTTP_MOVED_PERM
             || con.responseCode == HttpURLConnection.HTTP_MOVED_TEMP
@@ -95,21 +86,18 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
                 TAG,
                 "The current url is the redirect Url, the redirected url is $locationUrl"
             )
-            connectToDownload(locationUrl, apkName, listener)
+            connectToDownload(locationUrl, apkName, flow)
         } else {
-            withContext(Dispatchers.Main) {
-                listener?.error(SocketTimeoutException("Error: Http response code = ${con.responseCode}"))
-            }
+            val e = SocketTimeoutException("Error: Http response code = ${con.responseCode}")
+            flow.emit(DownloadStatus.Error(e))
         }
         con.disconnect()
     }
 
     override fun cancel() {
         shutdown = true
-        release()
     }
 
     override fun release() {
-        job?.cancel()
     }
 }
