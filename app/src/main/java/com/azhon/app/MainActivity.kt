@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
     }
 
     private fun startUpdate2() {
-        manager?.release()
         progressBar.progress = 0
         manager = DownloadManager.Builder(this).run {
             apkUrl(url)
@@ -71,7 +70,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
 
 
     private fun startUpdate3() {
-        manager?.release()
         manager = DownloadManager.Builder(this).run {
             apkUrl(url)
             apkName("QQ.apk")
@@ -86,7 +84,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
             //flow are unimportant filed
             enableLog(true)
             //httpManager()
-            jumpInstallPage(false)
+            jumpInstallPage(true)
 //            dialogImage(R.drawable.ic_dialog)
 //            dialogButtonColor(Color.parseColor("#E743DA"))
 //            dialogProgressBarColor(Color.parseColor("#E743DA"))

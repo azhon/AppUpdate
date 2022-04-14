@@ -26,6 +26,6 @@ abstract class OnDownloadListenerAdapter : OnDownloadListener {
     override fun cancel() {
     }
 
-    override fun error(e: Exception) {
+    override fun error(e: Throwable) {
     }
 }

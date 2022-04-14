@@ -1,7 +1,9 @@
 package com.azhon.app
 
 import com.azhon.appupdate.base.BaseHttpDownloadManager
-import com.azhon.appupdate.listener.OnDownloadListener
+import com.azhon.appupdate.base.bean.DownloadStatus
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 
 /**
@@ -16,7 +18,11 @@ import com.azhon.appupdate.listener.OnDownloadListener
 
 class MyDownload : BaseHttpDownloadManager() {
 
-    override fun download(apkUrl: String, apkName: String, listener: OnDownloadListener?) {
+
+    override fun download(
+        apkUrl: String, apkName: String
+    ): Flow<DownloadStatus> {
+        return flow { }
     }
 
     override fun cancel() {

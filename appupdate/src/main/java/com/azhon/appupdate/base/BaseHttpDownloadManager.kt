@@ -1,6 +1,7 @@
 package com.azhon.appupdate.base
 
-import com.azhon.appupdate.listener.OnDownloadListener
+import com.azhon.appupdate.base.bean.DownloadStatus
+import kotlinx.coroutines.flow.Flow
 
 /**
  * ProjectName: AppUpdate
@@ -18,9 +19,8 @@ abstract class BaseHttpDownloadManager {
      *
      * @param apkUrl
      * @param apkName
-     * @param listener
      */
-    abstract fun download(apkUrl: String, apkName: String, listener: OnDownloadListener?)
+    abstract fun download(apkUrl: String, apkName: String): Flow<DownloadStatus>
 
     /**
      * cancel download apk

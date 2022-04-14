@@ -39,5 +39,5 @@ interface OnDownloadListener {
      *
      * @param e
      */
-    fun error(e: Exception)
+    fun error(e: Throwable)
 }

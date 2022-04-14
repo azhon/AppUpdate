@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.IBinder
 import android.widget.Toast
 import com.azhon.appupdate.R
+import com.azhon.appupdate.base.bean.DownloadStatus
 import com.azhon.appupdate.config.Constant
 import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.manager.DownloadManager
@@ -14,6 +15,7 @@ import com.azhon.appupdate.util.ApkUtil
 import com.azhon.appupdate.util.FileUtil
 import com.azhon.appupdate.util.LogUtil
 import com.azhon.appupdate.util.NotificationUtil
+import kotlinx.coroutines.*
 import java.io.File
 
 /**
@@ -83,7 +85,18 @@ class DownloadService : Service(), OnDownloadListener {
         if (manager.httpManager == null) {
             manager.httpManager = HttpDownloadManager(manager.downloadPath)
         }
-        manager.httpManager!!.download(manager.apkUrl, manager.apkName, this)
+        GlobalScope.launch(Dispatchers.Main + CoroutineName(Constant.COROUTINE_NAME)) {
+            manager.httpManager!!.download(manager.apkUrl, manager.apkName)
+                .collect {
+                    when (it) {
+                        is DownloadStatus.Start -> start()
+                        is DownloadStatus.Downloading -> downloading(it.max, it.progress)
+                        is DownloadStatus.Done -> done(it.apk)
+                        is DownloadStatus.Cancel -> this@DownloadService.cancel()
+                        is DownloadStatus.Error -> error(it.e)
+                    }
+                }
+        }
         manager.downloadState = true
     }
 
@@ -149,7 +162,7 @@ class DownloadService : Service(), OnDownloadListener {
         manager.onDownloadListeners.forEach { it.cancel() }
     }
 
-    override fun error(e: Exception) {
+    override fun error(e: Throwable) {
         LogUtil.e(TAG, "download error: $e")
         manager.downloadState = false
         if (manager.showNotification) {
