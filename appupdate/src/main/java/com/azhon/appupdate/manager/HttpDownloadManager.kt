@@ -61,15 +61,13 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
             var progress = 0
             val buffer = ByteArray(1024 * 2)
             val file = File(path, apkName)
-            val outSteam = FileOutputStream(file)
-            while (inStream.read(buffer).also { len = it } != -1 && !shutdown) {
-                outSteam.write(buffer, 0, len)
-                progress += len
-                flow.emit(DownloadStatus.Downloading(length, progress))
-            }
-            outSteam.run {
-                flush()
-                close()
+            FileOutputStream(file).use { out ->
+                while (inStream.read(buffer).also { len = it } != -1 && !shutdown) {
+                    out.write(buffer, 0, len)
+                    progress += len
+                    flow.emit(DownloadStatus.Downloading(length, progress))
+                }
+                out.flush()
             }
             inStream.close()
             if (shutdown) {
