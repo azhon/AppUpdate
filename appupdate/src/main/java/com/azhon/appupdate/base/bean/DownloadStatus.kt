@@ -16,13 +16,13 @@ import java.io.File
 
 sealed class DownloadStatus {
 
-    data class Start(val unit: Unit) : DownloadStatus()
+    object Start : DownloadStatus()
 
     data class Downloading(val max: Int, val progress: Int) : DownloadStatus()
 
-    data class Done(val apk: File) : DownloadStatus()
+    class Done(val apk: File) : DownloadStatus()
 
-    data class Cancel(val unit: Unit) : DownloadStatus()
+    object Cancel : DownloadStatus()
 
     data class Error(val e: Throwable) : DownloadStatus()
 }

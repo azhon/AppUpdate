@@ -37,7 +37,7 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
             if (it.exists()) it.delete()
         }
         return flow {
-            emit(DownloadStatus.Start(Unit))
+            emit(DownloadStatus.Start)
             connectToDownload(apkUrl, apkName, this)
         }.catch {
             emit(DownloadStatus.Error(it))
@@ -71,7 +71,7 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
             }
             inStream.close()
             if (shutdown) {
-                flow.emit(DownloadStatus.Cancel(Unit))
+                flow.emit(DownloadStatus.Cancel)
             } else {
                 flow.emit(DownloadStatus.Done(file))
             }
