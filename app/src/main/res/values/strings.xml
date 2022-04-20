@@ -2,7 +2,7 @@
     <string name="app_name">版本更新</string>
     <string name="app_title">一个简单好用的版本更新库</string>
     <string name="dialog_title">发现新版本</string>
-    <string name="dialog_msg">1.支持Android M N O P Q\n2.支持自定义下载过程\n3.支持通知栏进度条展示\n4.支持文字国际化\n5.使用Kotlin协程重构</string>
+    <string name="dialog_msg">1.支持Android4.1及以上版本\n2.支持自定义下载过程\n3.支持通知栏进度条展示\n4.支持文字国际化\n5.使用Kotlin协程重构</string>
     <string name="dialog_confirm">升级</string>
     <string name="layout_msg">使用说明：三个方式不能并行 请等待一个方式下载完成在使用其他方式</string>
     <string name="layout_custom_dialog">使用自己的对话框更新</string>

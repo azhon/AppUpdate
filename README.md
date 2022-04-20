@@ -33,19 +33,18 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ### 功能介绍
 
+* [x] 支持Kotlin
 * [x] 支持AndroidX
 * [x] 支持后台下载
 * [x] 支持强制更新
 * [x] 支持自定义下载过程
+* [x] 支持Android4.1及以上版本
 * [x] 支持通知栏进度条展示(或者自定义显示进度)
-* [x] 支持Android N
-* [x] 支持Android O
-* [x] 支持Android P
-* [x] 支持Android Q
 * [x] 支持中/英文双语（国际化）
 * [x] 支持自定义内置对话框样式
 * [x] 支持取消下载(如果发送了通知栏消息，则会移除)
 * [x] 支持下载完成 打开新版本后删除旧安装包文件
+* [x] 不需要申请存储权限
 * [x] 使用HttpURLConnection下载，未集成其他第三方框架
 
 ### Demo下载体验
@@ -121,7 +120,7 @@ val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/appupdate.apk
 ```
 
 * 温馨提示：升级对话框中的内容是可以上下滑动的哦！
-* 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager` 并使用listener更新进度
+* 如果需要实现自己一套下载过程，只需要继承`BaseHttpDownloadManager`
 
 ```java
 class MyDownload : BaseHttpDownloadManager() {}
