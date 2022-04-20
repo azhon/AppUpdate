@@ -28,13 +28,11 @@
 
 ### Function introduction
 
+* [x] Support Kotlin
 * [x] Support AndroidX
 * [x] Support for custom download process
+* [x] Support Android 4.1 and above
 * [x] Support notification progress display (or custom display progress)
-* [x] Support Android N
-* [x] Support Android O
-* [x] Support Android P
-* [x] Support Android Q
 * [x] Support Chinese/English 
 * [x] Support for custom built-in dialog styles
 * [x] Support for canceling the download (if the notification bar message is sent, it will be removed)
@@ -99,7 +97,7 @@ val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/appupdate.apk
 ```
 
 * Tips: The contents of the upgrade dialog can be swiped up and down！
-* If you need to implement your own set of download process, you only need to `extends` `BaseHttpDownloadManager` and update the progress with listener.
+* If you need to implement your own set of download process, you only need to `extends` `BaseHttpDownloadManager`.
 
 ```java
 class MyDownload : BaseHttpDownloadManager() {}
