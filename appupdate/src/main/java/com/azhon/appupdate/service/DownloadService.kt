@@ -40,7 +40,7 @@ class DownloadService : Service(), OnDownloadListener {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent == null) {
-            return START_STICKY
+            return START_NOT_STICKY
         }
         init()
         return super.onStartCommand(intent, flags, startId)
