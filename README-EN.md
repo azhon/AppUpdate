@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.0.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.1.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -59,7 +59,7 @@ allprojects {
 - `app/build.gradle`
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:4.0.0'
+implementation 'com.github.azhon:AppUpdate:4.1.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
@@ -105,9 +105,10 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### Version update record
 
-* v4.0.0 (2022/04/08)
+* v4.1.0（2022/05/11）
 
-  *  [Refactor] Refactoring with Kotlin and coroutines
+  * [Fix] Service destroy may be restarted bug
+  * [Optimize] Optimize the code, download with Flow
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 
