@@ -89,8 +89,11 @@ val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
     apkName("appupdate.apk")
     smallIcon(R.mipmap.ic_launcher)
-    //设置了此参数，那么会自动判断是否需要更新弹出提示框
+    //设置了此参数，那么内部会自动判断是否需要更新显示更新提示框，否则需要自己判断是否需要更新
     apkVersionCode(2)
+    //同时下面三个参数也必须要设置
+    apkVersionName('2.0.0')
+    apkSize("20.4")
     apkDescription("更新描述信息(取服务端返回数据)")
     //省略一些非必须参数...
     build()
