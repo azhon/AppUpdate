@@ -11,6 +11,12 @@ import java.io.FileOutputStream
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 
 /**
@@ -32,6 +38,7 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
     private var shutdown: Boolean = false
 
     override fun download(apkUrl: String, apkName: String): Flow<DownloadStatus> {
+        trustAllHosts()
         shutdown = false
         File(path, apkName).let {
             if (it.exists()) it.delete()
@@ -90,6 +97,32 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
             flow.emit(DownloadStatus.Error(e))
         }
         con.disconnect()
+    }
+
+    /**
+     * fix https url (SSLHandshakeException) exception
+     */
+    private fun trustAllHosts() {
+        val manager: TrustManager = object : X509TrustManager {
+            override fun getAcceptedIssuers(): Array<X509Certificate> {
+                return arrayOf()
+            }
+
+            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+                LogUtil.d(TAG, "checkClientTrusted")
+            }
+
+            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+                LogUtil.d(TAG, "checkServerTrusted")
+            }
+        }
+        try {
+            val sslContext = SSLContext.getInstance("TLS")
+            sslContext.init(null, arrayOf(manager), SecureRandom())
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.socketFactory)
+        } catch (e: Exception) {
+            LogUtil.e(TAG, "trustAllHosts error: $e")
+        }
     }
 
     override fun cancel() {
