@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.1.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.1.1-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -79,7 +79,7 @@ dependencyResolutionManagement {
 ##### `app/build.gradle`添加依赖
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:4.1.0'
+implementation 'com.github.azhon:AppUpdate:4.1.1'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
@@ -131,10 +131,9 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### 版本更新记录
 
-* v4.1.0（2022/05/11）
+* v4.1.1（2022/06/06）
 
-  * [修复] 服务被杀死可能被重启bug
-  * [优化] 优化代码，使用Flow下载
+  * [修复] 解决部分https下载地址报SSLHandshakeException异常
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
