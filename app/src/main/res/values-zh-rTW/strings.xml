@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">版本更新</string>
+    <string name="app_title">一個簡單好用的版本更新函式庫</string>
+    <string name="dialog_title">發現新版本</string>
+    <string name="dialog_msg">1.支援Android4.1及以上版本\n2.支援自訂下載過程\n3.支援顯示通知欄進度條\n4.支持多語系\n5.使用Kotlin協助重構</string>
+    <string name="dialog_confirm">升級</string>
+    <string name="layout_msg">使用說明：三個方式不能並行 請代代下一個方式下載完成再使用其他方式</string>
+    <string name="layout_custom_dialog">使用自訂對話框更新</string>
+    <string name="layout_simple_use">簡單易用</string>
+    <string name="layout_library_dialog">使用版本庫內建對話框更新</string>
+    <string name="layout_cancel">取消下載</string>
+</resources>
