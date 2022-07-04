@@ -168,4 +168,9 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        manager.onDownloadListeners.remove(listenerAdapter)
+    }
 }
