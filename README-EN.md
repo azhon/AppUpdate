@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.1.1-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.2.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -33,13 +33,13 @@
 * [x] Support for custom download process
 * [x] Support Android 4.1 and above
 * [x] Support notification progress display (or custom display progress)
-* [x] Support Chinese/English 
+* [x] Support Chinese/Traditional/English 
 * [x] Support for custom built-in dialog styles
 * [x] Support for canceling the download (if the notification bar message is sent, it will be removed)
 * [x] Support download completion Delete old APK file after opening new version
 * [x] Download using HttpURLConnection, no other third-party framework is integrated
 
-### [Demo download experience](https://github.com/azhon/AppUpdate/releases/tag/4.0.0)
+### [Demo download experience](https://github.com/azhon/AppUpdate/releases/tag/4.2.0)
 
 ### Steps for usage
 
@@ -59,7 +59,7 @@ allprojects {
 - `app/build.gradle`
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:4.1.1'
+implementation 'com.github.azhon:AppUpdate:4.2.0'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
@@ -87,7 +87,7 @@ manager?.download()
 
 ### Skills
 
-* Internal support Chinese / English (other languages only need to take the same name in the corresponding `string.xml`
+* Internal support (other languages only need to take the same name in the corresponding `string.xml`
 * To view the Log, you only need to filter the Tag at the beginning of `AppUpdate`
 * Download completed Delete old APK file after opening new version
 
@@ -105,9 +105,11 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### Version update record
 
-* v4.1.0（2022/05/11）
+* v4.2.0（2022/07/05）
 
-  * [Fix] Some https url throw SSLHandshakeException
+  * [opt] Add support for traditional Chinese
+  * [Fix] Memory leak caused by non-forced update built-in dialog closing
+  * [Fix] Possible DownloadManager NPE bug
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 

@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.1.1-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.2.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -40,7 +40,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 * [x] 支持自定义下载过程
 * [x] 支持Android4.1及以上版本
 * [x] 支持通知栏进度条展示(或者自定义显示进度)
-* [x] 支持中/英文双语（国际化）
+* [x] 支持中文/繁体/英文语言（国际化）
 * [x] 支持自定义内置对话框样式
 * [x] 支持取消下载(如果发送了通知栏消息，则会移除)
 * [x] 支持下载完成 打开新版本后删除旧安装包文件
@@ -49,7 +49,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ### Demo下载体验
 
- [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/4.0.0)
+ [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/4.2.0)
 
 
 ### 使用步骤
@@ -79,7 +79,7 @@ dependencyResolutionManagement {
 ##### `app/build.gradle`添加依赖
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:4.1.1'
+implementation 'com.github.azhon:AppUpdate:4.2.0'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
@@ -111,7 +111,7 @@ manager?.download()
 
 ### 使用技巧
 
-* 框架内部支持中/英文 国际化（其他语言只需要在对应的`string.xml`中取相同的名字即可）
+* 框架内部支持国际化（其他语言只需要在对应的`string.xml`中取相同的名字即可）
 * 如果你需要修改框架内部的一些文字，你只需要在`string.xml`中取相同的名字即可以覆盖框架内设定的
 * 查看版本库中的Log只需要过滤`AppUpdate`开头的Tag
 * 支持校验安装包的MD5避免重复下载，只需要`Builder`设置安装包的MD5即可
@@ -131,9 +131,11 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### 版本更新记录
 
-* v4.1.1（2022/06/06）
+* v4.2.0（2022/07/05）
 
-  * [修复] 解决部分https下载地址报SSLHandshakeException异常
+  * [优化] 增加对繁体的支持 
+  * [修复] 非强制更新内置对话框关闭导致的内存泄露
+  * [修复] 有可能发生的DownloadManager NPE bug
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
