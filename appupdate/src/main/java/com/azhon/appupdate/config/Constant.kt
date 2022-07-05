@@ -38,6 +38,11 @@ object Constant {
     const val DEFAULT_CHANNEL_ID = "appUpdate"
 
     /**
+     * Notification id
+     */
+    const val DEFAULT_NOTIFY_ID = 1011
+
+    /**
      * Notification channel name
      */
     const val DEFAULT_CHANNEL_NAME = "AppUpdate"

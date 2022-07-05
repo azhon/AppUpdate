@@ -19,6 +19,7 @@ import com.azhon.appupdate.manager.DownloadManager
 import com.azhon.appupdate.service.DownloadService
 import com.azhon.appupdate.util.ApkUtil
 import com.azhon.appupdate.util.DensityUtil
+import com.azhon.appupdate.util.LogUtil
 import java.io.File
 
 
@@ -40,6 +41,10 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var progressBar: NumberProgressBar
     private lateinit var btnUpdate: Button
 
+    companion object {
+        private const val TAG = "UpdateDialogActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
@@ -49,7 +54,12 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun init() {
-        manager = DownloadManager.getInstance()
+        val tempManager = DownloadManager.getInstance()
+        if (tempManager == null) {
+            LogUtil.e(TAG, "An exception occurred by DownloadManager=null,please check your code!")
+            return
+        }
+        manager = tempManager
         manager.onDownloadListeners.add(listenerAdapter)
         setWindowSize()
         initView()

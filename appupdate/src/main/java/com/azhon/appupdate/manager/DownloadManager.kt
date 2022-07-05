@@ -32,9 +32,10 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         private const val TAG = "DownloadManager"
         private var instance: DownloadManager? = null
 
-        fun getInstance(builder: Builder? = null): DownloadManager {
+        fun getInstance(builder: Builder? = null): DownloadManager? {
             if (instance == null) {
-                instance = DownloadManager(builder!!)
+                if (builder == null) return null
+                instance = DownloadManager(builder)
             }
             return instance!!
         }
@@ -291,7 +292,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         /**
          * Notification id
          */
-        internal var notifyId = 1011
+        internal var notifyId = Constant.DEFAULT_NOTIFY_ID
 
         /**
          * dialog background Image resource
@@ -430,7 +431,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         }
 
         fun build(): DownloadManager {
-            return getInstance(this)
+            return getInstance(this)!!
         }
     }
 }
