@@ -47,7 +47,12 @@ class DownloadService : Service(), OnDownloadListener {
     }
 
     private fun init() {
-        manager = DownloadManager.getInstance()
+        val tempManager = DownloadManager.getInstance()
+        if (tempManager == null) {
+            LogUtil.e(TAG, "An exception occurred by DownloadManager=null,please check your code!")
+            return
+        }
+        manager = tempManager
         FileUtil.createDirDirectory(manager.downloadPath)
 
         val enable = NotificationUtil.notificationEnable(this@DownloadService)
