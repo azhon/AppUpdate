@@ -57,7 +57,11 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 #### 第一步：
 
 ##### 添加`maven`仓库地址
-- `gradle:7.0.0`以下在`root/build.gradle`添加如下代码
+
+<details>
+<summary>gradle:7.0.0以下</summary>
+
+- 在`root/build.gradle`添加如下代码
 ```groovy
 allprojects {
     repositories {
@@ -66,7 +70,11 @@ allprojects {
     }
 }
 ```
-- `gradle:7.0.0`或以上在`setting.gradle`中添加如下代码
+</details>
+<details>
+<summary>gradle:7.0.0或以上</summary>
+
+- 在`setting.gradle`中添加如下代码
 ```groovy
 dependencyResolutionManagement {
     repositories {
@@ -75,6 +83,7 @@ dependencyResolutionManagement {
     }
 }
 ````
+</details>
 
 ##### `app/build.gradle`添加依赖
 
