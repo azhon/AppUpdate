@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
             smallIcon(R.mipmap.ic_launcher)
             showNewerToast(true)
             apkVersionCode(2)
-            apkVersionName("2.1.8")
-            apkSize("20.4")
+            apkVersionName("v4.2.1")
+            apkSize("7.7MB")
             apkDescription(getString(R.string.dialog_msg))
             //apkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
 
