@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.2.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.2.1-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -88,12 +88,12 @@ dependencyResolutionManagement {
 ##### `app/build.gradle`添加依赖
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:4.2.0'
+implementation 'com.github.azhon:AppUpdate:4.2.1'
 ```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
 
-```kotlin
+```java
 val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
     apkName("appupdate.apk")
@@ -101,8 +101,8 @@ val manager = DownloadManager.Builder(this).run {
     //设置了此参数，那么内部会自动判断是否需要显示更新对话框，否则需要自己判断是否需要更新
     apkVersionCode(2)
     //同时下面三个参数也必须要设置
-    apkVersionName('2.0.0')
-    apkSize("20.4")
+    apkVersionName('v4.2.1')
+    apkSize("7.7MB")
     apkDescription("更新描述信息(取服务端返回数据)")
     //省略一些非必须参数...
     build()
@@ -140,11 +140,9 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### 版本更新记录
 
-* v4.2.0（2022/07/05）
+* v4.2.1（2022/08/04）
 
-  * [优化] 增加对繁体的支持 
-  * [修复] 非强制更新内置对话框关闭导致的内存泄露
-  * [修复] 有可能发生的DownloadManager NPE bug
+  * [优化] 优化升级对话框文本内容，移除多余符号
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
