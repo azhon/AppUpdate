@@ -8,7 +8,7 @@
     <string name="download_error">下載出錯</string>
     <string name="continue_downloading">點擊繼續下載</string>
     <string name="background_downloading">正在後臺下載新版本…</string>
-    <string name="dialog_new">發現新版本v%s可以下載啦！</string>
-    <string name="dialog_new_size">新版本大小：%sM</string>
+    <string name="dialog_new">發現新版本%s可以下載啦！</string>
+    <string name="dialog_new_size">新版本大小：%s</string>
     <string name="update">升級</string>
 </resources>
