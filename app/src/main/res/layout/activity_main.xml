@@ -16,20 +16,13 @@
         azhon:progress_reached_color="#3498DB"
         azhon:progress_text_color="#3498DB" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/layout_msg"
-        android:textColor="@color/purple_200" />
-
     <Button
         android:id="@+id/btn_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="40dp"
         android:text="@string/layout_custom_dialog"
         android:textAllCaps="false" />
 
