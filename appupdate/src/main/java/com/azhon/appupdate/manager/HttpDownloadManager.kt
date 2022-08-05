@@ -130,5 +130,6 @@ class HttpDownloadManager(private val path: String) : BaseHttpDownloadManager() 
     }
 
     override fun release() {
+        cancel()
     }
 }

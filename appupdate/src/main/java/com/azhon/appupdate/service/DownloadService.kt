@@ -181,7 +181,6 @@ class DownloadService : Service(), OnDownloadListener {
     }
 
     private fun releaseResources() {
-        manager.httpManager?.release()
         manager.release()
         stopSelf()
     }
