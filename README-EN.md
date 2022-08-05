@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.2.1-brightgreen.svg">
+  <img src="https://img.shields.io/badge/jitpack%20version-4.2.2-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -59,7 +59,7 @@ allprojects {
 - `app/build.gradle`
 
 ```groovy
-implementation 'com.github.azhon:AppUpdate:4.2.1'
+implementation 'com.github.azhon:AppUpdate:4.2.2'
 ```
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
@@ -71,7 +71,7 @@ val manager = DownloadManager.Builder(this).run {
     smallIcon(R.mipmap.ic_launcher)
     //If this parameter is set, it will automatically determine whether to show tip dialog
     apkVersionCode(2)
-    apkVersionName('v4.2.1')
+    apkVersionName('v4.2.2')
     apkSize("7.7MB")
     apkDescription("description...")
     //Optional parameters...
@@ -107,9 +107,10 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### Version update record
 
-* v4.2.1（2022/08/04）
+* v4.2.2（2022/08/05）
 
   * [opt] Optimize the text content of the dialog and remove redundant symbols
+  * [fix] Fix that the download parameters are not valid after multiple calls
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 
