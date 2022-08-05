@@ -4,7 +4,6 @@
     <string name="dialog_title">New version</string>
     <string name="dialog_msg">1.Support Android 4.1 and above\n2.Support for custom download process\n3.Support notification bar progress\n4.Support internationalization\n5.Use Kotlin Coroutines</string>
     <string name="dialog_confirm">Upgrade</string>
-    <string name="layout_msg">Instructions for use: Three ways can not be parallel\nPlease wait for one way to download completed in other ways</string>
     <string name="layout_custom_dialog">Use your own dialog</string>
     <string name="layout_simple_use">Simple to use</string>
     <string name="layout_library_dialog">Use the dialog built into the library</string>
