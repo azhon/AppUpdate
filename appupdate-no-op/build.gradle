@@ -1,38 +1,23 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'appUpdate'
-            keyPassword '123456'
-            storeFile file('./../app.jks')
-            storePassword '123456'
-        }
-    }
-
     compileSdk 31
+
     defaultConfig {
-        applicationId "com.azhon.app"
         minSdk 16
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
-    flavorDimensions "versionCode"
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-        }
-        debug {
-            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -42,22 +27,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    productFlavors {
-        other {}
-        googlePlay {}
-    }
 }
 
 dependencies {
-    otherImplementation project(':appupdate')
-    googlePlayImplementation project(':appupdate-no-op')
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.5.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
