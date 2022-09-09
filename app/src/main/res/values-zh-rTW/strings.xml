@@ -4,6 +4,7 @@
     <string name="dialog_title">發現新版本</string>
     <string name="dialog_msg">1.支持Android4.1及以上版本\n2.支持自定義下載過程\n3.支持通知欄進度條展示\n4.支持文字國際化\n5.使用Kotlin協程重構</string>
     <string name="dialog_confirm">升級</string>
+    <string name="layout_channel">當前渠道：%s</string>
     <string name="layout_custom_dialog">使用自己的對話框更新</string>
     <string name="layout_simple_use">簡單易用</string>
     <string name="layout_library_dialog">使用版本庫內置的對話框更新</string>

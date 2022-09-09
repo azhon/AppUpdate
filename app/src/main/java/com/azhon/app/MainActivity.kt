@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.azhon.appupdate.listener.OnButtonClickListener
 import com.azhon.appupdate.listener.OnDownloadListenerAdapter
 import com.azhon.appupdate.manager.DownloadManager
-import com.azhon.appupdate.view.NumberProgressBar
+import com.azhon.appupdate.util.ApkUtil
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickListener {
 
@@ -19,21 +21,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
     }
 
     private val url = "https://down.qq.com/qqweb/QQ_1/android_apk/Android_8.7.0.5295_537068059.apk"
+    private val apkName = "appupdate.apk"
     private var manager: DownloadManager? = null
-    private lateinit var progressBar: NumberProgressBar
+    private lateinit var tvPercent: TextView
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         title = getString(R.string.app_title)
         progressBar = findViewById(R.id.number_progress_bar)
+        tvPercent = findViewById<Button>(R.id.tv_percent)
+        findViewById<TextView>(R.id.tv_channel).text =
+            String.format(getString(R.string.layout_channel), BuildConfig.FLAVOR)
         findViewById<Button>(R.id.btn_1).setOnClickListener(this)
         findViewById<Button>(R.id.btn_2).setOnClickListener(this)
         findViewById<Button>(R.id.btn_3).setOnClickListener(this)
         findViewById<Button>(R.id.btn_4).setOnClickListener(this)
 
         //delete downloaded old Apk
-//        val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/QQ.apk")
+        val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/$apkName")
     }
 
     override fun onClick(v: View?) {
@@ -58,10 +65,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
     }
 
     private fun startUpdate2() {
-        progressBar.progress = 0
+        resetPb()
         manager = DownloadManager.Builder(this).run {
             apkUrl(url)
-            apkName("QQ.apk")
+            apkName(apkName)
             smallIcon(R.mipmap.ic_launcher)
             build()
         }
@@ -72,18 +79,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
     private fun startUpdate3() {
         manager = DownloadManager.Builder(this).run {
             apkUrl(url)
-            apkName("QQ.apk")
+            apkName(apkName)
             smallIcon(R.mipmap.ic_launcher)
             showNewerToast(true)
             apkVersionCode(2)
             apkVersionName("v4.2.1")
             apkSize("7.7MB")
             apkDescription(getString(R.string.dialog_msg))
-            //apkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
+//            apkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
 
-            //flow are unimportant filed
             enableLog(true)
-            //httpManager()
+//            httpManager()
             jumpInstallPage(true)
 //            dialogImage(R.drawable.ic_dialog)
 //            dialogButtonColor(Color.parseColor("#E743DA"))
@@ -99,14 +105,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
         manager?.download()
     }
 
+    private fun resetPb() {
+        progressBar.progress = 0
+        tvPercent.text = "0%"
+    }
+
     private val listenerAdapter: OnDownloadListenerAdapter = object : OnDownloadListenerAdapter() {
 
         override fun downloading(max: Int, progress: Int) {
             val curr = (progress / max.toDouble() * 100.0).toInt()
             progressBar.max = 100
             progressBar.progress = curr
+            tvPercent.text = "$curr%"
         }
     }
+
 
     override fun onButtonClick(id: Int) {
         Log.e(TAG, "onButtonClick: $id")
