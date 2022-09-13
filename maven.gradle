@@ -1,0 +1,58 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+Properties localProperties = new Properties()
+localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                from components.release
+                groupId "io.github.azhon"
+                artifactId project.ARTIFACT_ID
+                version rootProject.ext.publishVersion
+                artifact generateSourcesJar
+                pom {
+                    name = 'AppUpdate'
+                    description = 'Android App update library. Android版本更新库，简单、轻量、可随意定制'
+                    url = 'https://github.com/azhon/AppUpdate'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'azhon'
+                            name = 'azhon'
+                            email = 'azhon.cn@gmail.com'
+                        }
+                    }
+                    scm {
+                        connection = 'https://github.com/azhon/AppUpdate.git'
+                        developerConnection = 'https://github.com/azhon/AppUpdate.git'
+                        url = 'https://github.com/azhon/AppUpdate'
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username localProperties.getProperty('sonatype.name')
+                    password localProperties.getProperty('sonatype.password')
+                }
+            }
+        }
+    }
+}
+signing {
+    sign publishing.publications
+}
