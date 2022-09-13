@@ -60,7 +60,7 @@ implementation 'io.github.azhon:appupdate:4.2.3'
 ```
 
 <details>
-<summary><font color="#3D71FF">由于GooglePlay政策禁止应用内更新，所以可以通过多渠道的方式进处理</font></summary>
+<summary>由于GooglePlay政策禁止应用内更新，所以可以通过多渠道的方式进处理</summary>
 
 - [GooglePlay政策](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en&ref_topic=9877467)
 - 本库提供了一个没有任何实现的版本[点击查看详细内容](https://github.com/azhon/AppUpdate/blob/main/app/build.gradle)
@@ -75,7 +75,7 @@ android {
 
 dependencies {
     otherImplementation 'io.github.azhon:appupdate:latest-version'
-    googlePlayImplementation 'io.github.azhon:appupdate:latest-version'
+    googlePlayImplementation 'io.github.azhon:appupdate-no-op:latest-version'
 }
 ```
 </details>

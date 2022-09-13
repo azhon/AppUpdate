@@ -49,7 +49,7 @@
 implementation 'io.github.azhon:appupdate:4.2.3'
 ```
 <details>
-<summary><font color="#3D71FF">Since in-app updates are prohibited by GooglePlay policy, it can be handled in productFlavors</font></summary>
+<summary>Since in-app updates are prohibited by GooglePlay policy, it can be handled in productFlavors</summary>
 
 - [GooglePlay policy](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en&ref_topic=9877467)
 - Library provides a version without no operation[Click see more](https://github.com/azhon/AppUpdate/blob/main/app/build.gradle)
@@ -64,7 +64,7 @@ android {
 
 dependencies {
     otherImplementation 'io.github.azhon:appupdate:latest-version'
-    googlePlayImplementation 'io.github.azhon:appupdate:latest-version'
+    googlePlayImplementation 'io.github.azhon:appupdate-no-op:latest-version'
 }
 ```
 </details>
