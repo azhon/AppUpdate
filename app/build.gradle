@@ -13,11 +13,11 @@ android {
         }
     }
 
-    compileSdk 31
+    compileSdk rootProject.ext.compileSdk
     defaultConfig {
         applicationId "com.azhon.app"
-        minSdk 16
-        targetSdk 31
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
         versionCode 1
         versionName "1.0"
 
