@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.2.2-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.2.3-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -43,24 +43,31 @@
 
 ### Steps for usage
 
-#### Step1：
-
-- `root/build.gradle`
+#### Step1：`app/build.gradle`
 
 ```groovy
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
+implementation 'io.github.azhon:appupdate:4.2.3'
+```
+<details>
+<summary><font color="#3D71FF">Since in-app updates are prohibited by GooglePlay policy, it can be handled in productFlavors</font></summary>
+
+- [GooglePlay policy](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en&ref_topic=9877467)
+- Library provides a version without no operation[Click see more](https://github.com/azhon/AppUpdate/blob/main/app/build.gradle)
+```groovy
+android {
+    //...
+    productFlavors {
+        other {}
+        googlePlay {}
     }
 }
-```
 
-- `app/build.gradle`
-
-```groovy
-implementation 'com.github.azhon:AppUpdate:4.2.2'
+dependencies {
+    otherImplementation 'io.github.azhon:appupdate:latest-version'
+    googlePlayImplementation 'io.github.azhon:appupdate:latest-version'
+}
 ```
+</details>
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
 

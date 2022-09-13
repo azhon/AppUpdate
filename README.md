@@ -3,12 +3,11 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/jitpack%20version-4.2.2-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.2.3-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-## [需要上架至GooglePlay的App请主动移除此SDK依赖，否则可能导致您的应用被下架或者封禁](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en&ref_topic=9877467)
 ### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
 
 ## 扫码加入QQ群(群号：828385813)
@@ -54,42 +53,32 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ### 使用步骤
 
-#### 第一步：
+#### 第一步：`app/build.gradle`添加依赖
 
-##### 添加`maven`仓库地址
+```groovy
+implementation 'io.github.azhon:appupdate:4.2.3'
+```
 
 <details>
-<summary>gradle:7.0.0以下</summary>
+<summary><font color="#3D71FF">由于GooglePlay政策禁止应用内更新，所以可以通过多渠道的方式进处理</font></summary>
 
-- 在`root/build.gradle`添加如下代码
+- [GooglePlay政策](https://support.google.com/googleplay/android-developer/answer/9888379?hl=en&ref_topic=9877467)
+- 本库提供了一个没有任何实现的版本[点击查看详细内容](https://github.com/azhon/AppUpdate/blob/main/app/build.gradle)
 ```groovy
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
+android {
+    //...
+    productFlavors {
+        other {}
+        googlePlay {}
     }
+}
+
+dependencies {
+    otherImplementation 'io.github.azhon:appupdate:latest-version'
+    googlePlayImplementation 'io.github.azhon:appupdate:latest-version'
 }
 ```
 </details>
-<details>
-<summary>gradle:7.0.0或以上</summary>
-
-- 在`setting.gradle`中添加如下代码
-```groovy
-dependencyResolutionManagement {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-````
-</details>
-
-##### `app/build.gradle`添加依赖
-
-```groovy
-implementation 'com.github.azhon:AppUpdate:4.2.2'
-```
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
 
@@ -140,10 +129,10 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### 版本更新记录
 
-* v4.2.2（2022/08/05）
+* v4.2.3（2022/09/13）
 
-  * [优化] 优化升级对话框文本内容，移除多余符号
-  * [修复] 修复多次调用下载参数未生效bug
+  * [优化] 从jitpack迁移至mavenCentral
+  * [优化] 提供没有任何操作的版本用于特定情况使用
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
