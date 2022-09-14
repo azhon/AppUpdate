@@ -114,10 +114,10 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### Version update record
 
-* v4.2.2（2022/08/05）
+* v4.2.3（2022/09/13）
 
-  * [opt] Optimize the text content of the dialog and remove redundant symbols
-  * [fix] Fix that the download parameters are not valid after multiple calls
+  * [opt] Migrating from jitpack to mavenCentral
+  * [opt] Provides a version with no operations for use in specific situations
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 
