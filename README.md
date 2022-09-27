@@ -48,7 +48,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ### Demo下载体验
 
- [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/4.2.0)
+ [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/download/4.2.3/AppUpdateDemo.apk)
 
 
 ### 使用步骤
