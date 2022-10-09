@@ -36,6 +36,7 @@ import java.io.File
 class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
 
     private val install = 0x45
+    private val error = 0x46
     private lateinit var manager: DownloadManager
     private lateinit var apk: File
     private lateinit var progressBar: NumberProgressBar
@@ -60,7 +61,9 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
         manager = tempManager
-        manager.onDownloadListeners.add(listenerAdapter)
+        if (manager.forcedUpgrade) {
+            manager.onDownloadListeners.add(listenerAdapter)
+        }
         setWindowSize()
         initView()
     }
@@ -159,9 +162,13 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private val listenerAdapter: OnDownloadListenerAdapter = object : OnDownloadListenerAdapter() {
+        override fun start() {
+            btnUpdate.isEnabled = false
+            btnUpdate.text = resources.getString(R.string.background_downloading)
+        }
 
         override fun downloading(max: Int, progress: Int) {
-            if (max != -1 && progressBar.visibility == View.VISIBLE) {
+            if (max != -1) {
                 val curr = (progress / max.toDouble() * 100.0).toInt()
                 progressBar.progress = curr
             } else {
@@ -171,11 +178,15 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
 
         override fun done(apk: File) {
             this@UpdateDialogActivity.apk = apk
-            if (manager.forcedUpgrade) {
-                btnUpdate.tag = install
-                btnUpdate.isEnabled = true
-                btnUpdate.text = resources.getString(R.string.click_hint)
-            }
+            btnUpdate.tag = install
+            btnUpdate.isEnabled = true
+            btnUpdate.text = resources.getString(R.string.click_hint)
+        }
+
+        override fun error(e: Throwable) {
+            btnUpdate.tag = error
+            btnUpdate.isEnabled = true
+            btnUpdate.text = resources.getString(R.string.continue_downloading)
         }
     }
 
