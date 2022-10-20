@@ -45,13 +45,13 @@ android {
 
     productFlavors {
         other {}
-        googlePlay {}
+//        googlePlay {}
     }
 }
 
 dependencies {
     otherImplementation project(':appupdate')
-    googlePlayImplementation project(':appupdate-no-op')
+//    googlePlayImplementation project(':appupdate-no-op')
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
