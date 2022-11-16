@@ -82,6 +82,8 @@ dependencies {
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
 
+**如果需要显示内置的对话框那么你需要调用`builder.apkVersionCode()`将新版本的versionCode填进去，同时值必须大于当前版本的**
+
 ```java
 val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
@@ -98,8 +100,6 @@ val manager = DownloadManager.Builder(this).run {
 }
 manager?.download()
 ```
-如果需要显示内置的对话框那么你需要调用`builder.apkVersionCode()`将新版本的versionCode填进去
-
 #### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy
