@@ -108,13 +108,14 @@ class DownloadService : Service(), OnDownloadListener {
     override fun start() {
         LogUtil.i(TAG, "download start")
         if (manager.showBgdToast) {
-            Toast.makeText(this, R.string.background_downloading, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.app_update_background_downloading, Toast.LENGTH_SHORT)
+                .show()
         }
         if (manager.showNotification) {
             NotificationUtil.showNotification(
                 this@DownloadService, manager.smallIcon,
-                resources.getString(R.string.start_download),
-                resources.getString(R.string.start_download_hint)
+                resources.getString(R.string.app_update_start_download),
+                resources.getString(R.string.app_update_start_download_hint)
             )
         }
         manager.onDownloadListeners.forEach { it.start() }
@@ -129,7 +130,7 @@ class DownloadService : Service(), OnDownloadListener {
             val content = if (curr < 0) "" else "$curr%"
             NotificationUtil.showProgressNotification(
                 this@DownloadService, manager.smallIcon,
-                resources.getString(R.string.start_downloading),
+                resources.getString(R.string.app_update_start_downloading),
                 content, if (max == -1) -1 else 100, curr
             )
         }
@@ -144,8 +145,8 @@ class DownloadService : Service(), OnDownloadListener {
         if (manager.showNotification || Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             NotificationUtil.showDoneNotification(
                 this@DownloadService, manager.smallIcon,
-                resources.getString(R.string.download_completed),
-                resources.getString(R.string.click_hint),
+                resources.getString(R.string.app_update_download_completed),
+                resources.getString(R.string.app_update_click_hint),
                 Constant.AUTHORITIES!!, apk
             )
         }
@@ -173,8 +174,8 @@ class DownloadService : Service(), OnDownloadListener {
         if (manager.showNotification) {
             NotificationUtil.showErrorNotification(
                 this@DownloadService, manager.smallIcon,
-                resources.getString(R.string.download_error),
-                resources.getString(R.string.continue_downloading),
+                resources.getString(R.string.app_update_download_error),
+                resources.getString(R.string.app_update_continue_downloading),
             )
         }
         manager.onDownloadListeners.forEach { it.error(e) }

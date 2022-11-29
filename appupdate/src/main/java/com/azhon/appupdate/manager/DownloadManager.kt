@@ -125,9 +125,9 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
                 )
             } else {
                 if (showNewerToast) {
-                    Toast.makeText(application, R.string.latest_version, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(application, R.string.app_update_latest_version, Toast.LENGTH_SHORT).show()
                 }
-                LogUtil.d(TAG, application.resources.getString(R.string.latest_version))
+                LogUtil.d(TAG, application.resources.getString(R.string.app_update_latest_version))
             }
         }
 

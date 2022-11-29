@@ -50,7 +50,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
         title = ""
-        setContentView(R.layout.dialog_update)
+        setContentView(R.layout.app_update_dialog_update)
         init()
     }
 
@@ -108,11 +108,17 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
         }
         if (manager.apkVersionName.isNotEmpty()) {
             tvTitle.text =
-                String.format(resources.getString(R.string.dialog_new), manager.apkVersionName)
+                String.format(
+                    resources.getString(R.string.app_update_dialog_new),
+                    manager.apkVersionName
+                )
         }
         if (manager.apkSize.isNotEmpty()) {
             tvSize.text =
-                String.format(resources.getString(R.string.dialog_new_size), manager.apkSize)
+                String.format(
+                    resources.getString(R.string.app_update_dialog_new_size),
+                    manager.apkSize
+                )
             tvSize.visibility = View.VISIBLE
         }
         tvDescription.text = manager.apkDescription
@@ -141,7 +147,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 if (manager.forcedUpgrade) {
                     btnUpdate.isEnabled = false
-                    btnUpdate.text = resources.getString(R.string.background_downloading)
+                    btnUpdate.text = resources.getString(R.string.app_update_background_downloading)
                 } else {
                     finish()
                 }
@@ -154,6 +160,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     override fun onBackPressed() {
         if (manager.forcedUpgrade) return
         super.onBackPressed()
+        manager.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
     }
 
     override fun finish() {
@@ -164,7 +171,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     private val listenerAdapter: OnDownloadListenerAdapter = object : OnDownloadListenerAdapter() {
         override fun start() {
             btnUpdate.isEnabled = false
-            btnUpdate.text = resources.getString(R.string.background_downloading)
+            btnUpdate.text = resources.getString(R.string.app_update_background_downloading)
         }
 
         override fun downloading(max: Int, progress: Int) {
@@ -180,13 +187,13 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             this@UpdateDialogActivity.apk = apk
             btnUpdate.tag = install
             btnUpdate.isEnabled = true
-            btnUpdate.text = resources.getString(R.string.click_hint)
+            btnUpdate.text = resources.getString(R.string.app_update_click_hint)
         }
 
         override fun error(e: Throwable) {
             btnUpdate.tag = error
             btnUpdate.isEnabled = true
-            btnUpdate.text = resources.getString(R.string.continue_downloading)
+            btnUpdate.text = resources.getString(R.string.app_update_continue_downloading)
         }
     }
 

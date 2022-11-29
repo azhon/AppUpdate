@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="DialogActivity" parent="Theme.AppCompat">
+    <style name="AppUpdate.DialogActivity" parent="Theme.AppCompat">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -11,11 +11,11 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="UpdateDialog" parent="DialogActivity">
+    <style name="AppUpdate.UpdateDialog" parent="AppUpdate.DialogActivity">
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <declare-styleable name="NumberProgressBar">
+    <declare-styleable name="AppUpdate.NumberProgressBar">
         <attr name="progress_unreached_color" format="color" />
         <attr name="progress_reached_color" format="color" />
 

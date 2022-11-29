@@ -19,6 +19,6 @@
         </provider>
         <activity
             android:name=".view.UpdateDialogActivity"
-            android:theme="@style/UpdateDialog" />
+            android:theme="@style/AppUpdate.UpdateDialog" />
     </application>
 </manifest>
