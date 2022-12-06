@@ -32,7 +32,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         private const val TAG = "DownloadManager"
         private var instance: DownloadManager? = null
 
-        fun getInstance(builder: Builder? = null): DownloadManager? {
+        internal fun getInstance(builder: Builder? = null): DownloadManager? {
             if (instance != null && builder != null) {
                 instance!!.release()
             }
@@ -44,32 +44,32 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         }
     }
 
-    var application: Application = builder.application
-    var contextClsName: String = builder.contextClsName
-    var downloadState: Boolean = false
-    var apkUrl: String
-    var apkName: String
-    var apkVersionCode: Int
-    var apkVersionName: String
-    var downloadPath: String
-    var showNewerToast: Boolean
-    var smallIcon: Int
-    var apkDescription: String
-    var apkSize: String
-    var apkMD5: String
-    var httpManager: BaseHttpDownloadManager?
-    var notificationChannel: NotificationChannel?
-    var onDownloadListeners: MutableList<OnDownloadListener>
-    var onButtonClickListener: OnButtonClickListener?
-    var showNotification: Boolean
-    var jumpInstallPage: Boolean
-    var showBgdToast: Boolean
-    var forcedUpgrade: Boolean
-    var notifyId: Int
-    var dialogImage: Int
-    var dialogButtonColor: Int
-    var dialogButtonTextColor: Int
-    var dialogProgressBarColor: Int
+    private var application: Application = builder.application
+    private var apkVersionCode: Int
+    private var showNewerToast: Boolean
+    internal var contextClsName: String = builder.contextClsName
+    internal var downloadState: Boolean = false
+    internal var apkUrl: String
+    internal var apkName: String
+    internal var apkVersionName: String
+    internal var downloadPath: String
+    internal var smallIcon: Int
+    internal var apkDescription: String
+    internal var apkSize: String
+    internal var apkMD5: String
+    internal var httpManager: BaseHttpDownloadManager?
+    internal var notificationChannel: NotificationChannel?
+    internal var onDownloadListeners: MutableList<OnDownloadListener>
+    internal var onButtonClickListener: OnButtonClickListener?
+    internal var showNotification: Boolean
+    internal var jumpInstallPage: Boolean
+    internal var showBgdToast: Boolean
+    internal var forcedUpgrade: Boolean
+    internal var notifyId: Int
+    internal var dialogImage: Int
+    internal var dialogButtonColor: Int
+    internal var dialogButtonTextColor: Int
+    internal var dialogProgressBarColor: Int
 
 
     init {
@@ -125,7 +125,9 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
                 )
             } else {
                 if (showNewerToast) {
-                    Toast.makeText(application, R.string.app_update_latest_version, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        application, R.string.app_update_latest_version, Toast.LENGTH_SHORT
+                    ).show()
                 }
                 LogUtil.d(TAG, application.resources.getString(R.string.app_update_latest_version))
             }
