@@ -37,7 +37,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
 
     private val install = 0x45
     private val error = 0x46
-    private lateinit var manager: DownloadManager
+    private var manager: DownloadManager? = null
     private lateinit var apk: File
     private lateinit var progressBar: NumberProgressBar
     private lateinit var btnUpdate: Button
@@ -55,20 +55,19 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun init() {
-        val tempManager = DownloadManager.getInstance()
-        if (tempManager == null) {
+        manager = DownloadManager.getInstance()
+        if (manager == null) {
             LogUtil.e(TAG, "An exception occurred by DownloadManager=null,please check your code!")
             return
         }
-        manager = tempManager
-        if (manager.forcedUpgrade) {
-            manager.onDownloadListeners.add(listenerAdapter)
+        if (manager!!.forcedUpgrade) {
+            manager!!.onDownloadListeners.add(listenerAdapter)
         }
         setWindowSize()
-        initView()
+        initView(manager!!)
     }
 
-    private fun initView() {
+    private fun initView(manager: DownloadManager) {
         val ibClose = findViewById<View>(R.id.ib_close)
         val vLine = findViewById<View>(R.id.line)
         val ivBg = findViewById<ImageView>(R.id.iv_bg)
@@ -135,32 +134,32 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.ib_close -> {
-                if (!manager.forcedUpgrade) {
+                if (manager?.forcedUpgrade == false) {
                     finish()
                 }
-                manager.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
+                manager?.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
             }
             R.id.btn_update -> {
                 if (btnUpdate.tag == install) {
                     ApkUtil.installApk(this, Constant.AUTHORITIES!!, apk)
                     return
                 }
-                if (manager.forcedUpgrade) {
+                if (manager?.forcedUpgrade == true) {
                     btnUpdate.isEnabled = false
                     btnUpdate.text = resources.getString(R.string.app_update_background_downloading)
                 } else {
                     finish()
                 }
-                manager.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
+                manager?.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
                 startService(Intent(this, DownloadService::class.java))
             }
         }
     }
 
     override fun onBackPressed() {
-        if (manager.forcedUpgrade) return
+        if (manager?.forcedUpgrade == true) return
         super.onBackPressed()
-        manager.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
+        manager?.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
     }
 
     override fun finish() {
@@ -199,6 +198,6 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        manager.onDownloadListeners.remove(listenerAdapter)
+        manager?.onDownloadListeners?.remove(listenerAdapter)
     }
 }
