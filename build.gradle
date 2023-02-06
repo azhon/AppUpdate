@@ -12,5 +12,5 @@ ext {
     compileSdk = 31
     targetSdk = 31
     minSdk = 16
-    publishVersion = "4.2.6"
+    publishVersion = "4.2.7"
 }
