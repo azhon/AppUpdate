@@ -48,7 +48,6 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
     private var apkVersionCode: Int
     private var showNewerToast: Boolean
     internal var contextClsName: String = builder.contextClsName
-    internal var downloadState: Boolean = false
     internal var apkUrl: String
     internal var apkName: String
     internal var apkVersionName: String
@@ -70,6 +69,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
     internal var dialogButtonColor: Int
     internal var dialogButtonTextColor: Int
     internal var dialogProgressBarColor: Int
+    var downloadState: Boolean = false
 
 
     init {
