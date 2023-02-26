@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_update_latest_version">Последняя версия на данный момент!</string>
+    <string name="app_update_start_download">Начать загрузку</string>
+    <string name="app_update_start_download_hint">Вы можете проверить процесс загрузки позже</string>
+    <string name="app_update_start_downloading">Загрузка новой версии</string>
+    <string name="app_update_download_completed">Загрузка завершена</string>
+    <string name="app_update_click_hint">Нажмите для установки</string>
+    <string name="app_update_download_error">Ошибка загрузки</string>
+    <string name="app_update_continue_downloading">Нажмите для продолжения загрузки</string>
+    <string name="app_update_background_downloading">Фоновая загрузка новой версии...</string>
+    <string name="app_update_dialog_new">Новая версия %s может быть загружена!</string>
+    <string name="app_update_dialog_new_size">Размер новой версии: %s</string>
+    <string name="app_update_update">Обновление</string>
+</resources>

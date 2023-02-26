@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppUpdate</string>
+    <string name="app_title">Простая библиотека для обновления версии приложения</string>
+    <string name="dialog_title">Новая версия</string>
+    <string name="dialog_msg">1. Поддержка Android версии 4.1 и выше\n2. Поддержка настраиваемого процесса загрузки\n3. Поддержка уведомления о ходе выполнения загрузки в панели уведомлений\n4. Поддержка языковой адаптации\n5. Использование корутин Kotlin</string>
+    <string name="dialog_confirm">Обновление</string>
+    <string name="layout_channel">Текущий аромат: %s</string>
+    <string name="layout_custom_dialog">Используйте свои собственные диалоговые окна</string>
+    <string name="layout_simple_use">Просто в использовании</string>
+    <string name="layout_library_dialog">Используйте диалоговое окно, встроенное в библиотеку</string>
+    <string name="layout_cancel">Отменить скачивание</string>
+</resources>
