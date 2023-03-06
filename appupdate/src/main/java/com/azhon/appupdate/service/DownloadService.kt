@@ -74,6 +74,9 @@ class DownloadService : Service(), OnDownloadListener {
      * Check whether the Apk has been downloaded, don't download again
      */
     private fun checkApkMd5(): Boolean {
+        if (manager.apkMD5.isNullOrBlank()) {
+            return false;
+        }
         val file = File(manager.downloadPath, manager.apkName)
         if (file.exists()) {
             return FileUtil.md5(file).equals(manager.apkMD5, ignoreCase = true)
