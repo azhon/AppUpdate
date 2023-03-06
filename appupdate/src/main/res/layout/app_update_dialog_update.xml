@@ -92,5 +92,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:background="@drawable/app_update_dialog_close" />
+        android:background="@drawable/app_update_dialog_close"
+        android:contentDescription="@string/app_update_close" />
 </LinearLayout>

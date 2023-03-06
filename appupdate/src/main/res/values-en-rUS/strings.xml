@@ -11,5 +11,5 @@
     <string name="app_update_dialog_new">The new version %s can be downloaded!</string>
     <string name="app_update_dialog_new_size">New version size：%s</string>
     <string name="app_update_update">Update</string>
-
+    <string name="app_update_close">Close</string>
 </resources>
