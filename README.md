@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/mavenCentral-4.2.7-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.2.8-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -56,7 +56,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 #### 第一步：`app/build.gradle`添加依赖
 
 ```groovy
-implementation 'io.github.azhon:appupdate:4.2.7'
+implementation 'io.github.azhon:appupdate:4.2.8'
 ```
 
 <details>
@@ -129,9 +129,10 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### 版本更新记录
 
-* v4.2.7（2023/02/06）
+* v4.2.8（2023/03/06）
 
-  * [修复] `downloadState`被隐藏bug
+  * [优化] 内置对话框支持无障碍模式
+  * [优化] [合并PR](https://github.com/azhon/AppUpdate/pull/144)
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
