@@ -96,7 +96,7 @@ manager?.download()
 
 ### Skills
 
-* Internationalization support (other languages only need to take the same name in the corresponding `string.xml`
+* Internationalization support, other languages only need to take the same name in the corresponding `string.xml`
 * To view the Log, you only need to filter the Tag at the beginning of `AppUpdate`
 * Download completed Delete old APK file after opening new version
 
