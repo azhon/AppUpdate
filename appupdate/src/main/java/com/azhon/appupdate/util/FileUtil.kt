@@ -36,7 +36,7 @@ class FileUtil {
                 }
                 inStream.close()
                 val bigInt = BigInteger(1, digest.digest())
-                return bigInt.toString(16).uppercase()
+                return bigInt.toString(16).padStart(32, '0').uppercase()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
