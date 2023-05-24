@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/mavenCentral-4.2.8-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.2.9-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -114,10 +114,9 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### Version update record
 
-* v4.2.8（2023/03/06）
+* v4.2.9（2023/05/24）
 
-  * [Opt] dialog support accessibility
-  * [Opt] [Merge PR](https://github.com/azhon/AppUpdate/pull/144)
+  * [Fix] [ISSUES #152](https://github.com/azhon/AppUpdate/issues/152)
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 
