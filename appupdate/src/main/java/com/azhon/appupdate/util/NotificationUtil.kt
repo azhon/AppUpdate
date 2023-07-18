@@ -97,6 +97,9 @@ class NotificationUtil {
         ) {
             val manager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                afterO(manager)
+            }
             manager.cancel(DownloadManager.getInstance()?.notifyId ?: Constant.DEFAULT_NOTIFY_ID)
             val intent = ApkUtil.createInstallIntent(context, authorities, apk)
             val pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
