@@ -33,7 +33,7 @@ class NotificationUtil {
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         private fun getNotificationChannelId(): String {
-            val channel = DownloadManager.getInstance()?.notificationChannel
+            val channel = DownloadManager.getInstance().config.notificationChannel
             return if (channel == null) {
                 Constant.DEFAULT_CHANNEL_ID
             } else {
@@ -67,7 +67,7 @@ class NotificationUtil {
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .build()
             manager.notify(
-                DownloadManager.getInstance()?.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
+                DownloadManager.getInstance().config.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
                 notify
             )
         }
@@ -83,7 +83,7 @@ class NotificationUtil {
             val notify = builderNotification(context, icon, title, content)
                 .setProgress(max, progress, max == -1).build()
             manager.notify(
-                DownloadManager.getInstance()?.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
+                DownloadManager.getInstance().config.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
                 notify
             )
         }
@@ -100,7 +100,7 @@ class NotificationUtil {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 afterO(manager)
             }
-            manager.cancel(DownloadManager.getInstance()?.notifyId ?: Constant.DEFAULT_NOTIFY_ID)
+            manager.cancel(DownloadManager.getInstance().config.notifyId ?: Constant.DEFAULT_NOTIFY_ID)
             val intent = ApkUtil.createInstallIntent(context, authorities, apk)
             val pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
             val notify = builderNotification(context, icon, title, content)
@@ -108,7 +108,7 @@ class NotificationUtil {
                 .build()
             notify.flags = notify.flags or Notification.FLAG_AUTO_CANCEL
             manager.notify(
-                DownloadManager.getInstance()?.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
+                DownloadManager.getInstance().config.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
                 notify
             )
         }
@@ -133,7 +133,7 @@ class NotificationUtil {
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .build()
             manager.notify(
-                DownloadManager.getInstance()?.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
+                DownloadManager.getInstance().config.notifyId ?: Constant.DEFAULT_NOTIFY_ID,
                 notify
             )
         }
@@ -144,13 +144,13 @@ class NotificationUtil {
         fun cancelNotification(context: Context) {
             val manager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            manager.cancel(DownloadManager.getInstance()?.notifyId ?: Constant.DEFAULT_NOTIFY_ID)
+            manager.cancel(DownloadManager.getInstance().config.notifyId ?: Constant.DEFAULT_NOTIFY_ID)
 
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         private fun afterO(manager: NotificationManager) {
-            var channel = DownloadManager.getInstance()?.notificationChannel
+            var channel = DownloadManager.getInstance().config.notificationChannel
             if (channel == null) {
                 channel = NotificationChannel(
                     Constant.DEFAULT_CHANNEL_ID, Constant.DEFAULT_CHANNEL_NAME,

@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.azhon.appupdate.listener.OnButtonClickListener
 import com.azhon.appupdate.listener.OnDownloadListenerAdapter
 import com.azhon.appupdate.manager.DownloadManager
+import com.azhon.appupdate.manager.ViewType
+import com.azhon.appupdate.manager.downloadApp
 import com.azhon.appupdate.util.ApkUtil
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickListener {
@@ -54,55 +56,80 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
         }
     }
 
+    /**
+     * 使用内置的弹窗
+     */
     private fun startUpdate1() {
-        AlertDialog.Builder(this@MainActivity)
-            .setTitle(R.string.dialog_title)
-            .setMessage(R.string.dialog_msg)
-            .setPositiveButton(R.string.dialog_confirm) { _, _ ->
-                startUpdate2()
-            }.create()
-            .show()
+        downloadApp {
+            viewType = ViewType.SimpleDialog
+            apkUrl = url
+            apkName = this@MainActivity.apkName
+            smallIcon = R.mipmap.ic_launcher
+            apkVersionCode = 2
+            apkVersionName = "v4.2.1"
+            apkSize = "7.7MB"
+            apkDescription = getString(R.string.dialog_msg)
+            showNotification = true
+            showBgdToast = false
+            forcedUpgrade = false
+            enableLog(true)
+            jumpInstallPage = true
+        }
     }
 
+    /**
+     * 不使用内置视图，通过[registerDownloadListener]自己实现界面
+     */
     private fun startUpdate2() {
         resetPb()
-        manager = DownloadManager.Builder(this).run {
-            apkUrl(url)
-            apkName(apkName)
-            smallIcon(R.mipmap.ic_launcher)
-            build()
+        downloadApp {
+            viewType = ViewType.None
+            apkUrl = url
+            apkName = this@MainActivity.apkName
+            smallIcon = R.mipmap.ic_launcher
+            apkVersionCode = 2
+            apkVersionName = "v4.2.1"
+            apkSize = "7.7MB"
+            apkDescription = getString(R.string.dialog_msg)
+            showNotification = true
+            showBgdToast = false
+            forcedUpgrade = false
+            enableLog(true)
+            jumpInstallPage = true
+            registerDownloadListener(listenerAdapter)
         }
-        manager!!.download()
     }
 
 
     private fun startUpdate3() {
-        manager = DownloadManager.Builder(this).run {
-            apkUrl(url)
-            apkName(apkName)
-            smallIcon(R.mipmap.ic_launcher)
-            showNewerToast(true)
-            apkVersionCode(2)
-            apkVersionName("v4.2.1")
-            apkSize("7.7MB")
-            apkDescription(getString(R.string.dialog_msg))
-//            apkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
+        manager = DownloadManager.config(application) {
+            viewType = ViewType.Pixel
+            apkUrl = url
+            apkName = this@MainActivity.apkName
+            smallIcon = R.mipmap.ic_launcher
+            apkVersionCode = 2
+            apkVersionName = "v4.2.1"
+            apkSize = "7.7MB"
+            apkDescription = getString(R.string.dialog_msg)
+//            apkMD5="DC501F04BBAA458C9DC33008EFED5E7F"
 
             enableLog(true)
 //            httpManager()
-            jumpInstallPage(true)
-//            dialogImage(R.drawable.ic_dialog)
-//            dialogButtonColor(Color.parseColor("#E743DA"))
-//            dialogProgressBarColor(Color.parseColor("#E743DA"))
-            dialogButtonTextColor(Color.WHITE)
-            showNotification(true)
-            showBgdToast(false)
-            forcedUpgrade(false)
-            onDownloadListener(listenerAdapter)
-            onButtonClickListener(this@MainActivity)
-            build()
+            jumpInstallPage = true
+            configDialog {
+//              dialogImage=R.drawable.ic_dialog
+//              dialogButtonColor=Color.parseColor("#E743DA")
+//              dialogProgressBarColor=Color.parseColor("#E743DA")
+                showNewerToast = true
+                dialogButtonTextColor = Color.WHITE
+            }
+            showNotification = true
+            showBgdToast = false
+            forcedUpgrade = false
+            registerDownloadListener(listenerAdapter)
+            onButtonClickListener = this@MainActivity
         }
-        manager?.download()
+        downloadApp(manager!!)
     }
 
     private fun resetPb() {
