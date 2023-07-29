@@ -12,4 +12,5 @@
     <string name="app_update_dialog_new_size">新版本大小：%s</string>
     <string name="app_update_update">升級</string>
     <string name="app_update_close">關閉</string>
+    <string name="update_description_title">更新描述：</string>
 </resources>

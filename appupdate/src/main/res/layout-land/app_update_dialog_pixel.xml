@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/margin_xsmall"
             android:text="正在下载安装应用更新"
             android:textAlignment="viewStart"
-            android:textAppearance="@style/TextAppearance.Material3.DisplayMedium" />
+            android:textAppearance="@style/TextAppearance.Material3.DisplaySmall" />
 
         <ProgressBar
             android:id="@id/app_update_progress_bar"
@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="start"
             android:layout_marginTop="@dimen/margin_xsmall"
             android:text="下载及安装更新"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />

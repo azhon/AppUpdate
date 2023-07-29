@@ -29,7 +29,6 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

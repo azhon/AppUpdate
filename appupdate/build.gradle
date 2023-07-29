@@ -3,7 +3,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply from: '../maven.gradle'
 
 android {
-    compileSdk rootProject.ext.compileSdk
+    compileSdk 32
 
     defaultConfig {
         minSdk rootProject.ext.minSdk

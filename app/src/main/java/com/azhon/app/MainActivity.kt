@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
      */
     private fun startUpdate1() {
         downloadApp {
-            viewType = ViewType.SimpleDialog
+            viewType = ViewType.Win8
             apkUrl = url
             apkName = this@MainActivity.apkName
             smallIcon = R.mipmap.ic_launcher

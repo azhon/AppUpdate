@@ -10,6 +10,7 @@ import com.azhon.appupdate.service.DownloadService
 import com.azhon.appupdate.view.SimpleUpdateDialog
 import com.azhon.appupdate.view.UpdateDialogActivity
 import com.azhon.appupdate.view.UpdateDialogFragment
+import com.azhon.appupdate.view.Win8UpdateDialogFragment
 
 class ViewType {
     companion object {
@@ -51,8 +52,11 @@ fun AppCompatActivity.downloadApp(config: DownloadManager.Config): DownloadManag
                 ViewType.SimpleDialog->{
                     SimpleUpdateDialog.openAlertDialog(this,it)
                 }
-                else->{
+                ViewType.Pixel->{
                     UpdateDialogFragment.open(this)
+                }
+                ViewType.Win8->{
+                    Win8UpdateDialogFragment.open(this)
                 }
             }
             if (it.config.viewConfig.showNewerToast) {

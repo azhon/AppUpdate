@@ -12,8 +12,8 @@ android {
             storePassword '123456'
         }
     }
+    compileSdk 32
 
-    compileSdk rootProject.ext.compileSdk
     defaultConfig {
         applicationId "com.azhon.app"
         minSdk rootProject.ext.minSdk

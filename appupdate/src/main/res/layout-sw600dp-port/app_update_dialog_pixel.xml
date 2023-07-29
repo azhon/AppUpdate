@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
-    android:padding="@dimen/margin_xsmall">
+    android:padding="@dimen/margin_small">
 
     <LinearLayout
         app:layout_constraintTop_toTopOf="parent"
@@ -24,25 +24,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xsmall"
+            android:layout_marginTop="@dimen/margin_small"
             android:text="正在下载安装应用更新"
             android:textAlignment="viewStart"
-            android:textAppearance="@style/TextAppearance.Material3.DisplayMedium" />
+            android:textAppearance="@style/TextAppearance.Material3.DisplayLarge" />
 
         <ProgressBar
             android:id="@id/app_update_progress_bar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xsmall"
+            android:layout_marginTop="@dimen/margin_small"
             android:min="0"
-            android:visibility="gone" />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_xsmall"
+            android:layout_marginTop="@dimen/margin_large"
             android:text="下载及安装更新"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
 

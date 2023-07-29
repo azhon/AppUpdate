@@ -17,35 +17,9 @@ import com.azhon.appupdate.manager.DownloadManager
 import com.azhon.appupdate.util.ToastUtils
 import java.io.File
 
-class UpdateDialogFragment : DialogFragment(), OnDownloadListener {
-    private val manager: DownloadManager = DownloadManager.getInstance()
+open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
+    protected val manager: DownloadManager = DownloadManager.getInstance()
     lateinit var mView: View
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setStyle(STYLE_NORMAL,R.style.M3AppTheme)
-        mView = inflater.inflate(R.layout.app_update_dialog_pixel, container, false)
-        //全屏
-        dialog?.window?.let { window ->
-            //这步是必须的
-            window.setBackgroundDrawableResource(R.color.transparent)
-            //必要，设置 padding，这一步也是必须的，内容不能填充全部宽度和高度
-            window.decorView.setPadding(0, 0, 0, 0)
-            // 关键是这句，其实跟xml里的配置长得几乎一样
-            val wlp: WindowManager.LayoutParams = window.attributes
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                wlp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-            }
-            wlp.gravity = Gravity.CENTER
-            wlp.width = WindowManager.LayoutParams.MATCH_PARENT
-            wlp.height = WindowManager.LayoutParams.MATCH_PARENT
-            window.attributes = wlp
-        }
-        return mView
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,10 +70,7 @@ class UpdateDialogFragment : DialogFragment(), OnDownloadListener {
         Log.e(UpdateDialogFragment.TAG, "error: 下载错误", e)
     }
 
-
     companion object {
-        const val TAG = "UpdateDialogFragment"
-
         fun View.tvTitle(): TextView {
             return this.findViewById(R.id.app_update_tv_title)
         }
@@ -123,11 +94,96 @@ class UpdateDialogFragment : DialogFragment(), OnDownloadListener {
         fun View.progressBar(): ProgressBar {
             return this.findViewById(R.id.app_update_progress_bar)
         }
+    }
+}
 
+class UpdateDialogFragment : BaseUpdateDialogFragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        setStyle(STYLE_NORMAL,R.style.M3AppTheme)
+        mView = inflater.inflate(R.layout.app_update_dialog_pixel, container, false)
+        //全屏
+        dialog?.window?.let { window ->
+            //这步是必须的
+            window.setBackgroundDrawableResource(R.color.transparent)
+            //必要，设置 padding，这一步也是必须的，内容不能填充全部宽度和高度
+            window.decorView.setPadding(0, 0, 0, 0)
+            // 关键是这句，其实跟xml里的配置长得几乎一样
+            val wlp: WindowManager.LayoutParams = window.attributes
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                wlp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            }
+            wlp.gravity = Gravity.CENTER
+            wlp.width = WindowManager.LayoutParams.MATCH_PARENT
+            wlp.height = WindowManager.LayoutParams.MATCH_PARENT
+            window.attributes = wlp
+        }
+        return mView
+    }
+
+    companion object {
+        const val TAG = "UpdateDialogFragment"
 
         fun open(host: Fragment) {
             host.run {
                 val dialog = UpdateDialogFragment()
+                val ft = childFragmentManager.beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                dialog.show(ft, UpdateDialogFragment.TAG);
+            }
+        }
+
+        fun open(host: AppCompatActivity) {
+            host.run {
+                val dialog = UpdateDialogFragment()
+                val ft = supportFragmentManager.beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                dialog.show(ft, UpdateDialogFragment.TAG);
+            }
+        }
+    }
+
+}
+
+class Win8UpdateDialogFragment : BaseUpdateDialogFragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        setStyle(STYLE_NORMAL,R.style.M3AppTheme)
+        mView = inflater.inflate(R.layout.app_update_dialog_win8, container, false)
+        //全屏
+        dialog?.window?.let { window ->
+            //这步是必须的
+            window.setBackgroundDrawableResource(R.color.transparent)
+            //必要，设置 padding，这一步也是必须的，内容不能填充全部宽度和高度
+            window.decorView.setPadding(0, 0, 0, 0)
+            // 关键是这句，其实跟xml里的配置长得几乎一样
+            val wlp: WindowManager.LayoutParams = window.attributes
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                wlp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            }
+            wlp.gravity = Gravity.CENTER
+            wlp.width = WindowManager.LayoutParams.MATCH_PARENT
+            wlp.height = WindowManager.LayoutParams.WRAP_CONTENT
+            window.attributes = wlp
+        }
+        return mView
+    }
+
+
+    companion object {
+        const val TAG = "UpdateDialogFragment"
+
+        fun open(host: Fragment) {
+            host.run {
+                val dialog = Win8UpdateDialogFragment()
                 val ft = childFragmentManager.beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 dialog.show(ft, TAG);
@@ -136,7 +192,7 @@ class UpdateDialogFragment : DialogFragment(), OnDownloadListener {
 
         fun open(host: AppCompatActivity) {
             host.run {
-                val dialog = UpdateDialogFragment()
+                val dialog = Win8UpdateDialogFragment()
                 val ft = supportFragmentManager.beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 dialog.show(ft, TAG);

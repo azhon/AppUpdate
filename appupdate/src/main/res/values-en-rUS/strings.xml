@@ -12,4 +12,5 @@
     <string name="app_update_dialog_new_size">New version size：%s</string>
     <string name="app_update_update">Update</string>
     <string name="app_update_close">Close</string>
+    <string name="update_description_title">update note：</string>
 </resources>
