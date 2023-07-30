@@ -13,4 +13,11 @@
     <string name="app_update_update">升級</string>
     <string name="app_update_close">關閉</string>
     <string name="update_description_title">更新描述：</string>
+    <string name="has_cancel_download">已取消下載</string>
+    <string name="update_title">有更新可用</string>
+    <string name="update_title_downloading">正在下載安裝應用更新</string>
+    <string name="update_title_2">下載及安裝更新</string>
+    <string name="update_size_tv">更新大小：%s</string>
+    <string name="update">更新</string>
+    <string name="cancel">取消</string>
 </resources>

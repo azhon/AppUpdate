@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.azhon.appupdate.listener.OnButtonClickListener
 import com.azhon.appupdate.listener.OnDownloadListenerAdapter

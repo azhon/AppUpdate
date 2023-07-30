@@ -12,5 +12,12 @@
     <string name="app_update_dialog_new_size">New version size：%s</string>
     <string name="app_update_update">Update</string>
     <string name="app_update_close">Close</string>
-    <string name="update_description_title">update note：</string>
+    <string name="update_description_title">Update description:</string>
+    <string name="has_cancel_download">The download has been canceled</string>
+    <string name="update_title">An update is available</string>
+    <string name="update_title_downloading">Downloading and installing app updates</string>
+    <string name="update_title_2">Download and install updates</string>
+    <string name="update_size_tv">Update size: %s</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
 </resources>

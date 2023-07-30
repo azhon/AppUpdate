@@ -26,9 +26,21 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 
 ### 效果图
 
-<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_2.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_4.png" width="300">
-<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_6.png" width="300">
+<img src="screenshots/2.jpg" width="50%"/>
+
+<img src="img/zh/zh_1.png" width="300">　<img src="img/zh/zh_2.png" width="300">
+<img src="img/zh/zh_3.png" width="300">　<img src="img/zh/zh_4.png" width="300">
+<img src="img/zh/zh_5.png" width="300">　<img src="img/zh/zh_6.png" width="300">
+
+
+
+### 新添加的内置页面
+
+
+
+<img src="img/zh/zh_7.jpg" width="300"><img src="img/zh/zh_8.jpg" width="300">
+
+<img src="img/zh/zh_9.jpg" width="300">
 
 ### 功能介绍
 
@@ -82,24 +94,89 @@ dependencies {
 
 #### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
 
-**如果需要显示内置的对话框那么你需要调用`builder.apkVersionCode()`将新版本的versionCode填进去，同时值必须大于当前版本的**
+#### 废除了旧的builder模式，下面旧方式不再支持
 
-```java
+```
 val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
     apkName("appupdate.apk")
     smallIcon(R.mipmap.ic_launcher)
-    //设置了此参数，那么内部会自动判断是否需要显示更新对话框，否则需要自己判断是否需要更新
+    //If this parameter is set, it will automatically determine whether to show tip dialog
     apkVersionCode(2)
-    //同时下面三个参数也必须要设置
     apkVersionName('v4.2.2')
     apkSize("7.7MB")
-    apkDescription("更新描述信息(取服务端返回数据)")
-    //省略一些非必须参数...
+    apkDescription("description...")
+    //Optional parameters...
     build()
 }
 manager?.download()
 ```
+
+#### 崭新的使用方式
+
+**如果需要显示内置的对话框那么你需要在配置downloadmanager时指定viewType类型。**
+
+**如果指定了apkVersionCode，将自动判断是否需要升级**
+
+* 注
+
+如果需要自定义界面，在配置的时候将viewType指定为ViewType.None，这将不显示内置界面。
+
+在配置的时候通过registerDownloadListener方法监听下载进度。
+
+配置完成拿到manager后，通过调用manager.download()开始下载文件。
+
+
+
+下面是其中一个downloadApp方法的定义，是个接收者函数，因此可以直接在activity或拿到activity的代码中使用
+
+`fun AppCompatActivity.downloadApp(config: DownloadManager.Config): DownloadManager`
+
+* 使用方式
+
+```java
+通过DownloadManager.config(application)方法构造一个manager,然后通过downloadApp方法完成配置。
+如果指定viewtype为非ViewType.None,将显示内置界面
+
+    
+//配置一个downloadmanager
+val manager = DownloadManager.config(application) {
+    		//这里指定使用内置的不同更新界面，如果需要自己定制界面，指定为ViewType.None      
+    		viewType = ViewType.Colorful
+            apkUrl = url
+            apkName = this@MainActivity.apkName
+            smallIcon = R.mipmap.ic_launcher
+            apkVersionCode = 2
+            apkVersionName = "v4.2.1"
+            apkSize = "7.7MB"
+            apkDescription = getString(R.string.dialog_msg)
+            //对于之前的更新页面的配置
+            //新添加的内置更新页面不适用
+            configDialog {
+//              dialogImage=R.drawable.ic_dialog
+//              dialogButtonColor=Color.parseColor("#E743DA")
+//              dialogProgressBarColor=Color.parseColor("#E743DA")
+                showNewerToast = true
+                dialogButtonTextColor = Color.WHITE
+            }
+            forcedUpgrade = false
+        }
+
+//显示更新界面
+val manager = downloadApp(manager!!)
+```
+* 或者，更简单一些，直接配置并显示更新界面，还能拿到downloadmanager。如果使用了内置界面，其实是否拿到manager无关紧要。
+
+```
+直接通过downloadApp方法构造downloadmanager并显示更新界面
+val manager=downloadApp {
+            //。。。。。
+     		//跟上面一样的配置
+        }
+```
+
+
+
 #### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy

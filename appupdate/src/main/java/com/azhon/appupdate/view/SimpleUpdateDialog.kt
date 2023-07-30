@@ -36,7 +36,7 @@ class SimpleUpdateDialog {
                 setCancelable(false)
                 if (!manager.config.forcedUpgrade) {
                     setNegativeButton(R.string.cancel) { dialog_interface, _ ->
-                        manager.cancel(mOnDownloadListener) {
+                        manager.cancel {
                             dialog_interface.dismiss()
                         }
                     }
@@ -54,11 +54,13 @@ class SimpleUpdateDialog {
                 getButton(AlertDialog.BUTTON_POSITIVE).also { positiveButton ->
                     mOnDownloadListener = object : OnDownloadListener {
                         override fun cancel() {
+                            manager.clearListener()
                             ToastUtils.showLong(activity, activity.getString(R.string.has_cancel_download))
                             dismiss()
                         }
 
                         override fun done(apk: File) {
+                            manager.clearListener()
                             dismiss()
                         }
 

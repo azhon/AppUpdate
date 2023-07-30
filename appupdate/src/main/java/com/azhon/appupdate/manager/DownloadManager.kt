@@ -115,9 +115,8 @@ class DownloadManager private constructor(val config: Config) : Serializable {
      * when download not start,HttpManager maybe is null
      * in this case, will exec "then" block
      */
-    fun cancel(listener: OnDownloadListener? = null, then: () -> Unit={}) {
+    fun cancel(then: () -> Unit = {}) {
         config.httpManager?.cancel() ?: then()
-        listener?.let { config.onDownloadListeners.remove(it) }
     }
 
     /**

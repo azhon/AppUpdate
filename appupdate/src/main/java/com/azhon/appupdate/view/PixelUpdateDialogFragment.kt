@@ -36,7 +36,7 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
         }
         if (!manager.config.forcedUpgrade) {
             mView.btnCancel().setOnClickListener {
-                manager.cancel(this){
+                manager.cancel {
                     dismiss()
                 }
             }
@@ -60,10 +60,12 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
     }
 
     override fun done(apk: File) {
+        manager.clearListener()
         dismiss()
     }
 
     override fun cancel() {
+        manager.clearListener()
         ToastUtils.showLong(requireContext(), getString(R.string.has_cancel_download))
         dismiss()
     }
