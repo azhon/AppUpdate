@@ -1,7 +1,5 @@
 package com.azhon.appupdate.view
 
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.azhon.appupdate.R
 import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.manager.DownloadManager
-import com.azhon.appupdate.util.DensityUtil
 import com.azhon.appupdate.util.ToastUtils
 import java.io.File
 
