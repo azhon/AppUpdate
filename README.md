@@ -25,9 +25,6 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 * [版本更新记录](#版本更新记录)
 
 ### 效果图
-
-<img src="screenshots/2.jpg" width="50%"/>
-
 <img src="img/zh/zh_1.png" width="300">　<img src="img/zh/zh_2.png" width="300">
 <img src="img/zh/zh_3.png" width="300">　<img src="img/zh/zh_4.png" width="300">
 <img src="img/zh/zh_5.png" width="300">　<img src="img/zh/zh_6.png" width="300">
