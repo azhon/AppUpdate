@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".MainActivity">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RadioGroup
+        android:layout_margin="8dp"
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/colorful"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="多彩" />
+
+        <RadioButton
+            android:id="@+id/simpledialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="对话框" />
+
+        <RadioButton
+            android:id="@+id/pixel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="仿系统升级" />
+
+        <RadioButton
+            android:id="@+id/win"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="win8弹窗" />
+    </RadioGroup>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,18 +74,8 @@
         android:textColor="#333333" />
 
     <Button
-        android:id="@+id/btn_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="6dp"
-        android:text="@string/layout_custom_dialog"
-        android:textAllCaps="false" />
-
-    <Button
         android:id="@+id/btn_2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
@@ -58,7 +84,7 @@
 
     <Button
         android:id="@+id/btn_3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
@@ -67,10 +93,11 @@
 
     <Button
         android:id="@+id/btn_4"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
         android:text="@string/layout_cancel"
         android:textAllCaps="false" />
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>

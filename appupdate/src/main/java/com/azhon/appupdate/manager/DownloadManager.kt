@@ -147,6 +147,7 @@ class DownloadManager private constructor(val config: Config) : Serializable {
 
         /**
          * The apk versionCode that needs to be downloaded
+         * 如果不设置此值，将不检查当前应用的versioncode，直接下载安装更新
          */
         var apkVersionCode = Int.MIN_VALUE
 

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
     private var manager: DownloadManager? = null
     private lateinit var tvPercent: TextView
     private lateinit var progressBar: ProgressBar
+    private var viewStyle = ViewType.Colorful
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,59 +38,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
         tvPercent = findViewById<Button>(R.id.tv_percent)
         findViewById<TextView>(R.id.tv_channel).text =
             String.format(getString(R.string.layout_channel), BuildConfig.FLAVOR)
-        findViewById<Button>(R.id.btn_1).setOnClickListener(this)
         findViewById<Button>(R.id.btn_2).setOnClickListener(this)
         findViewById<Button>(R.id.btn_3).setOnClickListener(this)
         findViewById<Button>(R.id.btn_4).setOnClickListener(this)
-
+        findViewById<RadioGroup>(R.id.radio_group).setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.colorful->{
+                    viewStyle=ViewType.Colorful
+                }
+                R.id.simpledialog->{
+                    viewStyle=ViewType.SimpleDialog
+                }
+                R.id.pixel->{
+                    viewStyle=ViewType.Pixel
+                }
+                R.id.win->{
+                    viewStyle=ViewType.Win8
+                }
+            }
+        }
         //delete downloaded old Apk
         val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/$apkName")
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_1 -> startUpdate1()
             R.id.btn_2 -> startUpdate2()
             R.id.btn_3 -> startUpdate3()
             R.id.btn_4 -> {
-//                manager?.cancel()
-                downloadApp {
-                    viewType = ViewType.SimpleDialog
-                    apkUrl = url
-                    apkName = this@MainActivity.apkName
-                    smallIcon = R.mipmap.ic_launcher
-                    apkVersionCode = 2
-                    apkVersionName = "v4.2.1"
-                    apkSize = "7.7MB"
-                    apkDescription = getString(R.string.dialog_msg)
-                    showNotification = true
-                    showBgdToast = false
-                    forcedUpgrade = false
-                    enableLog(true)
-                    jumpInstallPage = true
-                }
+                manager?.cancel()
             }
-        }
-    }
-
-    /**
-     * 使用内置的弹窗
-     */
-    private fun startUpdate1() {
-        downloadApp {
-            viewType = ViewType.Win8
-            apkUrl = url
-            apkName = this@MainActivity.apkName
-            smallIcon = R.mipmap.ic_launcher
-            apkVersionCode = 2
-            apkVersionName = "v4.2.1"
-            apkSize = "7.7MB"
-            apkDescription = getString(R.string.dialog_msg)
-            showNotification = true
-            showBgdToast = false
-            forcedUpgrade = false
-            enableLog(true)
-            jumpInstallPage = true
         }
     }
 
@@ -118,7 +97,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
 
     private fun startUpdate3() {
         manager = DownloadManager.config(application) {
-            viewType = ViewType.Pixel
+            viewType = viewStyle
             apkUrl = url
             apkName = this@MainActivity.apkName
             smallIcon = R.mipmap.ic_launcher

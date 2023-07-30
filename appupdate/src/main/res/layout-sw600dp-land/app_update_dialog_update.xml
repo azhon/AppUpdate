@@ -9,14 +9,14 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@id/g_start"
+        android:id="@+id/g_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@dimen/dialog_start" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@id/g_end"
+        android:id="@+id/g_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

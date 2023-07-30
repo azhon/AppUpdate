@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/margin_xsmall"
-    android:background="@android:color/holo_blue_light">
+    android:background="@color/blue_dark">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+        <TextView
+            android:textColor="@android:color/white"
+            android:id="@id/app_update_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_title"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            />
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,6 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@android:color/white"
                     android:id="@id/app_update_tv_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -33,6 +41,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@android:color/white"
                     android:layout_marginTop="@dimen/margin_xsmall"
                     android:id="@id/app_update_tv_size"
                     android:layout_width="wrap_content"
@@ -65,6 +74,7 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:text="@string/cancel"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintBottom_toBottomOf="@id/app_update_btn_update"
@@ -74,6 +84,7 @@
         android:id="@id/app_update_btn_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
         app:strokeColor="@android:color/white"
         app:cornerRadius="0dp"
         app:strokeWidth="2dp"

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent">#00000000</color>
+    <color name="blue_dark">#303F9F</color>
+    <color name="blue">#3F51B5</color>
     <!--material3-->
     <color name="seed">#6750A4</color>
     <color name="md_theme_light_primary">#6750A4</color>

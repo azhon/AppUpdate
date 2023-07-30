@@ -6,75 +6,76 @@
     android:background="?android:attr/colorBackground"
     android:padding="@dimen/margin_xsmall">
 
-    <LinearLayout
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_barrier"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_icon"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:src="@drawable/baseline_system_update_24" />
-
-        <TextView
-            android:id="@id/app_update_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xsmall"
-            android:text="@string/update_title"
-            android:textAlignment="viewStart"
-            android:textAppearance="@style/TextAppearance.Material3.DisplaySmall" />
-
-        <ProgressBar
-            android:id="@id/app_update_progress_bar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xsmall"
-            android:min="0"
-            android:visibility="invisible" />
+            android:orientation="vertical"
+        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="@dimen/margin_xsmall"
-            android:text="@string/update_title_2"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:src="@drawable/baseline_system_update_24" />
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xsmall">
+            <TextView
+                android:id="@id/app_update_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:text="@string/update_title"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.Material3.DisplaySmall" />
+
+            <ProgressBar
+                android:id="@id/app_update_progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:min="0"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:text="@string/update_title_2"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@id/app_update_tv_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:id="@id/app_update_tv_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:text="@string/update_size_tv"
                     android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottom_barrier"
