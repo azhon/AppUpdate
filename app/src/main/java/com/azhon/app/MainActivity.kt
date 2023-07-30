@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
 
             enableLog(true)
 //            httpManager()
-            jumpInstallPage = true
+            jumpInstallPage = false
             configDialog {
 //              dialogImage=R.drawable.ic_dialog
 //              dialogButtonColor=Color.parseColor("#E743DA")

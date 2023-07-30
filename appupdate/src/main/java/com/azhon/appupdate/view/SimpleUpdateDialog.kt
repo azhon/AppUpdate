@@ -5,9 +5,12 @@ import android.app.AlertDialog
 import android.util.Log
 import android.view.View
 import com.azhon.appupdate.R
+import com.azhon.appupdate.config.Constant
 import com.azhon.appupdate.databinding.ItemUpdateDialogBinding
+import com.azhon.appupdate.listener.OnButtonClickListener
 import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.manager.DownloadManager
+import com.azhon.appupdate.util.ApkUtil
 import com.azhon.appupdate.util.ToastUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
@@ -18,6 +21,8 @@ class SimpleUpdateDialog {
          * 展示弹窗，以及下载安装更新
          */
         fun openAlertDialog(activity: Activity, manager: DownloadManager) {
+            var action = Action.download
+            var apkFile: File? = null
             var mOnDownloadListener: OnDownloadListener? = null
             val mView = ItemUpdateDialogBinding.inflate(activity.layoutInflater)
             //弹窗
@@ -36,9 +41,8 @@ class SimpleUpdateDialog {
                 setCancelable(false)
                 if (!manager.config.forcedUpgrade) {
                     setNegativeButton(R.string.cancel) { dialog_interface, _ ->
-                        manager.cancel {
-                            dialog_interface.dismiss()
-                        }
+                        manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
+                        dialog_interface.dismiss()
                     }
                 }
                 mView.appUpdateTvSize.setText(
@@ -47,21 +51,31 @@ class SimpleUpdateDialog {
                         manager.config.apkSize
                     )
                 )
-                mView.appUpdateTvDescription.text=
+                mView.appUpdateTvDescription.text =
                     manager.config.apkDescription.replace("\\n", "\n")
             }
             dialogBuilder.show().apply {
+                this.setOnDismissListener {
+                    ToastUtils.showLong(
+                        activity,
+                        activity.getString(R.string.has_cancel_download)
+                    )
+                    manager.cancel()
+                    manager.config.onDownloadListeners.remove(mOnDownloadListener)
+                }
                 getButton(AlertDialog.BUTTON_POSITIVE).also { positiveButton ->
                     mOnDownloadListener = object : OnDownloadListener {
-                        override fun cancel() {
-                            manager.clearListener()
-                            ToastUtils.showLong(activity, activity.getString(R.string.has_cancel_download))
-                            dismiss()
-                        }
+                        override fun cancel() {}
 
                         override fun done(apk: File) {
-                            manager.clearListener()
-                            dismiss()
+                            if (!manager.config.jumpInstallPage) {
+                                apkFile = apk
+                                positiveButton.isEnabled = true
+                                action = Action.install
+                                positiveButton.setText(R.string.install)
+                            } else {
+                                dismiss()
+                            }
                         }
 
                         override fun downloading(max: Int, progress: Int) {
@@ -85,8 +99,16 @@ class SimpleUpdateDialog {
                         manager.config.registerDownloadListener(it)
                     }
                     positiveButton.setOnClickListener {
-                        //下载并安装更新
-                        manager.directDownload()
+                        manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
+                        if (action == Action.install) {
+                            apkFile?.let { it1 ->
+                                ApkUtil.installApk(activity, Constant.AUTHORITIES!!, it1)
+                            }
+                        } else {
+                            //下载并安装更新
+                            manager.directDownload()
+                        }
+
                     }
                 }
             }

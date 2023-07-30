@@ -11,14 +11,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.azhon.appupdate.R
+import com.azhon.appupdate.config.Constant
+import com.azhon.appupdate.listener.OnButtonClickListener
 import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.manager.DownloadManager
+import com.azhon.appupdate.util.ApkUtil
 import com.azhon.appupdate.util.ToastUtils
 import java.io.File
+
+class Action {
+    companion object {
+        //mode
+        const val download = 0x01
+        const val install = 0x02
+    }
+}
 
 open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
     internal val manager: DownloadManager = DownloadManager.getInstance()
     lateinit var mView: View
+    var action = Action.download
+    var apkFile: File? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         manager.config.registerDownloadListener(this)
@@ -31,20 +46,30 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
         )
         mView.tvDescription().text = manager.config.apkDescription.replace("\\n", "\n")
         mView.btnUpdate().setOnClickListener {
-            manager.directDownload()
-            it.isEnabled = false
+            manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
+            if (action == Action.install) {
+                apkFile?.let { it1 ->
+                    ApkUtil.installApk(this.requireContext(), Constant.AUTHORITIES!!, it1)
+                }
+            } else {
+                //下载并安装更新
+                manager.directDownload()
+                it.isEnabled = false
+            }
+
         }
         if (!manager.config.forcedUpgrade) {
             mView.btnCancel().setOnClickListener {
-                manager.cancel {
-                    dismiss()
-                }
+                manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
+                ToastUtils.showLong(requireContext(), getString(R.string.has_cancel_download))
+                dismiss()
             }
         } else {
             mView.btnCancel().visibility = View.INVISIBLE
             isCancelable = false
         }
     }
+
 
     override fun start() {
         mView.progressBar().run {
@@ -60,15 +85,24 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
     }
 
     override fun done(apk: File) {
-        manager.clearListener()
-        dismiss()
+        apkFile = apk
+        if (!manager.config.jumpInstallPage) {
+            apkFile = apk
+            mView.btnUpdate().isEnabled = true
+            action = Action.install
+            mView.btnUpdate().setText(R.string.install)
+        } else {
+            dismiss()
+        }
     }
 
-    override fun cancel() {
-        manager.clearListener()
-        ToastUtils.showLong(requireContext(), getString(R.string.has_cancel_download))
-        dismiss()
+    override fun onDestroy() {
+        super.onDestroy()
+        manager.cancel()
+        manager.config.onDownloadListeners.remove(this)
     }
+
+    override fun cancel() {}
 
     override fun error(e: Throwable) {
         Log.e(PixelUpdateDialogFragment.TAG, "error:", e)
