@@ -75,16 +75,16 @@ class DownloadManager private constructor(val config: Config) : Serializable {
     /**
      * download file without dialog
      */
-    fun download(){
+    fun download() {
         if (canDownload()) {
             application.startService(Intent(application, DownloadService::class.java))
-        }else{
+        } else {
             Log.e(TAG, "download: cannot download")
         }
     }
 
-    fun directDownload(){
-            application.startService(Intent(application, DownloadService::class.java))
+    fun directDownload() {
+        application.startService(Intent(application, DownloadService::class.java))
     }
 
     private fun checkParams(): Boolean {
@@ -111,8 +111,13 @@ class DownloadManager private constructor(val config: Config) : Serializable {
         return true
     }
 
-    fun cancel() {
-        config.httpManager?.cancel()
+    /**
+     * when download not start,HttpManager maybe is null
+     * in this case, will exec "then" block
+     */
+    fun cancel(listener: OnDownloadListener? = null, then: () -> Unit={}) {
+        config.httpManager?.cancel() ?: then()
+        listener?.let { config.onDownloadListeners.remove(it) }
     }
 
     /**

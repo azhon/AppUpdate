@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.azhon.appupdate.R
 import com.azhon.appupdate.listener.OnDownloadListener
@@ -18,27 +17,32 @@ import com.azhon.appupdate.util.ToastUtils
 import java.io.File
 
 open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
-    protected val manager: DownloadManager = DownloadManager.getInstance()
+    internal val manager: DownloadManager = DownloadManager.getInstance()
     lateinit var mView: View
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        manager.config.registerDownloadListener(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        mView.tvSize().setText(manager.config.apkSize)
-        mView.tvDescription().setText(manager.config.apkDescription.replace("\\n", "\n"))
+        mView.tvSize().text = String.format(
+            getString(R.string.update_size_tv), manager.config.apkSize
+        )
+        mView.tvDescription().text = manager.config.apkDescription.replace("\\n", "\n")
         mView.btnUpdate().setOnClickListener {
             manager.directDownload()
             it.isEnabled = false
-            manager.config.registerDownloadListener(this)
         }
         if (!manager.config.forcedUpgrade) {
             mView.btnCancel().setOnClickListener {
-                manager.cancel()
-                dismiss()
+                manager.cancel(this){
+                    dismiss()
+                }
             }
         } else {
             mView.btnCancel().visibility = View.INVISIBLE
-            isCancelable=false
+            isCancelable = false
         }
     }
 
@@ -56,18 +60,16 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
     }
 
     override fun done(apk: File) {
-        ToastUtils.showLong(requireContext(), "完成")
         dismiss()
     }
 
     override fun cancel() {
-        ToastUtils.showLong(requireContext(), "已取消下载")
-        manager.cancel()
+        ToastUtils.showLong(requireContext(), getString(R.string.has_cancel_download))
         dismiss()
     }
 
     override fun error(e: Throwable) {
-        Log.e(UpdateDialogFragment.TAG, "error: 下载错误", e)
+        Log.e(PixelUpdateDialogFragment.TAG, "error:", e)
     }
 
     companion object {
@@ -97,14 +99,14 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
     }
 }
 
-class UpdateDialogFragment : BaseUpdateDialogFragment() {
+class PixelUpdateDialogFragment : BaseUpdateDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setStyle(STYLE_NORMAL,R.style.M3AppTheme)
+        setStyle(STYLE_NORMAL, R.style.M3AppTheme)
         mView = inflater.inflate(R.layout.app_update_dialog_pixel, container, false)
         //全屏
         dialog?.window?.let { window ->
@@ -115,7 +117,8 @@ class UpdateDialogFragment : BaseUpdateDialogFragment() {
             // 关键是这句，其实跟xml里的配置长得几乎一样
             val wlp: WindowManager.LayoutParams = window.attributes
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                wlp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+                wlp.layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
             }
             wlp.gravity = Gravity.CENTER
             wlp.width = WindowManager.LayoutParams.MATCH_PARENT
@@ -125,24 +128,20 @@ class UpdateDialogFragment : BaseUpdateDialogFragment() {
         return mView
     }
 
+    override fun start() {
+        super.start()
+        mView.tvTitle().setText(R.string.update_title_downloading)
+    }
+
     companion object {
         const val TAG = "UpdateDialogFragment"
 
-        fun open(host: Fragment) {
-            host.run {
-                val dialog = UpdateDialogFragment()
-                val ft = childFragmentManager.beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                dialog.show(ft, UpdateDialogFragment.TAG);
-            }
-        }
-
         fun open(host: AppCompatActivity) {
             host.run {
-                val dialog = UpdateDialogFragment()
-                val ft = supportFragmentManager.beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                dialog.show(ft, UpdateDialogFragment.TAG);
+                val dialog = PixelUpdateDialogFragment()
+                val ft = supportFragmentManager.beginTransaction()
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                dialog.show(ft, TAG)
             }
         }
     }
@@ -156,7 +155,7 @@ class Win8UpdateDialogFragment : BaseUpdateDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setStyle(STYLE_NORMAL,R.style.M3AppTheme)
+        setStyle(STYLE_NORMAL, R.style.M3AppTheme)
         mView = inflater.inflate(R.layout.app_update_dialog_win8, container, false)
         //全屏
         dialog?.window?.let { window ->
@@ -167,7 +166,8 @@ class Win8UpdateDialogFragment : BaseUpdateDialogFragment() {
             // 关键是这句，其实跟xml里的配置长得几乎一样
             val wlp: WindowManager.LayoutParams = window.attributes
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                wlp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+                wlp.layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
             }
             wlp.gravity = Gravity.CENTER
             wlp.width = WindowManager.LayoutParams.MATCH_PARENT
@@ -181,21 +181,12 @@ class Win8UpdateDialogFragment : BaseUpdateDialogFragment() {
     companion object {
         const val TAG = "UpdateDialogFragment"
 
-        fun open(host: Fragment) {
-            host.run {
-                val dialog = Win8UpdateDialogFragment()
-                val ft = childFragmentManager.beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                dialog.show(ft, TAG);
-            }
-        }
-
         fun open(host: AppCompatActivity) {
             host.run {
                 val dialog = Win8UpdateDialogFragment()
-                val ft = supportFragmentManager.beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                dialog.show(ft, TAG);
+                val ft = supportFragmentManager.beginTransaction()
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                dialog.show(ft, TAG)
             }
         }
     }

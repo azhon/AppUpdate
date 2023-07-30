@@ -51,7 +51,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
             R.id.btn_2 -> startUpdate2()
             R.id.btn_3 -> startUpdate3()
             R.id.btn_4 -> {
-                manager?.cancel()
+//                manager?.cancel()
+                downloadApp {
+                    viewType = ViewType.SimpleDialog
+                    apkUrl = url
+                    apkName = this@MainActivity.apkName
+                    smallIcon = R.mipmap.ic_launcher
+                    apkVersionCode = 2
+                    apkVersionName = "v4.2.1"
+                    apkSize = "7.7MB"
+                    apkDescription = getString(R.string.dialog_msg)
+                    showNotification = true
+                    showBgdToast = false
+                    forcedUpgrade = false
+                    enableLog(true)
+                    jumpInstallPage = true
+                }
             }
         }
     }

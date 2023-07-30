@@ -8,9 +8,17 @@
     <string name="app_update_download_error">下载出错</string>
     <string name="app_update_continue_downloading">点击继续下载</string>
     <string name="app_update_background_downloading">正在后台下载新版本…</string>
-    <string name="app_update_dialog_new">发现新版本%s可以下载啦！</string>
+    <string name="app_update_dialog_new">发现新版本%s ！</string>
     <string name="app_update_dialog_new_size">新版本大小：%s</string>
     <string name="app_update_update">升级</string>
     <string name="app_update_close">关闭</string>
+
+    <string name="has_cancel_download">已取消下载</string>
+    <string name="update_title">有更新可用</string>
+    <string name="update_title_downloading">正在下载安装应用更新</string>
+    <string name="update_title_2">下载及安装更新</string>
+    <string name="update_size_tv">更新大小：%s</string>
     <string name="update_description_title">更新描述：</string>
+    <string name="update">更新</string>
+    <string name="cancel">取消</string>
 </resources>

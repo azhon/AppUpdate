@@ -6,10 +6,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.azhon.appupdate.R
 import com.azhon.appupdate.listener.LifecycleCallbacksAdapter
-import com.azhon.appupdate.service.DownloadService
 import com.azhon.appupdate.view.SimpleUpdateDialog
 import com.azhon.appupdate.view.UpdateDialogActivity
-import com.azhon.appupdate.view.UpdateDialogFragment
+import com.azhon.appupdate.view.PixelUpdateDialogFragment
 import com.azhon.appupdate.view.Win8UpdateDialogFragment
 
 class ViewType {
@@ -53,7 +52,7 @@ fun AppCompatActivity.downloadApp(config: DownloadManager.Config): DownloadManag
                     SimpleUpdateDialog.openAlertDialog(this,it)
                 }
                 ViewType.Pixel->{
-                    UpdateDialogFragment.open(this)
+                    PixelUpdateDialogFragment.open(this)
                 }
                 ViewType.Win8->{
                     Win8UpdateDialogFragment.open(this)

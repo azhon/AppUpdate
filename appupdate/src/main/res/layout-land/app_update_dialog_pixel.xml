@@ -22,10 +22,11 @@
             android:src="@drawable/baseline_system_update_24" />
 
         <TextView
+            android:id="@id/app_update_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"
-            android:text="正在下载安装应用更新"
+            android:text="@string/update_title"
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.Material3.DisplaySmall" />
 
@@ -36,14 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"
             android:min="0"
-            android:visibility="gone" />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="@dimen/margin_xsmall"
-            android:text="下载及安装更新"
+            android:text="@string/update_title_2"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
 
         <androidx.core.widget.NestedScrollView
@@ -63,25 +64,13 @@
                     android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <TextView
                     android:layout_marginTop="@dimen/margin_xsmall"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="更新大小："
-                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
-
-                    <TextView
-                        android:id="@id/app_update_tv_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
-
-                </LinearLayout>
+                    android:id="@id/app_update_tv_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/update_size_tv"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -99,7 +88,7 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="取消"
+        android:text="@string/cancel"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintBottom_toBottomOf="@id/app_update_btn_update"
         app:layout_constraintEnd_toStartOf="@id/app_update_btn_update" />
@@ -108,7 +97,7 @@
         android:id="@id/app_update_btn_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="更新"
+        android:text="@string/update"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
