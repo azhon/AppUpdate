@@ -58,7 +58,7 @@ class DownloadService : Service(), OnDownloadListener {
         val enable = NotificationUtil.notificationEnable(this@DownloadService)
         LogUtil.d(
             TAG,
-            if (enable) "Notification switch status: opened" else " Notification switch status: closed"
+            if (enable) "Notification switch status: opened" else "Notification switch status: closed"
         )
         if (checkApkMd5()) {
             LogUtil.d(TAG, "Apk already exist and install it directly.")
