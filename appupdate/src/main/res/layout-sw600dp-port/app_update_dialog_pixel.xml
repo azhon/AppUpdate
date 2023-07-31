@@ -89,6 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
+        android:layout_marginEnd="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintBottom_toBottomOf="@id/app_update_btn_update"
         app:layout_constraintEnd_toStartOf="@id/app_update_btn_update" />

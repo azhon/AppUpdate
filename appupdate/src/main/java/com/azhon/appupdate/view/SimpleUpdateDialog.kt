@@ -21,7 +21,8 @@ class SimpleUpdateDialog {
          * 展示弹窗，以及下载安装更新
          */
         fun openAlertDialog(activity: Activity, manager: DownloadManager) {
-            var action = Action.download
+            val TAG="SimpleUpdateDialog"
+            var action = Action.downloading
             var apkFile: File? = null
             var mOnDownloadListener: OnDownloadListener? = null
             val mView = ItemUpdateDialogBinding.inflate(activity.layoutInflater)
@@ -55,11 +56,9 @@ class SimpleUpdateDialog {
                     manager.config.apkDescription.replace("\\n", "\n")
             }
             dialogBuilder.show().apply {
+                //dismiss listener
                 this.setOnDismissListener {
-                    ToastUtils.showLong(
-                        activity,
-                        activity.getString(R.string.has_cancel_download)
-                    )
+                    ToastUtils.showLong(activity, activity.getString(R.string.has_cancel_download))
                     manager.cancel()
                     manager.config.onDownloadListeners.remove(mOnDownloadListener)
                 }
@@ -71,7 +70,7 @@ class SimpleUpdateDialog {
                             if (!manager.config.jumpInstallPage) {
                                 apkFile = apk
                                 positiveButton.isEnabled = true
-                                action = Action.install
+                                action = Action.readyInstall
                                 positiveButton.setText(R.string.install)
                             } else {
                                 dismiss()
@@ -85,7 +84,7 @@ class SimpleUpdateDialog {
                         }
 
                         override fun error(e: Throwable) {
-                            Log.e(PixelUpdateDialogFragment.TAG, "error: 下载错误", e)
+                            Log.e(TAG, "error: 下载错误", e)
                         }
 
                         override fun start() {
@@ -100,7 +99,7 @@ class SimpleUpdateDialog {
                     }
                     positiveButton.setOnClickListener {
                         manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
-                        if (action == Action.install) {
+                        if (action == Action.readyInstall) {
                             apkFile?.let { it1 ->
                                 ApkUtil.installApk(activity, Constant.AUTHORITIES!!, it1)
                             }

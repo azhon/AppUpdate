@@ -1,8 +1,10 @@
 package com.azhon.appupdate.view
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.SparseArray
 import android.view.*
 import android.widget.Button
 import android.widget.ProgressBar
@@ -10,6 +12,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.azhon.appupdate.R
 import com.azhon.appupdate.config.Constant
 import com.azhon.appupdate.listener.OnButtonClickListener
@@ -22,116 +27,206 @@ import java.io.File
 class Action {
     companion object {
         //mode
-        const val download = 0x01
-        const val install = 0x02
+        const val ready = 0x01
+        const val downloading = 0x02
+        const val readyInstall = 0x04
+
+        const val canceled = 0x05
+        const val error = 0x06
     }
 }
 
 open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
-    internal val manager: DownloadManager = DownloadManager.getInstance()
+    lateinit var vm: BaseUpdateDialogViewModel
     lateinit var mView: View
-    var action = Action.download
-    var apkFile: File? = null
-
+    val views: SparseArray<View> = SparseArray()
+    val manager: DownloadManager = DownloadManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        manager.config.registerDownloadListener(this)
+        vm = ViewModelProvider(this)[BaseUpdateDialogViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mView.tvSize().text = String.format(
-            getString(R.string.update_size_tv), manager.config.apkSize
-        )
-        mView.tvDescription().text = manager.config.apkDescription.replace("\\n", "\n")
-        mView.btnUpdate().setOnClickListener {
-            manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
-            if (action == Action.install) {
-                apkFile?.let { it1 ->
-                    ApkUtil.installApk(this.requireContext(), Constant.AUTHORITIES!!, it1)
-                }
-            } else {
-                //下载并安装更新
-                manager.directDownload()
-                it.isEnabled = false
-            }
+        manager.config.registerDownloadListener(this)
+        initView()
+        observeLivedata()
+        vm.stateLivedata.value = Action.ready
+    }
 
-        }
-        if (!manager.config.forcedUpgrade) {
-            mView.btnCancel().setOnClickListener {
-                manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
-                ToastUtils.showLong(requireContext(), getString(R.string.has_cancel_download))
-                dismiss()
+    private fun observeLivedata() {
+        vm.run {
+            updateButtonLivedata.observe(viewLifecycleOwner) {
+                btnUpdate().apply {
+                    isEnabled = it.enable
+                    setText(it.stringId)
+                }
             }
-        } else {
-            mView.btnCancel().visibility = View.INVISIBLE
-            isCancelable = false
+            progressbarLivedata.observe(viewLifecycleOwner) {
+                progressBar().apply {
+                    progress = it.progress
+                    visibility = it.visibility
+                }
+
+            }
         }
     }
 
+    private fun initView() {
+        //title
+        tvDescription().text = manager.config.apkDescription.replace("\\n", "\n")
+        //size
+        tvSize().text = String.format(
+            getString(R.string.update_size_tv), manager.config.apkSize
+        )
+        //update button
+        btnUpdate().setOnClickListener {
+            manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
+            if (vm.stateLivedata.value == Action.readyInstall) {
+                vm.updateButtonLivedata.value = ButtonState(
+                    enable = false,
+                    stringId = R.string.install
+                )
+                vm.installApk(this.requireContext())
+            } else {
+                //下载并安装更新
+                manager.directDownload()
+                vm.updateButtonLivedata.value = ButtonState(
+                    enable = false,
+                    stringId = R.string.update
+                )
+            }
 
-    override fun start() {
-        mView.progressBar().run {
-            visibility = View.VISIBLE
+        }
+        //cancel button
+        if (!manager.config.forcedUpgrade) {
+            btnCancel().setOnClickListener {
+                vm.stateLivedata.postValue(Action.canceled)
+                manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
+                ToastUtils.showLong(requireContext(), getString(R.string.has_cancel_download))
+                manager.cancel()
+                dismiss()
+            }
+        } else {
+            btnCancel().visibility = View.INVISIBLE
+            isCancelable = false
+        }
+        //progressbar
+        initProgressBar()
+    }
+
+    private fun initProgressBar() {
+        progressBar().run {
             max = 100
             progress = 0
         }
     }
 
+    //===============download listener start===================//
+    override fun start() {
+        vm.progressbarLivedata.postValue(ProgressState(visibility = View.VISIBLE))
+        vm.stateLivedata.postValue(Action.downloading)
+    }
+
     override fun downloading(max: Int, progress: Int) {
         val curr = (progress / max.toDouble() * 100.0).toInt()
-        mView.progressBar().progress = curr
+        progressBar().progress = curr
     }
 
     override fun done(apk: File) {
-        apkFile = apk
-        if (!manager.config.jumpInstallPage) {
-            apkFile = apk
-            mView.btnUpdate().isEnabled = true
-            action = Action.install
-            mView.btnUpdate().setText(R.string.install)
-        } else {
+        vm.downloadFinish(apk)
+        if (manager.config.jumpInstallPage) {
             dismiss()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        manager.cancel()
-        manager.config.onDownloadListeners.remove(this)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //save progressbar state
+        vm.progressbarLivedata.value =
+            ProgressState(progressBar().progress, progressBar().visibility)
     }
 
     override fun cancel() {}
 
     override fun error(e: Throwable) {
-        Log.e(PixelUpdateDialogFragment.TAG, "error:", e)
+        Log.e(TAG, "error:", e)
+        vm.stateLivedata.postValue(Action.error)
+    }
+    //===============download listener end===================//
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        manager.config.onDownloadListeners.remove(this)
     }
 
+    //some view function
+    inline fun <reified T : View> findView(id: Int): T =
+        views.get(id)?.let {
+            it as T
+        } ?: let {
+            val view: T = mView.findViewById<T>(id)
+            views[id] = view
+            view
+        }
+
+    fun tvTitle(): TextView = findView(R.id.app_update_tv_title)
+    fun tvSize(): TextView = findView(R.id.app_update_tv_size)
+    fun tvDescription(): TextView = findView(R.id.app_update_tv_description)
+    fun btnUpdate(): Button = findView(R.id.app_update_btn_update)
+    fun btnCancel(): Button = findView(R.id.app_update_ib_close)
+    fun progressBar(): ProgressBar = findView(R.id.app_update_progress_bar)
+
     companion object {
-        fun View.tvTitle(): TextView {
-            return this.findViewById(R.id.app_update_tv_title)
-        }
+        const val TAG = "BaseUpdateDialog"
+    }
 
-        fun View.tvSize(): TextView {
-            return this.findViewById(R.id.app_update_tv_size)
-        }
+}
 
-        fun View.tvDescription(): TextView {
-            return this.findViewById(R.id.app_update_tv_description)
-        }
+data class ProgressState(
+    val progress: Int = 0,
+    val visibility: Int = View.VISIBLE
+) : java.io.Serializable
 
-        fun View.btnUpdate(): Button {
-            return this.findViewById(R.id.app_update_btn_update)
-        }
+data class ButtonState(
+    val enable: Boolean = true,
+    val visibility: Int = View.VISIBLE,
+    val stringId: Int
+) : java.io.Serializable
 
-        fun View.btnCancel(): Button {
-            return this.findViewById(R.id.app_update_ib_close)
-        }
+class BaseUpdateDialogViewModel : ViewModel() {
+    var apkFile: File? = null
 
-        fun View.progressBar(): ProgressBar {
-            return this.findViewById(R.id.app_update_progress_bar)
+    //update button
+    val updateButtonLivedata: MutableLiveData<ButtonState> =
+        MutableLiveData()
+
+    //progressbar
+    val progressbarLivedata: MutableLiveData<ProgressState> =
+        MutableLiveData()
+
+    //download & display state
+    val stateLivedata: MutableLiveData<Int> =
+        MutableLiveData()
+
+    fun installApk(context: Context) {
+        apkFile?.let { it1 ->
+            ApkUtil.installApk(context, Constant.AUTHORITIES!!, it1)
         }
+    }
+
+    /**
+     * when download finish,
+     * update button state changed,
+     * state changed
+     */
+    fun downloadFinish(apk: File) {
+        apkFile = apk
+        updateButtonLivedata.postValue(
+            ButtonState(enable = true, stringId = R.string.install)
+        )
+        stateLivedata.postValue(Action.readyInstall)
     }
 }
 
@@ -166,11 +261,23 @@ class PixelUpdateDialogFragment : BaseUpdateDialogFragment() {
 
     override fun start() {
         super.start()
-        mView.tvTitle().setText(R.string.update_title_downloading)
+        tvTitle().setText( R.string.update_title_downloading)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("title",tvTitle().text.toString())
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.let {
+            tvTitle().text = it.getString("title",getString(R.string.update_title))
+        }
     }
 
     companion object {
-        const val TAG = "UpdateDialogFragment"
+        const val TAG = "PixelUpdateDialogFragment"
 
         fun open(host: AppCompatActivity) {
             host.run {
@@ -215,7 +322,7 @@ class Win8UpdateDialogFragment : BaseUpdateDialogFragment() {
 
 
     companion object {
-        const val TAG = "UpdateDialogFragment"
+        const val TAG = "Win8UpdateDialogFragment"
 
         fun open(host: AppCompatActivity) {
             host.run {

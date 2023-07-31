@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_xsmall"
-    android:background="@color/blue_dark">
+    android:background="@color/blue_dark"
+    android:padding="@dimen/margin_small">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,14 +14,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-            android:textColor="@android:color/white"
             android:id="@id/app_update_tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/update_title"
             android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-            />
+            android:textColor="@android:color/white" />
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,33 +34,36 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:textColor="@android:color/white"
                     android:id="@id/app_update_tv_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:id="@id/app_update_tv_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_xsmall"
                     android:text="@string/update_size_tv"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
 
-        <ProgressBar
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@id/app_update_progress_bar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="16dp"
             android:layout_marginTop="@dimen/margin_xsmall"
             android:min="0"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            app:indicatorColor="@android:color/holo_green_light"
+            app:trackColor="@android:color/white" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Barrier
@@ -69,27 +73,27 @@
         app:barrierDirection="top"
         app:constraint_referenced_ids="app_update_ib_close,app_update_btn_update" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@id/app_update_ib_close"
-        style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
         android:text="@string/cancel"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:layout_marginEnd="@dimen/margin_xsmall"
+        android:layout_marginRight="@dimen/margin_xsmall"
         app:layout_constraintBottom_toBottomOf="@id/app_update_btn_update"
-        app:layout_constraintEnd_toStartOf="@id/app_update_btn_update" />
+        app:layout_constraintEnd_toStartOf="@id/app_update_btn_update"
+        style="@style/Win8ButtonStyle"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@id/app_update_btn_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
-        app:strokeColor="@android:color/white"
-        app:cornerRadius="0dp"
-        app:strokeWidth="2dp"
         android:text="@string/update"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Win8ButtonStyle"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

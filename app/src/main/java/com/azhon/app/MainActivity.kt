@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
         findViewById<Button>(R.id.btn_2).setOnClickListener(this)
         findViewById<Button>(R.id.btn_3).setOnClickListener(this)
         findViewById<Button>(R.id.btn_4).setOnClickListener(this)
+
         findViewById<RadioGroup>(R.id.radio_group).setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.colorful->{
@@ -60,8 +61,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
         val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/$apkName")
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
+    override fun onClick(v: View) {
+        when (v.id) {
             R.id.btn_2 -> startUpdate2()
             R.id.btn_3 -> startUpdate3()
             R.id.btn_4 -> {
