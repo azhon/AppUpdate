@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/mavenCentral-4.2.10-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.3.0-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -56,7 +56,7 @@
 #### Step1：`app/build.gradle`
 
 ```groovy
-implementation 'io.github.azhon:appupdate:4.2.10'
+implementation 'io.github.azhon:appupdate:4.3.0'
 ```
 <details>
 <summary>Since in-app updates are prohibited by GooglePlay policy, it can be handled in productFlavors</summary>
@@ -124,9 +124,9 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### Version update record
 
-* v4.2.10（2023/07/18）
+* v4.3.0（2023/08/01）
 
-  * [Opt] [Merge PR](https://github.com/azhon/AppUpdate/pull/154)
+  * [Fix] Adapt Android 13 notification
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 
