@@ -8,9 +8,19 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-### [由于Android Q版本限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）](https://developer.android.google.cn/guide/components/activities/background-starts)
+## 本库核心逻辑：
+#### 1、当调用了`apkVersionCode()`设置了最新的VersionCode，则内部会自动判断是否显示对话框、下载和安装
+- 适配Android 13通知运行权限，且当设置`showNotification(true)`时，点击对话框的升级按钮会申请通知栏权限，无论是否同意都将会继续下载
+#### 2、当没有调用`apkVersionCode()`，就可以把它当成一个下载器，内部只会进行下载和安装
+#### 3、由于Android 10限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）
+#### 4、[更多用法请点此查看](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt#L79)
+
+### 相关文档链接
+- [限制后台启动Activity](https://developer.android.google.cn/guide/components/activities/background-starts)
+- [通知栏适配](https://developer.android.google.cn/guide/topics/ui/notifiers/notifications?hl=zh-cn)
 
 ## 扫码加入QQ群(群号：828385813)
+- 或者添加加微信：hb958460248（备注 AppUpdate）
 
 <img
 src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
@@ -29,20 +39,21 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 <img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_2.png" width="300">
 <img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_4.png" width="300">
 <img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_6.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/zh/zh_7.png" width="300">
 
 ### 功能介绍
 
-* [x] 支持Kotlin
+* [x] 支持Java、Kotlin
 * [x] 支持AndroidX
 * [x] 支持后台下载
 * [x] 支持强制更新
 * [x] 支持自定义下载过程
 * [x] 支持Android4.1及以上版本
-* [x] 支持通知栏进度条展示(或者自定义显示进度)
+* [x] 支持通知栏进度条展示，适配到Android 13
 * [x] 支持中文/繁体/英文语言（国际化）
 * [x] 支持自定义内置对话框样式
 * [x] 支持取消下载(如果发送了通知栏消息，则会移除)
-* [x] 支持下载完成 打开新版本后删除旧安装包文件
+* [x] 支持下载完成，打开新版本后删除旧安装包文件
 * [x] 不需要申请存储权限
 * [x] 使用HttpURLConnection下载，未集成其他第三方框架
 
@@ -80,9 +91,7 @@ dependencies {
 ```
 </details>
 
-#### 第二步：创建`DownloadManager`，更多用法请查看[这里示例代码](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
-
-**如果需要显示内置的对话框那么你需要调用`builder.apkVersionCode()`将新版本的versionCode填进去，同时值必须大于当前版本的**
+#### 第二步：创建`DownloadManager`
 
 ```java
 val manager = DownloadManager.Builder(this).run {

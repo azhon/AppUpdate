@@ -8,7 +8,16 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
-### [Since Android Q version restricts background apps from launching Activity, a notification will be sent to the notification bar when the download is complete (ignoring the showNotification value, you need to allow notifications to be sent)](https://developer.android.google.cn/guide/components/activities/background-starts)
+## The core logic of this library：
+#### 1、When `apkVersionCode()` is set the latest VersionCode, it will automatically judge whether to display the dialog, download and install
+- Adapt to Android 13 notification permission, and when set `showNotification(true)`, clicking the upgrade button will request notification permission, and the download will continue regardless of whether you agree or not
+#### 2、When `apkVersionCode()` is not set, it can be regarded as a downloader, which will only download and install
+#### 3、Since Android Q version restricts background apps from launching Activity, a notification will be sent to the notification bar when the download is complete (ignoring the showNotification value, you need to allow notifications to be sent)
+#### 4、[For more usage,click here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt#L79)
+
+### Related Docs Links
+- [Activity background starts](https://developer.android.google.cn/guide/components/activities/background-starts)
+- [Adapt notification](https://developer.android.google.cn/guide/topics/ui/notifiers/notifications?hl=zh-cn)
 
 ## Table of Contents
 
@@ -25,14 +34,15 @@
 <img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_1.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_2.png" width="300">
 <img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_3.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_4.png" width="300">
 <img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_5.png" width="300">　<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_6.png" width="300">
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/en/en_7.png" width="300">
 
 ### Function introduction
 
-* [x] Support Kotlin
+* [x] Support Java、Kotlin
 * [x] Support AndroidX
 * [x] Support for custom download process
 * [x] Support Android 4.1 and above
-* [x] Support notification progress display (or custom display progress)
+* [x] Support notification progress display, adapt to Android 13
 * [x] Support Chinese/Traditional/English 
 * [x] Support for custom built-in dialog styles
 * [x] Support for canceling the download (if the notification bar message is sent, it will be removed)
@@ -69,14 +79,14 @@ dependencies {
 ```
 </details>
 
-#### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
+#### Step2：Create `DownloadManager`
 
 ```java
 val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
     apkName("appupdate.apk")
     smallIcon(R.mipmap.ic_launcher)
-    //If this parameter is set, it will automatically determine whether to show tip dialog
+    //If this parameter is set, it will automatically determine whether to show dialog
     apkVersionCode(2)
     apkVersionName('v4.2.2')
     apkSize("7.7MB")
