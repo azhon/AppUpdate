@@ -11,6 +11,7 @@
 ## The core logic of this library：
 #### 1、When `apkVersionCode()` is set the latest VersionCode, it will automatically judge whether to display the dialog, download and install
 - Adapt to Android 13 notification permission, and when set `showNotification(true)`, clicking the upgrade button will request notification permission, and the download will continue regardless of whether you agree or not
+- When set `forcedUpgrade(true)`，display dialog has progress bar
 #### 2、When `apkVersionCode()` is not set, it can be regarded as a downloader, which will only download and install
 #### 3、Since Android Q version restricts background apps from launching Activity, a notification will be sent to the notification bar when the download is complete (ignoring the showNotification value, you need to allow notifications to be sent)
 #### 4、[For more usage,click here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt#L79)
