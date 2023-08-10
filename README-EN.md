@@ -70,7 +70,7 @@ dependencies {
 </details>
 
 #### Step2：Create `DownloadManager`，For more usage, please see [sample code here](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt)
-
+* The following methods are no longer supported
 ```java
 val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
@@ -85,6 +85,43 @@ val manager = DownloadManager.Builder(this).run {
     build()
 }
 manager?.download()
+```
+* Use the following method instead
+```
+//config one downloadmanager
+val manager = DownloadManager.config(application) {
+//If you want to customize the interface, specify it as ViewType.None
+viewType = ViewType.Colorful
+apkUrl = url
+apkName = this@MainActivity.apkName
+smallIcon = R.mipmap.ic_launcher
+apkVersionCode = 2
+apkVersionName = "v4.2.1"
+apkSize = "7.7MB"
+apkDescription = getString(R.string.dialog_msg)
+//Configuration for the previous update page
+//The newly added built-in updates page is not applicable
+configDialog {
+//              dialogImage=R.drawable.ic_dialog
+//              dialogButtonColor=Color.parseColor("#E743DA")
+//              dialogProgressBarColor=Color.parseColor("#E743DA")
+showNewerToast = true
+dialogButtonTextColor = Color.WHITE
+}
+forcedUpgrade = false
+}
+
+//display update screen
+val manager = downloadApp(manager!!)
+```
+
+* Or, more simply, configure it directly and display the updated interface
+```
+//Construct the downloadmanager directly through the downloadApp method and display the update interface
+val manager=downloadApp {
+//。。。。。
+//same
+}
 ```
 
 #### Step3：ProGuard Rules

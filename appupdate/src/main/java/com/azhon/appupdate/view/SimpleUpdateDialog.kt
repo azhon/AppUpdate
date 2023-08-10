@@ -58,7 +58,6 @@ class SimpleUpdateDialog {
             dialogBuilder.show().apply {
                 //dismiss listener
                 this.setOnDismissListener {
-                    ToastUtils.showLong(activity, activity.getString(R.string.has_cancel_download))
                     manager.cancel()
                     manager.config.onDownloadListeners.remove(mOnDownloadListener)
                 }
