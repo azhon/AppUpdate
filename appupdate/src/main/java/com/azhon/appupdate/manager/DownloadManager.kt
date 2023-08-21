@@ -436,6 +436,11 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
             return this
         }
 
+        fun downloadPath(downloadPath: String): Builder {
+            this.downloadPath = downloadPath
+            return this
+        }
+
         fun build(): DownloadManager {
             return getInstance(this)!!
         }
