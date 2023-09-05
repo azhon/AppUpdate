@@ -13,6 +13,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.azhon.appupdate.R
@@ -56,6 +57,12 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
         overridePendingTransition(0, 0)
         title = ""
         setContentView(R.layout.app_update_dialog_update)
+        //system back button
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                backPressed()
+            }
+        })
         init()
     }
 
@@ -111,18 +118,14 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             ibClose.visibility = View.GONE
         }
         if (manager.apkVersionName.isNotEmpty()) {
-            tvTitle.text =
-                String.format(
-                    resources.getString(R.string.app_update_dialog_new),
-                    manager.apkVersionName
-                )
+            tvTitle.text = String.format(
+                resources.getString(R.string.app_update_dialog_new), manager.apkVersionName
+            )
         }
         if (manager.apkSize.isNotEmpty()) {
-            tvSize.text =
-                String.format(
-                    resources.getString(R.string.app_update_dialog_new_size),
-                    manager.apkSize
-                )
+            tvSize.text = String.format(
+                resources.getString(R.string.app_update_dialog_new_size), manager.apkSize
+            )
             tvSize.visibility = View.VISIBLE
         }
         tvDescription.text = manager.apkDescription
@@ -130,7 +133,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setWindowSize() {
         val attributes = window.attributes
-        attributes.width = (resources.displayMetrics.widthPixels * 0.75f).toInt()
+        attributes.width = DensityUtil.dip2px(this@UpdateDialogActivity, 280f).toInt()
         attributes.height = WindowManager.LayoutParams.WRAP_CONTENT
         attributes.gravity = Gravity.CENTER
         window.attributes = attributes
@@ -166,8 +169,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             return false
         }
         if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
+                this, Manifest.permission.POST_NOTIFICATIONS
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             LogUtil.d(TAG, "checkPermission: has permission")
@@ -194,9 +196,9 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
         startService(Intent(this, DownloadService::class.java))
     }
 
-    override fun onBackPressed() {
+    private fun backPressed() {
         if (manager?.forcedUpgrade == true) return
-        super.onBackPressed()
+        finish()
         manager?.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
     }
 
