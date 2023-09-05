@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/mavenCentral-4.3.0-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.3.1-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -68,7 +68,7 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 #### 第一步：`app/build.gradle`添加依赖
 
 ```groovy
-implementation 'io.github.azhon:appupdate:4.3.0'
+implementation 'io.github.azhon:appupdate:4.3.1'
 ```
 
 <details>
@@ -139,9 +139,9 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### 版本更新记录
 
-* v4.3.0（2023/08/01）
+* v4.3.1（2023/09/05）
 
-  * [修复] 适配Android 13通知栏
+  * [优化] 内置对话框适配pad
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
