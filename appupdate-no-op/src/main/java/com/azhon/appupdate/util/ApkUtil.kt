@@ -16,7 +16,7 @@ import android.content.Context
 class ApkUtil {
     companion object {
         fun deleteOldApk(context: Context, oldApkPath: String): Boolean {
-            return true;
+            return true
         }
     }
 }
