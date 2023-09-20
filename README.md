@@ -94,6 +94,9 @@ dependencies {
 
 #### 第二步：创建`DownloadManager`
 
+<details open>
+<summary>Kotlin</summary>
+
 ```java
 val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
@@ -110,6 +113,28 @@ val manager = DownloadManager.Builder(this).run {
 }
 manager?.download()
 ```
+</details>
+
+<details>
+<summary>Java</summary>
+
+```java
+DownloadManager manager = new DownloadManager.Builder(this)
+        .apkUrl("your apk url")
+        .apkName("appupdate.apk")
+        .smallIcon(R.mipmap.ic_launcher)
+        //设置了此参数，那么内部会自动判断是否需要显示更新对话框，否则需要自己判断是否需要更新
+        .apkVersionCode(2)
+        //同时下面三个参数也必须要设置
+        .apkVersionName("v4.2.2")
+        .apkSize("7.7MB")
+        .apkDescription("更新描述信息(取服务端返回数据)")
+        //省略一些非必须参数...
+        .build();
+manager.download();
+```
+</details>
+
 #### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy

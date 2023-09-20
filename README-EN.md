@@ -82,6 +82,9 @@ dependencies {
 
 #### Step2：Create `DownloadManager`
 
+<details open>
+<summary>Kotlin</summary>
+
 ```java
 val manager = DownloadManager.Builder(this).run {
     apkUrl("your apk url")
@@ -97,6 +100,26 @@ val manager = DownloadManager.Builder(this).run {
 }
 manager?.download()
 ```
+</details>
+
+<details>
+<summary>Java</summary>
+
+```java
+DownloadManager manager = new DownloadManager.Builder(this)
+        .apkUrl("your apk url")
+        .apkName("appupdate.apk")
+        .smallIcon(R.mipmap.ic_launcher)
+        //If this parameter is set, it will automatically determine whether to show dialog
+        .apkVersionCode(2)
+        .apkVersionName("v4.2.2")
+        .apkSize("7.7MB")
+        .apkDescription("description...")
+        //Optional parameters...
+        .build();
+manager.download();
+```
+</details>
 
 #### Step3：ProGuard Rules
 
