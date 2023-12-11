@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
             showBgdToast(false)
             forcedUpgrade(false)
             onDownloadListener(listenerAdapter)
+
 //            apkMD5("DC501F04BBAA458C9DC33008EFED5E7F")
 //            httpManager()
 //            dialogImage(R.drawable.ic_dialog)
