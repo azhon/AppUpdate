@@ -46,6 +46,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
 
     private var application: Application = builder.application
     private var apkVersionCode: Int
+    private var apkValidate: Boolean
     private var showNewerToast: Boolean
     internal var contextClsName: String = builder.contextClsName
     internal var apkUrl: String
@@ -64,6 +65,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
     internal var jumpInstallPage: Boolean
     internal var showBgdToast: Boolean
     internal var forcedUpgrade: Boolean
+    internal var forcedUpgradeHaveCloseIcon: Boolean
     internal var notifyId: Int
     internal var dialogImage: Int
     internal var dialogButtonColor: Int
@@ -76,6 +78,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         apkUrl = builder.apkUrl
         apkName = builder.apkName
         apkVersionCode = builder.apkVersionCode
+        apkValidate = builder.apkValidate
         apkVersionName = builder.apkVersionName
         downloadPath =
             builder.downloadPath ?: String.format(Constant.APK_PATH, application.packageName)
@@ -92,6 +95,7 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         jumpInstallPage = builder.jumpInstallPage
         showBgdToast = builder.showBgdToast
         forcedUpgrade = builder.forcedUpgrade
+        forcedUpgradeHaveCloseIcon = builder.forcedUpgradeHaveCloseIcon
         notifyId = builder.notifyId
         dialogImage = builder.dialogImage
         dialogButtonColor = builder.dialogButtonColor
@@ -115,23 +119,34 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         if (!checkParams()) {
             return
         }
-        if (checkVersionCode()) {
-            application.startService(Intent(application, DownloadService::class.java))
-        } else {
-            if (apkVersionCode > ApkUtil.getVersionCode(application)) {
-                application.startActivity(
-                    Intent(application, UpdateDialogActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                )
+        if (apkValidate) {
+            if (checkVersionCode()) {
+                application.startService(Intent(application, DownloadService::class.java))
             } else {
-                if (showNewerToast) {
-                    Toast.makeText(
-                        application, R.string.app_update_latest_version, Toast.LENGTH_SHORT
-                    ).show()
+                if (apkVersionCode > ApkUtil.getVersionCode(application)) {
+                    application.startActivity(
+                        Intent(application, UpdateDialogActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                } else {
+                    if (showNewerToast) {
+                        Toast.makeText(
+                            application, R.string.app_update_latest_version, Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    LogUtil.d(
+                        TAG,
+                        application.resources.getString(R.string.app_update_latest_version)
+                    )
                 }
-                LogUtil.d(TAG, application.resources.getString(R.string.app_update_latest_version))
             }
+        } else {
+            application.startActivity(
+                Intent(application, UpdateDialogActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
         }
+
 
     }
 
@@ -215,6 +230,11 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
          */
         internal var apkVersionCode = Int.MIN_VALUE
 
+        /***
+         * The apk validate
+         */
+        internal var apkValidate = true
+
         /**
          * The versionName of the dialog reality
          */
@@ -295,6 +315,13 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
          */
         internal var forcedUpgrade = false
 
+        /***
+         * wjether to force on upgrade have close
+         * forcedUpgrade true have effective
+         */
+
+        internal var forcedUpgradeHaveCloseIcon = false
+
         /**
          * Notification id
          */
@@ -333,6 +360,11 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
 
         fun apkVersionCode(apkVersionCode: Int): Builder {
             this.apkVersionCode = apkVersionCode
+            return this
+        }
+
+        fun apkValidate(apkValidate: Boolean): Builder {
+            this.apkValidate = apkValidate
             return this
         }
 
@@ -403,6 +435,11 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
 
         fun forcedUpgrade(forcedUpgrade: Boolean): Builder {
             this.forcedUpgrade = forcedUpgrade
+            return this
+        }
+
+        fun forcedUpgradeHaveCloseButton(forcedUpgradeHaveButton: Boolean): Builder {
+            this.forcedUpgradeHaveCloseIcon = forcedUpgradeHaveButton
             return this
         }
 

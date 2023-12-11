@@ -114,8 +114,15 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             btnUpdate.background = drawable
         }
         if (manager.forcedUpgrade) {
-            vLine.visibility = View.GONE
-            ibClose.visibility = View.GONE
+
+            if (manager.forcedUpgradeHaveCloseIcon) {
+                vLine.visibility = View.VISIBLE
+                ibClose.visibility = View.VISIBLE
+            } else {
+                vLine.visibility = View.GONE
+                ibClose.visibility = View.GONE
+            }
+
         }
         if (manager.apkVersionName.isNotEmpty()) {
             tvTitle.text = String.format(
@@ -144,9 +151,14 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             R.id.ib_close -> {
                 if (manager?.forcedUpgrade == false) {
                     finish()
+                } else {
+                    if (manager?.forcedUpgradeHaveCloseIcon == true) {
+                        finish()
+                    }
                 }
                 manager?.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
             }
+
             R.id.btn_update -> {
                 if (btnUpdate.tag == install) {
                     ApkUtil.installApk(this, Constant.AUTHORITIES!!, apk)
@@ -197,7 +209,11 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun backPressed() {
-        if (manager?.forcedUpgrade == true) return
+        if (manager?.forcedUpgrade == true) {
+            if (manager?.forcedUpgradeHaveCloseIcon == false) {
+                return
+            }
+        }
         finish()
         manager?.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
     }
