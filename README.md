@@ -20,12 +20,6 @@
 - [限制后台启动Activity](https://developer.android.google.cn/guide/components/activities/background-starts)
 - [通知栏适配](https://developer.android.google.cn/guide/topics/ui/notifiers/notifications?hl=zh-cn)
 
-## 扫码加入QQ群(群号：828385813)
-- 或者添加加微信：hb958460248（备注 AppUpdate）
-
-<img
-src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
-
 ## 目录
 
 * [效果图](#效果图)
@@ -61,6 +55,12 @@ src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group.png">
 ### Demo下载体验
 
  [点击下载Demo进行体验](https://github.com/azhon/AppUpdate/releases/tag/demo)
+
+## 扫码加入QQ群
+- 或者添加加微信：hb958460248（备注 AppUpdate）
+- 611136880
+- 828385813（已满）
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group_0.jpg" width="200"> <img src="https://github.com/azhon/AppUpdate/blob/main/img/qq_group_1.jpg" width="200">
 
 
 ### 使用步骤
