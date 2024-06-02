@@ -1,10 +1,6 @@
 package com.azhon.appupdate.manager
 
-import android.app.Activity
-import android.content.Intent
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.azhon.appupdate.R
+import androidx.fragment.app.FragmentActivity
 
 class ViewType {
     companion object {
@@ -15,19 +11,20 @@ class ViewType {
         const val Pixel = 4
     }
 }
+fun DownloadManager.download(activity: FragmentActivity) {
 
-fun AppCompatActivity.downloadApp(downloadManager: DownloadManager): DownloadManager {
+}
+
+fun FragmentActivity.downloadApp(downloadManager: DownloadManager): DownloadManager {
     return downloadApp(downloadManager.config)
 }
 
-fun AppCompatActivity.downloadApp(config: DownloadManager.Config): DownloadManager {
-    return DownloadManager.getInstance(config).let {
-        it
-    }
+fun FragmentActivity.downloadApp(config: DownloadManager.DownloadConfig): DownloadManager {
+    return DownloadManager.getInstance(config)
 }
 
-fun AppCompatActivity.downloadApp(block: DownloadManager.Config.() -> Unit): DownloadManager {
-    val config = DownloadManager.Config(application)
+fun FragmentActivity.downloadApp(block: DownloadManager.DownloadConfig.() -> Unit): DownloadManager {
+    val config = DownloadManager.DownloadConfig(application)
     config.block()
     return downloadApp(config)
 }

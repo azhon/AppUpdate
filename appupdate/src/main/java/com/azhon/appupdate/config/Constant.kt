@@ -56,4 +56,6 @@ object Constant {
      * Apk path
      */
     var APK_PATH = "/storage/emulated/0/Android/data/%s/cache"
+
+    var cacheDirName ="AppUpdateCache"
 }

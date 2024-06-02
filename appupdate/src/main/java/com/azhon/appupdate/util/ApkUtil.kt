@@ -5,8 +5,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import android.os.PatternMatcher
+import android.util.Log
 import androidx.core.content.FileProvider
+import com.azhon.appupdate.config.Constant
 import java.io.File
 
 
@@ -22,6 +23,8 @@ import java.io.File
 
 class ApkUtil {
     companion object {
+        const val TAG = "ApkUtil"
+
         /**
          * install package form file
          */
@@ -52,6 +55,39 @@ class ApkUtil {
                 packageInfo.longVersionCode
             } else {
                 return packageInfo.versionCode.toLong()
+            }
+        }
+
+        /**
+         * 给出默认存储文件的文件夹路径
+         * @param context Application
+         * @return String
+         */
+        fun getDefaultCachePath(context: Context): String {
+            val path = (context.externalCacheDir?.path ?: String.format(
+                Constant.APK_PATH,
+                context.packageName
+            )) + File.separator + Constant.cacheDirName
+            File(path).run {
+                if (!exists()) {
+                    mkdirs()
+                }
+            }
+            return path
+        }
+
+        /**
+         * 删除默认存储路径下的所有文件
+         * @param context context
+         */
+        fun deleteDefaultCacheDir(context: Context) {
+            try {
+                val cacheDir = File(getDefaultCachePath(context))
+                if (cacheDir.exists()) {
+                    cacheDir.deleteRecursively()
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "deleteDefaultCacheDir: failed", e)
             }
         }
 

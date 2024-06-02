@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import com.azhon.appupdate.R
 import com.azhon.appupdate.config.Constant
 import com.azhon.appupdate.databinding.ItemUpdateDialogBinding
@@ -11,7 +12,6 @@ import com.azhon.appupdate.listener.OnButtonClickListener
 import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.manager.DownloadManager
 import com.azhon.appupdate.util.ApkUtil
-import com.azhon.appupdate.util.ToastUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
@@ -21,7 +21,7 @@ class SimpleUpdateDialog {
          * 展示弹窗，以及下载安装更新
          */
         fun openAlertDialog(activity: Activity, manager: DownloadManager) {
-            val TAG="SimpleUpdateDialog"
+            val TAG = "SimpleUpdateDialog"
             var action = Action.downloading
             var apkFile: File? = null
             var mOnDownloadListener: OnDownloadListener? = null
@@ -39,7 +39,7 @@ class SimpleUpdateDialog {
                 )
                 setView(mView.root)
                 setPositiveButton(R.string.update, null)
-                setCancelable(false)
+                setCancelable(!manager.config.forcedUpgrade)
                 if (!manager.config.forcedUpgrade) {
                     setNegativeButton(R.string.cancel) { dialog_interface, _ ->
                         manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
@@ -55,13 +55,18 @@ class SimpleUpdateDialog {
                 mView.appUpdateTvDescription.text =
                     manager.config.apkDescription.replace("\\n", "\n")
             }
+
+            fun showProgressUi(positiveButton: Button) {
+                mView.appUpdateProgressBar.visibility = View.VISIBLE
+                mView.appUpdateProgressBar.max = 100
+                mView.appUpdateProgressBar.progress = 0
+                positiveButton.isEnabled = false
+            }
             dialogBuilder.show().apply {
-                //dismiss listener
-                this.setOnDismissListener {
-                    manager.cancel()
-                    manager.config.onDownloadListeners.remove(mOnDownloadListener)
-                }
                 getButton(AlertDialog.BUTTON_POSITIVE).also { positiveButton ->
+                    if (manager.downloadState) {
+                        showProgressUi(positiveButton)
+                    }
                     mOnDownloadListener = object : OnDownloadListener {
                         override fun cancel() {}
 
@@ -87,10 +92,7 @@ class SimpleUpdateDialog {
                         }
 
                         override fun start() {
-                            mView.appUpdateProgressBar.visibility = View.VISIBLE
-                            mView.appUpdateProgressBar.max = 100
-                            mView.appUpdateProgressBar.progress = 0
-                            positiveButton.isEnabled = false
+                            showProgressUi(positiveButton)
                         }
                     }
                     mOnDownloadListener?.let {
@@ -100,13 +102,21 @@ class SimpleUpdateDialog {
                         manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
                         if (action == Action.readyInstall) {
                             apkFile?.let { it1 ->
+                                dismiss()
                                 ApkUtil.installApk(activity, Constant.AUTHORITIES!!, it1)
                             }
                         } else {
-                            //下载并安装更新
+                            //下载
                             manager.directDownload()
                         }
 
+                    }
+                }
+                getButton(AlertDialog.BUTTON_NEGATIVE).also { negativeButton ->
+                    negativeButton.setOnClickListener {
+                        dismiss()
+                        manager.cancel()
+                        manager.config.onDownloadListeners.remove(mOnDownloadListener)
                     }
                 }
             }

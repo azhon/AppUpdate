@@ -1,16 +1,22 @@
 package com.azhon.appupdate.view
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.azhon.appupdate.R
 import com.azhon.appupdate.config.Constant
 import com.azhon.appupdate.listener.OnButtonClickListener
@@ -37,7 +43,8 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
 
     private val install = 0x45
     private val error = 0x46
-    private var manager: DownloadManager? = null
+    private val permissionCode = 0x47
+    private lateinit var manager: DownloadManager
     private lateinit var apk: File
     private lateinit var progressBar: NumberProgressBar
     private lateinit var btnUpdate: Button
@@ -49,23 +56,39 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
-        title = ""
-        setContentView(R.layout.app_update_dialog_update)
-        init()
-    }
-
-    private fun init() {
         manager = try {
             DownloadManager.getInstance()
         } catch (e: IllegalArgumentException) {
             LogUtil.e(TAG, "An exception occurred by DownloadManager=null,please check your code!")
             return
         }
-        if (manager!!.config.forcedUpgrade) {
-            manager!!.config.onDownloadListeners.add(listenerAdapter)
+        val layout = manager.config.viewConfig.layoutId
+        if (layout != -1) {
+            setContentView(layout)
+        } else {
+            setContentView(R.layout.app_update_dialog_update)
+        }
+        //system back button
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                backPressed()
+            }
+        })
+        init()
+    }
+
+    private fun init() {
+        title = ""
+        if (manager.config.forcedUpgrade) {
+            manager.config.onDownloadListeners.add(listenerAdapter)
         }
         setWindowSize()
-        initView(manager!!)
+        initView(manager)
+        if (manager.downloadState) {
+            manager.config.onDownloadListeners.add(listenerAdapter)
+            btnUpdate.isEnabled = false
+            btnUpdate.text = resources.getString(R.string.app_update_background_downloading)
+        }
     }
 
     private fun initView(manager: DownloadManager) {
@@ -126,7 +149,7 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setWindowSize() {
         val attributes = window.attributes
-        attributes.width = (resources.displayMetrics.widthPixels * 0.75f).toInt()
+        attributes.width = DensityUtil.dip2px(this@UpdateDialogActivity, 280f).toInt()
         attributes.height = WindowManager.LayoutParams.WRAP_CONTENT
         attributes.gravity = Gravity.CENTER
         window.attributes = attributes
@@ -140,26 +163,61 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 manager?.config?.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
             }
+
             R.id.app_update_btn_update -> {
                 if (btnUpdate.tag == install) {
                     ApkUtil.installApk(this, Constant.AUTHORITIES!!, apk)
                     return
                 }
-                if (manager?.config?.forcedUpgrade == true) {
-                    btnUpdate.isEnabled = false
-                    btnUpdate.text = resources.getString(R.string.app_update_background_downloading)
-                } else {
-                    finish()
+                if (!checkPermission()) {
+                    startUpdate()
                 }
-                manager?.config?.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
-                startService(Intent(this, DownloadService::class.java))
             }
         }
+
     }
 
-    override fun onBackPressed() {
+
+    /**
+     * check Notification runtime permission [DownloadManager.showNotification] is true && when api>=33.
+     * @return false: can continue to download, true: request permission.
+     */
+    private fun checkPermission(): Boolean {
+        if (manager?.config?.showNotification == false) {
+            LogUtil.d(TAG, "checkPermission: manager.showNotification = false")
+            return false
+        }
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            LogUtil.d(TAG, "checkPermission: has permission")
+            return false
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            LogUtil.d(TAG, "checkPermission: request permission")
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), permissionCode
+            )
+            return true
+        }
+        return false
+    }
+
+    private fun startUpdate() {
+        if (manager?.config?.forcedUpgrade == true) {
+            btnUpdate.isEnabled = false
+            btnUpdate.text = resources.getString(R.string.app_update_background_downloading)
+        } else {
+            finish()
+        }
+        manager?.config?.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
+        startService(Intent(this, DownloadService::class.java))
+    }
+
+    private fun backPressed() {
         if (manager?.config?.forcedUpgrade == true) return
-        super.onBackPressed()
+        finish()
         manager?.config?.onButtonClickListener?.onButtonClick(OnButtonClickListener.CANCEL)
     }
 
@@ -194,6 +252,15 @@ class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {
             btnUpdate.tag = error
             btnUpdate.isEnabled = true
             btnUpdate.text = resources.getString(R.string.app_update_continue_downloading)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (permissionCode == requestCode) {
+            startUpdate()
         }
     }
 

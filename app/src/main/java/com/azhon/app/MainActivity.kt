@@ -9,12 +9,15 @@ import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.azhon.appupdate.config.Constant
 import com.azhon.appupdate.listener.OnButtonClickListener
 import com.azhon.appupdate.listener.OnDownloadListenerAdapter
 import com.azhon.appupdate.manager.DownloadManager
 import com.azhon.appupdate.manager.ViewType
+import com.azhon.appupdate.manager.download
 import com.azhon.appupdate.manager.downloadApp
 import com.azhon.appupdate.util.ApkUtil
+import com.google.android.material.color.MaterialColors
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickListener {
 
@@ -42,33 +45,60 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
         findViewById<Button>(R.id.btn_4).setOnClickListener(this)
 
         findViewById<RadioGroup>(R.id.radio_group).setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                R.id.colorful->{
-                    viewStyle=ViewType.Colorful
+            when (checkedId) {
+                R.id.colorful -> {
+                    viewStyle = ViewType.Colorful
                 }
-                R.id.simpledialog->{
-                    viewStyle=ViewType.SimpleDialog
+
+                R.id.simpledialog -> {
+                    viewStyle = ViewType.SimpleDialog
                 }
-                R.id.pixel->{
-                    viewStyle=ViewType.Pixel
+
+                R.id.pixel -> {
+                    viewStyle = ViewType.Pixel
                 }
-                R.id.win->{
-                    viewStyle=ViewType.Win8
+
+                R.id.win -> {
+                    viewStyle = ViewType.Win8
                 }
             }
         }
         //delete downloaded old Apk
-        val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/$apkName")
+//        val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/${Constant.cacheDirName}/$apkName")
+        //删除所有下载的文件
+//        ApkUtil.deleteDefaultCacheDir(application)
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.btn_2 -> startUpdate2()
-            R.id.btn_3 -> startUpdate3()
+            R.id.btn_2 -> {
+                startUpdate1()
+//                startUpdate2()
+            }
+            R.id.btn_3 -> {
+                startUpdate3()
+            }
             R.id.btn_4 -> {
                 manager?.cancel()
             }
         }
+    }
+
+    private fun startUpdate1() {
+        val downloadManager =DownloadManager.Builder(this).run{
+            //Optional parameters...
+            apkUrl(url)
+            apkVersionCode(2)
+            apkVersionName("v4.2.1" )
+            apkSize("7.7MB")
+            apkName(this@MainActivity.apkName)
+            smallIcon(R.mipmap.ic_launcher)
+            dialogButtonColor(Color.RED)
+            apkDescription(getString(R.string.dialog_msg))
+//            viewType(ViewType.SimpleDialog)//修改样式
+            build()
+        }
+        downloadManager.download(this)//如果不增加此参数，viewType则不起作用
     }
 
     /**
@@ -76,7 +106,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
      */
     private fun startUpdate2() {
         resetPb()
-        downloadApp {
+        val manager = downloadApp {
             viewType = ViewType.None
             apkUrl = url
             apkName = this@MainActivity.apkName
@@ -90,8 +120,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
             forcedUpgrade = false
             enableLog(true)
             jumpInstallPage = true
-            registerDownloadListener(listenerAdapter)
+            registerDownloadListener(listenerAdapter)//监听下载进度
         }
+        manager.checkThenDownload()//立即开始下载
     }
 
 

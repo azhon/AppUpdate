@@ -3,7 +3,9 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply from: '../maven.gradle'
 
 android {
-    compileSdk 32
+    compileSdk rootProject.ext.compileSdk
+
+    namespace "com.azhon.appupdate"
 
     defaultConfig {
         minSdk rootProject.ext.minSdk
@@ -27,6 +29,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    publishing{
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
     }
 }
 

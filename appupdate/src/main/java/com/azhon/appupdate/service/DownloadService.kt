@@ -62,7 +62,7 @@ class DownloadService : Service(), OnDownloadListener {
         val enable = NotificationUtil.notificationEnable(this@DownloadService)
         LogUtil.d(
             TAG,
-            if (enable) "Notification switch status: opened" else " Notification switch status: closed"
+            if (enable) "Notification switch status: opened" else "Notification switch status: closed"
         )
         if (checkApkMd5()) {
             LogUtil.d(TAG, "Apk already exist and install it directly.")
@@ -94,14 +94,9 @@ class DownloadService : Service(), OnDownloadListener {
             LogUtil.e(TAG, "Currently downloading, please download again!")
             return
         }
-        try {
-            manager.config.httpManager = HttpDownloadManager(manager.config.downloadPath)
-        } catch (e: IllegalStateException) {
-            Log.i(TAG, "download: HttpManager已存在")
-        }
         scope.launch {
             withContext(Dispatchers.Main) {
-                manager.config.httpManager!!.download(manager.config.apkUrl, manager.config.apkName)
+                manager.config.download()
                     .collect {
                         when (it) {
                             is DownloadStatus.Start -> start()
@@ -109,6 +104,7 @@ class DownloadService : Service(), OnDownloadListener {
                             is DownloadStatus.Done -> done(it.apk)
                             is DownloadStatus.Cancel -> this@DownloadService.cancel()
                             is DownloadStatus.Error -> error(it.e)
+                            else -> {}
                         }
                     }
             }

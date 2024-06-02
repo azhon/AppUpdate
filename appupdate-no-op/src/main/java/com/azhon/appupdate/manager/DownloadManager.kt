@@ -1,5 +1,6 @@
 package com.azhon.appupdate.manager
 
+import android.app.Activity
 import android.app.Application
 import android.app.NotificationChannel
 import com.azhon.appupdate.base.BaseHttpDownloadManager
@@ -16,7 +17,7 @@ import java.io.Serializable
  *
  * @author azhon
  */
-class DownloadManager private constructor(val config: Config) : Serializable {
+class DownloadManager private constructor(val config: DownloadConfig) : Serializable {
 
     companion object {
         private const val TAG = "DownloadManager"
@@ -24,13 +25,13 @@ class DownloadManager private constructor(val config: Config) : Serializable {
         @Volatile
         private var instance: DownloadManager? = null
 
-        fun config(application: Application, block: Config.() -> Unit): DownloadManager {
-            val config = Config(application)
+        fun config(application: Application, block: DownloadConfig.() -> Unit): DownloadManager {
+            val config = DownloadConfig(application)
             config.block()
             return getInstance(config)
         }
 
-        internal fun getInstance(config: Config? = null): DownloadManager {
+        internal fun getInstance(config: DownloadConfig? = null): DownloadManager {
             if (instance != null && config != null) {
                 instance!!.release()
             }
@@ -60,7 +61,7 @@ class DownloadManager private constructor(val config: Config) : Serializable {
     /**
      * download file without dialog
      */
-    fun download() {
+    fun checkThenDownload() {
 
     }
 
@@ -91,7 +92,7 @@ class DownloadManager private constructor(val config: Config) : Serializable {
 
     }
 
-    class Config constructor(var application: Application) {
+    class DownloadConfig constructor(var application: Application) {
         /**
          * Apk download url
          */
@@ -194,21 +195,21 @@ class DownloadManager private constructor(val config: Config) : Serializable {
         var viewType: Int = 1
 
 
-        fun enableLog(enable: Boolean): Config {
+        fun enableLog(enable: Boolean): DownloadConfig {
             return this
         }
 
-        fun registerDownloadListener(onDownloadListener: OnDownloadListener): Config {
+        fun registerDownloadListener(onDownloadListener: OnDownloadListener): DownloadConfig {
             this.onDownloadListeners.add(onDownloadListener)
             return this
         }
 
-        internal val viewConfig: DialogConfig = DialogConfig()
+        internal var viewConfig: DialogConfig = DialogConfig()
 
         /**
          * 配置视图
          */
-        fun configDialog(block: DialogConfig.() -> Unit): Config {
+        fun configDialog(block: DialogConfig.() -> Unit): DownloadConfig {
             viewConfig.block()
             return this
         }
@@ -239,6 +240,141 @@ class DownloadManager private constructor(val config: Config) : Serializable {
          * dialog progress bar color and progress-text color
          */
         var dialogProgressBarColor = -1
+    }
+    /**
+     * 兼容旧方式
+     * @property config DownloadConfig
+     * @property dialogConfig DialogConfig
+     * @constructor
+     */
+    class Builder constructor(activity: Activity) {
+        var config: DownloadManager.DownloadConfig =
+            DownloadManager.DownloadConfig(application = activity.application)
+        var dialogConfig: DownloadManager.DialogConfig = DownloadManager.DialogConfig()
+
+        fun apkUrl(apkUrl: String): Builder {
+            config.apkUrl = apkUrl
+            return this
+        }
+
+        fun apkName(apkName: String): Builder {
+            config.apkName = apkName
+            return this
+        }
+
+        fun apkVersionCode(apkVersionCode: Int): Builder {
+            config.apkVersionCode = apkVersionCode
+            return this
+        }
+
+        fun apkVersionName(apkVersionName: String): Builder {
+            config.apkVersionName = apkVersionName
+            return this
+        }
+
+        fun showNewerToast(showNewerToast: Boolean): Builder {
+            dialogConfig.showNewerToast = showNewerToast
+            return this
+        }
+
+        fun smallIcon(smallIcon: Int): Builder {
+            config.smallIcon = smallIcon
+            return this
+        }
+
+        fun apkDescription(apkDescription: String): Builder {
+            config.apkDescription = apkDescription
+            return this
+        }
+
+        fun apkSize(apkSize: String): Builder {
+            config.apkSize = apkSize
+            return this
+        }
+
+        fun apkMD5(apkMD5: String): Builder {
+            config.apkMD5 = apkMD5
+            return this
+        }
+
+        fun httpManager(httpManager: BaseHttpDownloadManager): Builder {
+            config.httpManager = httpManager
+            return this
+        }
+
+        fun notificationChannel(notificationChannel: NotificationChannel): Builder {
+            config.notificationChannel = notificationChannel
+            return this
+        }
+
+        fun onButtonClickListener(onButtonClickListener: OnButtonClickListener): Builder {
+            config.onButtonClickListener = onButtonClickListener
+            return this
+        }
+
+        fun onDownloadListener(onDownloadListener: OnDownloadListener): Builder {
+            config.onDownloadListeners.add(onDownloadListener)
+            return this
+        }
+
+        fun showNotification(showNotification: Boolean): Builder {
+            config.showNotification = showNotification
+            return this
+        }
+
+        fun jumpInstallPage(jumpInstallPage: Boolean): Builder {
+            config.jumpInstallPage = jumpInstallPage
+            return this
+        }
+
+        fun showBgdToast(showBgdToast: Boolean): Builder {
+            config.showBgdToast = showBgdToast
+            return this
+        }
+
+        fun forcedUpgrade(forcedUpgrade: Boolean): Builder {
+            config.forcedUpgrade = forcedUpgrade
+            return this
+        }
+
+        fun notifyId(notifyId: Int): Builder {
+            config.notifyId = notifyId
+            return this
+        }
+
+        fun dialogImage(dialogImage: Int): Builder {
+            dialogConfig.dialogImage = dialogImage
+            return this
+        }
+
+        fun dialogButtonColor(dialogButtonColor: Int): Builder {
+            dialogConfig.dialogButtonColor = dialogButtonColor
+            return this
+        }
+
+        fun dialogButtonTextColor(dialogButtonTextColor: Int): Builder {
+            dialogConfig.dialogButtonTextColor = dialogButtonTextColor
+            return this
+        }
+
+        fun dialogProgressBarColor(dialogProgressBarColor: Int): Builder {
+            dialogConfig.dialogProgressBarColor = dialogProgressBarColor
+            return this
+        }
+
+        fun viewType(viewType: Int = ViewType.Colorful) {
+            config.viewType = viewType
+        }
+
+        fun enableLog(enable: Boolean): Builder {
+            config.enableLog(enable)
+            return this
+        }
+
+        fun build(): DownloadManager {
+            config.viewConfig = dialogConfig
+            return DownloadManager.getInstance(config)
+        }
     }
 
 }

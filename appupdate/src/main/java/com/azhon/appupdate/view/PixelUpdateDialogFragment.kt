@@ -9,8 +9,9 @@ import android.view.*
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -53,10 +54,46 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
         initView()
         observeLivedata()
         vm.stateLivedata.value = Action.ready
+        //如果正在下载，更新一下界面状态
+        if (manager.downloadState){
+            start()
+        }
     }
 
     private fun observeLivedata() {
         vm.run {
+            stateLivedata.observe(viewLifecycleOwner){
+                when(it){
+                    Action.ready->{
+                        //更新按钮的初始文本
+                        vm.updateButtonLivedata.value = ButtonState(
+                            enable = manager.canDownload(),
+                            stringId = R.string.update
+                        )
+                    }
+                    Action.downloading->{
+                        vm.updateButtonLivedata.value = ButtonState(
+                            enable = false,
+                            stringId = R.string.app_update_start_downloading
+                        )
+                    }
+                    Action.readyInstall->{
+                        updateButtonLivedata.postValue(
+                            ButtonState(enable = true, stringId = R.string.install)
+                        )
+                    }
+                    Action.error->{
+                        updateButtonLivedata.postValue(
+                            ButtonState(enable = true, stringId = R.string.app_update_download_error)
+                        )
+                    }
+                    Action.canceled->{
+                        updateButtonLivedata.postValue(
+                            ButtonState(enable = true, stringId = R.string.cancel)
+                        )
+                    }
+                }
+            }
             updateButtonLivedata.observe(viewLifecycleOwner) {
                 btnUpdate().apply {
                     isEnabled = it.enable
@@ -84,20 +121,11 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
         btnUpdate().setOnClickListener {
             manager.config.onButtonClickListener?.onButtonClick(OnButtonClickListener.UPDATE)
             if (vm.stateLivedata.value == Action.readyInstall) {
-                vm.updateButtonLivedata.value = ButtonState(
-                    enable = false,
-                    stringId = R.string.install
-                )
                 vm.installApk(this.requireContext())
             } else {
-                //下载并安装更新
+                //执行下载
                 manager.directDownload()
-                vm.updateButtonLivedata.value = ButtonState(
-                    enable = false,
-                    stringId = R.string.update
-                )
             }
-
         }
         //cancel button
         if (!manager.config.forcedUpgrade) {
@@ -136,6 +164,7 @@ open class BaseUpdateDialogFragment : DialogFragment(), OnDownloadListener {
 
     override fun done(apk: File) {
         vm.downloadFinish(apk)
+        //service在下载完成后，会判断是否要自动跳转安装，所以ui界面中不需要处理跳转安装
         if (manager.config.jumpInstallPage) {
             dismiss()
         }
@@ -223,9 +252,6 @@ class BaseUpdateDialogViewModel : ViewModel() {
      */
     fun downloadFinish(apk: File) {
         apkFile = apk
-        updateButtonLivedata.postValue(
-            ButtonState(enable = true, stringId = R.string.install)
-        )
         stateLivedata.postValue(Action.readyInstall)
     }
 }
@@ -261,25 +287,25 @@ class PixelUpdateDialogFragment : BaseUpdateDialogFragment() {
 
     override fun start() {
         super.start()
-        tvTitle().setText( R.string.update_title_downloading)
+        tvTitle().setText(R.string.update_title_downloading)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("title",tvTitle().text.toString())
+        outState.putString("title", tvTitle().text.toString())
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         savedInstanceState?.let {
-            tvTitle().text = it.getString("title",getString(R.string.update_title))
+            tvTitle().text = it.getString("title", getString(R.string.update_title))
         }
     }
 
     companion object {
         const val TAG = "PixelUpdateDialogFragment"
 
-        fun open(host: AppCompatActivity) {
+        fun open(host: FragmentActivity) {
             host.run {
                 val dialog = PixelUpdateDialogFragment()
                 val ft = supportFragmentManager.beginTransaction()
@@ -324,7 +350,7 @@ class Win8UpdateDialogFragment : BaseUpdateDialogFragment() {
     companion object {
         const val TAG = "Win8UpdateDialogFragment"
 
-        fun open(host: AppCompatActivity) {
+        fun open(host: FragmentActivity) {
             host.run {
                 val dialog = Win8UpdateDialogFragment()
                 val ft = supportFragmentManager.beginTransaction()
