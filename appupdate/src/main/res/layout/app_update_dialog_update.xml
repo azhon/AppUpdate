@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/iv_bg"
+        android:id="@id/app_update_iv_bg"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@drawable/app_update_dialog_default" />
@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@id/app_update_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -29,7 +29,7 @@
             tools:text="发现新版v2.0.1可以下载啦！" />
 
         <TextView
-            android:id="@+id/tv_size"
+            android:id="@id/app_update_tv_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -49,7 +49,7 @@
             android:overScrollMode="never">
 
             <TextView
-                android:id="@+id/tv_description"
+                android:id="@id/app_update_tv_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.1"
@@ -59,15 +59,15 @@
         </ScrollView>
 
         <com.azhon.appupdate.view.NumberProgressBar
-            android:id="@+id/np_bar"
+            android:id="@id/app_update_progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp" />
 
-        <Button
-            android:id="@+id/btn_update"
+        <android.widget.Button
+            android:id="@id/app_update_btn_update"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
@@ -81,14 +81,14 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line"
+        android:id="@id/app_update_line"
         android:layout_width="2dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:background="@android:color/white" />
 
     <ImageButton
-        android:id="@+id/ib_close"
+        android:id="@id/app_update_ib_close"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"

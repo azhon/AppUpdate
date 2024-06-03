@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="app_update_iv_bg" type="id" />
+    <item name="app_update_tv_title" type="id" />
+    <item name="app_update_tv_size" type="id" />
+    <item name="app_update_tv_description" type="id" />
+    <item name="app_update_progress_bar" type="id" />
+    <item name="app_update_btn_update" type="id" />
+    <item name="app_update_line" type="id" />
+    <item name="app_update_ib_close" type="id" />
+</resources>

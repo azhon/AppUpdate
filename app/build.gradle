@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace "com.azhon.app"
     signingConfigs {
         config {
             keyAlias 'appUpdate'
@@ -12,8 +13,8 @@ android {
             storePassword '123456'
         }
     }
-
     compileSdk rootProject.ext.compileSdk
+
     defaultConfig {
         applicationId "com.azhon.app"
         minSdk rootProject.ext.minSdk
@@ -46,6 +47,9 @@ android {
     productFlavors {
         other {}
 //        googlePlay {}
+    }
+    buildFeatures {
+        buildConfig true
     }
 }
 

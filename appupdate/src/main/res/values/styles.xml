@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="AppUpdate.DialogActivity" parent="Theme.AppCompat">
+<style name="Win8ButtonStyle" parent="Widget.Material3.Button">
+    <item name="android:textColor">@android:color/white</item>
+    <item name="backgroundTint">@color/win8_button_background</item>
+    <item name="strokeColor">@android:color/white</item>
+    <item name="cornerRadius">0dp</item>
+    <item name="strokeWidth">2dp</item>
+</style>
+    <style name="AppUpdate.DialogActivity" parent="Theme.Material3.DayNight">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>

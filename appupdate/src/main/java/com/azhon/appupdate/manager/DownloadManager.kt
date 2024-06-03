@@ -4,7 +4,10 @@ import android.app.Activity
 import android.app.Application
 import android.app.NotificationChannel
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.FragmentActivity
 import com.azhon.appupdate.R
 import com.azhon.appupdate.base.BaseHttpDownloadManager
 import com.azhon.appupdate.config.Constant
@@ -14,7 +17,12 @@ import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.service.DownloadService
 import com.azhon.appupdate.util.ApkUtil
 import com.azhon.appupdate.util.LogUtil
+import com.azhon.appupdate.util.NotNullSingleVar
+import com.azhon.appupdate.util.NullableSingleVar
+import com.azhon.appupdate.view.PixelUpdateDialogFragment
+import com.azhon.appupdate.view.SimpleUpdateDialog
 import com.azhon.appupdate.view.UpdateDialogActivity
+import com.azhon.appupdate.view.Win8UpdateDialogFragment
 import java.io.Serializable
 
 /**
@@ -26,130 +34,102 @@ import java.io.Serializable
  *
  * @author azhon
  */
-class DownloadManager private constructor(builder: Builder) : Serializable {
+class DownloadManager private constructor(
+    var config: DownloadConfig,
+    internal var application: Application
+) : Serializable {
 
     companion object {
         private const val TAG = "DownloadManager"
+
+        @Volatile
         private var instance: DownloadManager? = null
 
-        internal fun getInstance(builder: Builder? = null): DownloadManager? {
-            if (instance != null && builder != null) {
-                instance!!.release()
+        fun config(application: Application, block: DownloadConfig.() -> Unit): DownloadManager {
+            val config = DownloadConfig(application)
+            config.block()
+            return getInstance(config, application)
+        }
+
+        fun isDownloading(): Boolean {
+            return instance?.downloadState ?: false
+        }
+
+        fun existInstance(): DownloadManager? = instance
+
+        internal fun getInstance(
+            config: DownloadConfig? = null,
+            application: Application? = null
+        ): DownloadManager {
+            if (instance != null && config != null) {
+                instance!!.reConfig(config)
             }
             if (instance == null) {
-                if (builder == null) return null
-                instance = DownloadManager(builder)
+                if (config == null || application == null) throw IllegalArgumentException("config or application is null")
+                synchronized(this) {
+                    instance ?: DownloadManager(config, application).also { instance = it }
+                }
             }
             return instance!!
         }
     }
 
-    private var application: Application = builder.application
-    private var apkVersionCode: Int
-    private var showNewerToast: Boolean
-    internal var contextClsName: String = builder.contextClsName
-    internal var apkUrl: String
-    internal var apkName: String
-    internal var apkVersionName: String
-    internal var downloadPath: String
-    internal var smallIcon: Int
-    internal var apkDescription: String
-    internal var apkSize: String
-    internal var apkMD5: String
-    internal var httpManager: BaseHttpDownloadManager?
-    internal var notificationChannel: NotificationChannel?
-    internal var onDownloadListeners: MutableList<OnDownloadListener>
-    internal var onButtonClickListener: OnButtonClickListener?
-    internal var showNotification: Boolean
-    internal var jumpInstallPage: Boolean
-    internal var showBgdToast: Boolean
-    internal var forcedUpgrade: Boolean
-    internal var notifyId: Int
-    internal var dialogImage: Int
-    internal var dialogButtonColor: Int
-    internal var dialogButtonTextColor: Int
-    internal var dialogProgressBarColor: Int
+    private var apkVersionCode: Int = config.apkVersionCode
+
     var downloadState: Boolean = false
 
-
-    init {
-        apkUrl = builder.apkUrl
-        apkName = builder.apkName
-        apkVersionCode = builder.apkVersionCode
-        apkVersionName = builder.apkVersionName
-        downloadPath =
-            builder.downloadPath ?: String.format(Constant.APK_PATH, application.packageName)
-        showNewerToast = builder.showNewerToast
-        smallIcon = builder.smallIcon
-        apkDescription = builder.apkDescription
-        apkSize = builder.apkSize
-        apkMD5 = builder.apkMD5
-        httpManager = builder.httpManager
-        notificationChannel = builder.notificationChannel
-        onDownloadListeners = builder.onDownloadListeners
-        onButtonClickListener = builder.onButtonClickListener
-        showNotification = builder.showNotification
-        jumpInstallPage = builder.jumpInstallPage
-        showBgdToast = builder.showBgdToast
-        forcedUpgrade = builder.forcedUpgrade
-        notifyId = builder.notifyId
-        dialogImage = builder.dialogImage
-        dialogButtonColor = builder.dialogButtonColor
-        dialogButtonTextColor = builder.dialogButtonTextColor
-        dialogProgressBarColor = builder.dialogProgressBarColor
-        // Fix memory leak
-        application.registerActivityLifecycleCallbacks(object : LifecycleCallbacksAdapter() {
-            override fun onActivityDestroyed(activity: Activity) {
-                super.onActivityDestroyed(activity)
-                if (contextClsName == activity.javaClass.name) {
-                    clearListener()
-                }
+    /**
+     * test whether can download
+     */
+    fun canDownload(): Boolean {
+        val params = checkParams()
+        val versionCodeCheck: Boolean =
+            if (apkVersionCode == Int.MIN_VALUE) {
+                true
+            } else {
+                apkVersionCode > ApkUtil.getVersionCode(application)
             }
-        })
+        return (params && versionCodeCheck)
+
     }
 
     /**
-     * Start download
+     * download file without dialog
      */
-    fun download() {
-        if (!checkParams()) {
-            return
-        }
-        if (checkVersionCode()) {
+    fun checkThenDownload() {
+        if (canDownload()) {
             application.startService(Intent(application, DownloadService::class.java))
         } else {
-            if (apkVersionCode > ApkUtil.getVersionCode(application)) {
-                application.startActivity(
-                    Intent(application, UpdateDialogActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                )
-            } else {
-                if (showNewerToast) {
-                    Toast.makeText(
-                        application, R.string.app_update_latest_version, Toast.LENGTH_SHORT
-                    ).show()
-                }
-                LogUtil.d(TAG, application.resources.getString(R.string.app_update_latest_version))
-            }
+            Log.e(TAG, "download: cannot download")
         }
+    }
 
+    /**
+     * with out check whether can download, so you need to check it yourself
+     */
+    fun directDownload() {
+        application.startService(Intent(application, DownloadService::class.java))
     }
 
     private fun checkParams(): Boolean {
-        if (apkUrl.isEmpty()) {
+        if (config.apkUrl.isEmpty()) {
             LogUtil.e(TAG, "apkUrl can not be empty!")
             return false
         }
-        if (apkName.isEmpty()) {
+        if (config.apkName.isEmpty()) {
             LogUtil.e(TAG, "apkName can not be empty!")
             return false
         }
-        if (!apkName.endsWith(Constant.APK_SUFFIX)) {
+        if (!config.apkName.endsWith(Constant.APK_SUFFIX)) {
             LogUtil.e(TAG, "apkName must endsWith .apk!")
             return false
         }
-        if (smallIcon == -1) {
+        if (config.smallIcon == -1) {
             LogUtil.e(TAG, "smallIcon can not be empty!");
+            return false
+        }
+        if (config.apkDescription.isEmpty()) {
+            LogUtil.e(TAG, "apkDescription can not be empty!")
             return false
         }
         Constant.AUTHORITIES = "${application.packageName}.fileProvider"
@@ -157,104 +137,84 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
     }
 
     /**
-     * Check the set apkVersionCode if it is not the default then use the built-in dialog
-     * If it is the default value Int.MIN_VALUE, directly start the service download
+     * when download not start,HttpManager maybe is null
+     * in this case, will exec "then" block
      */
-    private fun checkVersionCode(): Boolean {
-        if (apkVersionCode == Int.MIN_VALUE) {
-            return true
-        }
-        if (apkDescription.isEmpty()) {
-            LogUtil.e(TAG, "apkDescription can not be empty!")
-        }
-        return false
-    }
-
-    fun cancel() {
-        httpManager?.cancel()
+    fun cancel(then: () -> Unit = {}) {
+        config.httpManager?.cancel() ?: then()
     }
 
     /**
      * release objects
      */
     internal fun release() {
-        httpManager?.release()
+        config.httpManager?.release()
         clearListener()
         instance = null
     }
 
-    private fun clearListener() {
-        onButtonClickListener = null
-        onDownloadListeners.clear()
+    internal fun reConfig(config: DownloadConfig) {
+        this.config.httpManager?.release()
+        this.config = config
     }
 
-    class Builder constructor(activity: Activity) {
+    fun clearListener() {
+        config.onButtonClickListener = null
+        config.onDownloadListeners.clear()
+    }
 
-        /**
-         * library context
-         */
-        internal var application: Application = activity.application
-
-        /**
-         * Fix the memory leak caused by Activity destroy
-         */
-        internal var contextClsName: String = activity.javaClass.name
-
+    class DownloadConfig constructor(application: Application) {
         /**
          * Apk download url
          */
-        internal var apkUrl = ""
+        var apkUrl = ""
 
         /**
          * Apk file name on disk
          */
-        internal var apkName = ""
+        var apkName = ""
 
         /**
          * The apk versionCode that needs to be downloaded
+         * 如果不设置此值，将不检查当前应用的versioncode，直接下载安装更新
          */
-        internal var apkVersionCode = Int.MIN_VALUE
+        var apkVersionCode = Int.MIN_VALUE
 
         /**
          * The versionName of the dialog reality
          */
-        internal var apkVersionName = ""
+        var apkVersionName = ""
 
         /**
          * The file path where the Apk is saved
          * eg: /storage/emulated/0/Android/data/ your packageName /cache
          */
-        internal var downloadPath = application.externalCacheDir?.path
-
-        /**
-         * whether to tip to user "Currently the latest version!"
-         */
-        internal var showNewerToast = false
+        var downloadPath = ApkUtil.getDefaultCachePath(application)
 
         /**
          * Notification icon resource
          */
-        internal var smallIcon = -1
+        var smallIcon = -1
 
         /**
          * New version description information
          */
-        internal var apkDescription = ""
+        var apkDescription = ""
 
         /**
          * Apk Size,Unit MB
          */
-        internal var apkSize = ""
+        var apkSize = ""
 
         /**
          * Apk md5 file verification(32-bit) verification repeated download
          */
-        internal var apkMD5 = ""
+        var apkMD5 = ""
 
         /**
          * Apk download manager
          */
-        internal var httpManager: BaseHttpDownloadManager? = null
+        var httpManager: BaseHttpDownloadManager? by NullableSingleVar()
 
         /**
          * The following are unimportant filed
@@ -263,181 +223,314 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         /**
          * adapter above Android O notification
          */
-        internal var notificationChannel: NotificationChannel? = null
+        var notificationChannel: NotificationChannel? = null
 
         /**
          * download listeners
          */
-        internal var onDownloadListeners = mutableListOf<OnDownloadListener>()
+        val onDownloadListeners: MutableList<OnDownloadListener> by NotNullSingleVar(mutableListOf())
 
         /**
          * dialog button click listener
          */
-        internal var onButtonClickListener: OnButtonClickListener? = null
+        var onButtonClickListener: OnButtonClickListener? = null
 
         /**
          * Whether to show the progress of the notification
          */
-        internal var showNotification = true
+        var showNotification = true
 
         /**
          * Whether the installation page will pop up automatically after the download is complete
          */
-        internal var jumpInstallPage = true
+        var jumpInstallPage = true
 
         /**
          * Does the download start tip "Downloading a new version in the background..."
          */
-        internal var showBgdToast = true
+        var showBgdToast = true
 
         /**
          * Whether to force an upgrade
          */
-        internal var forcedUpgrade = false
+        var forcedUpgrade = false
 
         /**
          * Notification id
          */
-        internal var notifyId = Constant.DEFAULT_NOTIFY_ID
+        var notifyId = Constant.DEFAULT_NOTIFY_ID
 
         /**
-         * dialog background Image resource
+         * View type
          */
-        internal var dialogImage = -1
-
-        /**
-         * dialog button background color
-         */
-        internal var dialogButtonColor = -1
-
-        /**
-         * dialog button text color
-         */
-        internal var dialogButtonTextColor = -1
-
-        /**
-         * dialog progress bar color and progress-text color
-         */
-        internal var dialogProgressBarColor = -1
+        var viewType: Int = ViewType.Colorful
 
 
-        fun apkUrl(apkUrl: String): Builder {
-            this.apkUrl = apkUrl
-            return this
-        }
-
-        fun apkName(apkName: String): Builder {
-            this.apkName = apkName
-            return this
-        }
-
-        fun apkVersionCode(apkVersionCode: Int): Builder {
-            this.apkVersionCode = apkVersionCode
-            return this
-        }
-
-        fun apkVersionName(apkVersionName: String): Builder {
-            this.apkVersionName = apkVersionName
-            return this
-        }
-
-        fun showNewerToast(showNewerToast: Boolean): Builder {
-            this.showNewerToast = showNewerToast
-            return this
-        }
-
-        fun smallIcon(smallIcon: Int): Builder {
-            this.smallIcon = smallIcon
-            return this
-        }
-
-        fun apkDescription(apkDescription: String): Builder {
-            this.apkDescription = apkDescription
-            return this
-        }
-
-        fun apkSize(apkSize: String): Builder {
-            this.apkSize = apkSize
-            return this
-        }
-
-        fun apkMD5(apkMD5: String): Builder {
-            this.apkMD5 = apkMD5
-            return this
-        }
-
-        fun httpManager(httpManager: BaseHttpDownloadManager): Builder {
-            this.httpManager = httpManager
-            return this
-        }
-
-        fun notificationChannel(notificationChannel: NotificationChannel): Builder {
-            this.notificationChannel = notificationChannel
-            return this
-        }
-
-        fun onButtonClickListener(onButtonClickListener: OnButtonClickListener): Builder {
-            this.onButtonClickListener = onButtonClickListener
-            return this
-        }
-
-        fun onDownloadListener(onDownloadListener: OnDownloadListener): Builder {
-            this.onDownloadListeners.add(onDownloadListener)
-            return this
-        }
-
-        fun showNotification(showNotification: Boolean): Builder {
-            this.showNotification = showNotification
-            return this
-        }
-
-        fun jumpInstallPage(jumpInstallPage: Boolean): Builder {
-            this.jumpInstallPage = jumpInstallPage
-            return this
-        }
-
-        fun showBgdToast(showBgdToast: Boolean): Builder {
-            this.showBgdToast = showBgdToast
-            return this
-        }
-
-        fun forcedUpgrade(forcedUpgrade: Boolean): Builder {
-            this.forcedUpgrade = forcedUpgrade
-            return this
-        }
-
-        fun notifyId(notifyId: Int): Builder {
-            this.notifyId = notifyId
-            return this
-        }
-
-        fun dialogImage(dialogImage: Int): Builder {
-            this.dialogImage = dialogImage
-            return this
-        }
-
-        fun dialogButtonColor(dialogButtonColor: Int): Builder {
-            this.dialogButtonColor = dialogButtonColor
-            return this
-        }
-
-        fun dialogButtonTextColor(dialogButtonTextColor: Int): Builder {
-            this.dialogButtonTextColor = dialogButtonTextColor
-            return this
-        }
-
-        fun dialogProgressBarColor(dialogProgressBarColor: Int): Builder {
-            this.dialogProgressBarColor = dialogProgressBarColor
-            return this
-        }
-
-        fun enableLog(enable: Boolean): Builder {
+        fun enableLog(enable: Boolean): DownloadConfig {
             LogUtil.enable(enable)
             return this
         }
 
+        fun registerDownloadListener(onDownloadListener: OnDownloadListener): DownloadConfig {
+            this.onDownloadListeners.add(onDownloadListener)
+            return this
+        }
+
+        fun registerButtonListener(onButtonClickListener: OnButtonClickListener): DownloadConfig {
+            this.onButtonClickListener = onButtonClickListener
+            return this
+        }
+
+        private fun getOneHttpManager(): BaseHttpDownloadManager {
+            if (httpManager == null) {
+                synchronized(this) {
+                    if (httpManager == null) {
+                        try {
+                            httpManager = HttpDownloadManager(downloadPath)
+                        } catch (e: Exception) {
+                            Log.e(TAG, "getOneHttpManager: 重复赋值", e)
+                        }
+                    }
+                }
+            }
+            return httpManager!!
+        }
+
+        /**
+         * 真正的下载
+         * @return Flow<DownloadStatus>
+         */
+        internal fun download() = getOneHttpManager().download(apkUrl, apkName)
+
+        internal var viewConfig: DialogConfig = DialogConfig()
+
+        /**
+         * 配置视图
+         */
+        fun configDialog(block: DialogConfig.() -> Unit): DownloadConfig {
+            viewConfig.block()
+            return this
+        }
+    }
+
+    class DialogConfig() {
+        /**
+         * custom layout id
+         */
+        var layoutId: Int = -1
+
+        /**
+         * whether to tip to user "Currently the latest version!"
+         */
+        var showNewerToast = false
+
+        /**
+         * dialog background Image resource
+         */
+        var dialogImage = -1
+
+        /**
+         * dialog button background color
+         */
+        var dialogButtonColor = -1
+
+        /**
+         * dialog button text color
+         */
+        var dialogButtonTextColor = -1
+
+        /**
+         * dialog progress bar color and progress-text color
+         */
+        var dialogProgressBarColor = -1
+    }
+
+    /**
+     * 兼容旧方式
+     * @property config DownloadConfig
+     * @property dialogConfig DialogConfig
+     * @constructor
+     */
+    class Builder constructor(activity: Activity) {
+        val ctx = activity.application
+        var config: DownloadManager.DownloadConfig =
+            DownloadManager.DownloadConfig(application = ctx)
+        var dialogConfig: DownloadManager.DialogConfig = DownloadManager.DialogConfig()
+
+        fun apkUrl(apkUrl: String): Builder {
+            config.apkUrl = apkUrl
+            return this
+        }
+
+        fun downloadPath(path: String): Builder {
+            config.downloadPath = path
+            return this
+        }
+
+        fun apkName(apkName: String): Builder {
+            config.apkName = apkName
+            return this
+        }
+
+        fun apkVersionCode(apkVersionCode: Int): Builder {
+            config.apkVersionCode = apkVersionCode
+            return this
+        }
+
+        fun apkVersionName(apkVersionName: String): Builder {
+            config.apkVersionName = apkVersionName
+            return this
+        }
+
+        fun showNewerToast(showNewerToast: Boolean): Builder {
+            dialogConfig.showNewerToast = showNewerToast
+            return this
+        }
+
+        fun smallIcon(smallIcon: Int): Builder {
+            config.smallIcon = smallIcon
+            return this
+        }
+
+        fun apkDescription(apkDescription: String): Builder {
+            config.apkDescription = apkDescription
+            return this
+        }
+
+        fun apkSize(apkSize: String): Builder {
+            config.apkSize = apkSize
+            return this
+        }
+
+        fun apkMD5(apkMD5: String): Builder {
+            config.apkMD5 = apkMD5
+            return this
+        }
+
+        fun httpManager(httpManager: BaseHttpDownloadManager): Builder {
+            config.httpManager = httpManager
+            return this
+        }
+
+        fun notificationChannel(notificationChannel: NotificationChannel): Builder {
+            config.notificationChannel = notificationChannel
+            return this
+        }
+
+        fun onButtonClickListener(onButtonClickListener: OnButtonClickListener): Builder {
+            config.onButtonClickListener = onButtonClickListener
+            return this
+        }
+
+        fun onDownloadListener(onDownloadListener: OnDownloadListener): Builder {
+            config.onDownloadListeners.add(onDownloadListener)
+            return this
+        }
+
+        fun showNotification(showNotification: Boolean): Builder {
+            config.showNotification = showNotification
+            return this
+        }
+
+        fun jumpInstallPage(jumpInstallPage: Boolean): Builder {
+            config.jumpInstallPage = jumpInstallPage
+            return this
+        }
+
+        fun showBgdToast(showBgdToast: Boolean): Builder {
+            config.showBgdToast = showBgdToast
+            return this
+        }
+
+        fun forcedUpgrade(forcedUpgrade: Boolean): Builder {
+            config.forcedUpgrade = forcedUpgrade
+            return this
+        }
+
+        fun notifyId(notifyId: Int): Builder {
+            config.notifyId = notifyId
+            return this
+        }
+
+        fun dialogImage(dialogImage: Int): Builder {
+            dialogConfig.dialogImage = dialogImage
+            return this
+        }
+
+        fun dialogButtonColor(dialogButtonColor: Int): Builder {
+            dialogConfig.dialogButtonColor = dialogButtonColor
+            return this
+        }
+
+        fun dialogButtonTextColor(dialogButtonTextColor: Int): Builder {
+            dialogConfig.dialogButtonTextColor = dialogButtonTextColor
+            return this
+        }
+
+        fun dialogProgressBarColor(dialogProgressBarColor: Int): Builder {
+            dialogConfig.dialogProgressBarColor = dialogProgressBarColor
+            return this
+        }
+
+        fun dialogLayout(@LayoutRes layout: Int): Builder {
+            dialogConfig.layoutId = layout
+            return this
+        }
+
+        fun viewType(viewType: Int = ViewType.Colorful) {
+            config.viewType = viewType
+        }
+
+        fun enableLog(enable: Boolean): Builder {
+            config.enableLog(enable)
+            return this
+        }
+
         fun build(): DownloadManager {
-            return getInstance(this)!!
+            config.viewConfig = dialogConfig
+            return DownloadManager.getInstance(config, application = ctx)
+        }
+    }
+
+}
+
+fun DownloadManager.download(activity: FragmentActivity) {
+    if (canDownload()) {
+        showUi(this, activity)
+    } else {
+        if (config.viewConfig.showNewerToast) {
+            Toast.makeText(
+                application, R.string.app_update_latest_version, Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+}
+
+/**
+ * 这个方法将会忽略配置中的viewType，使用默认UpdateDialogActivity进行下载
+ * @receiver DownloadManager
+ */
+fun DownloadManager.download() {
+    application.startActivity(
+        Intent(application, UpdateDialogActivity::class.java)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    )
+    // Fix memory leak
+    application.registerActivityLifecycleCallbacks(object :
+        LifecycleCallbacksAdapter() {
+        override fun onActivityDestroyed(activity: Activity) {
+            super.onActivityDestroyed(activity)
+            if (this.javaClass.name == activity.javaClass.name) {
+                clearListener()
+            }
+        }
+    })
+
+    if (!canDownload()) {
+        if (config.viewConfig.showNewerToast) {
+            Toast.makeText(
+                application, R.string.app_update_latest_version, Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
