@@ -219,6 +219,8 @@ button.setOnClickListener {
 }
 ```
 
+调用showUi显示正在下载的信息
+
 #### 第三步：混淆打包，只需保持`Activity`、`Service`不混淆
 
 ```groovy
