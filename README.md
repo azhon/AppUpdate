@@ -28,7 +28,9 @@
 * [扫码加入QQ群](#扫码加入qq群)
 * [使用步骤](#使用步骤)
 * [使用技巧](#使用技巧)
+* [常见问题](#常见问题)
 * [版本更新记录](#版本更新记录)
+* [赞赏](#赞赏)
 
 ### 效果图
 
@@ -162,6 +164,13 @@ val result = ApkUtil.deleteOldApk(this, "${externalCacheDir?.path}/appupdate.apk
 
 ```java
 class MyDownload : BaseHttpDownloadManager() {}
+```
+### 常见问题
+
+* App设置是横屏时下载完成无法拉起安装问题，可以在Manifest中对应的Activity添加如下代码
+
+```xml
+ android:configChanges="orientation|screenSize"
 ```
 
 ### 版本更新记录
