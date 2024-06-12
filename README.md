@@ -170,7 +170,7 @@ class MyDownload : BaseHttpDownloadManager() {}
 * App设置是横屏时下载完成无法拉起安装问题，可以在Manifest中对应的Activity添加如下代码
 
 ```xml
- android:configChanges="orientation|screenSize"
+ android:configChanges="orientation|screenSize|keyboardHidden"
 ```
 
 ### 版本更新记录
