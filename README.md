@@ -8,6 +8,7 @@
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
 
+### 如果你是Flutter，请使用[flutter_app_update](https://github.com/azhon/flutter_app_update)
 ## 本库核心逻辑（必读）：
 #### 1、当调用了`apkVersionCode()`设置了最新的VersionCode，则内部会自动判断是否显示对话框、下载和安装
 - 适配Android 13通知运行权限，且当设置`showNotification(true)`时，点击对话框的升级按钮会申请通知栏权限，无论是否同意都将会继续下载

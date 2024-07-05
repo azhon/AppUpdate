@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AppUpdate</string>
-    <string name="app_title">A simple version update library</string>
+    <string name="app_title">A simple app update library</string>
     <string name="dialog_title">New version</string>
     <string name="dialog_msg">1.Support Android 4.1 and above\n2.Support for custom download process\n3.Support notification bar progress\n4.Support internationalization\n5.Use Kotlin Coroutines</string>
     <string name="dialog_confirm">Upgrade</string>
