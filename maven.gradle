@@ -1,10 +1,6 @@
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
 Properties localProperties = new Properties()
 localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
 
@@ -16,7 +12,6 @@ afterEvaluate {
                 groupId "io.github.azhon"
                 artifactId project.ARTIFACT_ID
                 version rootProject.ext.publishVersion
-                artifact generateSourcesJar
                 pom {
                     name = 'AppUpdate'
                     description = 'Android App update library. Android版本更新库，简单、轻量、可随意定制'

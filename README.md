@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/mavenCentral-4.3.2-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.3.3-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -73,7 +73,7 @@
 #### 第一步：`app/build.gradle`添加依赖
 
 ```groovy
-implementation 'io.github.azhon:appupdate:4.3.2'
+implementation 'io.github.azhon:appupdate:4.3.3'
 ```
 
 <details>
@@ -176,9 +176,9 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### 版本更新记录
 
-* v4.3.2（2023/12/18）
+* v4.3.3（2024/07/23）
 
-  * [修复] Targeting S+ requires FLAG IMMUTABLE bug
+  * [优化] 没有改动，只想发布个版本
 
 * [更多更新记录点此查看](https://github.com/azhon/AppUpdate/wiki/Home)
 
