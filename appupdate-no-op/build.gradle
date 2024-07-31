@@ -3,6 +3,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply from: '../maven.gradle'
 
 android {
+    namespace 'com.azhon.appupdate'
     compileSdk rootProject.ext.compileSdk
 
     defaultConfig {

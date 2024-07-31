@@ -4,15 +4,7 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'appUpdate'
-            keyPassword '123456'
-            storeFile file('./../app.jks')
-            storePassword '123456'
-        }
-    }
-
+    namespace 'com.azhon.app'
     compileSdk rootProject.ext.compileSdk
     defaultConfig {
         applicationId "com.azhon.app"
@@ -25,16 +17,6 @@ android {
     }
     flavorDimensions "versionCode"
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-        }
-        debug {
-            signingConfig signingConfigs.config
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -46,6 +28,24 @@ android {
     productFlavors {
         other {}
 //        googlePlay {}
+    }
+    signingConfigs {
+        config {
+            keyAlias 'appUpdate'
+            keyPassword '123456'
+            storeFile file('./../app.jks')
+            storePassword '123456'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
+        }
     }
 }
 

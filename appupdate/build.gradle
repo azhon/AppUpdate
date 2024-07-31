@@ -4,6 +4,7 @@ apply from: '../maven.gradle'
 
 android {
     compileSdk rootProject.ext.compileSdk
+    namespace 'com.azhon.appupdate'
 
     defaultConfig {
         minSdk rootProject.ext.minSdk
