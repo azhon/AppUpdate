@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickLis
         private const val TAG = "MainActivity"
     }
 
-    private val url = "http://s.duapps.com/apks/own/ESFileExplorer-cn.apk"
+    private val url = "https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_9.0.81_64.apk"
     private val apkName = "appupdate.apk"
     private var manager: DownloadManager? = null
     private lateinit var tvPercent: TextView
