@@ -1,6 +1,7 @@
 package com.azhon.appupdate.util
 
 import android.content.Context
+import java.io.File
 
 
 /**
@@ -15,6 +16,9 @@ import android.content.Context
 
 class ApkUtil {
     companion object {
+        fun installApk(context: Context, authorities: String, apk: File) {
+        }
+
         fun deleteOldApk(context: Context, oldApkPath: String): Boolean {
             return true
         }
