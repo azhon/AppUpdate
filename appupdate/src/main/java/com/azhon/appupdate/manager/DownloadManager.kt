@@ -33,9 +33,6 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
         private var instance: DownloadManager? = null
 
         internal fun getInstance(builder: Builder? = null): DownloadManager? {
-            if (instance != null && builder != null) {
-                instance!!.release()
-            }
             if (instance == null) {
                 if (builder == null) return null
                 instance = DownloadManager(builder)
