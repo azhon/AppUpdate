@@ -87,7 +87,7 @@ class DownloadService : Service(), OnDownloadListener {
     @Synchronized
     private fun download() {
         if (manager.downloadState) {
-            LogUtil.e(TAG, "Currently downloading, please download again!")
+            LogUtil.e(TAG, "Currently downloading, please don't download again!")
             return
         }
         if (manager.httpManager == null) {
