@@ -3,7 +3,7 @@
 <p align="center"><img src="https://github.com/azhon/AppUpdate/blob/main/img/logo.png"></p>
 <p align="center">
   <img src="https://img.shields.io/badge/miniSdk-16%2B-blue.svg">
-  <img src="https://img.shields.io/badge/mavenCentral-4.3.5-brightgreen.svg">
+  <img src="https://img.shields.io/badge/mavenCentral-4.3.6-brightgreen.svg">
   <img src="https://img.shields.io/badge/author-azhon-%23E066FF.svg">
   <img src="https://img.shields.io/badge/license-Apache2.0-orange.svg">
 </p>
@@ -57,7 +57,7 @@
 #### Step1：`app/build.gradle`
 
 ```groovy
-implementation 'io.github.azhon:appupdate:4.3.5'
+implementation 'io.github.azhon:appupdate:4.3.6'
 ```
 <details>
 <summary>Since in-app updates are prohibited by GooglePlay policy, it can be handled in productFlavors</summary>
@@ -148,9 +148,9 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 ### Version update record
 
-* v4.3.5（2024/10/13）
+* v4.3.6（2024/10/22）
 
-  * [Fix] Fix DownloadManager release bug
+  * [Opt] Change DownloadManager release() to public
 
 #### [More update records click here to view](https://github.com/azhon/AppUpdate/wiki/Home)
 
