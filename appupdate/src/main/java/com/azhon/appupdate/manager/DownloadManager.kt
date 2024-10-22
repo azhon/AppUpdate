@@ -173,8 +173,10 @@ class DownloadManager private constructor(builder: Builder) : Serializable {
 
     /**
      * release objects
+     * Call this method when you need to destroy the previous download and re-download,
+     * otherwise don't use it.
      */
-    internal fun release() {
+    fun release() {
         httpManager?.release()
         clearListener()
         instance = null
