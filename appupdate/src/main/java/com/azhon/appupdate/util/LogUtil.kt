@@ -5,11 +5,8 @@ import com.azhon.appupdate.config.Constant
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.util
- * FileName:    LogUtil
- * CreateDate:  2022/4/7 on 11:23
- * Desc:
+ * createDate:  2022/4/7 on 11:23
+ * desc:
  *
  * @author azhon
  */

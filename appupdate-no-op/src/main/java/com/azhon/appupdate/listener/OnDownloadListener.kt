@@ -3,11 +3,8 @@ package com.azhon.appupdate.listener
 import java.io.File
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.listener
- * FileName:    OnDownloadListener
- * CreateDate:  2022/4/7 on 10:27
- * Desc:
+ * createDate:  2022/4/7 on 10:27
+ * desc:
  *
  * @author azhon
  */

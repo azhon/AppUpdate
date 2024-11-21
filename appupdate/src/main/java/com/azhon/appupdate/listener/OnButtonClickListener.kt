@@ -2,13 +2,10 @@ package com.azhon.appupdate.listener
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.listener
- * FileName:    OnButtonClickListener
- * CreateDate:  2022/4/7 on 15:56
- * Desc:
+ * createDate:  2022/4/7 on 15:56
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 interface OnButtonClickListener {

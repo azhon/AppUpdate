@@ -4,15 +4,11 @@ import java.io.File
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.base.bean
- * FileName:    DownloadStatus
- * CreateDate:  2022/4/14 on 11:18
- * Desc:
+ * createDate: 2022/4/14 on 11:18
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
-
 
 sealed class DownloadStatus {
 

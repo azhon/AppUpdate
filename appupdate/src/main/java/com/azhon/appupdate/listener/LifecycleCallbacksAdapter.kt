@@ -6,13 +6,10 @@ import android.os.Bundle
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.listener
- * FileName:    LifecycleCallbacksAdapter
- * CreateDate:  2022/4/8 on 11:26
- * Desc:
+ * createDate:  2022/4/8 on 11:26
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 abstract class LifecycleCallbacksAdapter : Application.ActivityLifecycleCallbacks {

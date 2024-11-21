@@ -11,13 +11,10 @@ import java.io.File
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.util
- * FileName:    ApkUtil
- * CreateDate:  2022/4/7 on 17:02
- * Desc:
+ * createDate:  2022/4/7 on 17:02
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 class ApkUtil {

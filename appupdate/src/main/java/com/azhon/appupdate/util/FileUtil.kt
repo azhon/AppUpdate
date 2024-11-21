@@ -6,11 +6,8 @@ import java.math.BigInteger
 import java.security.MessageDigest
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.util
- * FileName:    FileUtil
- * CreateDate:  2022/4/7 on 11:52
- * Desc:
+ * createDate:  2022/4/7 on 11:52
+ * desc:
  *
  * @author azhon
  */

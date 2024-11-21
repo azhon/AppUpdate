@@ -29,13 +29,10 @@ import java.io.File
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.view
- * FileName:    UpdateDialogActivity
- * CreateDate:  2022/4/7 on 17:40
- * Desc:
+ * createDate:  2022/4/7 on 17:40
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 class UpdateDialogActivity : AppCompatActivity(), View.OnClickListener {

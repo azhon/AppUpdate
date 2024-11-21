@@ -4,11 +4,8 @@ import com.azhon.appupdate.base.bean.DownloadStatus
 import kotlinx.coroutines.flow.Flow
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.base
- * FileName:    BaseHttpDownloadManager
- * CreateDate:  2022/4/7 on 10:24
- * Desc:
+ * createDate:  2022/4/7 on 10:24
+ * desc:
  *
  * @author azhon
  */

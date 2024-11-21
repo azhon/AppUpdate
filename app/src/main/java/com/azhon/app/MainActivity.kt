@@ -14,6 +14,13 @@ import com.azhon.appupdate.listener.OnDownloadListenerAdapter
 import com.azhon.appupdate.manager.DownloadManager
 import com.azhon.appupdate.util.ApkUtil
 
+/**
+ * createDate: 2022/04/08 on 14:52
+ * desc:
+ *
+ * @author azhon
+ */
+
 class MainActivity : AppCompatActivity(), View.OnClickListener, OnButtonClickListener {
 
     companion object {

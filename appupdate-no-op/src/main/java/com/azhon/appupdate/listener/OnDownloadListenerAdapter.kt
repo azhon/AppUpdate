@@ -4,13 +4,10 @@ import java.io.File
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.listener
- * FileName:    OnDownloadListenerAdapter
- * CreateDate:  2022/4/8 on 10:58
- * Desc:
+ * createDate:  2022/4/8 on 10:58
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 abstract class OnDownloadListenerAdapter : OnDownloadListener {

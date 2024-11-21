@@ -20,13 +20,10 @@ import javax.net.ssl.X509TrustManager
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.manager
- * FileName:    HttpDownloadManager
- * CreateDate:  2022/4/7 on 14:29
- * Desc:
+ * createDate:  2022/4/7 on 14:29
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 @Suppress("BlockingMethodInNonBlockingContext")

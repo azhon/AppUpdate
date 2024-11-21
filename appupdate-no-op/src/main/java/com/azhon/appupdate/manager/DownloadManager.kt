@@ -8,11 +8,8 @@ import com.azhon.appupdate.listener.OnDownloadListener
 import java.io.Serializable
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.manager
- * FileName:    DownloadManager
- * CreateDate:  2022/4/7 on 10:36
- * Desc:
+ * createDate:  2022/4/7 on 10:36
+ * desc:
  *
  * @author azhon
  */

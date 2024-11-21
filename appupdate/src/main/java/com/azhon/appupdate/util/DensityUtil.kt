@@ -4,13 +4,10 @@ import android.content.Context
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.util
- * FileName:    DensityUtil
- * CreateDate:  2022/4/7 on 17:52
- * Desc:
+ * createDate:  2022/4/7 on 17:52
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 class DensityUtil {

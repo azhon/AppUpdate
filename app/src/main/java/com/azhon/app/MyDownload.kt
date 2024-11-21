@@ -7,13 +7,10 @@ import kotlinx.coroutines.flow.flow
 
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.app
- * FileName:    MyDownload
- * CreateDate:  2022/4/8 on 11:23
- * Desc:
+ * createDate: 2022/4/8 on 11:23
+ * desc:
  *
- * @author   azhon
+ * @author azhon
  */
 
 class MyDownload : BaseHttpDownloadManager() {

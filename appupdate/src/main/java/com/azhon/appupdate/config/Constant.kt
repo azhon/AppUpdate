@@ -1,11 +1,8 @@
 package com.azhon.appupdate.config
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.config
- * FileName:    Constant
- * CreateDate:  2022/4/7 on 10:28
- * Desc:
+ * createDate: 2022/4/7 on 10:28
+ * desc:
  *
  * @author azhon
  */

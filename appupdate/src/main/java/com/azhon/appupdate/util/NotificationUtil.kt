@@ -16,11 +16,8 @@ import com.azhon.appupdate.service.DownloadService
 import java.io.File
 
 /**
- * ProjectName: AppUpdate
- * PackageName: com.azhon.appupdate.util
- * FileName:    NotificationUtil
- * CreateDate:  2022/4/7 on 13:36
- * Desc:
+ * createDate:  2022/4/7 on 13:36
+ * desc:
  *
  * @author azhon
  */
