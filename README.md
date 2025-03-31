@@ -19,6 +19,8 @@
 > #### 3、由于Android 10限制后台应用启动Activity，所以下载完成会发送一个通知至通知栏（忽略showNotification的值，需要允许发送通知）
 > #### 4、[更多用法请点此查看](https://github.com/azhon/AppUpdate/blob/main/app/src/main/java/com/azhon/app/MainActivity.kt#L79)
 
+### 如果有需要使用[UpgradeLink](http://upgrade.toolsetlink.com)的可以[查阅此文档](http://upgrade.toolsetlink.com/upgrade/example/android-appupdate-example.html)
+
 ### 相关文档链接
 - [限制后台启动Activity](https://developer.android.google.cn/guide/components/activities/background-starts)
 - [通知栏适配](https://developer.android.google.cn/guide/topics/ui/notifiers/notifications?hl=zh-cn)
