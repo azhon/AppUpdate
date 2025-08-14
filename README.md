@@ -21,6 +21,8 @@
 
 ### 如果有需要使用[UpgradeLink](http://upgrade.toolsetlink.com)的可以[查阅此文档](http://upgrade.toolsetlink.com/upgrade/example/android-appupdate-example.html)
 
+<img src="https://github.com/azhon/AppUpdate/blob/main/img/upgrade_link.png" width="500">
+
 ### 相关文档链接
 - [限制后台启动Activity](https://developer.android.google.cn/guide/components/activities/background-starts)
 - [通知栏适配](https://developer.android.google.cn/guide/topics/ui/notifiers/notifications?hl=zh-cn)
