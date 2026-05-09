@@ -193,3 +193,4 @@ class MyDownload : BaseHttpDownloadManager() {}
 
 
 <img src="https://github.com/azhon/AppUpdate/blob/main/img/money.jpg" width="600"/>
+
